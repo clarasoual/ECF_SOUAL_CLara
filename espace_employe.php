@@ -12,7 +12,7 @@
 <hr>
 
 <main>
-    <nav>
+    <nav class="sidebar">
         <section>
             <h2>Tableau de bord</h2>
         </section>
@@ -43,10 +43,10 @@
         </section>
     </nav>
 <!--Contenu principal suivi signalement -->
-    <section>
+    <section class="report-tracking">
         <h2>Suivi signalement</h2>
 
-        <article>
+        <article class="report-details">
             <h3>Signalement #023</h3>
             <p><strong>Conducteur :</strong>Finn</p>
             <p><strong>Trajet :</strong>Paris - Rennes</p>
@@ -59,7 +59,7 @@
 
         <h3>Passagers concernés</h3>
 
-        <div>
+        <div class="passenger-card">
 
         <h4>Passager 1</h4>
         <img src="" alt="Photo de profil" width="60">
@@ -68,8 +68,10 @@
         <p><strong>Email :</strong>alex@exemple.com</p>
         <p><strong>Commentaire :</strong>Le conducteur était agressif.</p>
         </div>
-
+        
         <hr>
+
+        <div class="passenger-card">
 
         <h4>Passager 2</h4>
         <img src="" alt="Photo de profil" width="60">
@@ -77,6 +79,7 @@
         <p><strong>Téléphone :</strong>06 20 21 22 23</p>
         <p><strong>Email :</strong>zoe@exemple.com</p>
         <p><strong>Commentaire :</strong>Je ne me suis pas du tout sentie en sécurité.</p>
+        </div>
     </section>
 </main>
 

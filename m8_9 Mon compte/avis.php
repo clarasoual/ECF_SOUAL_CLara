@@ -12,10 +12,10 @@
 <?php include('COMPONENTS/menu-profil.html'); ?>
 <section>
     <h2>Mes avis</h2>
-<div id="avis-recus">
+<div id="reviews-received">
     <h3>Avis reçus</h3>
 
-    <div class="avis">
+    <div class="review">
         <p><strong>Date :</strong> 12/05/2025</p>
         <p><strong>Trajet :</strong> Toulouse - Bordeaux</p>
         <p><strong>Rôle :</strong> Conducteur</p>
@@ -23,7 +23,7 @@
         <p><strong>Commentaire :</strong> Trajet très agréable, merci.</p>
     </div>
 
-    <div class="avis">
+    <div class="review">
         <p><strong>Date :</strong> 28/04/2025</p>
         <p><strong>Trajet :</strong> Nantes - Rennes</p>
         <p><strong>Rôle :</strong> Passager</p>
@@ -32,10 +32,10 @@
     </div>
 </div>
 
-<div id="avis-donnes">
+<div id="reviews-given">
     <h3>Avis donnés</h3>
 
-    <div class="avis">
+    <div class="review">
         <p><strong>Date :</strong> 19/04/2025</p>
         <p><strong>Trajet :</strong> Lyon - Grenoble</p>
         <p><strong>Rôle :</strong> Passager</p>
@@ -43,7 +43,7 @@
         <p><strong>Commentaire :</strong> Chauffeur correct, un peu en retard.</p>
     </div>
 
-    <div class="avis">
+    <div class="review">
         <p><strong>Date :</strong> 03/04/2025</p>
         <p><strong>Trajet :</strong> Lille - Paris</p>
         <p><strong>Rôle :</strong> Conducteur</p>

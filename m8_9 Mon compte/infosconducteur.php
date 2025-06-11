@@ -9,18 +9,18 @@
 <body>
 <?php include('COMPONENTS/header.html') ; ?>
 
-<main class="infos-conducteur-container">
+<main class="driver-info-container">
     <h2>Véhicule numéro 1</h2>
-    <section class="form-vehicule">
+    <section class="vehicle-form">
         <form action="#" method="post">
-            <label for="plaque">Plaque d'immatriculation :</label><br>
-            <input type="text" id="plaque" name="plaque" placeholder="AB-123-CD"><br><br>
+            <label for="plate">Plaque d'immatriculation :</label><br>
+            <input type="text" id="plate" name="plate" placeholder="AB-123-CD"><br><br>
 
             <label for="date">Date de première immatriculation :</label><br>
             <input type="date" id="date" name="date"><br><br>
 
-            <label for="marque">Marque :</label><br>
-            <select id="marque" name="marque">
+            <label for="brand">Marque :</label><br>
+            <select id="brand" name="brand">
                 <option value="">Choisir une marque</option>
                 <option value="Peugeot">Peugeot</option>
                 <option value="Renault">Renault</option>
@@ -37,8 +37,8 @@
 
             </select><br><br>
 
-            <label for="modele">Modèle :</label><br>
-            <select id="modele" name="modele">
+            <label for="model">Modèle :</label><br>
+            <select id="model" name="model">
                 <option value="208" data-marque="Peugeot">208</option>
                 <option value="308" data-marque="Peugeot">308</option>
                 <option value="3008" data-marque="Peugeot">3008</option>
@@ -99,8 +99,8 @@
                 <option value="X1" data-marque="BMW">X1</option>
             </select><br><br>
 
-            <label for="couleur">Couleur :</label>
-            <select id="couleur" name="couleur">
+            <label for="color">Couleur :</label>
+            <select id="color" name="color">
                 <option value="">Choisir une couleur :</option>
                 <option value="Noir">Noir</option>
                 <option value="Bleu">Bleu</option>
@@ -111,29 +111,29 @@
 
             </select><br><br>
 
-            <label for="places">Nombre de places passagers :</label><br>
-            <input type="number" id="places" name="places" min="1" max="8"><br><br>
+            <label for="seats">Nombre de places passagers :</label><br>
+            <input type="number" id="seats" name="seats" min="1" max="8"><br><br>
 
             <hr>
 
             <h3>Vos préférences</h3>
 
             <p>Animaux acceptés :</p>
-            <label><input type="radio" name="animaux" value="oui">Oui</label>
-            <label><input type="radio" name="animaux" value="non">Non</label><br><br>
+            <label><input type="radio" name="pets" value="oui">Oui</label>
+            <label><input type="radio" name="pets" value="non">Non</label><br><br>
 
             <p>Fumeur :</p>
-            <label><input type="radio" name="fumeur" value="oui">Oui</label>
-            <label><input type="radio" name="fumeur" value="non">Non</label><br><br>
+            <label><input type="radio" name="smoking" value="oui">Oui</label>
+            <label><input type="radio" name="smoking" value="non">Non</label><br><br>
 
-            <label for="musique">Musique :</label><br>
-            <select id="musique" name="musique">
+            <label for="music">Musique :</label><br>
+            <select id="music" name="music">
                 <option value="">Choisir un style</option>
-                <option value="Aucune">Pas de musique</option>
-                <option value="Classique">Classique</option>
-                <option value="Pop">Pop</option>
-                <option value="Rock">Rock</option>
-                <option value="Jazz">Jazz</option>
+                <option value="none">Pas de musique</option>
+                <option value="classic">Classique</option>
+                <option value="pop">Pop</option>
+                <option value="rock">Rock</option>
+                <option value="jazz">Jazz</option>
             </select><br><br>
 
             <button type="submit">Enregistrer</button>

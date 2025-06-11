@@ -1,4 +1,3 @@
-<?php include('COMPONENTS/header.html') ; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,6 +7,7 @@
     <link rel="stylesheet" href="CSS/ecoride_style.css">
 </head>
 <body>
+    <?php include('COMPONENTS/header.html') ; ?>
     <section class="hero">
         <div class="hero-image">
             <img src="images/pexels-cottonbro-5329298.jpg" alt ="Image libre de droit covoiturage">

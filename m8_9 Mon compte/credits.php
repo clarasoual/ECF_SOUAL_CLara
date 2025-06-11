@@ -30,11 +30,11 @@
 <table border="1">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Montant</th>
-            <th>Solde à ce jour</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Solde à ce jour</th>
         </tr>
     </thead>
 

@@ -10,37 +10,37 @@
 <?php include('COMPONENTS/header.html') ; ?>
 
     <main>
-        <div class="creation-compte-container">
-            <h1>Création de votre comtpe</h1>
-            <p class="note-obligatoire">* Champs obligatoires</p>
+        <div class="account-creation-container">
+            <h1>Création de votre compte</h1>
+            <p class="required-notes">* Champs obligatoires</p>
 
             <form action="#" method="POST" class="form-inscription">
 
-                <fieldset class="civilite">
+                <fieldset class="gender">
                     <legend>Civilité *</legend>
-                    <label><input type="radio" name="civilite" value="monsieur" required> Monsieur</label>
-                    <label><input type="radio" name="civilite" value="madame" required> Madame</label>
-                    <label><input type="radio" name="civilite" value="autre" required> Autre</label>
+                    <label><input type="radio" name="gender" value="monsieur" required> Monsieur</label>
+                    <label><input type="radio" name="gender" value="madame" required> Madame</label>
+                    <label><input type="radio" name="gender" value="autre" required> Autre</label>
                 </fieldset>
 
-                <label for="nom">Nom * :</label>
-                <input type="text" id="nom" name="nom" required>
+                <label for="last-name">Nom * :</label>
+                <input type="text" id="last-name" name="last-name" required>
 
-                <label for="prenom">Prénom * :</label>
-                <input type="text" id="prenom" name="prenom" required>
+                <label for="first-name">Prénom * :</label>
+                <input type="text" id="first-name" name="first-name" required>
 
-                <label for="naissance">Date de naissance * :</label>
-                <input type="date" id="naissance" name="naissance" placeholder="JJ/MM/AAAA" required>
+                <label for="birth-date">Date de naissance * :</label>
+                <input type="date" id="birth-date" name="birth-date" placeholder="JJ/MM/AAAA" required>
 
-                <label for="telephone">Téléphone * :</label>
-                <input type="tel" id="telephone" name="telephone" required>
+                <label for="phone-number">Téléphone * :</label>
+                <input type="tel" id="phone-number" name="phone-number" required>
 
                 <label for="email">Adresse mail * :</label>
                 <input type="email" id="email" name="email" required>
 
                 <label for="password">Mot de passe * :</label>
                 <input type="password" id="password" name="password" required>
-                <p class="conditions-mdp">
+                <p class="conditions-password">
                     Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre etun caractère spécial.
                 </p>
 
@@ -52,7 +52,7 @@
                     J'accepte les <a href="#">conditions d'utilisation</a>
                 </label>
 
-                <button type="submit" class="btn-valider">Créer mon compte</button>
+                <button type="submit" class="btn-submit">Créer mon compte</button>
             </form>
         </div>
     </main>

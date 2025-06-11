@@ -12,46 +12,46 @@
 <hr>
 
 <main>
-    <nav>
-        <section>
+    <nav class="menu-principal">
+        <section class="menu-section">
             <h2>Tableau de bord</h2>
         </section>
 
-        <section>
+        <section class="menu-section">
             <h2>Comptes</h2>
-            <ul>
-                <li>Employés</li>
-                <li>Utilisateurs</li>
+            <ul class="menu-li">
+                <li class="menu-item">Employés</li>
+                <li class="menu-item">Utilisateurs</li>
             </ul>
         </section>
 
-        <section>
+        <section class="menu-section">
             <h2>Statistiques</h2>
-            <ul>
-                <li>Covoiturage quotidien</li>
-                <li>Ratio</li>
-                <li>Crédit</li>
-                <li>Crédit auto / utilisateur auto</li>
+            <ul class="menu-li">
+                <li class="menu-item">Covoiturage quotidien</li>
+                <li class="menu-item">Ratio</li>
+                <li class="menu-item">Crédit</li>
+                <li class="menu-item">Crédit auto / utilisateur auto</li>
             </ul>
         </section>
     </nav>
 
-    <section>
+    <section id="account-user">
         <h2>Compte Utilisateurs</h2>
 
         <form>
-            <label for="recherche">Rechercher un utilisateur :</label>
-            <input type="text" id="recherche" name="recherche" placeholder="Pseudo, mail, téléphone...">
+            <label for="search">Rechercher un utilisateur :</label>
+            <input type="text" id="search" name="search" placeholder="Pseudo, mail, téléphone...">
             <button type="submit">Rechercher</button>
         </form>
 
-        <table>
+        <table class="table-users">
             <thead>
                 <tr>
-                    <th>Pseudo</th>
-                    <th>Email</th>
-                    <th>Téléphone</th>
-                    <th>Actions</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,8 +60,8 @@
                     <td>alex@exemple.com</td>
                     <td>06 11 22 33 44</td>
                     <td>
-                        <button>Voir</button>
-                        <button>Supprimer</button>
+                        <button class="btn-voir">Voir</button>
+                        <button class="btn-supprimer">Supprimer</button>
                     </td>
                 </tr>
             </tbody>

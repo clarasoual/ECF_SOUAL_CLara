@@ -11,30 +11,30 @@
 <?php include('COMPONENTS/header.html') ; ?>
 
     <main>
-        <div class="connexion-container">
-            <div class="inscription-section">
+        <div class="container-connexion">
+            <div id="inscription">
                 <h2>S'inscrire</h2>
-                <button class="btn-inscription">Continuer avec une adresse mail</button>
-                <p class="mentions-legales">
+                <button class="btn-inscription-mail">Continuer avec une adresse mail</button>
+                <p id="mentions-legales">
                     En continuant, vous acceptez nos <a href="#">Conditions d'utilisation</a>, notre <a href="#">Politique de confidentialité</a>, notre <a href="#">Politique sur les Cookies</a>.
                 </p>
             </div>
 
-            <div class="connexion-section">
+            <div id="connexion">
                 <h2>Se connecter</h2>
-                <form action="#" method="POST">
-                    <label for="email">Adresse mail :</label>
-                    <input type="email" id="email" name="email" required>
+                <form id="formulaire-connexion" action="#" method="POST">
+                    <label for="email-connexion">Adresse mail :</label>
+                    <input type="email" id="email-connexion" name="email-connexion" required>
 
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="password" required>
 
-                    <div class="options-connexion">
+                    <div id="options-connexion">
                         <label>
                             <input type="checkbox" name="remember">
                             Se souvenir de moi
                         </label>
-                        <a href="#">Mot de passe oublié ?</a>
+                        <a href="#" id="link-password">Mot de passe oublié ?</a>
                     </div>
 
                     <button type="submit" class="btn-connexion">Connexion</button>

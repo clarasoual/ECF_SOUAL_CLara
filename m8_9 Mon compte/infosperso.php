@@ -13,14 +13,14 @@
 
 
 <div>
-    <main class="profil-content">
+    <main class="profile-content">
         <section class="profil-header">
             <img src="" alt="Photo de profil" class="profil-photo">
             <h2>Pseudo Utilisateur</h2>
             <button>Modifier mes informations</button>
         </section>
 
-        <section class="verif-profil">
+        <section class="profile-verification">
             <h3>Vérifier le profil</h3>
             <ul>
                 <li>Ajouter une carte d'identité</li>
@@ -29,13 +29,13 @@
             </ul>
         </section>
 
-        <section class="vous">
+        <section class="user-role">
             <h3>Vous</h3>
-            <label for="role-passager"><input type="radio" name="role" value="passager"> Passager</label><br>
-            <label for="role-conducteur"><input type="radio" name="role" value="conducteur"> Conducteur</label><br>
-            <label for="role-lesdeux"><input type="radio" name="role" value="lesdeux"> Passager-conducteur</label><br>
+            <label for="role-passenger"><input type="radio" name="role" value="passenger"> Passager</label><br>
+            <label for="role-driver"><input type="radio" name="role" value="driver"> Conducteur</label><br>
+            <label for="role-both"><input type="radio" name="role" value="both"> Passager-conducteur</label><br>
 
-            <div class="alerte">
+            <div class="alert-message">
                 Merci de completer vos informations conducteur pour activer ce rôle !
             </div>
         </section>
@@ -45,7 +45,7 @@
             <textarea rows="5" cols="40" placeholder="Parle un peu de toi..."></textarea>
         </section>
 
-        <section class="credit">
+        <section class="credit-balance">
             <h3>Crédit</h3>
             <p>Solde : 10 crédits</p>
             <p>Besoin de crédit ? <a href="credit.html">Contacte Ecp Ride</a></p>

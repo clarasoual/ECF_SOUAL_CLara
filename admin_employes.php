@@ -12,41 +12,41 @@
 <hr>
 
 <main>
-    <nav>
-        <section>
+    <nav class="menu-principal">
+        <section class="menu-section">
             <h2>Tableau de bord</h2>
         </section>
 
-        <section>
+        <section class="menu-section">
             <h2>Comptes</h2>
-            <ul>
-                <li>Employés</li>
-                <li>Utilisateurs</li>
+            <ul class="menu-li">
+                <li class="menu-item">Employés</li>
+                <li class="menu-item">Utilisateurs</li>
             </ul>
         </section>
 
-        <section>
+        <section class="menu-section">
             <h2>Statistiques</h2>
-            <ul>
-                <li>Covoiturage</li>
-                <li>Ratio</li>
-                <li>Crédit</li>
-                <li>Crédit auto / utilisateur auto</li>
+            <ul class="menu-li">
+                <li class="menu-item">Covoiturage</li>
+                <li class="menu-item">Ratio</li>
+                <li class="menu-item">Crédit</li>
+                <li class="menu-item">Crédit auto / utilisateur auto</li>
             </ul>
         </section>
     </nav>
 
-    <section>
+    <section class="menu-section">
         <h2>Compte Employés</h2>
 
         <table>
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Date d'inscription</th>
-                    <th>Actions</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Date d'inscription</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>

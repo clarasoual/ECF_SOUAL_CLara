@@ -15,7 +15,7 @@
         <div class="date-title">
             <h1>Samedi 12 mai 2025</h1>
         </div>
-        <div class="reservation-button">
+        <div class="reservation-btn">
             <button type="button" class="btn-reservation">
                 Demande de réservation
             </button>
@@ -23,7 +23,7 @@
     </div>
 
     <section class="plan-section">
-        <div class="plan-ville">
+        <div class="plan-town">
             <h2>Plan schématique du trajet</h2>
             <p>Ville de départ : Bordeaux</p>
             <p>Ville d'arrivée : Périgueux</p>
@@ -38,9 +38,9 @@
         </div>
     </section>
 
-    <section class="conducteur">
+    <section class="driver">
     <h2>Conducteur</h2>
-    <div class="infos-conducteur">
+    <div class="driver-infos">
         <img src="" alt="Photo de Thierry">
         <div>
             <p><strong>Pseudo :</strong>Thierry</p>
@@ -56,7 +56,7 @@
         </ul>
     </div>
 
-    <div class="vehicule">
+    <div class="vehicle">
         <h3>Véhicule</h3>
         <p><strong>Marque</strong>Renault</p>
         <p><strong>Modèle :</strong>Clio</p>
@@ -65,10 +65,10 @@
     </div>
     </section>
 
-    <section class="passagers">
+    <section class="passenger">
         <h2>Passagers</h2>
 
-        <article class="passager">
+        <article class="passenger">
             <img src="" alt="Photo de Claire">
             <div>
                 <p><strong>Pseudo :</strong>Claire</p>
@@ -76,7 +76,7 @@
             </div>
         </article>
 
-        <article class="passager">
+        <article class="passenger">
             <img src="" alt="Photo de Marc">
             <div>
                 <p><strong>Pseudo :</strong>Marc</p>
@@ -85,11 +85,11 @@
         </article>
     </section>
 
-    <section class="avis-conducteur">
+    <section class="driver-reviews">
         <h2>Ce que les passagers pensent de Thierry</h2>
 
-        <article class="avis">
-            <div class="auteur-avis">
+        <article class="reviews">
+            <div class="author-review">
                 <img src="" alt="Photo de sophie">
                 <p><strong>Sophie</strong></p>
                 <p><strong>Note :</strong>5 / 5</p>
@@ -98,8 +98,8 @@
             <p>Thierry est toujours ponctuel et très sympa, je reccomande !</p>
         </article>
 
-        <article class="avis">
-            <div class="auteur-avis">
+        <article class="review">
+            <div class="author-review">
                 <img src="" alt="Photo de Lucas">
                 <p><strong>Lucas</strong></p>
                 <p><strong>Note :</strong>4.6 / 5</p>

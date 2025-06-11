@@ -13,7 +13,7 @@
 
 <section>
     <h2>Mes trajets</h2>
-    <nav class="onglets-trajets">
+    <nav class="trips-tab">
         <ul>
             <li><a href="#a-venir">A venir</a></li>
             <li><a href="#en-cours">En cours</a></li>
@@ -21,21 +21,21 @@
         </ul>
     </nav>
 
-    <div id="a-venir">
+    <div id="upcoming">
         <h3>Trajets à venir</h3>
         <p>Vous n'avez pas de trajet prévu actuellement.</p>
     </div>
 
-    <div id="en-cours">
+    <div id="ongoing">
         <h3>Trajets en cours</h3>
         <p>Aucun trajet en cours.</p>
     </div>
 
-    <div id="passes">
+    <div id="past">
         <h3>Historique des trajets</h3>
 
-        <div class="trajets-passes">
-            <div class="carte-trajet">
+        <div class="past-trips">
+            <div class="trip-card">
                 <p><strong>Date :</strong> 15/05/2025</p>
                 <p><strong>Départ :</strong> Lyon</p>
                 <p><strong>Arrivée :</strong> Marseille</p>
@@ -44,7 +44,7 @@
                 <button>Voir les avis</button>
             </div>
 
-            <div class="carte-trajet">
+            <div class="trip-card">
                 <p><strong>Date :</strong> 03/04/2025</p>
                 <p><strong>Départ :</strong> Lille</p>
                 <p><strong>Arrivée :</strong> Paris</p>

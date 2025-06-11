@@ -33,20 +33,20 @@
     <section class="results-section">
         <div class="filters">
             <h2>Filtrer</h2>
-            <button type="button">Tout effacer</button>
+            <button type="button" class="fillers-clear-btn">Tout effacer</button>
 
             <label for="max-price">Prix max.</label>
-            <input type="number" id="max-price" name="max-price" placeholder="Ex : 20 euros">
+            <input type="number" id="max-price" name="max-price" placeholder="Ex : 20 euros" class="filter-input">
 
             <label for="eco">Trajet écologique :</label>
-            <input type="checkbox" id="eco" name="eco">
+            <input type="checkbox" id="eco" name="eco" class="filter-input">
 
             <label for="note">Note chauffeur minimale :</label>
-            <input type="number" id="note" name="note" step="0.1" placeholder="Ex : 4.5">
+            <input type="number" id="note" name="note" step="0.1" placeholder="Ex : 4.5" class="filter-input">
         </div>
 
         <div class="search-results">
-            <article class="trajet">
+            <article class="ride">
                 <h3>Bordeaux → Périgueux</h3>
                 <p>Départ : 08h00 - Arrivée : 10h00</p>
                 <p>Durée estimée : 2h00</p>
@@ -57,11 +57,11 @@
                 <button>Voir les détails</button>
             </article>
 
-            <article class="trajet">
+            <article class="ride">
                 <h3>Bordeaux → Bayonne</h3>
                 <p>Départ : 11h30 - Arrivée : 14h00</p>
                 <p>Durée estimée : 2h30</p>
-                <p>Prix : 17 euros /> passager</p>
+                <p>Prix : 17 euros / passager</p>
                 <p>Chauffeur : <img src="" alt="Photo chauffeur">Jean Patate</p>
                 <p>Places restantes : 1</p>
                 <p>Voyage écologique</p>
