@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Accueil </title>
-    <link rel="stylesheet" href="CSS/ecoride_style.css">
+    <link rel="stylesheet" href="ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php include('COMPONENTS/header.html') ; ?>
@@ -33,7 +34,7 @@
                 <input type="number" id="passenger" name="passenger" min="1" value="1" required>
 
                 <button type="submit" class="search-btn">
-                    <img src="" alt="Rechercher"  class="search-icon">
+                    <img src="IMAGES/logo recherche.png" alt="Rechercher"  class="search-icon">
                 </button>
             </div>
         </form>
@@ -41,7 +42,8 @@
 
    
 <script src="JS/ecoride_js.js"></script> 
+<?php include('COMPONENTS/footer.html'); ?>
 </body>
 </html>
-<?php include('COMPONENTS/footer.html'); ?>
+
 

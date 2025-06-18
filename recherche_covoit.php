@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Rechercher un covoiturage </title>
-    <link rel="stylesheet" href="CSS/ecoride_style.css">
+    <link rel="stylesheet" href="ecoride_style.css">
 </head>
 <body>
     <section class="search-section">

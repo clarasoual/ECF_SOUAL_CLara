@@ -1,0 +1,341 @@
+:root {
+    --vert-doux: #a8d5ba ;
+    --orange-doux: #f4b183 ;
+    --beige-fonce: #2e2b28 ;
+    --gris-doux: #e0e0e0 ;
+    --texte: #f0f0f0 ;
+    --fond: #1f1f1f ;
+    --shadow: rgba(0, 0, 0, 0.3)
+}
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+header {
+    background-color: var(--beige-fonce) ; 
+    padding: 1rem 2rem ;
+    box-shadow: 0 2px 8px var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color : var(--vert-doux) ;
+    font-weight: 700;
+    font-size: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+}
+.logo {
+    max-height: 50px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+}
+
+.logo img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+header .logo{
+    font-family: 'Arial Black', Arial, sans-serif;
+    letter-spacing: 2px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--vert-doux);
+    max-height: 50px;
+    overflow: hidden;
+
+}
+
+.logo-link img {
+    height: auto;
+    max-height: 50px;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Montserrat', 'Century Gothic', sans-serif;
+    color: var(--vert-doux);
+}
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    margin-left: auto;
+    flex-direction: nowrap;
+}
+.nav-links {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--texte);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links:hover {
+    color: var(--orange-doux);
+    text-decoration: underline;
+}
+
+.profil-container {
+    position: relative;
+    margin-left: 1rem;
+
+}
+
+.photo-profil {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid var(--vert-doux);
+}
+
+.menu-profil {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--beige-fonce);
+    border: 1px solid var(--vert-doux);
+    border-radius: 6px;
+    margin-top: 6px;
+    box-shadow: 0 4px 8px var(--shadow) ;
+    z-index: 10;
+}
+
+.menu-profil a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--texte);
+    text-decoration: none;
+    font-family: 'Quicksans', sans-serif;
+    font-size: 0.95rem;
+}
+
+.menu-profil a:hover {
+    background-color: var(--orange-doux);
+    color: black;
+    border-radius: 6px;
+
+}
+.hero {
+    position: relative;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.hero-image {
+    max-height: 400px;
+    overflow: hidden;
+    filter: brightness(0.7);
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slogan {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px 25px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.slogan h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+footer{
+    background-color: var(--beige-fonce);
+    color: var(--gris-doux);
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--vert-doux);
+    margin-top: 3rem;
+}
+
+footer a {
+    color: var(--orange-doux);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3 ease;
+}
+
+footer a:hover {
+    color: var(--vert-doux);
+    text-decoration: underline;
+
+}
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Century Gothic', 'Montserrat', 'Quicksand', sans-serif ;
+    font-weight: 400;
+    line-height: 1.6;
+    background-color: var(--fond);
+    color: var(--texte);
+    margin: 0;
+    padding: 80px 1.5rem 0 1.5rem;
+  
+}
+
+h1,h2,h3 {
+    font-family: 'Montserrat', 'Century Gothic', sans-serif;
+    color: var(--vert-doux);
+    margin-top: 0;
+    font-weight: 700;
+}
+
+h1 {
+   font-size: 2.5rem; 
+   margin-bottom: 0.75rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+a{
+    color:var(--orange-doux) ;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline ;
+    color: #e07b39 ;
+}
+
+button {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--vert-doux);
+    color: black;
+    border: none;
+    padding: 0.6em 1.2em;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3 ease;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+button:hover {
+    background-color: var(--orange-doux);
+    box-shadow: 0 4px 10px var(--shadow);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    background-color: var(--beige-fonce);
+    color: var(--texte);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid var(--vert-doux);
+    padding: 0.75em 1em;
+    text-align: left;
+}
+
+th {
+    background-color: var(--orange-doux);
+    font-weight: 700;
+}
+
+input, select, textarea {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--gris-doux);
+    border: 1px solid var(--orange-doux);
+    padding: 0.6em;
+    border-radius: 6px;
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.search-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+}
+
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.search-container label{
+    flex: 0 0 120px;
+    margin-right: 0.5rem;
+    text-align: right;
+}
+.search-container input, 
+.search-container button {
+    flex: 1 1 auto;
+    min-width: 150px;
+}
+
+label {
+    color: var(--vert-doux);
+    font-weight: 600;
+}
+
+input {
+    color: #222;
+    background-color: #f9f9f9;
+    border: 1px solid var(--vert-doux);
+}
+
+@media (max-width : 600px) {
+    .search-container {
+        flex-direction: column;
+    }
+}
+
