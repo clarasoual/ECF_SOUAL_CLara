@@ -9,26 +9,34 @@
 </head>
 <body>
     <section class="search-section">
-        <form action="recherche.php" method="get">
-            <div class="search-container">
-                <label for="departure"> -Je pars de...</label>
-                <input type="text" id="departure" name="departure" value="Bordeaux" required>
+        <form action ="recherche.php" method ="get">
+            <div class = "search-container">
+                <div class="form-group">
+                <label for="departure">Je pars de ...</label>
+                <input type ="text" id="departure" name="departure" placeholder="Ville de départ" required>
+                </div>
 
-                <label for="destination"> -Je vais à...</label>
-                <input type="text" id="destination" name="destination" value="Perigueux" required>
+                <div class="form-group">
+                <label for="destination">Je vais à ...</label>
+                <input type ="text" id="destination" name="destination" placeholder="Ville d'arrivée" required>
+                </div>
 
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" value="2025-05-12" required>
+                <div class="form-group">
+                <label for ="date">Date</label>
+                <input type ="date" id="date" name="date" required>
+                </div>
 
-                <label for="passenger">Passager.s</label>
-                <input type="number" id="passenger" name="passenger" value="1" min="1" required>
-
+                <div class="form-group">
+                <label for="passenger">Passagers</label>
+                <input type="number" id="passenger" name="passenger" min="1" value="1" required>
+                </div>
+                
                 <button type="submit" class="search-btn">
-                    <img src="" alt="Rechercher" class="search-icon">
+                    <img src="IMAGES/logo recherche.png" alt="Rechercher"  class="search-icon">
                 </button>
             </div>
         </form>
-    </section>
+    </section> 
 
     <section class="results-section">
         <div class="filters">
@@ -51,7 +59,7 @@
                 <p>Départ : 08h00 - Arrivée : 10h00</p>
                 <p>Durée estimée : 2h00</p>
                 <p>Prix : 15 euros / passager</p>
-                <p>Chauffeur : <img src="" alt="Photo chauffeur">Jean Dupont</p>
+                <p>Chauffeur : <img src="IMAGES/photo ld 2.jpg" alt="Photo chauffeur">Jean Dupont</p>
                 <p>Places restantes : 2</p>
                 <p>Voyage écologique</p>
                 <button>Voir les détails</button>
@@ -62,7 +70,7 @@
                 <p>Départ : 11h30 - Arrivée : 14h00</p>
                 <p>Durée estimée : 2h30</p>
                 <p>Prix : 17 euros / passager</p>
-                <p>Chauffeur : <img src="" alt="Photo chauffeur">Jean Patate</p>
+                <p>Chauffeur : <img src="IMAGES/photo ld 3.jpg" alt="Photo chauffeur">Jean Patate</p>
                 <p>Places restantes : 1</p>
                 <p>Voyage écologique</p>
                 <button>Voir les détails</button>
