@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Compte employés</title>
+    <link rel="stylesheet" href="../CSS/ecoride_style.css">
+</head>
+<body>
+
+<!-- Header commun employés -->
+<?php include('../COMPONENTS/headeremploye.html') ; ?>
+
+<hr>
+
+<main>
+    <!-- Menu de navigation à gauche -->
+    <nav class="menu-principal">
+
+        <!-- Première section du menu -->
+        <section class="menu-section">
+            <h2>Tableau de bord</h2>
+        </section>
+
+        <!-- Deuxième section du menu -->
+        <section class="menu-section">
+            <h2>Comptes</h2>
+            <ul class="menu-li">
+                <li class="menu-item"><a class="link_board" href="admin_employes.php">Employés</a></li>
+                <li class="menu-item"><a class="link_board" href="admin_utilisateurs.php">Utilisateurs</a></li>
+            </ul>
+        </section>
+
+        <!-- Troisième section du menu -->
+        <section class="menu-section">
+            <h2>Statistiques</h2>
+            <ul class="menu-li">
+                <li class="menu-item">Covoiturage</li>
+                <li class="menu-item">Ratio</li>
+                <li class="menu-item">Crédit</li>
+                <li class="menu-item">Crédit auto / utilisateur auto</li>
+            </ul>
+        </section>
+    </nav>
+
+    <!-- Section principale : tableau des employés -->
+    <section class="menu-section">
+
+        <!-- Tableau des employés -->
+        <h2>Comptes Employés</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Date d'inscription</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Martin</td>
+                    <td>Claire</td>
+                    <td>claire.martin@exemple.com</td>
+                    <td>01/03/2023</td>
+                    <td>
+                        <button>Modifier</button>
+                        <button>Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <button>Ajouter un employé</button>
+        </div>
+    </section>
+</main>
+
+<script src="JS/ecoride_js.js"></script>
+<!-- Footer commun -->
+<?php include('../COMPONENTS/footer.html') ?>
+
+</body>
+</html>
+
+<!-- A corriger ici :
+ - Mettre un ease sur le tableau des employés
+ - Titres
+ - Couleur titres
+ 
+ A ajouter :
+ - Créer une section modifier mon profil et y relier la photo employé 
+ - Pareil pour tout le reste du tableau de bord
+ - Page de connexion utilisateurs
