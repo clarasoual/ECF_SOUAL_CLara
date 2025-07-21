@@ -14,6 +14,23 @@ Pour ouvrir le site, il faut utiliser un serveur local comme XAMPP (car le site 
 4. Ouvrir un navigateur et aller à l'adresse : "http://localhost/eco_ride/".
 5. Aller dans le dossier "CODE".
 6. Aller dans le dossier "USERS PHP" pour voir la partie utilisateur, dans "ADMIN PHP" pour voir la partie admin puis dans "EMPLOYE PHP" pour voir la partie employé.
+7. Les pages qui ont commencé à être développées sont :
+   **Dans le dossier "USERS PHP"** :
+   - accueil.php
+   - connexion_inscription.php
+   - details_trajet.php
+   - inscription.php
+   - proposer_trajet.php
+   - recherche_covoit.php
+   - Tout le dossier "MON COMPTE"
+   - Dans le dossier "PROFIL USERS" : profilfinn.php
+  
+  **Dans le dossier "ADMIN PHP"** :
+  - admin_employes.php
+  - admin_utilisateurs.php
+
+  **Dans le dossier "EMPLOYES PHP"**
+  - signalement.php
 
 ## Modifications et ajouts prévus
 
@@ -73,6 +90,9 @@ Le design et les idées de structures ont été inspirés de :
 - Git et GitHub
 - Trello pour la gestion de projet
 - ProCreate pour le logo et les maquettes
+- Google Docs pour les maquettes écrites
+
+Vous retrouverez mes esquisses (procreate) et écrites (Google Docs) en PDF dans le dossier "MAQUETTES".
 
 
 ### Auteur
