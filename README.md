@@ -12,6 +12,8 @@ Pour ouvrir le site, il faut utiliser un serveur local comme XAMPP (car le site 
 2. Placer le dossier "eco_ride" dans le dossier "htdocs" de XAMPP.
 3. Démarrer le serveur Apache via le panneau de contrôle de XAMPP.
 4. Ouvrir un navigateur et aller à l'adresse : "http://localhost/eco_ride/".
+5. Aller dans le dossier "CODE".
+6. Aller dans le dossier "USERS PHP" pour voir la partie utilisateur, dans "ADMIN PHP" pour voir la partie admin puis dans "EMPLOYE PHP" pour voir la partie employé.
 
 ## Modifications et ajouts prévus
 
