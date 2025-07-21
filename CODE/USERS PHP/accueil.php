@@ -52,7 +52,7 @@
 
                 <!-- Bouton re cherche avec icône -->
                 <button type="submit" class="search-btn">
-                    <img src="IMAGES/logo recherche.png" alt="Rechercher"  class="search-icon">
+                    <img src="../../IMAGES/logo recherche.png" alt="Rechercher"  class="search-icon">
                 </button>
             </div>
         </form>
@@ -90,11 +90,11 @@
 
         <article class="testimonials">
             <p>Superbe expérience, conducteur sympa. Je recommande à 100 % !</p>
-            <strong>- Julie  M.</strong>
+            <strong>- Nina R.</strong>
         </article>
 
         <article class="testimonials">
-            <p>Pratique et écologique, j'utilise Eco Ride toutes les semaines.</p>
+            <p>Nino est très accueillant et prudent. Pratique et écologique, j'utilise Eco Ride toutes les semaines.</p>
             <strong>- Théo K.</strong>
         </article>
     </section>
@@ -122,26 +122,26 @@
 <script src="JS/ecoride_js.js"></script> 
 
 <!-- Footer commun -->
-<?php include('COMPONENTS/footer.html'); ?>
+<?php include('../COMPONENTS/footer.html'); ?>
 </body>
 </html>
 
-<!-- A corriger ici :
- - Loupe du formulaire a aligner
- - Logo plus lisible
- - Comment ça marche a améliorer
+<!-- A faire
+ - Loupe du formulaire à aligner
+ - Logo plus lisible, à refaire
+ - Comment ça marche à améliorer
  - Aérer le footer
  - Recadrer la photo
- - Responsive
- - Rétrécir la section email dans le footer
-
- A ajouter : 
+ - Responsive !!
  - Relier la photo de profil a l'espace mon compte OU a la connexion/inscription
  - Relier la FAQ à la page dédiée
  - Relier et créer mentions légales
  - Relier et créer Réglement de la plateforme
- - Relier contact
+ - Relier et créer contact
  - Relier et créer les réseaux sociaux
- - Créer newsletter -->
+ - Créer newsletter ? 
+ - Peut être faire une section à propos pour Niels
+ - Mettre à la place une description de Eco Ride, en incluant le comment ça marche ?
+ -->
 
 

@@ -29,7 +29,11 @@
 
     <div id="upcoming">
         <h3>Trajets à venir</h3>
-        <p>Vous n'avez pas de trajet prévu actuellement.</p>
+        <!-- 1 : Nino
+        Bordeaux à Bayonne
+        25 juillet 2024
+        8h30
+        Passagers : Théo et Nina -->
     </div>
 
     <div id="ongoing">
@@ -52,15 +56,10 @@
                 <button>Voir les avis</button>
             </div>
 
-            <div class="trip-card">
-                <p><strong>Date :</strong> 03/04/2025</p>
-                <p><strong>Départ :</strong> Lille</p>
-                <p><strong>Arrivée :</strong> Paris</p>
-                <p><strong>Arrêts :</strong> Arras, Amiens</p>
-                <p><strong>Note moyenne :</strong> 5/5</p>
-                <button>Voir les avis</button>
-
-            </div>
+            <!-- Remplacer par Trajet 2.1 : Finn : Saint Pierre de Chignac - Bordeaux avec Théo, Nino et Nina le 7 février 2024
+            Théo : 5/5
+            Nina : 4/5
+            Nino : 5/5 -->
         </div>
     </div>
 </section>
@@ -70,3 +69,9 @@
     <?php include('../../COMPONENTS/footer.html'); ?>
 </body>
 </html>
+
+<!-- A faire :
+
+- remplacer le trajet
+
+-->

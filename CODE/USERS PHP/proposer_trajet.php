@@ -49,7 +49,7 @@
                 <label for="arrival">Adresse d'arrivée</label><br>
                 <input type="text" id="arrival" name="arrival" placeholder="Adresse d'arrivée"><br><br>
 
-                <label for="places">Nombre de passagers disponibles</label><br>
+                <label for="places">Nombre de places passagers disponibles</label><br>
                 <input type="number" id="places" name="places" min="1" max="8"><br><br>
 
                 <label for="commentaire">Autres précisions (optionnel)</label><br>
@@ -70,7 +70,7 @@
 </html>
 
 <!-- A modifier ici : 
-- Enlever le ease
+- Enlever le hover vert
 - Espace entre label et input
 - Styliser d'ou partons nous etc
 - Styliser titre

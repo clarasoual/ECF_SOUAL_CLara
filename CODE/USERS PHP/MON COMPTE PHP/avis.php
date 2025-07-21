@@ -64,3 +64,8 @@
     <?php include('../../COMPONENTS/footer.html'); ?>
 </body>
 </html>
+
+<!-- A faire :
+
+- Séparer section avis recus et avis donnés
+- Mettre info cohérentes -->

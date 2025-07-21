@@ -55,10 +55,13 @@
 </body>
 </html>
 
-<!-- A modifier ici :
-- Coche se souvenir de moi a replacer
+<!-- A faire :
+- Checkbox se souvenir de moi aà replacer
 - Styles boutons : plus gros, autre couleur ?
-- Relier photo de profil à cette page
+- Relier photo de profil de toutes les pages users à cette page
 - Relier continuer à une adresse mail à la page inscription
-- <a></a> couleur
-- Diminuer la taille de l'input
+- Enlever la couleur orange pour les <a></a>
+- Diminuer la taille des input connexion
+- Tout mettre au centre et bien séparer les 2 sections
+- Créer et relier C.U., P.C., et P. Cookies
+- Créer et relier une page mot de passe oublié

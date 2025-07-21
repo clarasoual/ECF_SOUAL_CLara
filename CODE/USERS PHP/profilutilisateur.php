@@ -15,9 +15,9 @@
 <section class="driver-profile">
     <h2>Profil de <strong>Finn</strong></h2>
     <img src="../../IMAGES/finn.png"class="profile-picture" alt="Photo de profil" width="150" height="150">
-    <p>Age : 34 ans</p>
-    <p>Note globale : ★★★★☆ (4.2 / 5)</p>
-    <p>Nombre d'avis : 12 <a href="#">Voir les avis</a></p>
+    <p>Age : 23 ans</p>
+    <p>Note globale : ★★★★★ (4.8 / 5)</p>
+    <p>Nombre d'avis : 3 <a href="#">Voir les avis</a></p>
 </section>
 
 <hr>
@@ -40,7 +40,7 @@
     <h4 class="subsection-title">Véhicule(s)</h4>
     <ul>
         <li>Peugeot 208 - Bleue</li>
-        <li>Renault Clio - Grise</li>
+        <li>Renault Clio II - Grise</li>
     </ul>
 </section>
 
@@ -50,21 +50,9 @@
     <h3 class="section-title">Historique de trajets</h3>
 
     <div class="trip">
-        <h4 class="trip-title">Trajet 1</h4>
-        <p class="trip-route">Paris - Lyon</p>
-        <p class="trip-date">Date : 12 mai 2025</p>
-    </div>
-
-     <div class="trip">
-        <h4 class="trip-title">Trajet 2</h4>
-        <p class="trip-route">Marseille - Toulouse</p>
-        <p class="trip-date">Date : 5 avril 2025</p>
-    </div>
-
-     <div class="trip">
-        <h4 class="trip-title">Trajet 3</h4>
-        <p class="trip-route">Lille - Strasbourg</p>
-        <p class="trip-date">Date : 12 mai 2025</p>
+        <h4 class="trip-title">Trajet du 7 février 2024</h4>
+        <p class="trip-route">Saint Pierre de Chignac - Bordeaux</p>
+        <p class="trip-passengers">Théo K, Nino C., Nina R.</p>
     </div>
 
 </section>
@@ -86,4 +74,6 @@
 
 <!-- A faire : 
  - CSS
+ - Mettre les avis des passagers
+ - Faire les autres pages profil
 

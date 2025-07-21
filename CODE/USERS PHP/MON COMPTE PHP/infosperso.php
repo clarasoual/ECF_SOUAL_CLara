@@ -56,8 +56,8 @@
         <!-- Section solde crédit -->
         <section class="credit-balance">
             <h3>Crédit</h3>
-            <p>Solde : 10 crédits</p>
-            <p>Besoin de crédit ? <a href="credit.html">Contacte Ecp Ride</a></p>
+            <p>Solde : 15 crédits</p>
+            <p>Besoin de crédits ? <a href="credit.html">Contacter Eco Ride</a></p>
         </section>
 
     </main>
@@ -68,3 +68,9 @@
     <?php include('../../COMPONENTS/footer.html'); ?>
 </body>
 </html>
+
+<!-- A faire :
+
+- Bouton enregistrer infos
+- Alerte remplir infos conducteur si conducteur ou passager condcuteur a été coché : page : infosconducteur.php
+- Modifier photo de profil -->

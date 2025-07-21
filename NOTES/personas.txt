@@ -1,51 +1,99 @@
 Utilisateurs :
 
-Nino : Conducteur
-Finn : Conducteur
-Antoine : Conducteur
-Nina : Passagère
-Théo : Passager
+Nino : Passager-Conducteur ; Note moyenne : 4.7 (5 + 4 + 5)
+Finn : Passager-Conducteur ; Note moyenne : 4.5 (5 + 4)
+Antoine : Passager-Conducteur ; Note moyenne : 3,5 (3,5)
+Nina : Passagère ; Note moyenne : 4,7 (5 + 4 + 5)
+Théo : Passager ; Note moyenne : 5 (5 + 5)
+Jeanne : Conductrice uniquement
 
-Trajets : 
+Véhicules : 
+Nino : Renault, Clio, Bleu, essence
+
+Trajets futurs : 
 
 1 : Nino
 Bordeaux à Bayonne
 25 juillet 2024
 8h30
 Passagers : Théo et Nina
-Avis : Nino
-Avis Nina :
-Avis Théo :
+Nombre de places restantes : 2
+
 
 2. Nino
 Bayonne - Dax
 28 juillet 2024
 17h45
 Passager : Antoine
-Avis : Nino
-Avis Antoine :
+Nombre de places restantes : 3
+
 
 3. Finn
 Toulouse - Auch
 16 juillet 2024
 10h
 Passagere : Nina
-Avis Finn :
-Avis Nina :
+Nombre de places restantes : 3
 
 4. Antoine
 Agen - Pau
 27 juillet 2024
 14h15
 Passagers : Théo, Finn
-Avis Antoine :
-Avis Théo :
-Avis Finn :
+Nombre de places restantes : 1
+
+
+
+Trajets passés : 
+
+Trajet 1.1 : Nino 
+
+Perigueux-Limoges avec Antoine et Finn le 26 janvier 2024
+Avis de Finn : 4/5 ( Trajet confortable, Nino est très respectueux et à l'écoute de ses passagers. Petit bémol, il y a eu un peu de retard à l'arrivée.)  
+Avis d'Antoine : 5/5 ( Nino est toujours ponctuel et très sympa, je recommande !)
+Notes aux passagers :
+A Finn : 5/5
+A Antoine : 5/5
+
+
+Trajet 2.1 : Finn
+
+Saint Pierre de Chignac - Bordeaux avec Théo, Nino et Nina le 7 février 2024
+Avis de Théo : 5/5
+Avis de Nina : 4/5
+Avis de Nino : 5/5
+Notes au passagers : 
+A Théo : 5/5
+A Nino : 5/5
+A Nina : 4/5
+
+Trajet 3.1 : Antoine : Béziers - Bordeaux avec Nina le 15 mars 2024
+Avis de Nina : 3.5/5
+Notes aux passagers : 
+A Nina : 5/5
+
+
+Trajet en cours : 
+
+5. Jeanne : 
+Mussidan - Périgueux
+2 juillet 2024
+15h
+Avec Nina en passagère
+
+
+Notes :
+
+Quand nous sommes sur le site nous sommes Nina, nous sommes le 2 juillet à 15h
 
 Employés : Laura, Blathazar, Luna
 
 Admins : Clara, Léon
 
-Signalement : trajet 4, antoine roulait trop vite
+Signalement : trajet 3.1, antoine roulait trop vite
 
+Peut être mettre quelqu'un en conducteur uniquement pour diversifier
+
+Véhicules a ajouter
+Antoine a une voiture 4 places
 

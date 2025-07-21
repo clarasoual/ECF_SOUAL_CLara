@@ -24,27 +24,26 @@
         <aside class="conversation-list">
             <h3>Conversations</h3>
             <ul>
-                <li><strong>Marie D.</strong><br><small>A tout à l'heure !</small></li>
-                <li><strong>Julien S.</strong><br><small>Merci pour le trajet</small></li>
-                <li><strong>Nina R.</strong><br><small>Ok pour 8h </small></li>
+                <li><strong>Nino C.</strong><br><small>Super, à demain alors ! Bonne soirée</small></li>
+                <li><strong>Finn M.</strong><br><small>Moi : Merci pour le trajet</small></li>
             </ul>
         </aside>
 
         <!-- Zone d'affichage de la conversation selectionnée -->
         <section class="message-area">
-            <h3>Conversation avec Marie D.</h3>
+            <h3>Conversation avec Nino C.</h3>
 
             <div class="message-thread">
                 <div class="message-received">
-                    <p><strong>Marie :</strong>Salut, c'est toujours bon pour toi pour le trajet de demain ?</p>
+                    <p><strong>Nino : </strong>Salut, c'est toujours bon pour toi pour le trajet de demain ?</p>
                     <small>20:16</small>
                 </div>
                 <div class="message-sent">
-                    <p><strong>Moi :</strong>Oui c'est toujours bon pour moi !</p>
+                    <p><strong>Moi : </strong>Oui c'est toujours bon pour moi !</p>
                     <small>20:18</small>
                 </div>
                 <div class="message-received">
-                    <p><strong>Marie :</strong>Super, à demain alors ! Bonne soirée</p>
+                    <p><strong>Nino : </strong>Super, à demain alors ! Bonne soirée</p>
                     <small>20:26</small>
                 </div>
             </div>
@@ -64,3 +63,7 @@
     <?php include('../../COMPONENTS/footer.html'); ?>
 </body>
 </html>
+
+<!-- 
+A faire :
+Mettre l'heure et la date de la conversation -->

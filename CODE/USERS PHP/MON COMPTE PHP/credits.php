@@ -45,15 +45,15 @@
 
     <tbody>
         <tr>
-            <td>21/05/2025</td>
+            <td>04/02/2024</td>
             <td>Sortie</td>
-            <td>Réservation du trajet n°13</td>
-            <td>- 10</td>
-            <td>10</td>
+            <td>Réservation du trajet n°2.1</td>
+            <td>- 5</td>
+            <td>15</td>
         </tr>
         <tr>
 
-        <td>03/05/2025</td>
+        <td>01/02/2024</td>
         <td>Entrée</td>
         <td>Crédits de bienvenue</td>
         <td>+ 20</td>
@@ -74,3 +74,6 @@
     <?php include('../../COMPONENTS/footer.html'); ?>
 </body>
 </html>
+
+<!-- a faire :
+ - Mettre lien vers la trajet en question -->

@@ -58,26 +58,16 @@
             <input type="number" id="note" name="note" step="0.1" placeholder="Ex : 4.5" class="filter-input">
         </div>
 
-        <!-- Résultats de la recherche -->
+        <!-- Résultats de la recherche "Bordeaux - Bayonne -->
         <div class="search-results">
+            <!-- Trajet 1 -->
             <article class="ride">
-                <h3>Bordeaux → Périgueux</h3>
-                <p>Départ : 08h00 - Arrivée : 10h00</p>
+                <h3>Bordeaux → Bayonne</h3>
+                <p>Départ : 08h30</p>
                 <p>Durée estimée : 2h00</p>
-                <p>Prix : 15 euros / passager</p>
+                <p>Prix : 15 crédits / passager</p>
                 <p>Chauffeur : <img src="IMAGES/photo ld 2.jpg" alt="Photo chauffeur">Jean Dupont</p>
                 <p>Places restantes : 2</p>
-                <p>Voyage écologique</p>
-                <button><a href="details_trajet.php">Voir les détails</a></button>
-            </article>
-
-            <article class="ride">
-                <h3>Bordeaux → Trélissac</h3>
-                <p>Départ : 11h30 - Arrivée : 14h00</p>
-                <p>Durée estimée : 2h30</p>
-                <p>Prix : 17 euros / passager</p>
-                <p>Chauffeur : <img src="IMAGES/photo ld 3.jpg" alt="Photo chauffeur">Jean Patate</p>
-                <p>Places restantes : 1</p>
                 <p>Voyage écologique</p>
                 <button><a href="details_trajet.php">Voir les détails</a></button>
             </article>
@@ -103,3 +93,4 @@
 - aligner coche
 - Diminuer taille de la section filtres
 - Styliser la section résultats
+- Rajouter date trajet

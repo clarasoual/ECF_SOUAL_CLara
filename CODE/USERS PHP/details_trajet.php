@@ -14,10 +14,11 @@
     <!-- Le titre du trajet -->
     <div class="page-header">
         <div class="date-title">
-            <h1>Samedi 12 mai 2025</h1>
+            <h1>Jeudi 25 juillet 2024</h1>
         </div>
 
         <!-- Bouton de réservation -->
+        <!-- Mettre que ça coute 5 crédits par passagers -->
         <div class="reservation-btn">
                 <a href="reservation.html">Demande de réservation</a>
         </div>
@@ -28,9 +29,9 @@
         <div class="plan-town">
             <h2>Plan schématique du trajet</h2>
             <p>Ville de départ : Bordeaux</p>
-            <p>Ville d'arrivée : Périgueux</p>
-            <p>Arrêt 1 : Libourne</p>
-            <p>Arrêt 2 : Saint Astier</p>
+            <p>Arrêt 1 : Saugnac-et-Muret</p>
+            <p>Arrêt 2 : Soorts-Hossegor</p>
+            <p>Ville d'arrivée : Bayonne</p>
         </div>
 
         <!-- Bouton de demande de la durée -->
@@ -47,9 +48,9 @@
     <div class="driver-infos">
         <img src="../../IMAGES/thierry.jpg" alt="Photo de Thierry" class="driver-photo">
         <div class="driver-details">
-            <p><strong>Pseudo :</strong> Thierry</p>
+            <p><strong>Pseudo :</strong> Nino</p>
             <p><strong>Nombre de trajets :</strong> 8</p>
-            <p><strong>Note moyenne :</strong> 4.7/5</p>
+            <p><strong>Note moyenne :</strong> 4.5/5</p>
         </div>
     </div>
     <div class="preferences">
@@ -75,42 +76,42 @@
         <article class="passenger-card">
             <img src="../../IMAGES/claire.jpg" alt="Photo de Claire" class="passenger-photo">
             <div class="passenger-info">
-                <p><strong>Pseudo :</strong>Claire</p>
-                <p><em>De l'arrêt 1 à Périgueux</em></p>
+                <p><strong>Pseudo :</strong> Nina R.</p>
+                <p><em>De Saugnac-et-Muret à Bayonne</em></p>
             </div>
         </article>
 
         <article class="passenger-card">
             <img src="../../IMAGES/marc.jpg" alt="Photo de Marc" class="passenger-photo">
             <div class="passenger-info">
-                <p><strong>Pseudo :</strong>Marc</p>
-                <p><em>De l'arrêt Bordeaux à Périgueux</em></p>
+                <p><strong>Pseudo :</strong> Théo K.</p>
+                <p><em>De Bordeaux à Bayonne</em></p>
             </div>
         </article>
     </section>
 
     <!-- Avis du conducteur -->
     <section class="driver-reviews">
-        <h2>Ce que les passagers pensent de Thierry</h2>
+        <h2>Ce que les passagers pensent de Nino</h2>
 
         <article class="reviews">
             <div class="author-review">
                 <img src="../../IMAGES/sophie.jpeg" alt="Photo de sophie" class="author-photo">
-                <p><strong>Sophie</strong></p>
+                <p><strong>Antoine</strong></p>
                 <p><strong>Note :</strong> 5 / 5</p>
             </div>
             <h3>Très bon conducteur</h3>
-            <p>Thierry est toujours ponctuel et très sympa, je reccomande !</p>
+            <p>Nino est toujours ponctuel et très sympa, je recommande !</p>
         </article>
 
         <article class="review">
             <div class="author-review">
                 <img src="../../IMAGES/lucas.jpg" alt="Photo de Lucas" class="author-photo">
-                <p><strong>Lucas</strong></p>
-                <p><strong>Note :</strong> 4.6 / 5</p>
+                <p><strong>Finn</strong></p>
+                <p><strong>Note :</strong> 4 / 5</p>
             </div>
-            <h3>Conduite agréable</h3>
-            <p>Trajet confortable, Thierry est très respectueux et à l'écoute de ses passagers.</p>
+            <h3>Conduite agréable malgré le retard.</h3>
+            <p>Trajet confortable, Nino est très respectueux et à l'écoute de ses passagers. Petit bémol, il y a eu un peu de retard à l'arrivée.</p>
         </article>
     </section>
 
@@ -122,15 +123,13 @@
 </body>
 </html>
 
-<!-- A modifier ici :
+<!-- A faire ici :
     - Moderniser plan shcématique du trajet ( dessin ? )
-    - Mettre passagers sur la droite en séparant
+    - Mettre passagers sur la droite en séparant du reste (en colonne ?)
     - Relier demander durée max au chauffeur à la section messages
     - Relier le nom du condcuteur à son profil/historique
-    - Note à modernister
-    - Scroll a enlever avis
-    
-    A ajouter : 
-
-    - Guillemets avis
+    - Note à modernister (étoiles ?)
+    - Overflow a enlever avis
+    - Noter que ça coute 5 crédits par passagers
+    - Gros guillements avis
     - Créer et relier une nouvelle page résumé de la demande de réservation 
