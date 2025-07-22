@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informations Conducteur</title>
     <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
 
 <?php include('../../COMPONENTS/menumyaccount.html'); ?>
 
-<!-- Formulaire de déclaratio  d'un véhicule -->
+<!-- Formulaire de déclaration d'un véhicule -->
 <main class="driver-info-container">
     <h2>Véhicule numéro 1</h2>
     <section class="vehicle-form">
@@ -159,6 +160,7 @@
 </body>
 </html>
 
-<!-- A faire
+<!-- A FAIRE
 
+- Faire en sorte que cette page s'affiche lorsque l'utilisateur coche qu'il est condcuteur ou passager-condcuteur dans les infos personnelles.
 - Bouton ajouter ou supprimer un véhicule -->

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Connexion / Inscription ECO RIDE </title>
-    <<link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -18,7 +19,7 @@
             <!-- Section inscription -->
             <div id="inscription">
                 <h2>S'inscrire</h2>
-                <button class="btn-inscription-mail"><a href="inscription.php">Continuer avec une adresse mail</a></button>
+                <a class="btn-inscription-mail" href="inscription.php">Continuer avec une adresse mail</a>
                 <p id="mentions-legales">
                     En continuant, vous acceptez nos <a href="#">Conditions d'utilisation</a>, notre <a href="#">Politique de confidentialité</a>, notre <a href="#">Politique sur les Cookies</a>.
                 </p>
@@ -48,7 +49,6 @@
         </div>
     </main>
 
-    <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
     <?php include('../COMPONENTS/footer.html'); ?>
@@ -64,4 +64,4 @@
 - Diminuer la taille des input connexion
 - Tout mettre au centre et bien séparer les 2 sections
 - Créer et relier C.U., P.C., et P. Cookies
-- Créer et relier une page mot de passe oublié
+- Créer et relier une page mot de passe oublié -->

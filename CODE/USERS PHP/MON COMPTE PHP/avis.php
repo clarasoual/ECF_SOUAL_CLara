@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mon compte - Avis </title>
     <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -67,5 +68,6 @@
 
 <!-- A faire :
 
-- Séparer section avis recus et avis donnés
-- Mettre info cohérentes -->
+- CSS
+- Séparer section avis reçus et avis donnés
+- Mettre info cohérentes de personas.txt-->

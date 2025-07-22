@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mon compte </title>
     <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -51,8 +52,8 @@
             <!-- Zone de saisie d'un nouveau message -->
             <div class="send-message-area">
                 <label for="new-message">Nouveau message :</label><br>
-                <textarea id="new-message" name="new-message" rows="3" cols="40" placeholder="Ecrire un message..."></textarea>
-                <button>Envoyer</button>
+                <textarea id="new-message" name="new-message" rows="3" cols="40" placeholder="Écrire un message..."></textarea>
+                <button>Envoyer</button> <!-- Ajouter type button ou submit -->
             </div>
         </section>
     </div>
@@ -64,6 +65,6 @@
 </body>
 </html>
 
-<!-- 
-A faire :
-Mettre l'heure et la date de la conversation -->
+<!-- A FAIRE
+- CSS
+- Mettre l'heure et la date de la conversation -->

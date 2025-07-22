@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Espace employé - Suivi signalement </title>
     <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -37,7 +38,7 @@
         <div class="passenger-card">
 
         <h4>Passager 1</h4>
-        <img src="" alt="Photo de profil" width="60">
+        <img src="#" alt="Photo de profil" width="60">
         <p><strong>Pseudo :</strong> Alex</p>
         <p><strong>Téléphone :</strong>06 11 12 13 14</p>
         <p><strong>Email :</strong>alex@exemple.com</p>
@@ -66,4 +67,5 @@
 <!-- A faire : 
 
 - CSS
+- Modifier les passagers
 -->

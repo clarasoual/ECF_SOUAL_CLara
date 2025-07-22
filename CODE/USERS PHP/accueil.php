@@ -50,7 +50,7 @@
                 <input type="number" id="passenger" name="passenger" min="1" value="1" required>
                 </div>
 
-                <!-- Bouton re cherche avec icône -->
+                <!-- Bouton recherche avec icône -->
                 <button type="submit" class="search-btn">
                     <img src="../../IMAGES/logo recherche.png" alt="Rechercher"  class="search-icon">
                 </button>
@@ -61,13 +61,13 @@
     <!-- Présentation du fondateur (peut-être à déplacer) -->
     <section class="founder-section">
         <div class="founder-container">
-        <img src="../../IMAGES/portrait niels.png" alt="Niels Marceau" class="founder-photo">
+        <img src="../../IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
         <div class="founder-bio">
-            <h2>Niels Marceau</h2>
+            <h2>José Marceau</h2>
             <p>
-                Originaire d’Annecy, Niels Marceau a fondé Eco Ride en 2022 avec une conviction forte : rendre les modes de transport durables plus visibles, accessibles et attractifs.
+                Originaire d’Annecy, José Marceau a fondé Eco Ride en 2022 avec une conviction forte : rendre les modes de transport durables plus visibles, accessibles et attractifs.
                 Après plusieurs années à travailler dans le secteur associatif et environnemental, il constate que de nombreuses initiatives locales peinent à se faire connaître, malgré leur impact positif. C’est ainsi qu’est née Eco Ride : une plateforme dédiée aux mobilités douces, au service de celles et ceux qui souhaitent se déplacer autrement, à leur échelle.
-                Niels croit en un changement progressif, porté par l’information, la confiance et des solutions concrètes. À travers Eco Ride, il souhaite créer un lien entre les citoyens, les acteurs locaux et les alternatives de transport, dans un esprit d’ouverture, de simplicité et de respect de l’environnement.
+                José croit en un changement progressif, porté par l’information, la confiance et des solutions concrètes. À travers Eco Ride, il souhaite créer un lien entre les citoyens, les acteurs locaux et les alternatives de transport, dans un esprit d’ouverture, de simplicité et de respect de l’environnement.
             </p>
         </div>
         </div>
@@ -88,12 +88,12 @@
     <section class="testimonials responsive-section">
         <h2>Ils ont voyagé avec Eco Ride</h2>
 
-        <article class="testimonials">
+        <article class="testimonial">
             <p>Superbe expérience, conducteur sympa. Je recommande à 100 % !</p>
             <strong>- Nina R.</strong>
         </article>
 
-        <article class="testimonials">
+        <article class="testimonial">
             <p>Nino est très accueillant et prudent. Pratique et écologique, j'utilise Eco Ride toutes les semaines.</p>
             <strong>- Théo K.</strong>
         </article>
@@ -119,7 +119,6 @@
         <h2>Prêt.e à partager la route ?</h2>
         <a href="inscription.php" class="cta-btn">Créer un compte</a>
     </section>
-<script src="JS/ecoride_js.js"></script> 
 
 <!-- Footer commun -->
 <?php include('../COMPONENTS/footer.html'); ?>
@@ -140,8 +139,9 @@
  - Relier et créer contact
  - Relier et créer les réseaux sociaux
  - Créer newsletter ? 
- - Peut être faire une section à propos pour Niels
+ - Peut être faire une section à propos pour José
  - Mettre à la place une description de Eco Ride, en incluant le comment ça marche ?
+ - Faire un composant pour le formulaire
  -->
 
 

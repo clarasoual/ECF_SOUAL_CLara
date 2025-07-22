@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Compte utilisateurs</title>
     <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -35,12 +36,13 @@
         <!-- Troisième section du menu -->
         <section class="menu-section">
             <h2>Statistiques</h2>
-            <ul class="menu-li">
+            <!-- A REVOIR
+             <ul class="menu-li">
                 <li class="menu-item">Covoiturage quotidien</li>
                 <li class="menu-item">Ratio</li>
                 <li class="menu-item">Crédit</li>
                 <li class="menu-item">Crédit auto / utilisateur auto</li>
-            </ul>
+            </ul> -->
         </section>
     </nav>
 
@@ -82,16 +84,13 @@
 <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html') ?>
+    <?php include('../COMPONENTS/footer.html') ; ?>
 </body>
 </html>
 
 <!-- A corriger ici :
  - Mettre un ease sur le tableau des utilisateurs
- - Titres
- - Couleur titres <a></a>
- 
- A ajouter :
- - Créer une section modifier mon profil et y relier la photo employé 
- - Pareil pour tout le reste du tableau de bord
- - Page de connexion utilisateurs
+ - Revoir CSS des titres
+ - Mettre les utilisateurs de personas.txt
+ - Mettre le menu de gauche en composant php 
+ - Chemin JS -->

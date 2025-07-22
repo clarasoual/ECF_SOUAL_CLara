@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Création de votre compte - ECO RIDE </title>
     <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -44,7 +45,7 @@
                 <label for="password">Mot de passe * :</label>
                 <input type="password" id="password" name="password" required>
                 <p class="conditions-password">
-                    Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre etun caractère spécial.
+                    Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
                 </p>
 
                 <label for="confirm-password">Confirmer le mot de passe * :</label>
@@ -69,12 +70,11 @@
 </body>
 </html>
 
-<!-- A modifier ici :
+<!-- A FAIRE :
     - Civilité à aligner
     - Label à moderniser
-    - Conditions mot de passe en plus petit
-    - Coche condition d'utilisation à aligner
-
-    A ajouter ici : 
-    - Limite numéro tél
-    - Champs obligatoire -->
+    - Conditions mot de passe en plus petit, fonctionalité de vérification
+    - Checkbox condition d'utilisation à aligner
+    - Limite de caractères pour le numéro tél
+    - Champs obligatoire
+    - Mettre qu'il y a des crédits de bienvenue -->

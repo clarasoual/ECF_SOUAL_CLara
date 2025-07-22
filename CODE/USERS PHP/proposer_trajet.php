@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proposer un trajet</title>
     <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -24,7 +25,7 @@
                 <label for="departure">Adresse de départ</label><br>
                 <input type="text" id="departure" name="departure" placeholder="Adresse de départ"><br>
 
-                <label for="arret1">Arrêt n°1 (optionnel)</label><br>
+                <label for="step1">Arrêt n°1 (optionnel)</label><br>
                 <input type="text" id="step1" name="step1" placeholder="Ajouter un arrêt"><br><br>
 
                 <button type="button">+ Ajouter un arrêt</button><br><br>
@@ -40,7 +41,7 @@
                 <input type="date" id="date" name="date"><br><br>
 
                 <label for="time">Heure de départ</label><br>
-                <input type="time" id="heure" name="time"><br><br>
+                <input type="time" id="time" name="time"><br><br>
             </td>
 
             <td class="trip-info-destination">
@@ -71,11 +72,11 @@
 
 <!-- A modifier ici : 
 - Enlever le hover vert
-- Espace entre label et input
-- Styliser d'ou partons nous etc
+- Espace entre les labels et inputs
+- Styliser d'ou partons nous etc pour différencier du reste
 - Styliser titre
-- Limite nombre de passagers
+- Limite nombre de passagers par rapport au véhicule choisi
 - Champs obligatoire à mettre
-
-A ajouter : 
-- Résumé de la proposition de trajet 
+- Résumé de la proposition de trajet lorsqu'on valide (étape 2 sur 2, proposer_trajet2.php)
+- Aérer un peu le tout
+- Encadrés orange à enlever -->

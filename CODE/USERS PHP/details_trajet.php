@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Détails trajet </title>
    <link rel="stylesheet" href="../CSS/ecoride_style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -42,11 +43,11 @@
         </div>
     </section>
 
-    <!-- Section condcuteur -->
+    <!-- Section conducteur -->
     <section class="driver">
     <h2>Conducteur</h2>
     <div class="driver-infos">
-        <img src="../../IMAGES/thierry.jpg" alt="Photo de Thierry" class="driver-photo">
+        <img src="../../IMAGES/nino.jpg" alt="Photo de nino" class="driver-photo">
         <div class="driver-details">
             <p><strong>Pseudo :</strong> Nino</p>
             <p><strong>Nombre de trajets :</strong> 8</p>
@@ -74,7 +75,7 @@
         <h2>Passagers</h2>
 
         <article class="passenger-card">
-            <img src="../../IMAGES/claire.jpg" alt="Photo de Claire" class="passenger-photo">
+            <img src="../../IMAGES/nina.jpg" alt="Photo de Nina" class="passenger-photo">
             <div class="passenger-info">
                 <p><strong>Pseudo :</strong> Nina R.</p>
                 <p><em>De Saugnac-et-Muret à Bayonne</em></p>
@@ -82,7 +83,7 @@
         </article>
 
         <article class="passenger-card">
-            <img src="../../IMAGES/marc.jpg" alt="Photo de Marc" class="passenger-photo">
+            <img src="../../IMAGES/theo.jpg" alt="Photo de Theo" class="passenger-photo">
             <div class="passenger-info">
                 <p><strong>Pseudo :</strong> Théo K.</p>
                 <p><em>De Bordeaux à Bayonne</em></p>
@@ -96,7 +97,7 @@
 
         <article class="reviews">
             <div class="author-review">
-                <img src="../../IMAGES/sophie.jpeg" alt="Photo de sophie" class="author-photo">
+                <img src="../../IMAGES/antoine.jpg" alt="Photo d'antoine" class="author-photo">
                 <p><strong>Antoine</strong></p>
                 <p><strong>Note :</strong> 5 / 5</p>
             </div>
@@ -106,7 +107,7 @@
 
         <article class="review">
             <div class="author-review">
-                <img src="../../IMAGES/lucas.jpg" alt="Photo de Lucas" class="author-photo">
+                <img src="../../IMAGES/finn.png" alt="Photo de Finn" class="author-photo">
                 <p><strong>Finn</strong></p>
                 <p><strong>Note :</strong> 4 / 5</p>
             </div>
@@ -124,12 +125,14 @@
 </html>
 
 <!-- A faire ici :
-    - Moderniser plan shcématique du trajet ( dessin ? )
+    - Moderniser plan schématique du trajet ( dessin ? )
     - Mettre passagers sur la droite en séparant du reste (en colonne ?)
     - Relier demander durée max au chauffeur à la section messages
-    - Relier le nom du condcuteur à son profil/historique
+    - Relier le nom du conducteur à son profil/historique
     - Note à modernister (étoiles ?)
     - Overflow a enlever avis
     - Noter que ça coute 5 crédits par passagers
     - Gros guillements avis
-    - Créer et relier une nouvelle page résumé de la demande de réservation 
+    - Créer et relier une nouvelle page résumé de la demande de réservation
+    - Mettre date des avis et nom du trajet en question
+    - Mettre places restantes -->

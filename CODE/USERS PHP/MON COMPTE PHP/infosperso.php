@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mon compte - Informations personnelles </title>
     <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -20,7 +21,7 @@
 
         <!-- Section en-tête du profil -->
         <section class="profil-header">
-            <img src="" alt="Photo de profil" class="profil-photo">
+            <img src="#" alt="Photo de profil" class="profil-photo">
             <h2>Pseudo Utilisateur</h2>
             <button>Modifier mes informations</button>
         </section>
@@ -43,7 +44,7 @@
             <label for="role-both"><input type="radio" name="role" value="both"> Passager-conducteur</label><br>
 
             <div class="alert-message">
-                Merci de completer vos informations conducteur pour activer ce rôle !
+                Merci de compléter vos informations conducteur pour activer ce rôle !
             </div>
         </section>
 

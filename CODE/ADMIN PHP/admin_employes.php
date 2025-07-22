@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Compte employés</title>
     <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -81,17 +82,13 @@
 
 <script src="JS/ecoride_js.js"></script>
 <!-- Footer commun -->
-<?php include('../COMPONENTS/footer.html') ?>
+<?php include('../COMPONENTS/footer.html'); ?>
 
 </body>
 </html>
 
 <!-- A corriger ici :
  - Mettre un ease sur le tableau des employés
- - Titres
- - Couleur titres
- 
- A ajouter :
- - Créer une section modifier mon profil et y relier la photo employé 
- - Pareil pour tout le reste du tableau de bord
- - Page de connexion utilisateurs
+ - Titres à revoir en CSS
+ - Mettre les éléments de personas.txt
+ - Chemin JS -->

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Rechercher un covoiturage </title>
     <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -65,11 +66,11 @@
                 <h3>Bordeaux → Bayonne</h3>
                 <p>Départ : 08h30</p>
                 <p>Durée estimée : 2h00</p>
-                <p>Prix : 15 crédits / passager</p>
-                <p>Chauffeur : <img src="IMAGES/photo ld 2.jpg" alt="Photo chauffeur">Jean Dupont</p>
+                <p>Prix : 5 crédits / passager</p>
+                <p>Chauffeur : <img src="../../IMAGES/nino.jpg" alt="Photo chauffeur">Nino C.</p>
                 <p>Places restantes : 2</p>
                 <p>Voyage écologique</p>
-                <button><a href="details_trajet.php">Voir les détails</a></button>
+                <a href="details_trajet.php" class="btn">Voir les détails</a>
             </article>
 
             <div class="day-navigation">
@@ -90,7 +91,10 @@
 
 <!-- A modifier ici : 
 - Titre des filtres a modifier
-- aligner coche
+- Aligner checkbox
+- Ajouter des filtres ?
 - Diminuer taille de la section filtres
 - Styliser la section résultats
-- Rajouter date trajet
+- Remplacer les informations des trajets par les trajets types crées dans personas.txt
+- Prix max à enlever 
+- Photo à adapter-->

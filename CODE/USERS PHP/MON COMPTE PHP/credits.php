@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mon compte - Crédits </title>
     <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -18,14 +19,14 @@
 <section>
     <h2>Mes crédits</h2>
 
-    <p><strong>Solde actuel :</strong> 10 crédits</p>
+    <p><strong>Solde actuel :</strong> 15 crédits</p>
 
     <p>Vous gagnez des crédits en proposant des trajets à d'autres utilisateurs, lorsque vous êtes conducteur.</p>
 
     <!-- Demande de crédits -->
     <p><em>Besoin de plus de crédits pour continuer à covoiturer ?</em></p>
 
-    <form action="demande-credits" method="post">
+    <form action="#" method="post">
         <button type="submit">Demander des crédits à Eco Ride</button>
     </form>
     <p><strong> Remarque :</strong>Votre demande sera étudiée par notre équipe. Vous recevrez une réponse sous peu.</p>
@@ -65,7 +66,7 @@
 <!-- Infos générales sur le système de crédits -->
 <h3>A propos des crédits</h3>
 <p>Chez <strong>EcoRide</strong>, chaque trajet partagé est un pas vers un monde plus solidaire et écologique.</p>
-<p>Notre système de crédit permet de vérifier régulièrement si l'ensemble de nos trajets se passent dans le respect de notre charte de confiance.(sécurité, respect, fiabilité.), tout en encourageant les utulisateurs</p>
+<p>Notre système de crédit permet de vérifier régulièrement si l'ensemble de nos trajets se passent dans le respect de notre charte de confiance (sécurité, respect, fiabilité.), tout en encourageant les utilisateurs à adopter un comportement éco-responsable.</p>
 
 </section>
 
@@ -75,5 +76,9 @@
 </body>
 </html>
 
-<!-- a faire :
- - Mettre lien vers la trajet en question -->
+<!-- A FAIRE :
+
+ - CSS
+ - Aérer le tout
+ - Mettre lien vers la trajet en question dans le tableau
+ - Mettre historique avant la demande de crédits ? -->

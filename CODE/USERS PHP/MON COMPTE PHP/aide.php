@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mon compte - Aide </title>
     <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 <!-- Header commun -->
 <?php include('../../COMPONENTS/header.html') ; ?>
 
 <!-- Menu latéral -->
-<<?php include('../../COMPONENTS/menumyaccount.html'); ?>
+<?php include('../../COMPONENTS/menumyaccount.html'); ?>
 
 <section>
     <h2>Aide & Support</h2>
 
     <!-- Introduction de la section d'aide -->
-    <p>Bienvenue dans la section d'aide. Voici les réponses aux questions les plus fréquentes. Si vous ne trouver pas votre réponse, vous pouvez nous contacter.</p>
+    <p>Bienvenue dans la section d'aide. Voici les réponses aux questions les plus fréquentes. Si vous ne trouvez pas votre réponse, vous pouvez nous contacter.</p>
 
 <!-- Bloc FAQ -->
 <div class="faq-section">
@@ -31,7 +32,7 @@
 
     <div class="faq-question">
         <p><strong>Comment supprimer le trajet ?</strong></p>
-        <p>Rendez-vous dans la sections "Mes trajets", cliquez sur le trajet concerné puis sélectionnez "Supprimer".</p>
+        <p>Rendez-vous dans la section "Mes trajets", cliquez sur le trajet concerné puis sélectionnez "Supprimer".</p>
     </div>
 
     <div class="faq-question">
@@ -61,3 +62,9 @@
     <?php include('../../COMPONENTS/footer.html'); ?>
 </body>
 </html>
+
+<!-- A FAIRE 
+ - CSS de toute la page
+ - CSS du menu latéral à corriger (police)
+ - Ajouter des questions à la FAQ
+ - Séparer les sections distinctement -->

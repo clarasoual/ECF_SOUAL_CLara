@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mon compte </title>
     <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -21,9 +22,9 @@
     <!-- Navigation  entre les différents types de trajets -->
     <nav class="trips-tab">
         <ul>
-            <li><a href="#a-venir">A venir</a></li>
-            <li><a href="#en-cours">En cours</a></li>
-            <li><a href="#passes">Passés</a></li>
+            <li><a href="#upcoming">À venir</a></li>
+            <li><a href="#ongoing">En cours</a></li>
+            <li><a href="#past">Passés</a></li>
         </ul>
     </nav>
 
@@ -53,7 +54,7 @@
                 <p><strong>Arrivée :</strong> Marseille</p>
                 <p><strong>Arrêts :</strong> Valence, Avignon</p>
                 <p><strong>Note moyenne :</strong> 4.5/5</p>
-                <button>Voir les avis</button>
+                <!-- Mettre avis -->
             </div>
 
             <!-- Remplacer par Trajet 2.1 : Finn : Saint Pierre de Chignac - Bordeaux avec Théo, Nino et Nina le 7 février 2024
@@ -70,8 +71,11 @@
 </body>
 </html>
 
-<!-- A faire :
-
-- remplacer le trajet
+<!-- A FAIRE :
+- CSS
+- Mettre le.s trajet.s passé.s par rapport à personas.txt
+- Mettre le trajet en cours avec Jeanne
+- Mettre avis des trajets passés
+- Rajouter le trajet mentionné en haut
 
 -->
