@@ -43,7 +43,7 @@ Pour ouvrir le site, il faut utiliser un serveur local comme XAMPP (car le site 
 # Back-end :
 
 - Ajout d'un système de connexion sécurisé (gestion admin/employé/utilisateur).
-- Mise en place d'une base de données relationnelle et non relationnelle avec NoSQL et MySQL.
+- Mise en place d'une base de données relationnelle avec MySQL et non relationnelle avec NoSQL.
 
 # Accessibilité :
 
@@ -55,7 +55,7 @@ Pour ouvrir le site, il faut utiliser un serveur local comme XAMPP (car le site 
 ### Statut du projet
 Le projet est en phase initiale, il y a uniquement du HTML, du CSS et des composants PHP pour le moment. Le développement de la partie back-end viendra lorsque le front-end sera terminé.
 En commentaires de chaque page PHP, il y a les tâches qu'il reste à faire sur la page en question. 
-Les tâches sont aussi sur un trello pour une vision plus globale du travail restant.
+Les tâches, notamment les tâches concernant la correction des beugs sont aussi sur un trello pour une vision plus globale du travail restant.
 
 ### Charte graphique
 
@@ -89,10 +89,10 @@ Le design et les idées de structures ont été inspirés de :
 - Visual Studio Code (éditeur)
 - Git et GitHub
 - Trello pour la gestion de projet
-- ProCreate pour le logo et les maquettes
+- ProCreate pour le logo, les maquettes, et mon plan de route.
 - Google Docs pour les maquettes écrites
 
-Vous retrouverez mes esquisses (procreate) et écrites (Google Docs) en PDF dans le dossier "MAQUETTES".
+Vous retrouverez mes esquisses, mon plan de route (procreate) et mes maquettes écrites (Google Docs) en PDF dans le dossier "MAQUETTES".
 
 
 ### Auteur
