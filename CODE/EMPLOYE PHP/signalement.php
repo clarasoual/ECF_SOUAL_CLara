@@ -35,7 +35,7 @@
 
         <h3>Passagers concernés</h3>
 
-        <div class="passenger-card">
+        <div class="passenger-reporting">
 
         <h4>Passager 1</h4>
         <img src="#" alt="Photo de profil" width="60">
@@ -47,7 +47,7 @@
         
         <hr>
 
-        <div class="passenger-card">
+        <div class="passenger-reporting">
 
         <h4>Passager 2</h4>
         <img src="" alt="Photo de profil" width="60">
@@ -68,4 +68,6 @@
 
 - CSS
 - Modifier les passagers
+- Mettre img
+- Remettre droit les elements des passagers concernes
 -->

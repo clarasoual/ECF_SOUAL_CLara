@@ -10,42 +10,16 @@
 <body>
 
 <!-- Header commun employés -->
-<?php include('../COMPONENTS/headeremploye.html') ; ?>
+<?php include('../COMPONENTS/headeradmin.html') ; ?>
 
 <hr>
 
 <main>
-    <!-- Menu de navigation à gauche -->
-    <nav class="menu-principal">
 
-        <!-- Première section du menu -->
-        <section class="menu-section">
-            <h2>Tableau de bord</h2>
-        </section>
-
-        <!-- Deuxième section du menu -->
-        <section class="menu-section">
-            <h2>Comptes</h2>
-            <ul class="menu-li">
-                <li class="menu-item"><a class="link_board" href="admin_employes.php">Employés</a></li>
-                <li class="menu-item"><a class="link_board" href="admin_utilisateurs.php">Utilisateurs</a></li>
-            </ul>
-        </section>
-
-        <!-- Troisième section du menu -->
-        <section class="menu-section">
-            <h2>Statistiques</h2>
-            <ul class="menu-li">
-                <li class="menu-item">Covoiturage</li>
-                <li class="menu-item">Ratio</li>
-                <li class="menu-item">Crédit</li>
-                <li class="menu-item">Crédit auto / utilisateur auto</li>
-            </ul>
-        </section>
-    </nav>
+<?php include('../COMPONENTS/menuadmin.html') ; ?>
 
     <!-- Section principale : tableau des employés -->
-    <section class="menu-section">
+    <section class="principal-menu-section">
 
         <!-- Tableau des employés -->
         <h2>Comptes Employés</h2>
@@ -88,7 +62,6 @@
 </html>
 
 <!-- A corriger ici :
- - Mettre un ease sur le tableau des employés
- - Titres à revoir en CSS
+ - PB de ease sur les href
  - Mettre les éléments de personas.txt
  - Chemin JS -->

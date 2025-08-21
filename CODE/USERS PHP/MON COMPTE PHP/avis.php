@@ -69,5 +69,7 @@
 <!-- A faire :
 
 - CSS
-- Séparer section avis reçus et avis donnés
+- responsive,
+- aligner avec menu
+- header
 - Mettre info cohérentes de personas.txt-->

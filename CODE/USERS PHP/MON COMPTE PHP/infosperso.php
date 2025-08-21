@@ -74,4 +74,7 @@
 
 - Bouton enregistrer infos
 - Alerte remplir infos conducteur si conducteur ou passager condcuteur a été coché : page : infosconducteur.php
-- Modifier photo de profil -->
+- Modifier photo de profil
+- Aligner boutons radio
+- Section vérifier profil
+- Aligner avec le menu -->

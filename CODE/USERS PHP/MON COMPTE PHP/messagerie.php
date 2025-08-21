@@ -67,4 +67,6 @@
 
 <!-- A FAIRE
 - CSS
-- Mettre l'heure et la date de la conversation -->
+- Mettre l'heure et la date de la conversation
+- Mettre msg envoyé a droite
+- Aligner avec le menu -->

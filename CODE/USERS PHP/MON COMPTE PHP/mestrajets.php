@@ -76,6 +76,7 @@
 - Mettre le.s trajet.s passé.s par rapport à personas.txt
 - Mettre le trajet en cours avec Jeanne
 - Mettre avis des trajets passés
+- Changer titre et mettre section par section
 - Rajouter le trajet mentionné en haut
 
 -->

@@ -13,7 +13,7 @@
 <?php include('../../COMPONENTS/header.html') ; ?>
 
 <!-- Profil du conducteur -->
-<section class="driver-profile">
+<section class="driver-profile-section">
     <h2>Profil de <strong>Finn</strong></h2>
     <img src="../../../IMAGES/finn.png"class="profile-picture" alt="Photo de profil" width="150" height="150">
     <p>Age : 23 ans</p>
@@ -23,7 +23,7 @@
 
 <hr>
 
-<section class="driver-details">
+<section class="-profile-driver-details">
     <h3 class="section-title">En savoir plus</h3>
 
     <h4 class="subsection-title">Biographie</h4>
@@ -76,6 +76,7 @@
 <!-- A faire : 
  - CSS
  - Mettre les avis des passagers
+ - Revoir encardé profil
  - Faire les autres pages profil
  - Etoiles à moderniser
  - Ancre vers les avis qui sont plus bas

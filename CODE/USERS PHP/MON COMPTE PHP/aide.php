@@ -64,7 +64,6 @@
 </html>
 
 <!-- A FAIRE 
- - CSS de toute la page
- - CSS du menu latéral à corriger (police)
+ - aligner avec le menu
  - Ajouter des questions à la FAQ
- - Séparer les sections distinctement -->
+ -->
