@@ -11,7 +11,7 @@
 
 <!-- Header commun -->
 <?php include('../COMPONENTS/headeremploye.html') ; ?>
-
+<div class="layout">
 <?php include('../COMPONENTS/menuemploye.html') ; ?>
 
 <hr>
@@ -20,15 +20,14 @@
     <section class="reviews-moderation">
         <h2 id="title-reviews">Avis utilisateurs - Modération quotidienne</h2>
 
-        <form class="toolbar-filters" method="GET" action="">
-            <fieldset class="search-zone" role="search">
+        <form class="search-container" method="GET" action="">
+
+            <div class="form-group">
                 <label for="q">Rechercher</label>
-                <input type="search" id="q" placeholder="Auteur, trajet, commentaire,..." autocomplete="off">
-            </fieldset>
+                <input type="search" id="q" name="q" placeholder="Auteur, trajet, commentaire,..." autocomplete="off">
+            </div>
 
-            <fieldset class="filters-zone">
-                <legend class="sr-only">Filtres</legend>
-
+            <div class="form-group">
                 <label for="filters-status">Statut</label>
                 <select id="filters-status" name="status">
                     <option value="">Tous</option>
@@ -36,7 +35,9 @@
                     <option value="published">Publié</option>
                     <option value="archivec">Archivé</option>
                 </select>
+            </div>
 
+            <div class="form-group">
                 <label for="filters-rate">Note</label>
                 <select id="filters-rate" name="note">
                     <option value="">Toutes</option>
@@ -46,13 +47,19 @@
                     <option value="2">2</option>
                     <option value="1">1</option>
                 </select>
+            </div>
 
+            <div class="form-group">
                 <label for="debut-date">Du</label>
                 <input type="date" id="debut-date" name="from">
+            </div>
 
+            <div class="form-group">
                 <label for="end-date">Au</label>
                 <input type="date" id="end-date" name="to">
+            </div>
 
+            <div class="form-group">
                 <label for="tri">Trier par</label>
                 <select id="tri" name="sort">
                     <option value="newest">Plus récent</option>
@@ -60,13 +67,13 @@
                     <option value="rating_desc">Note décroissante</option>
                     <option value="rating_asc">Note croissante</option>
                 </select>
-
+            </div>
+            <div class="form-group">
                 <button type="submit">Filtrer</button>
                 <a href="avisutilisateurs" class="btn-reset" role="button">Réinitialiser</a>
+            </div>
 
 
-
-            </fieldset>
         </form>
 
         <form method="POST" action="moderation.php" class="reviews-list">
@@ -118,7 +125,7 @@
 
     </section>
 </main>
-
+</div>
     <?php include('../COMPONENTS/footer.html') ?>
 
 </body>

@@ -661,44 +661,43 @@ header .logo{
 /* PAGE AIDE EMPLOYÉ */
 /* ==============================================*/
 
-.titre_help {
+.title_help {
 max-width: 700;
-margin: 2rem auto 4rem;
 background-color: var(--beige-fonce);
-padding: 2rem 2.5 rem;
+padding: 2rem 2.5rem;
 border-radius: 10px;
 box-shadow: 0 4px 12px var(--shadow);
 border-radius: 10px;
 }
 
-.titre_help h2 {
+.title_help h2 {
     color: var(--vert-doux);
     font-weight: 700;
     margin-bottom: 1.5rem;
     font-size: 2rem;
 }
 
-.titre_help form > div {
+.title_help form > div {
     margin-bottom : 1.5rem ;
 }
 
-.titre_help label{
+.title_help label{
     display: block;
     font-weight: 600;
     margin-bottom: 0.4rem;
     color: var(texte);
 }
 
-.titre_help label span {
+.title_help label span {
     color: var(--orange-doux);
     margin-left: 0.2rem;
 
 }
 
-.titre_help input[type="text"],
-.titre_help input[type="email"],
-.titre_help input[type="file"],
-.titre_help textarea {
+.title_help input[type="text"],
+.title_help input[type="email"],
+.title_help input[type="file"],
+.title_help textarea {
     font-family: 'Quicksand', sans-serif;
     font-size: 1rem;
     padding: 0.8em 1em;
@@ -711,21 +710,21 @@ border-radius: 10px;
     transition: border-color 0.3 ease;
 }
 
-.titre_help input[type="text"]:focus,
-.titre_help input[type="email"]:focus,
-.titre_help input[type="file"]:focus,
-.titre_help textarea {
+.title_help input[type="text"]:focus,
+.title_help input[type="email"]:focus,
+.title_help input[type="file"]:focus,
+.title_help textarea {
     border-color: var(--vert-doux);
     outline: none;
 }
 
-.titre_help p {
+.title_help p {
     font-size: 0.875rem;
     color: var(--texte);
     margin-top: 0.2rem;
 }
 
-.titre_help fieldset {
+.title_help fieldset {
     border: 1px solid var(--orange-doux);
     border-radius: 8px;
     padding: 1rem 1.5rem 1.5rem;
@@ -733,13 +732,13 @@ border-radius: 10px;
     color: var(--texte);
 }
 
-.titre_help legend {
+.title_help legend {
     font-weight: 700;
     font-size: 1.1rem;
     margin-bottom: 0.8rem;
 }
 
-.titre_help fieldset label {
+.title_help fieldset label {
     font-weight: 400;
     display: inline-flex;
     align-items: center;
@@ -748,12 +747,12 @@ border-radius: 10px;
     user-select: none;
 }
 
-.titre_help fieldset input [type="radio"] {
+.title_help fieldset input[type="radio"] {
     margin-right: 0.4rem;
     cursor: pointer;
 }
 
-.titre_help button [type="submit"] {
+.title_help button[type="submit"] {
     background-color: var(--vert-doux);
     color: black;
     padding: 0.8rem 1.5rem;
@@ -768,20 +767,28 @@ border-radius: 10px;
     width: 100%;
 }
 
-.titre_help button [type="submit"]:hover {
+.title_help button [type="submit"]:hover {
     background-color: var(--orange-doux);
     box-shadow: 0 5px  15px var(--shadow);
 }
 
-.titre_help p a {
+.title_help p a {
     color: var(--orange-doux);
 }
 
 @media (max-width : 480px) {
-    .titre_help {
+    .title_help {
         padding: 1.2rem 1.5rem;
         margin: 0.6em 1em;
     }
+}
+
+.layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+
 }
 
 /* ==============================================*/
@@ -1894,6 +1901,7 @@ section.menu-section > div > button {
     margin-bottom: 1rem;
     box-shadow: 0 2px 5px var(--shadow);
     font-family: 'Quicksand', sans-serif;
+    transition: transform 0.2s,, box-shadow 0.2s;
 }
 
 .review p {
@@ -1903,6 +1911,11 @@ section.menu-section > div > button {
 
 .review p strong {
     color: var(--vert-doux);
+}
+
+.reviews-moderation {
+    padding: 1rem;
+
 }
 
 @media screen and (max-width: 768px) {

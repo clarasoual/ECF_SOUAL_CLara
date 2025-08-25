@@ -8,9 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    
 
 <!-- Header commun -->
 <?php include('../COMPONENTS/headeremploye.html') ; ?>
+<div class="layout">
 
 <?php include('../COMPONENTS/menuemploye.html') ; ?>
 
@@ -51,13 +53,16 @@
         <label><input type="radio" name="severity" value="medium">Moyenne</label>
         <label><input type="radio" name="severity" value="high">Critique</label>
         <p>Choisir "critique" si le site est inutilisable ou si des données sont en danger.</p>
-
+    </fieldset>
+    <fieldset>
+        <legend>Pièce jointe</legend>
+    
         <div>
             <label for="screenshot">Capture d'écran (optionnelle)</label>
             <input id="screenshot" name="screenshot" type="file" accept="image/*,application/pdf"/>
             <p>Formats acceptés : PNG, JPG, GIF ou PDF. Taille max recommandée : 5 Mo. </p>
         </div>
-
+</fieldset>
         <div>
             <button type="submit">Envoyer le signalement</button>
         </div>
@@ -71,5 +76,6 @@
     </form>
 
 </section>
+    </div>
 </body>
 </html>
