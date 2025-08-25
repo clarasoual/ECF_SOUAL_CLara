@@ -1,0 +1,110 @@
+.driver-info-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--fond);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.driver-info-container h2 {
+    font-family: 'Quicksans', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--vert-doux);
+    text-align: center;
+}
+
+.vehicle-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-form label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.vehicle-form input[type="text"],
+.vehicle-form input[type="date"],
+.vehicle-form input[type="number"],
+.vehicle-form select {
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.vehicle-form input[type="text"]:focus,
+.vehicle-form input[type="date"]:focus,
+.vehicle-form input[type="number"]:focus,
+.vehicle-form select:focus {
+    border-color: var(--vert-doux);
+    outline: none;
+}
+
+.vehicle-form hr {
+    margin: 2rem 0;
+    border: 0.5px solid var(--orange-doux);
+}
+
+.vehicle-form h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.vehicle-form input[type="radio"] {
+    margin-right: 0.3rem;
+}
+
+.vehicle-form button[type="submit"] {
+    padding: 0.8rem 1.2rem;
+    background-color: var(--fond);
+    color: var(--vert-doux);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.vehicle-form button[type="submit"]:hover {
+    background-color: var(--orange-doux);
+}
+
+@media (max-width: 768px) {
+    .driver-info-container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .vehicle-form input[type="text"],
+    .vehicle-form input[type="date"],
+    .vehicle-form input[type="number"],
+    .vehicle-form select,
+    .vehicle-form button [type="submit"] {
+        width: 100%;
+
+    }
+
+     .vehicle-form button [type="submit"] {
+        text-align: center;
+     }
+
+}
+
+@media (max-width: 480px) {
+    .driver-info-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .vehicle-form {
+        font-size: 1.3rem;
+    }
+}

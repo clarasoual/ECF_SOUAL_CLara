@@ -1,0 +1,84 @@
+.report-tracking {
+    flex: 1;
+    background-color: var(--beige-fonce);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow);
+}
+
+.report-tracking h2 {
+    margin-bottom: 1rem;
+    color: var(--vert-doux);
+}
+
+.report-details {
+    background-color: var(--fond);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.report-details h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--orange-doux);
+}
+
+.report-details p {
+    margin: 0.3rem 0;
+}
+
+.passenger-reporting {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--fond);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.passenger-reporting h4 {
+    margin: 0;
+    color: var(--vert-doux);
+    flex-basis: 100px;
+}
+
+.passenger-reporting img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border: 2px solid var(--vert-doux);
+}
+
+.passenger-reporting p {
+    margin: 0.2rem 0;
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .report-tracking {
+        padding: 1rem;
+    }
+
+    .passenger-reporting {
+        flex-direction: column;
+        align-items: flex-start;
+    } 
+
+    .passenger-reporting h4 {
+        margin-bottom: 0.5rem;
+    }
+
+    .passenger-reporting img {
+        margin-bottom: 0.5rem;
+    }
+}

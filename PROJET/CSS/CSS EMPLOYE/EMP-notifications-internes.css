@@ -1,0 +1,94 @@
+.notifications-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 1rem auto 3rem auto;
+    padding: 1rem;
+    background-color: #292724;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow);
+}
+
+.notification-item {
+    background-color: var(--beige-fonce);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow);
+}
+
+.notification-item h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--beige-fonce);
+}
+
+.notification-item p {
+    margin: 0 0 0.7rem 0;
+    color: var(--texte);
+    font-size: 1rem;
+
+}
+
+.notification-item small {
+    color: var(--gris-doux);
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+.post-notification {
+    background-color: var(--beige-fonce);
+    padding: 1.5rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow);
+}
+
+.post-notification h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--vert-doux);
+}
+
+.post-notification label {
+    color: var(--texte);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.post-notification input [type="text"],
+.post-notification textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    background-color: var(--fond);
+    border: 1.5px solid var(--vert-doux);
+    border-radius: 6px;
+    color: var(--texte);
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+.post-notification input [type="text"]:focus,
+.post-notification textarea:focus {
+    outline: none;
+    border-color: var(--orange-doux);
+    background-color: #292724;
+}
+
+.post-notification button {
+    margin-top: 0.8rem;
+    font-size: 1rem;
+    width: auto;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 60px 1rem 0 1rem;
+    }
+    .notifications-feed {
+        max-width: 100%;
+        padding: 1rem 0.5rem;
+    }
+}

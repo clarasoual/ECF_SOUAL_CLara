@@ -1,0 +1,568 @@
+
+
+/* ==============================================*/
+/* MENUS */
+/* ==============================================*/
+
+/* .menu-profil {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--beige-fonce);
+    border: 1px solid var(--vert-doux);
+    border-radius: 6px;
+    margin-top: 6px;
+    box-shadow: 0 4px 8px var(--shadow) ;
+    z-index: 10;
+}
+
+.menu-profil a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--texte);
+    text-decoration: none;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+}
+
+.menu-profil a:hover {
+    background-color: var(--orange-doux);
+    color: black;
+    border-radius: 6px;
+
+} 
+
+.nav-links.active {
+    color: var(--orange-doux);
+    text-decoration: underline;
+}
+
+
+
+
+/* tbody tr:hover {
+    background-color: var(--vert-doux);
+    color: black;
+} */
+
+
+
+
+/* ==============================================*/
+/* HERO */
+
+
+
+
+
+/* FIN GLOBAL*/
+
+/* ==============================================*/
+
+/* ==============================================*/
+
+/* ==============================================*/
+
+/* ==============================================*/
+
+/* ==============================================*/
+
+/* ==============================================*/
+
+/* ==============================================*/
+/* PROFIL USERS */
+/* ==============================================*/
+
+
+
+
+/* ==============================================*/
+/* COMPTES UTILISATEURS ==> A STYLISER */
+/* ==============================================*/
+
+
+/* ==============================================*/
+/* PAGE AIDE EMPLOYÉ */
+/* ==============================================*/
+
+/* .title_help {
+max-width: 700;
+background-color: var(--beige-fonce);
+padding: 2rem 2.5rem;
+border-radius: 10px;
+box-shadow: 0 4px 12px var(--shadow);
+border-radius: 10px;
+}
+
+.title_help h2 {
+    color: var(--vert-doux);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.title_help form > div {
+    margin-bottom : 1.5rem ;
+}
+
+.title_help label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(texte);
+}
+
+.title_help label span {
+    color: var(--orange-doux);
+    margin-left: 0.2rem;
+
+}
+
+.title_help input[type="text"],
+.title_help input[type="email"],
+.title_help input[type="file"],
+.title_help textarea {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    padding: 0.8em 1em;
+    border-radius: 8px;
+    border: 1px solid var(--orange-doux);
+    background-color: var(--gris-doux);
+    color: #333;
+    width: 100%;
+    resize: vertical;
+    transition: border-color 0.3 ease;
+}
+
+.title_help input[type="text"]:focus,
+.title_help input[type="email"]:focus,
+.title_help input[type="file"]:focus,
+.title_help textarea {
+    border-color: var(--vert-doux);
+    outline: none;
+}
+
+.title_help p {
+    font-size: 0.875rem;
+    color: var(--texte);
+    margin-top: 0.2rem;
+}
+
+.title_help fieldset {
+    border: 1px solid var(--orange-doux);
+    border-radius: 8px;
+    padding: 1rem 1.5rem 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--texte);
+}
+
+.title_help legend {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+.title_help fieldset label {
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.title_help fieldset input[type="radio"] {
+    margin-right: 0.4rem;
+    cursor: pointer;
+}
+
+.title_help button[type="submit"] {
+    background-color: var(--vert-doux);
+    color: black;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 8px var(--shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.title_help button [type="submit"]:hover {
+    background-color: var(--orange-doux);
+    box-shadow: 0 5px  15px var(--shadow);
+}
+
+.title_help p a {
+    color: var(--orange-doux);
+}
+
+@media (max-width : 480px) {
+    .title_help {
+        padding: 1.2rem 1.5rem;
+        margin: 0.6em 1em;
+    }
+}
+
+.layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+
+} */
+
+/* ==============================================*/
+/* PAGE MESSAGERIE EMPLOYÉ ET MESSAGERIE MON COMPTE  */
+/* ==============================================*/
+
+
+/* ==============================================*/
+/* PAGE NOTIF INTERNES */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE CONTACT ECORIDE */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE DETAILS TRAJETS */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE INSCRIPTION */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE MPD OUBLIE */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE PROPOSER TRAJET  */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE PROPOSER TRAJET 2 */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE PROPOSER TRAJET 3 */
+/* ==============================================*/
+
+
+/* ==============================================*/
+/* PAGE RECHERCHE COVOIT */
+/* ==============================================*/
+
+
+
+
+
+
+.espace-employe {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--vert-doux);
+    padding: 0.3rem 0.6rem;
+    background-color: rgba(168, 213, 186, 0.15);
+    border-radius: 6px;
+    margin: 0;
+}
+
+.menu-principal {
+    width: 220px;
+    background-color: var(--beige-fonce);
+    padding: 0rem;
+    border-radius: 8px;
+    color: var(--texte);
+    font-weight: 600;
+    height: auto;
+    max-height: fit-content;
+    align-self: flex-start;
+    flex-shrink: 0;
+
+}
+
+
+
+.menu-section {
+    margin-bottom: 0rem;
+
+}
+.menu-principal .menu-section {
+    padding: 0.5rem 1rem;
+    
+}
+.menu-principal .dashboard-admin-title {
+    font-size: 1.5rem;
+    padding: 0.3rem 0.6rem;
+    background-color: rgba(168, 213, 186, 0.15);
+    border-radius: 6px;
+}
+.menu-item-title {
+    font-size: 1.2rem;
+    margin-bottom: 0rem;
+    color: var(--vert-doux);
+    font-weight: 700;
+}
+
+.menu-li {
+    list-style: none;
+    padding-left: 0;
+    font-weight: 400;
+}
+
+.menu-item {
+    padding: 0.4em 0.5em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: 400;
+}
+
+.menu-item:hover {
+    background-color: var(--vert-doux);
+    color: black;
+} 
+
+section.menu-section > div > button {
+    margin-top: 1rem;
+    padding: 0.75em 1.5em;
+    font-size: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--vert-doux);
+    font-weight: 600;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+
+.profil-container {
+    position: relative;
+}
+
+.label-employe {
+    color: var(--vert-doux);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+/* ==============================================*/
+/* PAGE AIDE ET SUPPORT */
+/* ==============================================*/
+
+
+
+
+/* ==============================================*/
+/* SECTION CONTACT */
+/* ==============================================*/
+
+
+
+/* ==============================================*/
+/* PAGE AVIS */
+/* ==============================================*/
+
+
+/* ==============================================*/
+/* PAGE INFOS CONDUCTEUR */
+/* ==============================================*/
+
+
+/* ==============================================*/
+/* PAGE INFOS PERSOS */
+/* ==============================================*/
+
+
+/* PAGE MES TRAJETS */
+
+
+/* PAGE PROFIL */
+
+/* .driver-profile-section, .profile-driver-details, .trip-history, .contact-driver {
+    background-color: var(--beige-fonce);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.driver-profile-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.driver-profile-section, .profile-picture {
+    border-radius: 10%;
+    border: 3px solid var(--vert-doux);
+    margin-bottom: 1rem;
+}
+
+.driver-profile-section p {
+    margin: 0.3rem 0;
+}
+
+.driver-profile-section a {
+    color: var(--orange-doux);
+    font-weight: 600;
+
+}
+
+.profile-driver-details .section-title,
+.trip-history .section-title,
+.contact-driver .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--vert-doux);
+}
+
+.subsection-title {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--orange-doux);
+
+}
+
+.preferences-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.preferences-list li {
+    background-color: var(--fond);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--vert-doux);
+}
+
+.trip {
+    background-color: var(--fond);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--vert-doux);
+}
+
+.trip-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--vert-doux);
+}
+
+.trip-route, .trip-passengers {
+    margin: 0.2rem 0;
+}
+
+.btn-message, .btn-report {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--vert-doux);
+    color: black;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-right: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-message:hover, .btn-report:hover {
+    background-color: var(--orange-doux);
+    color: black;
+}
+
+@media (max-width:768px) {
+    body {
+        padding: 80px 1rem 0 1rem;
+    }
+
+    .driver-profile-section, .profile-driver-details, .trip-history,.contact-driver {
+        padding: 1rem;
+    }
+
+    .driver-profile-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .subsection-title {
+        font-size: 1rem;
+    }
+
+    .trip-title {
+        font-size: 1rem;
+    }
+
+    .btn-message, .btn-report {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+} */
+
+/*PAGE SINGALEMENT EMPLOYÉ */
+
+
+
+/* PAGE ADMIN LOGIN */
+
+
+
+#link-password {
+    font-size: 0.9rem;
+    color: var(--orange-doux);
+    text-decoration: none;
+    padding-top: 1rem;
+}
+
+#link-password:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+.menu-section .menu-li .menu-item a {
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    height: 100%;
+    font-weight: 400;
+    color: var(--texte);
+    display: block;
+ }
+
+.menu-section .menu-li .menu-item a:hover {
+    background-color: var(--vert-doux);
+    color: black;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

@@ -1,0 +1,29 @@
+.faq-section {
+    background-color: var(--beige-fonce);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px var(--shadow);
+}
+
+.faq-section h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--vert-doux);
+}
+
+.faq-question {
+    background-color: var(--fond);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--vert-doux);
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.faq-question p:first-child {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
