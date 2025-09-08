@@ -12,13 +12,16 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/headeremploye.html') ; ?>
 <div class="layout">
-<?php include('../COMPONENTS/menuemploye.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
+
 
 <hr>
 
 <main>
+
+<?php include('../COMPONENTS/COMP-menu-employe.html') ; ?>
+
     <section class="reviews-moderation">
         <h2 id="title-reviews">Avis utilisateurs - Modération quotidienne</h2>
 
@@ -128,7 +131,7 @@
     </section>
 </main>
 </div>
-    <?php include('../COMPONENTS/footer.html') ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 
 </body>
 </html>

@@ -11,11 +11,12 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../../COMPONENTS/header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
+
+<main>
 
 <!-- Menu latéral -->
-<?php include('../../COMPONENTS/menumyaccount.html'); ?>
-
+<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 <!-- Section principale de la messagerie -->
 <section>
     <h2>Messagerie</h2>
@@ -61,8 +62,10 @@
 </section>
 <script src="JS/ecoride_js.js"></script>
 
+</main>
+
     <!-- Footer commun -->
-    <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

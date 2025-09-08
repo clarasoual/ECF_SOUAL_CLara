@@ -11,7 +11,7 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
 
     <!-- Section de recherche de trajet -->
     <section class="search-section">
@@ -86,7 +86,7 @@
     <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

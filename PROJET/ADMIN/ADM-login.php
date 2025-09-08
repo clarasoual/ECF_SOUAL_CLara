@@ -12,7 +12,7 @@
 <body class="connexion-page">
 
 <!-- Header commun employés -->
-<?php include('../COMPONENTS/headeradmin.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-admin.html') ; ?>
 
     <main>
         <!-- Section globale de la partie connexion/inscription-->
@@ -42,6 +42,6 @@
 
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>

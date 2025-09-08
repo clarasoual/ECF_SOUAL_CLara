@@ -12,11 +12,13 @@
 <body>
     
 
-<!-- Header commun -->
-<?php include('../COMPONENTS/headeremploye.html') ; ?>
-<div class="layout">
 
-<?php include('../COMPONENTS/menuemploye.html') ; ?>
+
+<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
+
+<main>
+
+<?php include('../COMPONENTS/COMP-menu-employe.html') ; ?>
 
 <section class="title_help">
     <h2>Formulaire de signalement</h2>
@@ -79,5 +81,11 @@
 
 </section>
     </div>
+
+    </main>
+
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+
+    
 </body>
 </html>

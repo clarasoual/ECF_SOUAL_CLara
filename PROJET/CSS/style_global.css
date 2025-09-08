@@ -15,7 +15,7 @@
 main {
     display: flex;
     gap: 2rem;
-    padding: 1rem 2rem; 
+    padding: 2rem 0.5rem;
     align-items: flex-start;}
 
 *{
@@ -368,20 +368,19 @@ header .logo{
 }
 
 /* ==============================================*/
-/* PAGE HEADER EMPLOYÉ */
+/* COMP HEADER EMPLOYÉ */
 /* ==============================================*/
 
 .header-employe {
     background-color: var(--beige-fonce);
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     box-shadow: 0 2px 8px var(--shadow);
     position: sticky;
     top: 0;
     z-index: 100;
-    flex-wrap: wrap;
     gap: 1rem;
     font-family: 'Montserrat', sans-serif;
 }
@@ -390,8 +389,8 @@ header .logo{
     font-size: 1.8rem;
     color: var(--vert-doux);
     margin: 0;
-    flex: 1 1 100%;
     font-weight: 700;
+    text-align: left;
 }
 
 .header-employe .logo {
@@ -431,13 +430,176 @@ header .logo{
     color: var(--texte);
 }
 
-.header-employe.profil-container {
+.header-employe .profil-container {
     display: flex;
     align-items: center;
     position: relative;
 }
 
+.header-employe a {
+    color: var(--texte);
+}
+
 .user-info p {
     margin: 0;
     line-height: 1.2;
+}
+
+.menu-principal {
+    background-color: var(--beige-fonce);
+    border-radius: 10px;
+}
+.menu-section {
+    margin-bottom: 0rem;
+
+}
+.menu-principal .menu-section {
+    padding: 0.5rem 1rem;
+    
+}
+.menu-principal .dashboard-admin-title {
+    font-size: 1.5rem;
+    padding: 0.3rem 0.6rem;
+    background-color: rgba(168, 213, 186, 0.15);
+    border-radius: 6px;
+}
+.menu-item-title {
+    font-size: 1.2rem;
+    margin-bottom: 0rem;
+    color: var(--vert-doux);
+    font-weight: 700;
+}
+
+.menu-li {
+    list-style: none;
+    padding-left: 0;
+    font-weight: 400;
+}
+
+
+.menu-item {
+    padding: 1em 0.5em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: 400;
+}
+
+.menu-item:hover {
+    background-color: var(--vert-doux);
+    color: black;
+} 
+
+.menu-item a {
+    color: var(--texte);
+}
+
+
+
+section.menu-section > div > button {
+    margin-top: 1rem;
+    padding: 0.75em 1.5em;
+    font-size: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--vert-doux);
+    font-weight: 600;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+
+
+.label-employe {
+    color: var(--vert-doux);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+.espace-employe {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--vert-doux);
+    padding: 0.3rem 0.6rem;
+    background-color: rgba(168, 213, 186, 0.15);
+    border-radius: 6px;
+    margin: 0;
+}
+
+
+
+.label-employe {
+    color: var(--vert-doux);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+.profil-container {
+    position: relative;
+}
+
+.menu-profil {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--beige-fonce);
+    border: 1px solid var(--vert-doux);
+    border-radius: 6px;
+    margin-top: 6px;
+    box-shadow: 0 4px 8px var(--shadow) ;
+    z-index: 10;
+}
+
+.menu-profil a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--texte);
+    text-decoration: none;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+}
+
+.menu-profil a:hover {
+    background-color: var(--orange-doux);
+    color: black;
+    border-radius: 6px;
+
+} 
+
+.nav-links.active {
+    color: var(--orange-doux);
+    text-decoration: underline;
+}
+
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-right: 1.5rem;
+}
+
+
+
+.profil-container {
+    position: relative;
+    margin-left: 1rem;
+
+}
+
+.photo-profil {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid var(--vert-doux);
 }

@@ -12,9 +12,13 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/headeremploye.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
 
     <main>
+
+    <?php include('../COMPONENTS/COMP-menu-employe.html') ; ?>
+
+
         <!-- Section globale de la partie connexion/inscription-->
         <div class="container-connexion">
             <div id="connexion">
@@ -42,6 +46,6 @@
 
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>

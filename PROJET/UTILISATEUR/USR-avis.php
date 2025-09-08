@@ -11,10 +11,10 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../../COMPONENTS/header.html') ; ?>
-
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<main>
 <!-- Menu latéral -->
-<?php include('../../COMPONENTS/menumyaccount.html'); ?>
+<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 <section>
     <h2>Mes avis</h2>
 
@@ -62,8 +62,10 @@
 </section>
  <script src="JS/ecoride_js.js"></script>
 
+ </main>
+
     <!-- Footer commun -->
-    <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

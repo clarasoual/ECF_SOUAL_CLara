@@ -12,11 +12,13 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/headeremploye.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
 
-<?php include('../COMPONENTS/menuemploye.html') ; ?>
+
 
 <main>
+
+<?php include('../COMPONENTS/COMP-menu-employe.html') ; ?>
     <section>
         <h2>Messagerie employé</h2>
         <div class="messaging-container">
@@ -45,8 +47,9 @@
             </section>
         </div>
     </section>
-
 </main>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+
 </body>
 </html>
 

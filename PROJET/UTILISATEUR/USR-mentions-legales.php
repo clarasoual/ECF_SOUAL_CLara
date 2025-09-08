@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Header commun -->
-    <?php include('../COMPONENTS/header.html') ; ?>
+    <?php include('../COMPONENTS/COMP-header.html') ; ?>
 
     <main class="legal-section responsive-section">
         <h1>Mentions légales</h1>
@@ -72,7 +72,7 @@
 
      <script src="JS/ecoride_js.js"></script>
     <!-- Footer commun -->
-    <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

@@ -11,10 +11,10 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../../COMPONENTS/header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
 
 <!-- Menu latéral -->
-<?php include('../../COMPONENTS/menumyaccount.html'); ?>
+<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
 <!-- Contenu principal -->
 <div>
@@ -67,7 +67,7 @@
     <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
-    <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

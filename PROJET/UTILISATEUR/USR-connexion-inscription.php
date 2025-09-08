@@ -11,7 +11,7 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/header.html') ; ?>
+    <?php include('../COMPONENTS/COMP-header.html') ; ?>
 
     <main>
         <!-- Section globale de la partie connexion/inscription-->
@@ -52,7 +52,7 @@
 
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

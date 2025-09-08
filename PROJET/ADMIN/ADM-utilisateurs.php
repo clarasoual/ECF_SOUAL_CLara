@@ -12,13 +12,13 @@
 <body>
 
 <!-- Header commun employés -->
-<?php include('../COMPONENTS/headeradmin.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-admin.html') ; ?>
 
 <hr>
 
 <main>
 
-<?php include('../COMPONENTS/menuadmin.html') ; ?>
+<?php include('../COMPONENTS/COMP-menu-admin.html') ; ?>
 
 
     <!-- Section principale : tableau des employés -->
@@ -59,7 +59,7 @@
 <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html') ; ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

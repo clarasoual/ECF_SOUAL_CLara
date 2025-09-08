@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Header commun -->
-    <?php include('../COMPONENTS/header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
 
     <!-- Section accueil avec image et slogan -->
     <section class="hero">
@@ -122,7 +122,7 @@
     </section>
 
 <!-- Footer commun -->
-<?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

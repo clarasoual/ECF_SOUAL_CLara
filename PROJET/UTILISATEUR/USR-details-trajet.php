@@ -11,7 +11,11 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
+
+<main>
+<!-- Menu latéral -->
+<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
     <!-- Le titre du trajet -->
     <div class="page-header">
@@ -120,8 +124,10 @@
    
     <script src="JS/ecoride_js.js"></script>
 
+</main>
+
 <!-- Footer commun -->
-<?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

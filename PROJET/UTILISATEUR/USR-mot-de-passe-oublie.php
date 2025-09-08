@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    <?php include('../COMPONENTS/COMP-header.html') ; ?>
+
 
 <main class="password-forgotten-container">
     <section class="password-forgotten-content">
@@ -32,6 +34,6 @@
 <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 

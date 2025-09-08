@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Header commun -->
-    <?php include('../COMPONENTS/header.html') ; ?>
+    <?php include('../COMPONENTS/COMP-header.html') ; ?>
 
     <main class="cgu-section responsive-section">
         <h1>Conditions Générales d'Utilisation & Réglement</h1>
@@ -63,6 +63,6 @@
 
      <script src="JS/ecoride_js.js"></script>
     <!-- Footer commun -->
-    <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>

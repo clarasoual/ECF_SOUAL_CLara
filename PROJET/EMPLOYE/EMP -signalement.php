@@ -12,13 +12,14 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/headeremploye.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
 
-<?php include('../COMPONENTS/menuemploye.html') ; ?>
 
 <hr>
 
 <main>
+
+<?php include('../COMPONENTS/COMP-menu-employe.html') ; ?>
 
     <!--Contenu principal suivi signalement -->
     <section class="report-tracking">
@@ -62,7 +63,7 @@
 </main>
 
 <script src="JS/ecoride_js.js"></script>
-    <?php include('../COMPONENTS/footer.html') ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

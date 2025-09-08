@@ -11,7 +11,7 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
 
 <main class="trip-step2">
     <h2 class="step-title">Résumé de votre trajet - Étape 2 sur 2</h2>
@@ -70,7 +70,7 @@
 <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 
 </body>
 </html>
