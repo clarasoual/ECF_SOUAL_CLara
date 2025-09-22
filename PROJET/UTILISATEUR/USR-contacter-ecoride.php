@@ -11,12 +11,12 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../../COMPONENTS/header.html') ; ?>
-
+    <?php include('../COMPONENTS/COMP-header.html') ; ?>
+<main>
 <!-- Menu latéral -->
-<?php include('../../COMPONENTS/menumyaccount.html'); ?>
+<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
+<div class="contact-page">
 
-<main class="contact-page">
     <h1>Contactez Eco Ride</h1>
     <p>Vous pouvez nous envoyer un message via le formulaire si vous ne trouvez pas réponses à vos questions dans la <a href="faq">F.A.Q.</a></p>
 
@@ -42,6 +42,7 @@
         <p>Téléphone : 01 23 45 67 89</p>
         <p>Adresse : 123 Rue de la Gaité, 33000 Bordeaux</p>
     </section>
+</div>
 </main>
 
  <script src="JS/ecoride_js.js"></script>

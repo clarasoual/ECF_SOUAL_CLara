@@ -1,6 +1,7 @@
 .trip-step2 {
+    flex-direction: column;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 2rem;
     background-color: var(--fond);
     border-radius: 10px;

@@ -1,9 +1,18 @@
+.profil-header,
+.profile-verification, 
+.user-role,
+.bio,
+.credit-balance {
+    margin: 2rem auto;
+}
+
 .profile-content {
     flex-direction: column;
     gap: 2rem;
     max-width: 900px;
     margin: 0 auto;
 }
+
 
 .profil-header {
     display: flex;

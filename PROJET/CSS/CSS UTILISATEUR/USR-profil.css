@@ -1,16 +1,29 @@
-.profil-container {
+.driver-profile-section,
+.profile-dirver-details,
+.trip-history,
+.contact-driver {
+    background-color: var(--beige-fonce);
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow);
+    max-width: 700px;
+}
+
+
+
+.profile-container {
     position: relative;
     margin-left: 1rem;
 
 }
 
-.photo-profil {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    object-fit: cover;
-    border: 2px solid var(--vert-doux);
+.profile-picture {
+border-radius: 50%;
+border: 1px solid var(--vert-doux);
+margin: 1rem 0;
+object-fit: cover;
+    box-shadow: 0 2px 8px var(--shadow);
 }
 
 /* ==============================================*/
@@ -39,4 +52,25 @@
     background-color: var(--orange-doux);
     color: black;
 }
+
+
+h2, .section-title {
+    color: var(--vert-doux);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.subsection-title {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: var(--orange-doux);
+}
+
+.preferences-list li::before {
+    color: var(--vert-doux);
+    position: absolute;
+    left: 0;
+}
+
+
 

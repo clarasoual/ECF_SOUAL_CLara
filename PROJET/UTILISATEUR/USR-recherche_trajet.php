@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Rechercher un covoiturage </title>
     <link rel="stylesheet" href="../CSS/style_global.css">
-    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-rechercher-trajet.css">
+    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-recherche-trajet.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>

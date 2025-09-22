@@ -24,7 +24,7 @@
     <div class="messaging-container">
 
         <!-- Liste des conversations (menu à gauche) -->
-        <aside class="conversation-list">
+        <aside class="conversations-list">
             <h3>Conversations</h3>
             <ul>
                 <li><strong>Nino C.</strong><br><small>Super, à demain alors ! Bonne soirée</small></li>
@@ -33,6 +33,7 @@
         </aside>
 
         <!-- Zone d'affichage de la conversation selectionnée -->
+
         <section class="message-area">
             <h3>Conversation avec Nino C.</h3>
 
@@ -49,8 +50,7 @@
                     <p><strong>Nino : </strong>Super, à demain alors ! Bonne soirée</p>
                     <small>20:26</small>
                 </div>
-            </div>
-
+        </div>
             <!-- Zone de saisie d'un nouveau message -->
             <div class="send-message-area">
                 <label for="new-message">Nouveau message :</label><br>

@@ -13,12 +13,13 @@
 <!-- Header commun -->
 <?php include('../COMPONENTS/COMP-header.html') ; ?>
 
+<main>
 <!-- Menu latéral -->
 <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
 <!-- Contenu principal -->
-<div>
-    <main class="profile-content">
+<div class="profile-info">
+    
 
         <!-- Section en-tête du profil -->
         <section class="profil-header">
