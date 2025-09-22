@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informations Conducteur</title>
-    <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link rel="stylesheet" href="../CSS/style_global.css">
+    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-infos-conducteur.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Header commun -->
-<?php include('../../COMPONENTS/header.html') ; ?>
 
-<?php include('../../COMPONENTS/menumyaccount.html'); ?>
+<!-- Header commun -->
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<main>
+<!-- Menu latéral -->
+<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
 <!-- Formulaire de déclaration d'un véhicule -->
-<main class="driver-info-container">
+ <div class="form-column">
+<div class="driver-info-container">
     <h2>Véhicule numéro 1</h2>
+    
     <section class="vehicle-form">
         <form action="#" method="post">
             <label for="plate">Plaque d'immatriculation :</label><br>
-            <input type="text" id="plate" name="plate" placeholder="AB-123-CD"><br><br>
-
+            <input type="text" id="plate" name="plate" placeholder="AB-123-CD">
+            </div>
+            <div class="form-section">
             <label for="date">Date de première immatriculation :</label><br>
-            <input type="date" id="date" name="date"><br><br>
-
+            <input type="date" id="date" name="date">
+            </div>
+            <div class="form-section">
             <!-- Selection marque du véhicule ; à mettre à jour-->
             <label for="brand">Marque :</label><br>
             <select id="brand" name="brand">
@@ -42,8 +49,9 @@
                 <option value="Opel">Opel</option>
                 <option value="BMW">BMW</option>
 
-            </select><br><br>
-
+            </select>
+            </div>
+            <div class="form-section">
             <!-- Selection modèle du véhicule (lié à la marque) -->
             <label for="model">Modèle :</label><br>
             <select id="model" name="model">
@@ -105,8 +113,9 @@
                 <option value="Série 1" data-marque="BMW">Série 1</option>
                 <option value="Série 3" data-marque="BMW">Série 3</option>
                 <option value="X1" data-marque="BMW">X1</option>
-            </select><br><br>
-
+            </select>
+            </div>
+            <div class="form-section">
             <!-- Couleur du véhicule -->
             <label for="color">Couleur :</label>
             <select id="color" name="color">
@@ -118,25 +127,31 @@
                 <option value="Gris">Gris</option>
                 <option value="Orange">Orange</option>
 
-            </select><br><br>
-
+            </select>
+            </div>
+            <div class="form-section">
             <!-- Nombre de passagers -->
             <label for="seats">Nombre de places passagers :</label><br>
-            <input type="number" id="seats" name="seats" min="1" max="8"><br><br>
+            <input type="number" id="seats" name="seats" min="1" max="8">
+            </div>
 
             <hr>
 
             <!-- Préférences conducteur -->
             <h3>Vos préférences</h3>
-
+            <div class="form-section">
             <p>Animaux acceptés :</p>
             <label><input type="radio" name="pets" value="oui">Oui</label>
             <label><input type="radio" name="pets" value="non">Non</label><br><br>
+            </div>
 
+            <div class="form-section">
             <p>Fumeur :</p>
             <label><input type="radio" name="smoking" value="oui">Oui</label>
             <label><input type="radio" name="smoking" value="non">Non</label><br><br>
+            </div>
 
+            <div class="form-section">
             <label for="music">Musique :</label><br>
             <select id="music" name="music">
                 <option value="">Choisir un style</option>
@@ -145,17 +160,21 @@
                 <option value="pop">Pop</option>
                 <option value="rock">Rock</option>
                 <option value="jazz">Jazz</option>
-            </select><br><br>
+            </select>
+            </div>
 
             <button type="submit">Enregistrer</button>
+            </div>
         </form>
     </section>
-</main>
+</div>
 
  <script src="JS/ecoride_js.js"></script>
 
+</main>
+
  <!-- Footer commun -->
- <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 
 </body>
 </html>

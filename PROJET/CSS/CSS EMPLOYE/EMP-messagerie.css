@@ -1,0 +1,111 @@
+.messaging-container {
+    display: flex;
+    gap: 1.5rem;
+    background-color: var(--beige-fonce);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.conversations-list {
+    width: 30%;
+    background-color: var(--fond);
+    border-radius: 10px;
+    padding: 1rem;
+    color: var(--texte);
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.conversations-list h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--vert-doux);
+}
+
+.conversations-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.conversations-list {
+    background-color: var(--gris-doux);
+    color: #222;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.conversations-list li:hover {
+    background-color: var(--orange-doux);
+    color: black;
+}
+
+.message-area {
+    flex: 1;
+    background-color: var(--fond);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--texte);
+    max-height: 400px;
+}
+
+.message-area h3 {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    margin-bottom: 1rem;
+
+}
+
+.message-received {
+    background-color: var(--gris-doux);
+    color: #222;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    max-width: 80%;
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.message-received p {
+    margin: 0 0.25rem 0;
+}
+
+.message-received small {
+    font-size: 0.75rem;
+    color: var(--beige-fonce);
+}
+
+.send-message-area label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--vert-doux);
+    font-weight: 600;
+
+}
+
+.send-message-area textarea {
+    width: 100%;
+    resize: vertical;
+    border: 1px solid var(--orange-doux);
+    border-radius: 8px;
+    padding: 0.6rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    color: #222;
+    background-color: var(--gris-doux);
+    margin-bottom: 0.75rem;
+    min-height: 80px;
+}
+
+.send-message-area button {
+    align-self: flex-end;
+}

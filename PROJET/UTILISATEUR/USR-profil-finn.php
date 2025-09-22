@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Profil du conducteur </title>
-    <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link rel="stylesheet" href="../CSS/style_global.css">
+    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-profil.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Header commun -->
-<?php include('../../COMPONENTS/header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
 
 <!-- Profil du conducteur -->
 <section class="driver-profile-section">
     <h2>Profil de <strong>Finn</strong></h2>
-    <img src="../../../IMAGES/finn.png"class="profile-picture" alt="Photo de profil" width="150" height="150">
+    <img src="../../IMAGES/finn.png"class="profile-picture" alt="Photo de profil" width="150" height="150">
     <p>Age : 23 ans</p>
     <p>Note globale : ★★★★★ (4.8 / 5)</p>
     <p>Nombre d'avis : 3 <a href="#">Voir les avis</a></p>
@@ -23,7 +24,7 @@
 
 <hr>
 
-<section class="-profile-driver-details">
+<section class="profile-driver-details">
     <h3 class="section-title">En savoir plus</h3>
 
     <h4 class="subsection-title">Biographie</h4>
@@ -48,7 +49,7 @@
 <hr>
 
 <section class="trip-history">
-    <h3 class="section-title">Historique de trajets</h3>
+    <h3 class="section-title">Historique de trajets</h3> <!-- Mettre flèches pour faire défiler -->
 
     <div class="trip">
         <h4 class="trip-title">Trajet du 7 février 2024</h4>
@@ -69,7 +70,7 @@
    <script src="JS/ecoride_js.js"></script>
 
     <!-- Footer commun -->
-    <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

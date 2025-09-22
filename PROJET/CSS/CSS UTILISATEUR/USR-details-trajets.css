@@ -1,0 +1,125 @@
+.plan-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.plan-town {
+    flex: 2;
+    background-color: var(--beige-fonce);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.btn-duration button {
+    padding: 0.5em 1em;
+}
+
+.driver-infos {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.driver-photo {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.driver-details {
+    margin: 0.3rem 0;
+}
+
+.passenger-card {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.passenger-photo {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.passenger-info p {
+    margin: 0.2rem 0;
+}
+
+.main-content {
+    display: flex;
+    padding: 0 2rem;
+    gap: 1rem
+}
+
+.plan-section {
+    flex: 2;
+}
+
+.driver-reviews {
+    flex: 1;
+    background-color: var(--fond);
+    color: var(--texte);
+    padding: 1rem;
+    border-radius: 10px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.driver-reviews article {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--vert-doux);
+    padding-bottom: 1rem;
+}
+
+author-review {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.author-review img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.left-column {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.right-column {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--vert-doux);
+}
+
+.reservation-btn a {
+    background-color: var(--vert-doux);
+    color: black;
+    padding: 0.6em 1.2em;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3 ease;
+}
+
+.reservation-btn a:hover {
+    background-color: var(--orange-doux);
+}

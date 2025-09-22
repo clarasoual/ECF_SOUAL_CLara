@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Mon compte - Avis </title>
-    <link rel="stylesheet" href="../../CSS/ecoride_style.css">
+    <link rel="stylesheet" href="../CSS/style_global.css">
+    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-avis.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Header commun -->
-<?php include('../../COMPONENTS/header.html') ; ?>
-
+<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<main>
 <!-- Menu latéral -->
-<?php include('../../COMPONENTS/menumyaccount.html'); ?>
+<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 <section>
     <h2>Mes avis</h2>
 
@@ -61,8 +62,10 @@
 </section>
  <script src="JS/ecoride_js.js"></script>
 
+ </main>
+
     <!-- Footer commun -->
-    <?php include('../../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
 

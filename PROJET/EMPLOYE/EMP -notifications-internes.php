@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Espace employé - Notifications internes </title>
-    <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link rel="stylesheet" href="../CSS/style_global.css">
+            <link rel="stylesheet" href="../CSS/CSS EMPLOYE/EMP-notifications-internes.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/headeremploye.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
 
-<?php include('../COMPONENTS/menuemploye.html') ; ?>
+
 
 <main>
+
+<?php include('../COMPONENTS/COMP-menu-employe.html') ; ?>
     <section>
         <h2>Fil d'actualité interne</h2>
 
@@ -51,5 +55,6 @@
         </section>
     </div>
 </main>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>

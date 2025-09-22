@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Compte employés</title>
-    <link rel="stylesheet" href="../CSS/ecoride_style.css">
+    <link rel="stylesheet" href="../CSS/style_global.css">
+        <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-login.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body class="connexion-page">
 
 <!-- Header commun employés -->
-<?php include('../COMPONENTS/headeradmin.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-admin.html') ; ?>
 
     <main>
         <!-- Section globale de la partie connexion/inscription-->
@@ -40,6 +42,6 @@
 
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
