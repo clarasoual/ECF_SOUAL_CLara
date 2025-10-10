@@ -43,7 +43,7 @@
                     <td>claire.martin@exemple.com</td>
                     <td>01/03/2023</td>
                     <td>
-                        <button>Modifier</button>
+                        <button data-popup="#popup-modifier-employe">Modifier</button>
                         <button>Supprimer</button>
                     </td>
                 </tr>
@@ -51,12 +51,40 @@
         </table>
 
         <div>
-            <button>Ajouter un employé</button>
+            <button data-popup="#popup-ajouter-employe">Ajouter un employé</button>
+
+            <!-- POP UP AJOUTER EMPLOYÉ -->
+
+            <div  id="popup-ajouter-employe" class="popup" style="display:none;">
+                <form id="form-ajouter-employe">
+                    <input type="text" placeholder="Nom">
+                    <input type="text" placeholder="Prénom">
+                    <input type="email" placeholder="Email">
+                    <button type="submit">Enregistrer</button>
+                    <button type="button" class="popup-close">X</button>
+                </form>
+            </div>
+
+            <!-- FIN POP UP -->
+
+            <!-- POP UP MODIFIER -->
+
+            <div id="popup-modifier-employe" class="popup" style="display:none;">
+                <form id="form-modifier-employe">
+                    <input type="text" placeholder="Nom">
+                    <input type="text" placeholder="Prénom">
+                    <input type="email" placeholder="Email">
+                    <button type="submit">Enregistrer</button>
+                    <button type="button" class="popup-close">X</button>
+                </form>
+            </div>
+
+            <!-- FIN POP UP -->
         </div>
     </section>
 </main>
 
-<script src="JS/ecoride_js.js"></script>
+<script src="../JS/ecoride_js.js"></script>
 <!-- Footer commun -->
 <?php include('../COMPONENTS/COMP-footer.html'); ?>
 

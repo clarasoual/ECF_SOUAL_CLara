@@ -181,5 +181,102 @@
 - pagination/navigation par jour */
 
 
+/* ---------------------- POP UP OUVRIR-FERMER ---------------------- */
+const popButtons = document.querySelectorAll('[data-popup]');
+popButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const popup = document.querySelector(btn.dataset.popup);
+        popup.style.display = 'block';
+    });
+});
+
+const closeButtons = document.querySelectorAll('.popup-close');
+closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.closest('.popup').style.display = 'none';
+    });
+});
 
 
+/* ---------------------- AJOUTER UN EMPLOYÉ ---------------------- */
+const addForm = document.querySelector('#form-ajouter-employe');
+const employeeTable = document.querySelector('table tbody');
+
+addForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nom = addForm.querySelector('input[placeholder="Nom"]').value;
+    const prenom = addForm.querySelector('input[placeholder="Prénom"]').value;
+    const email = addForm.querySelector('input[placeholder="Email"]').value;
+    const date = new Date().toLocaleDateString('fr-FR');
+
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>${nom}</td>
+        <td>${prenom}</td>
+        <td>${email}</td>
+        <td>${date}</td>
+        <td>
+            <button data-popup="#popup-modifier-employe">Modifier</button>
+            <button>Supprimer</button>
+        </td>
+    `;
+    employeeTable.appendChild(newRow);
+
+    addForm.reset();
+    addForm.closest('.popup').style.display = 'none';
+});
+
+
+/* ---------------------- SUPPRIMER ---------------------- */
+employeeTable.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+        const btn = e.target;
+
+        if (btn.textContent === 'Supprimer') {
+            const confirmation = confirm("Voulez-vous vraiment supprimer cet employé ?");
+            if (confirmation) {
+                btn.closest('tr').remove();
+                alert("Employé supprimé avec succès !");
+            }
+        }
+
+        if (btn.textContent === 'Modifier') {
+            openModifyPopup(btn);
+        }
+    }
+});
+
+
+/* ---------------------- MODIFIER ---------------------- */
+const modifyPopup = document.querySelector('#popup-modifier-employe');
+const modifyForm = document.querySelector('#form-modifier-employe');
+let currentRow = null; // pour garder la ligne à modifier
+
+function openModifyPopup(btn) {
+    const row = btn.closest('tr');
+    currentRow = row;
+
+    const nom = row.children[0].textContent;
+    const prenom = row.children[1].textContent;
+    const email = row.children[2].textContent;
+
+    modifyForm.querySelector('input[placeholder="Nom"]').value = nom;
+    modifyForm.querySelector('input[placeholder="Prénom"]').value = prenom;
+    modifyForm.querySelector('input[placeholder="Email"]').value = email;
+
+    modifyPopup.style.display = 'block';
+}
+
+modifyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (!currentRow) return; // sécurité
+
+    currentRow.children[0].textContent = modifyForm.querySelector('input[placeholder="Nom"]').value;
+    currentRow.children[1].textContent = modifyForm.querySelector('input[placeholder="Prénom"]').value;
+    currentRow.children[2].textContent = modifyForm.querySelector('input[placeholder="Email"]').value;
+
+    modifyPopup.style.display = 'none';
+    currentRow = null;
+});
