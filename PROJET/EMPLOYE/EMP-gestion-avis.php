@@ -132,6 +132,7 @@
 </main>
 </div>
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+<script src="../JS/EMP-gestion-avis.js"></script>
 
 </body>
 </html>

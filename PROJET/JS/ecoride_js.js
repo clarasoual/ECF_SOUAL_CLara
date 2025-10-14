@@ -180,6 +180,7 @@
 - autocomplétion villes
 - pagination/navigation par jour */
 
+/* ---------------------- ADM EMPLOPYES ---------------------- */
 
 /* ---------------------- POP UP OUVRIR-FERMER ---------------------- */
 const popButtons = document.querySelectorAll('[data-popup]');
@@ -221,6 +222,7 @@ addForm.addEventListener('submit', (e) => {
             <button>Supprimer</button>
         </td>
     `;
+
     employeeTable.appendChild(newRow);
 
     addForm.reset();
@@ -280,3 +282,6 @@ modifyForm.addEventListener('submit', (e) => {
     modifyPopup.style.display = 'none';
     currentRow = null;
 });
+
+/* ---------------------- ADM UTILISATEURS ---------------------- */
+
