@@ -62,8 +62,9 @@
     </section>
 </main>
 
-<script src="JS/ecoride_js.js"></script>
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+    <script src="../JS/EMP-signalement.js"></script>
+
 </body>
 </html>
 

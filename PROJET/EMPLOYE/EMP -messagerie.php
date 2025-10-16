@@ -49,6 +49,8 @@
     </section>
 </main>
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+    <script src="../JS/EMP-messagerie.js"></script>
+
 
 </body>
 </html>

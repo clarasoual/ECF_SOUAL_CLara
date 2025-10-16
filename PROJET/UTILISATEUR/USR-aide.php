@@ -58,11 +58,13 @@
     </form>
 </div>
 </section>
-<script src="JS/ecoride_js.js"></script>
+
 </main>
 
     <!-- Footer commun -->
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+    <script src="../JS/USR-aide.js"></script>
+
 </body>
 </html>
 

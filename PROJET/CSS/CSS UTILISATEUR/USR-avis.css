@@ -1,4 +1,32 @@
-#reviews-received, #reviews-given {
+/* =====================================
+   Layout général : menu + contenu
+===================================== */
+main {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Colonne menu */
+.menu-column {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+/* Colonne contenu principal */
+.content-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =====================================
+   Avis reçus / Avis donnés
+===================================== */
+#reviews-received,
+#reviews-given {
+    display: block;
     background-color: var(--beige-fonce);
     padding: 1.5rem;
     border-radius: 10px;
@@ -6,6 +34,7 @@
     box-shadow: 0 4px 8px var(--shadow);
 }
 
+/* Avis individuels */
 .review {
     background-color: var(--fond);
     padding: 1rem 1.5rem;
@@ -13,7 +42,7 @@
     margin-bottom: 1rem;
     box-shadow: 0 2px 5px var(--shadow);
     font-family: 'Quicksand', sans-serif;
-    transition: transform 0.2s,, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .review p {
@@ -25,32 +54,105 @@
     color: var(--vert-doux);
 }
 
-.reviews-moderation {
-    padding: 1rem;
-
+/* =====================================
+   Boutons et tri
+===================================== */
+.btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1rem;
+    align-items: center;
 }
 
+.btn-container button,
+.btn-container select {
+    padding: 6px 12px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #007bff;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    transition: all 0.2s;
+}
+
+.btn-container button:hover,
+.btn-container select:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* =====================================
+   Diagramme
+===================================== */
+.chart-container {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    background-color: var(--beige-fonce);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.chart-container h4 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.chart-container div {
+    border-radius: 4px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+/* =====================================
+   Sections internes
+===================================== */
+.reviews-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =====================================
+   Responsive
+===================================== */
 @media screen and (max-width: 768px) {
     main {
         flex-direction: column;
-        padding: 1rem;
     }
-    
-    section {
-        padding: 1rem;
+
+    .menu-column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .content-column {
+        width: 100%;
     }
 
     .review {
         padding: 0.8rem 1rem;
     }
+
+    .btn-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .chart-container {
+        max-width: 100%;
+    }
 }
 
 @media screen and (max-width: 480px) {
-    section h2 {
+    .reviews-section h2 {
         font-size: 1.5rem;
     }
 
-    section h3 {
+    .reviews-section h3 {
         font-size: 1.2rem;
     }
 

@@ -56,5 +56,6 @@
     </div>
 </main>
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+    <script src="../JS/EMP-notifications-internes.js"></script>
 </body>
 </html>
