@@ -74,7 +74,7 @@
 
 </section>
 
- <script src="JS/ecoride_js.js"></script>
+<script src="../JS/USR-gestion-credits.js"></script>
 
  </main>
     <!-- Footer commun -->

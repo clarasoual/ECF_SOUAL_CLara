@@ -603,3 +603,26 @@ section.menu-section > div > button {
     object-fit: cover;
     border: 2px solid var(--vert-doux);
 }
+
+th {
+    position: relative;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+th::after {
+    content: '▾'; /* triangle vers le bas par défaut */
+    position: absolute;
+    right: 8px;
+    font-size: 0.8rem;
+    color: #f0f0f0;
+    transition: transform 0.2s ease;
+}
+
+th.asc::after {
+    transform: rotate(180deg); /* triangle pointe vers le haut */
+}
+
+th.desc::after {
+    transform: rotate(0deg); /* triangle vers le bas */
+}
