@@ -60,7 +60,7 @@
         </section>
     </div>
 </section>
-<script src="JS/ecoride_js.js"></script>
+<script src="../JS/USR-messagerie.js"></script>
 
 </main>
 

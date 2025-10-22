@@ -31,7 +31,7 @@
     </section>
 
 </main>
-<script src="JS/ecoride_js.js"></script>
+<script src="../JS/USR-mot-de-passe-oublie.js"></script>
 
     <!-- Footer commun -->
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
