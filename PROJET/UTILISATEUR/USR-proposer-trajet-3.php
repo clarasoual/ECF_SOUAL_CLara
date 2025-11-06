@@ -27,7 +27,7 @@
     </section>
 </main>
 
-<script src="JS/ecoride_js.js"></script>
+<script src="../JS/USR-proposer-trajet3.js"></script>
 
     <!-- Footer commun -->
     <?php include('../COMPONENTS/COMP-footer.html'); ?>

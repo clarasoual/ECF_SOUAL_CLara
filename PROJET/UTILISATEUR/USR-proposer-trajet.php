@@ -64,7 +64,7 @@
         </table>
     </section>
 
-    <script src="JS/ecoride_js.js"></script>
+    <script src="../JS/USR-proposer-trajet.js"></script>
 
     <!-- Footer commun -->
     <?php include('../COMPONENTS/COMP-footer.html'); ?>

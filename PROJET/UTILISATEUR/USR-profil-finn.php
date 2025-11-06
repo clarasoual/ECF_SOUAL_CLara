@@ -63,11 +63,11 @@
 
 <section class="contact-driver">
     <h3 class="section-title">Contacter ce conducteur</h3>
-    <p><a href="#" class="btn-message">Envoyer un message</a></p>
+<a href="USR-messagerie.php?contact=Finn" class="btn-message">Envoyer un message</a>
 
     <p><a href="#" class="btn-report">Signaler ce profil</a></p>
 </section>
-   <script src="JS/ecoride_js.js"></script>
+   <script src="../JS/USR-profil.js"></script>
 
     <!-- Footer commun -->
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
