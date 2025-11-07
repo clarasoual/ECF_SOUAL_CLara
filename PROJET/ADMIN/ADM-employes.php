@@ -90,4 +90,7 @@
 <!-- A corriger ici :
  - PB de ease sur les href
  - Mettre les éléments de personas.txt
- - Chemin JS -->
+ - CSS de l'ajout d'employé
+ - Tri Nom, etc (JS)
+ - Pages statistiques
+ - Chemins menu -->

@@ -68,10 +68,7 @@
 </body>
 </html>
 
-<!-- A faire : 
-
-- CSS
-- Modifier les passagers
-- Mettre img
-- Remettre droit les elements des passagers concernes
+<!-- 
+- CSS général
+- Mettre infos personas
 -->

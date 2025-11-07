@@ -97,8 +97,7 @@
 </html>
 
 <!-- A corriger ici :
- - Mettre un ease sur le tableau des utilisateurs
- - Revoir CSS des titres
- - Mettre les utilisateurs de personas.txt
- - Mettre le menu de gauche en composant php 
- - Chemin JS -->
+ - CSS du ajouter
+ - Voir ?
+ - Tri Nom, etc
+ - Recherche -->

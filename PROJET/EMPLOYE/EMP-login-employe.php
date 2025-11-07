@@ -49,3 +49,9 @@
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
+
+<!--
+- Re centrer
+- Mdp oublié
+- Enlever menu
+-->

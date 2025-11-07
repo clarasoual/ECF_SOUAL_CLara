@@ -69,6 +69,7 @@
 </html>
 
 <!-- A FAIRE 
- - aligner avec le menu
+- Faire des sections ?
+- Recherche mot clé ?
  - Ajouter des questions à la FAQ
  -->

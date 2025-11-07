@@ -8,7 +8,10 @@ Théo : Passager ; Note moyenne : 5 (5 + 5)
 Jeanne : Conductrice uniquement
 
 Véhicules : 
-Nino : Renault, Clio, Bleu, essence
+Nino : Honda, Civic, Bleu, electrique, 4 places dispo
+Finn : Opel, Agila, Blanche, essence, 3 places dispo
+Antoine : Citroen, C3, diesel, 4 places dispo
+Jeanne : Peugeot, 307, grise, diesel, 4 places dispo
 
 Trajets futurs : 
 
