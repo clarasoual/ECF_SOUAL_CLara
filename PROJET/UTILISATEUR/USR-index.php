@@ -1,3 +1,8 @@
+<?php
+include('../PHP/trajets.php'); // anciennement ../SQL/trajets.php
+$trajets = getTrajetsActifs($bdd);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,7 +29,7 @@
 
     <!-- Formulaire de recherche -->
     <section class="search-section">
-        <form action ="recherche.php" method ="get">
+    <form action="USR-recherche_trajet.php" method="get">
             <div class = "search-container">
 
                 <!-- Champ de départ -->
@@ -58,6 +63,19 @@
             </div>
         </form>
     </section> 
+    <section class="liste-trajets">
+    <h2>Trajets disponibles</h2>
+
+    <?php foreach($trajets as $trajet): ?>
+        <div class="trajet">
+            <p>Départ : <?= $trajet['depart'] ?></p>
+            <p>Arrivée : <?= $trajet['arrivee'] ?></p>
+            <p>Date : <?= $trajet['date_depart'] ?> à <?= $trajet['heure_depart'] ?></p>
+            <p>Places disponibles : <?= $trajet['places_disponibles'] ?></p>
+        </div>
+    <?php endforeach; ?>
+</section>
+
 
     <!-- Présentation du fondateur (peut-être à déplacer) -->
     <section class="founder-section">

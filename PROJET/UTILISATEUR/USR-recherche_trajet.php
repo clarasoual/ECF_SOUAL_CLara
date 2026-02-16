@@ -1,101 +1,131 @@
+<?php
+include('../PHP/recherche_trajets.php'); 
+
+$trajets = [];
+
+$depart = '';
+$arrivee = '';
+$date = '';
+
+if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
+    $depart = $_GET['departure'];
+    $arrivee = $_GET['destination'];
+    $date = $_GET['date'];
+
+    $trajets = chercherTrajets($bdd, $depart, $arrivee, $date);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Rechercher un covoiturage </title>
+    <title>Rechercher un covoiturage</title>
+
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-recherche-trajet.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html'); ?>
 
-    <!-- Section de recherche de trajet -->
-    <section class="search-section">
-        <form action ="recherche.php" method ="get">
-            <div class = "search-container">
-                <div class="form-group">
-                <label for="departure">Je pars de ...</label>
-                <input type ="text" id="departure" name="departure" placeholder="Ville de départ" required>
-                </div>
+<section class="search-section">
+    <form method="get">
+        <div class="search-container">
 
-                <div class="form-group">
-                <label for="destination">Je vais à ...</label>
-                <input type ="text" id="destination" name="destination" placeholder="Ville d'arrivée" required>
-                </div>
-
-                <div class="form-group">
-                <label for ="date">Date</label>
-                <input type ="date" id="date" name="date" required>
-                </div>
-
-                <div class="form-group">
-                <label for="passenger">Passagers</label>
-                <input type="number" id="passenger" name="passenger" min="1" value="1" required>
-                </div>
-                
-                <button type="submit" class="search-btn">
-                    <img src="../../IMAGES/logo recherche.png" alt="Rechercher"  class="search-icon">
-                </button>
+            <div class="form-group">
+                <label>Je pars de</label>
+                <input type="text" name="departure" required value="<?= htmlspecialchars($depart) ?>">
             </div>
-        </form>
-    </section> 
 
-    <!-- Section filtres -->
-    <section class="results-section">
-        <div class="filters">
-            <h2>Filtrer</h2>
-            <button type="button" class="fillers-clear-btn">Tout effacer</button>
-
-            <label for="max-price">Prix max.</label>
-            <input type="number" id="max-price" name="max-price" placeholder="Ex : 20 euros" class="filter-input">
-
-            <label for="eco">Trajet écologique :</label>
-            <input type="checkbox" id="eco" name="eco" class="filter-input">
-
-            <label for="note">Note chauffeur minimale :</label>
-            <input type="number" id="note" name="note" step="0.1" placeholder="Ex : 4.5" class="filter-input">
-        </div>
-
-        <!-- Résultats de la recherche "Bordeaux - Bayonne -->
-        <div class="search-results">
-            <!-- Trajet 1 -->
-            <article class="ride">
-                <h3>Bordeaux → Bayonne</h3>
-                <p>Départ : 08h30</p>
-                <p>Durée estimée : 2h00</p>
-                <p>Prix : 5 crédits / passager</p>
-                <p>Chauffeur : <img src="../../IMAGES/nino.jpg" alt="Photo chauffeur">Nino C.</p>
-                <p>Places restantes : 2</p>
-                <p>Voyage écologique</p>
-                <a href="details_trajet.php" class="btn">Voir les détails</a>
-            </article>
-
-            <div class="day-navigation">
-                <button>Jour précédent</button>
-                <button>Jour suivant</button>
+            <div class="form-group">
+                <label>Je vais à</label>
+                <input type="text" name="destination" required value="<?= htmlspecialchars($arrivee) ?>">
             </div>
+
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="date" required value="<?= htmlspecialchars($date) ?>">
+            </div>
+
+            <div class="form-group">
+                <label>Passagers</label>
+                <input type="number" name="passenger" min="1" value="1">
+            </div>
+
+            <button class="search-btn" type="submit">
+                <img src="../../IMAGES/logo recherche.png" alt="Rechercher">
+            </button>
+
         </div>
-    </section>
+    </form>
+</section>
 
-    
+<section class="results-section">
 
-    <script src="JS/ecoride_js.js"></script>
+    <div class="filters">
+        <h2>Filtrer</h2>
+        <button type="button" class="fillers-clear-btn">Tout effacer</button>
 
-    <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+        <label>
+            <input type="checkbox" class="filter-input">
+            Trajet écologique
+        </label>
+
+        <label>
+            Note chauffeur minimale
+            <input type="number" step="0.1" class="filter-input">
+        </label>
+    </div>
+
+    <div class="search-results">
+
+        <?php if (empty($trajets)): ?>
+            <p>Aucun trajet trouvé.</p>
+        <?php else: ?>
+            <?php foreach ($trajets as $trajet): ?>
+                <article class="ride">
+
+                    <div class="ride-driver">
+                        <img src="../../IMAGES/antoine.jpg" alt="Chauffeur">
+                        <span class="driver-name">
+                            <?= htmlspecialchars($trajet['prenom_conducteur']) ?>
+                        </span>
+                    </div>
+
+                    <div class="ride-content">
+                        <h3 class="ride-title">
+                            <?= htmlspecialchars($trajet['depart']) ?> → <?= htmlspecialchars($trajet['arrivee']) ?>
+                        </h3>
+
+                        <div class="ride-infos">
+                            <p>🕒 <?= htmlspecialchars($trajet['heure_depart']) ?></p>
+                            <p>📅 <?= htmlspecialchars($trajet['date_depart']) ?></p>
+                            <p>💺 <?= htmlspecialchars($trajet['places_disponibles']) ?> place(s)</p>
+                        </div>
+                    </div>
+
+                    <div class="ride-action">
+                        <!-- ✅ LIEN CORRIGÉ -->
+                        <a class="ride-btn" href="../UTILISATEUR/USR-details-trajet.php?id=<?= (int)$trajet['id'] ?>">
+                            Voir détails
+                        </a>
+                    </div>
+
+                </article>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+    </div>
+
+</section>
+
+<script src="../JS/ecoride_js.js"></script>
+
+<?php include('../COMPONENTS/COMP-footer.html'); ?>
+
 </body>
 </html>
-
-<!-- A modifier ici : 
-- Titre des filtres a modifier
-- Aligner checkbox
-- Ajouter des filtres ?
-- Diminuer taille de la section filtres
-- Styliser la section résultats
-- Remplacer les informations des trajets par les trajets types crées dans personas.txt
-- Prix max à enlever 
-- Photo à adapter-->

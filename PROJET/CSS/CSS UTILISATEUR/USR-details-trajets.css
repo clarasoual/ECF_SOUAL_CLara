@@ -2,315 +2,267 @@
     --vert-doux: #a8d5ba;
     --orange-doux: #f4b183;
     --beige-fonce: #2e2b28;
-    --gris-doux: #e0e0e0;
+    --gris-doux: #cfcfcf;
     --texte: #f0f0f0;
     --fond: #1f1f1f;
-    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow: rgba(0, 0, 0, 0.35);
 }
 
-/* ------------------- PAGE DETAILS TRAJET ------------------- */
-main {
-    display: flex;
-    flex-direction: row; /* Menu à gauche, contenu à droite */
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 2rem 3rem;
+body {
+    margin: 0;
+    padding: 0;
     font-family: 'Quicksand', sans-serif;
-    color: var(--texte);
     background-color: var(--fond);
+    color: var(--texte);
 }
 
-.menu-lateral, 
-.mon-compte-menu, 
-aside {
-    flex-shrink: 0;
-    width: 250px;
-}
-
-.details-trajet {
-    flex: 1;
+main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 1300px;
+    margin: auto;
+    padding: 2.5rem 2rem;
 }
 
-/* Conteneur spécifique pour plan + passagers */
-.plan-passengers-container {
-    display: flex;
-    gap: 2rem;
-}
-
-/* Chaque section prend la moitié de l’espace disponible */
-.plan-section, .passenger {
-    flex: 1;
-}
-
-/* ------------------- HEADER ------------------- */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    background-color: var(--beige-fonce);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px var(--shadow);
-}
-
-.page-header h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
-    color: var(--vert-doux);
-}
-
-.reservation-btn a {
-    background-color: var(--vert-doux);
-    color: var(--fond);
-    padding: 0.8em 1.6em;
-    border-radius: 12px;
-    font-weight: 600;
+/* Retour à gauche */
+.back-arrow {
+    color: var(--gris-doux);
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 6px var(--shadow);
-}
-
-.reservation-btn a:hover {
-    background-color: var(--orange-doux);
-    transform: translateY(-2px);
-}
-
-/* ------------------- PLAN DU TRAJET ------------------- */
-.plan-section {
-    background-color: var(--beige-fonce);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px var(--shadow);
-}
-
-.plan-town h2 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--vert-doux);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    display: inline-block;
     margin-bottom: 1rem;
 }
 
-.plan-town p {
-    margin: 0.5rem 0;
-    line-height: 1.6;
-    font-size: 1rem;
-    color: var(--texte);
+.back-arrow:hover {
+    color: var(--vert-doux);
 }
 
-.btn-duration {
+/* Titre */
+.page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: var(--vert-doux);
+    margin: 0 0 1.5rem 0;
+}
+
+/* Cartes côte à côte */
+.cards-wrapper {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.cards-wrapper .card {
+    flex: 1 1 48%;
+}
+
+/* Cartes */
+.card {
+    background-color: var(--beige-fonce);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 12px 30px var(--shadow);
+}
+
+/* Conducteur */
+.driver-main {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.driver-photo-lg {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--vert-doux);
+}
+
+.driver-infos h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.driver-rating {
+    color: var(--vert-doux);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.driver-car,
+.driver-schedule {
+    color: var(--gris-doux);
+    margin-bottom: 0.5rem;
+}
+
+/* Avis conducteur */
+.driver-reviews h4 {
+    color: var(--vert-doux);
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.review {
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.review-author {
+    font-weight: 600;
+}
+
+.review-text {
+    color: var(--gris-doux);
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+}
+
+.empty {
+    color: var(--gris-doux);
+    font-style: italic;
+}
+
+/* Itinéraire */
+.trajet-path {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.trajet-path .ville a {
+    font-weight: 600;
+    color: var(--vert-doux);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.trajet-path .ville a:hover {
+    text-decoration: underline;
+}
+
+.trajet-path .arrow {
+    color: var(--gris-doux);
+    font-size: 1.2rem;
+}
+
+.address {
+    font-size: 0.85rem;
+    color: var(--gris-doux);
+    margin-top: 0.2rem;
+}
+
+.map-icon {
+    font-size: 1rem;
+}
+
+.passengers-section h4 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--vert-doux);
+    margin-bottom: 0.5rem;
+}
+
+.passengers-section p {
+    margin: 0.3rem 0;
+}
+
+/* BOUTON RESERVER EN DEHORS DES CARTES, À DROITE */
+.cta-container {
+    display: flex;
+    justify-content: flex-end; /* pousse le bouton à droite */
     margin-top: 1.5rem;
 }
 
-.btn-duration button {
-    background-color: var(--orange-doux);
-    border: none;
+.cta-reserver {
+    background-color: var(--vert-doux);
     color: var(--fond);
-    padding: 0.8em 1.6em;
-    border-radius: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 8px var(--shadow);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.btn-duration button:hover {
-    background-color: var(--vert-doux);
+.cta-reserver:hover {
+    background-color: var(--orange-doux);
     transform: translateY(-2px);
 }
 
-/* ------------------- CONDUCTEUR ------------------- */
-.driver {
-    background-color: var(--beige-fonce);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px var(--shadow);
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    .cards-wrapper {
+        flex-direction: column;
+    }
+
+    .driver-main {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .driver-photo-lg {
+        margin: auto;
+    }
+
+    .cta-container {
+        justify-content: center; /* centré sur mobile */
+    }
+
+    .trajet-path {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .trajet-path .arrow {
+        display: none;
+    }
+}
+
+/* Passagers améliorés */
+.passengers-list {
     display: flex;
-    flex-direction: row; /* conducteur large */
-    gap: 2rem;
-    width: 100%;
-    align-items: flex-start;
-    flex-wrap: wrap; /* passe en colonne si petit écran */
-}
-
-.driver h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    color: var(--vert-doux);
-    flex-basis: 100%; /* titre sur toute la largeur */
-    margin-bottom: 1rem;
-}
-
-/* Conteneurs internes horizontal */
-.driver-infos, .preferences, .vehicle {
-    display: flex;
-    flex-direction: column; /* contenu interne vertical */
-    gap: 0.5rem; /* moins d'espacement entre éléments */
-    flex: 1 1 auto; /* chaque bloc prend une largeur équivalente */
-    min-width: 200px; /* pour éviter de trop réduire */
-}
-
-/* photo + détails côte à côte */
-.driver-infos {
-    flex-direction: row;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.driver-photo {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid var(--vert-doux);
-}
-
-.driver-details p {
-    margin: 0.2rem 0; /* réduit l'espacement vertical */
-    font-size: 1rem;
-    color: var(--texte);
-}
-
-.preferences h3, .vehicle h3 {
-    font-size: 1.2rem;
-    color: var(--vert-doux);
-    margin-bottom: 0.3rem; /* réduit l'espace sous le titre */
-}
-
-.preferences ul {
-    padding-left: 1.2rem;
-}
-
-.preferences li {
-    margin-bottom: 0.2rem; /* moins d'espacement entre les éléments */
-    color: var(--texte);
-}
-
-/* ------------------- PASSAGERS ------------------- */
-.passenger {
-    background-color: var(--beige-fonce);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px var(--shadow);
-}
-
-.passenger h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    color: var(--vert-doux);
-    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .passenger-card {
     display: flex;
-    gap: 1rem;
     align-items: center;
-    margin-bottom: 1rem;
+    gap: 0.8rem;
+    background-color: rgba(255,255,255,0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    color: var(--texte);
+}
+
+.passenger-card:hover {
+    background-color: var(--vert-doux);
+    color: var(--fond);
+    transform: translateY(-2px);
 }
 
 .passenger-photo {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid var(--vert-doux);
-}
-
-.passenger-info p {
-    margin: 0.2rem 0;
-    color: var(--texte);
-}
-
-/* ------------------- AVIS CONDUCTEUR ------------------- */
-.driver-reviews {
-    background-color: var(--beige-fonce);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px var(--shadow);
-}
-
-.driver-reviews h2 {
-    font-size: 1.5rem;
-    color: var(--vert-doux);
-    margin-bottom: 1rem;
-}
-
-.reviews, .review {
-    margin-bottom: 1.5rem;
-}
-
-.author-review {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.author-photo {
     width: 50px;
     height: 50px;
-    object-fit: cover;
     border-radius: 50%;
+    object-fit: cover;
     border: 2px solid var(--vert-doux);
 }
 
-.reviews h3, .review h3 {
-    font-size: 1.2rem;
-    margin: 0.3rem 0;
-    color: var(--texte);
+.passenger-info .passenger-name {
+    font-weight: 600;
 }
 
-/* ------------------- SCROLLBAR ------------------- */
-.driver-reviews::-webkit-scrollbar {
-    width: 6px;
-}
-.driver-reviews::-webkit-scrollbar-thumb {
-    background-color: var(--vert-doux);
-    border-radius: 10px;
-}
-.driver-reviews::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-/* ------------------- RESPONSIVE ------------------- */
-@media (max-width: 900px) {
-    main {
-        flex-direction: column;
-        padding: 1.5rem;
-    }
-
-    .menu-lateral, 
-    .mon-compte-menu, 
-    aside {
-        width: 100%;
-    }
-
-    .details-trajet {
-        gap: 1.5rem;
-    }
-
-    /* Plan et passagers empilés sur mobile */
-    .plan-passengers-container {
-        flex-direction: column;
-    }
-
-    .driver {
-        flex-direction: column;
-    }
-
-    .driver-infos {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .preferences, .vehicle {
-        flex: 1 1 100%;
-    }
-
-    .passenger-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}

@@ -1,82 +1,147 @@
+<?php
+session_start();
+include('../PHP/infos-perso.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <title>Mon compte – Informations personnelles</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mon compte - Informations personnelles </title>
+
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-infos-perso.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<?php if (isset($_SESSION['success'])): ?>
+    <div id="toast-success" class="toast-success">
+        ✅ <?= htmlspecialchars($_SESSION['success']) ?>
+    </div>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error'])): ?>
+    <div id="toast-error" class="toast-error">
+        ❌ <?= htmlspecialchars($_SESSION['error']) ?>
+    </div>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
+<?php include('../COMPONENTS/COMP-header.html'); ?>
 
 <main>
-<!-- Menu latéral -->
 <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
-<!-- Contenu principal -->
-<div class="profile-info">
-    
+<div class="profile-content">
 
-        <!-- Section en-tête du profil -->
-        <section class="profil-header">
-            <img src="#" alt="Photo de profil" class="profil-photo">
-            <h2>Pseudo Utilisateur</h2>
-            <button>Modifier mes informations</button>
-        </section>
+<section class="profil-header">
 
-        <!-- Section vérification du profil -->
-        <section class="profile-verification">
-            <h3>Vérifier le profil</h3>
-            <ul>
-                <li>Ajouter une carte d'identité</li>
-                <li>Confirmer l'adresse mail</li>
-                <li>Confirmer le numéro de téléphone</li>
-            </ul>
-        </section>
+    <img
+        src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
+        alt="Photo de profil"
+        class="profil-photo"
+    >
 
-        <!-- Section choix du rôle du choix utilisateur -->
-        <section class="user-role">
-            <h3>Vous</h3>
-            <label for="role-passenger"><input type="radio" name="role" value="passenger"> Passager</label><br>
-            <label for="role-driver"><input type="radio" name="role" value="driver"> Conducteur</label><br>
-            <label for="role-both"><input type="radio" name="role" value="both"> Passager-conducteur</label><br>
+    <h2><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></h2>
 
-            <div class="alert-message">
-                Merci de compléter vos informations conducteur pour activer ce rôle !
-            </div>
-        </section>
+    <p><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></p>
 
-        <!-- Section biographie -->
-        <section class="bio">
-            <h3>Biographie</h3>
-            <textarea rows="5" cols="40" placeholder="Parle un peu de toi..."></textarea>
-        </section>
+    <button
+        id="openModalBtn"
+        type="button"
+        class="btn-submit"
+    >
+        Modifier mes informations
+    </button>
+</section>
 
-        <!-- Section solde crédit -->
-        <section class="credit-balance">
-            <h3>Crédit</h3>
-            <p>Solde : 15 crédits</p>
-            <p>Besoin de crédits ? <a href="credit.html">Contacter Eco Ride</a></p>
-        </section>
 
-    </main>
+
+<section class="user-role">
+    <h3>Vous</h3>
+
+    <label>
+        <input type="radio" disabled <?= $user['role'] === 'passager' ? 'checked' : '' ?>>
+        Passager
+    </label>
+
+    <label>
+        <input type="radio" disabled <?= $user['role'] === 'conducteur' ? 'checked' : '' ?>>
+        Conducteur
+    </label>
+
+    <label>
+        <input type="radio" disabled <?= $user['role'] === 'passager-conducteur' ? 'checked' : '' ?>>
+        Passager-conducteur
+    </label>
+
+    <div class="alert-message">
+        Merci de compléter vos informations conducteur pour activer ce rôle !
+    </div>
+</section>
+
+<!-- ================= VÉRIFICATION ================= -->
+<section class="profile-verification">
+    <h3>Vérifier le profil</h3>
+    <ul>
+        <li>Ajouter une carte d'identité</li>
+        <li>Confirmer l'adresse mail</li>
+        <li>Confirmer le numéro de téléphone</li>
+    </ul>
+</section>
 </div>
-    <script src="JS/ecoride_js.js"></script>
+<!-- ================= RÔLE ================= -->
 
-    <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+</main>
+
+<!-- ================= MODAL ================= -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span id="closeModalBtn" class="close">&times;</span>
+
+        <h2>Modifier mes informations</h2>
+
+        <form action="../PHP/update_infos.php" method="POST" enctype="multipart/form-data">
+            
+            <!-- Photo de profil -->
+            <label for="photo">Photo de profil :</label>
+            <input type="file" name="photo" id="photo" accept="image/*">
+
+            <!-- Nom et prénom (grisés) -->
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" value="<?= htmlspecialchars($user['prenom']) ?>" disabled>
+            <div class="contact-note">Merci de contacter Eco Ride pour modifier cette information</div>
+
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" value="<?= htmlspecialchars($user['nom']) ?>" disabled>
+            <div class="contact-note">Merci de contacter Eco Ride pour modifier cette information</div>
+
+            <!-- Email (grisé) -->
+            <label for="email">Email :</label>
+            <input type="email" id="email" value="<?= htmlspecialchars($user['email']) ?>" disabled>
+            <div class="contact-note">Merci de contacter Eco Ride pour modifier cette information</div>
+
+            <!-- Date de naissance -->
+            <label for="date_naissance">Date de naissance :</label>
+            <input type="date" name="date_naissance" id="date_naissance" value="<?= htmlspecialchars($user['date_naissance']) ?>">
+
+            <!-- Bio -->
+            <label for="bio">Bio :</label>
+            <textarea name="bio" id="bio" rows="4"><?= htmlspecialchars($user['bio']) ?></textarea>
+
+            <!-- Lien pour changer le mot de passe -->
+            <div class="password-link">
+                <a href="/eco_ride/PROJET/UTILISATEUR/USR-modif-mdp.php">Modifier le mot de passe</a>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                Enregistrer
+            </button>
+        </form>
+    </div>
+</div>
+
+<script src="../JS/USR-modal.js"></script>
 </body>
 </html>
-
-<!-- A faire :
-
-- Bouton enregistrer infos
-- Alerte remplir infos conducteur si conducteur ou passager condcuteur a été coché : page : infosconducteur.php
-- Modifier photo de profil
-- Aligner boutons radio
-- Section vérifier profil
-- Aligner avec le menu -->

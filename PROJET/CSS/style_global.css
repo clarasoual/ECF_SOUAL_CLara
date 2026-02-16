@@ -626,3 +626,49 @@ th.asc::after {
 th.desc::after {
     transform: rotate(0deg); /* triangle vers le bas */
 }
+
+
+/* Conteneur général pour toutes les sections */
+.responsive-container {
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* Tableaux responsive */
+.responsive-container table {
+    width: 100%;
+    display: block;
+    overflow-x: auto; /* scroll horizontal sur mobile */
+    white-space: nowrap;
+    border-collapse: collapse;
+}
+
+.responsive-container th,
+.responsive-container td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Boutons et inputs */
+.responsive-container button,
+.responsive-container input {
+    width: 100%;
+    max-width: 300px;
+    margin: 0.25rem 0;
+    box-sizing: border-box;
+}
+
+/* Titres adaptatifs */
+.responsive-container h2 {
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .responsive-container h2 { font-size: 1.5rem; }
+    .responsive-container th,
+    .responsive-container td { font-size: 0.9rem; padding: 0.3rem; }
+    .responsive-container button,
+    .responsive-container input { font-size: 0.9rem; }
+}
+
