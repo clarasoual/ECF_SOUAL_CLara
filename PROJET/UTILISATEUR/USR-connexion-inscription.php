@@ -27,10 +27,17 @@
         <div id="connexion">
             <h2>Se connecter</h2>
 
-            <!-- ✅ ACTION CORRIGÉE -->
+            <?php
+            // 🔹 On récupère l'URL vers laquelle rediriger après connexion
+            $redirect = $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php';
+            ?>
+
             <form id="formulaire-connexion"
                   action="../PHP/login.php"
                   method="POST">
+
+                <!-- 🔹 Champ caché pour mémoriser la page cible -->
+                <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
 
                 <label for="email">Adresse mail :</label>
                 <input type="email"

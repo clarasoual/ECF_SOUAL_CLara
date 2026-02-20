@@ -1,4 +1,8 @@
 <?php
+include('../PHP/auth.php'); // Démarre la session et charge les fonctions
+requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+?>
+
 include('../PHP/details_trajet.php');
 ?>
 

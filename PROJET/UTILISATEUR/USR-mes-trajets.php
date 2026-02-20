@@ -1,3 +1,7 @@
+<?php
+include('../PHP/auth.php'); // Démarre la session et charge les fonctions
+requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

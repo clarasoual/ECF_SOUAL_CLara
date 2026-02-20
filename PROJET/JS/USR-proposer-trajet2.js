@@ -1,16 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // === Récupérer les valeurs depuis localStorage ===
-    const departure = localStorage.getItem('departure') || '';
-    const stops = JSON.parse(localStorage.getItem('stops') || '[]');
-    const arrival = localStorage.getItem('arrival') || '';
-    const date = localStorage.getItem('date') || '';
-    const time = localStorage.getItem('time') || '';
-    const vehicle = localStorage.getItem('vehicle') || '';
-    const places = localStorage.getItem('places') || '';
-    const comments = localStorage.getItem('comments') || '';
+    const departure = sessionStorage.getItem('departure') || '';
+    const stops = JSON.parse(sessionStorage.getItem('stops') || '[]');
+    const arrival = sessionStorage.getItem('arrival') || '';
+    const date = sessionStorage.getItem('date') || '';
+    const time = sessionStorage.getItem('time') || '';
+    const vehicle = sessionStorage.getItem('vehicle') || '';
+    const places = sessionStorage.getItem('places') || '';
+    const comments = sessionStorage.getItem('comments') || '';
 
-    // === Formater la date pour l'affichage (jj/mm/aaaa) ===
     function formatDate(inputDate) {
         if(!inputDate) return '';
         const d = new Date(inputDate);
@@ -20,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${day}/${month}/${year}`;
     }
 
-    // === Afficher les valeurs dans le tableau ===
     document.getElementById('summary-departure').textContent = departure;
     document.getElementById('summary-stops').textContent = stops.length ? stops.join(', ') : 'Aucun arrêt';
     document.getElementById('summary-arrival').textContent = arrival;
@@ -30,7 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('summary-places').textContent = places;
     document.getElementById('summary-comments').textContent = comments;
 
-    // === Ajouter alerte / confirmation lors de la soumission ===
+    // --- Cliquer sur modifier : définir le drapeau pour revenir sur page 1 ---
+    const editLink = document.getElementById('edit-link');
+    editLink.addEventListener('click', () => {
+        sessionStorage.setItem('fromStep2', 'true');
+    });
+
     const submitBtn = document.querySelector('.btn-submit');
     if(submitBtn){
         submitBtn.addEventListener('click', (e) => {
@@ -39,12 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const confirmed = confirm(`Confirmez-vous ce trajet ?\nDépart : ${departure}\nArrêts : ${stops.join(', ') || 'Aucun'}\nArrivée : ${arrival}\nDate : ${formatDate(date)}\nHeure : ${time}\nVéhicule : ${vehicle}\nPlaces : ${places}\nCommentaires : ${comments}`);
             
             if(confirmed){
-                // Pop-up de confirmation
                 alert("Trajet confirmé ! Vous gagnerez vos crédits après le trajet.");
-                // Soumettre le formulaire après confirmation
+                sessionStorage.clear(); // vider tout après confirmation
                 submitBtn.closest('form').submit();
             }
         });
     }
-
 });

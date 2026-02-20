@@ -136,7 +136,7 @@ $trajets = getTrajetsActifs($bdd);
     <!-- Appel à l'action pour créer un compte -->
     <section class="cta-section responsive-section">
         <h2>Prêt.e à partager la route ?</h2>
-        <a href="inscription.php" class="cta-btn">Créer un compte</a>
+        <a href="USR-inscription.php" class="cta-btn">Créer un compte</a>
     </section>
 <script src="../JS/USR-index.js"></script>
 <!-- Footer commun -->

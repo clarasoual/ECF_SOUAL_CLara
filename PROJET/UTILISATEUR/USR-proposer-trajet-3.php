@@ -20,9 +20,9 @@
 
         <p>Vous pouvez :</p>
         <ul>
-            <li><a href="mestrajets.php">Voir vos trajets.</a></li>
-            <li><a href="proposertrajet.php">Proposer un nouveau trajet</a></li>
-            <li><a href="accueil.php">Retourner à l'accueil</a></li>
+            <li><a href="../UTILISATEUR/USR-mes-trajets.php">Voir vos trajets.</a></li>
+            <li><a href="../UTILISATEUR/USR-proposer-trajet.php">Proposer un nouveau trajet</a></li>
+            <li><a href="../UTILISATEUR/USR-index.php">Retourner à l'accueil</a></li>
         </ul>
     </section>
 </main>

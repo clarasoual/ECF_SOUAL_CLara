@@ -76,7 +76,10 @@ $_SESSION['user_id'] = $new_user_id;
 $_SESSION['user_email'] = $email;
 $_SESSION['user_role'] = $role;
 
-// Message de bienvenue + redirection après 6 secondes (heredoc pour simplifier)
+// Sécuriser le prénom pour le HTML
+$prenom_safe = htmlspecialchars($prenom, ENT_QUOTES, 'UTF-8');
+
+// Message de bienvenue + redirection vers USR-inscription2.php
 echo <<<HTML
 <!DOCTYPE html>
 <html lang="fr">
@@ -104,35 +107,23 @@ echo <<<HTML
         max-width: 400px;
         animation: fadeIn 0.8s ease-in-out;
     }
-    .message h2 {
-        color: #4CAF50;
-        margin-bottom: 1rem;
-    }
-    .message p {
-        color: #333;
-        font-size: 1.1rem;
-        margin: 0.5rem 0;
-    }
-    .message .redirect {
-        font-size: 0.9rem;
-        color: #555;
-        margin-top: 1rem;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+    .message h2 { color: #4CAF50; margin-bottom: 1rem; }
+    .message p { color: #333; font-size: 1.1rem; margin: 0.5rem 0; }
+    .message .redirect { font-size: 0.9rem; color: #555; margin-top: 1rem; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
-<meta http-equiv="refresh" content="6;url=../UTILISATEUR/USR-infos-perso.php">
+<!-- Redirection automatique après 6 secondes -->
+<meta http-equiv="refresh" content="6;url=/eco_ride/PROJET/UTILISATEUR/USR-inscription2.php">
 </head>
 <body>
     <div class="message">
         <h2>✅ Inscription réussie !</h2>
-        <p>Bienvenue, {$prenom} ! Complète ton profil pour commencer à utiliser Eco Ride.</p>
-        <p class="redirect">Redirection automatique dans 6 secondes...</p>
+        <p>Bienvenue, {$prenom_safe} ! Complète ton profil pour commencer à utiliser Eco Ride.</p>
+        <p class="redirect">Redirection automatique vers la suite de l'inscription dans 6 secondes...</p>
     </div>
 </body>
 </html>
 HTML;
 
 exit;
+?>
