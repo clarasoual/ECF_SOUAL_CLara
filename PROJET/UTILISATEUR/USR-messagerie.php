@@ -1,3 +1,7 @@
+<?php
+include('../PHP/auth.php'); // Démarre la session et charge les fonctions
+requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -60,7 +64,7 @@
         </section>
     </div>
 </section>
-<script src="JS/ecoride_js.js"></script>
+<script src="../JS/USR-messagerie.js"></script>
 
 </main>
 

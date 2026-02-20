@@ -1,3 +1,4 @@
+/* Conteneur formulaire/carte véhicule */
 .driver-info-container {
     max-width: 900px;
     margin: 2rem auto;
@@ -9,6 +10,7 @@
     width: 100%;
 }
 
+/* Titre véhicule */
 .driver-info-container h2 {
     font-family: 'Quicksand', sans-serif;
     font-size: 2rem;
@@ -17,6 +19,7 @@
     text-align: center;
 }
 
+/* Formulaire */
 .vehicle-form form {
     display: flex;
     flex-direction: column;
@@ -47,21 +50,22 @@
     outline: none;
 }
 
+/* Section formulaire */
+.form-section {
+    background-color: var(--fond);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--shadow);
+}
+
+/* Séparateur */
 .vehicle-form hr {
     margin: 2rem 0;
     border: 0.5px solid var(--orange-doux);
 }
 
-.vehicle-form h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.vehicle-form input[type="radio"] {
-    margin-right: 0.3rem;
-}
-
+/* Bouton enregistrer */
 .vehicle-form button[type="submit"] {
     padding: 0.8rem 1.2rem;
     background-color: var(--fond);
@@ -79,6 +83,52 @@
     background-color: var(--orange-doux);
 }
 
+/* Carte véhicule */
+.vehicle-card {
+    background-color: var(--fond);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.vehicle-card h2 {
+    text-align: center;
+    color: var(--vert-doux);
+    margin-bottom: 1rem;
+}
+
+.vehicle-card p {
+    margin: 0.4rem 0;
+    font-size: 1rem;
+}
+
+/* Boutons ajouter/supprimer véhicule */
+.vehicle-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.vehicle-buttons button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--vert-doux);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.vehicle-buttons button:hover {
+    background-color: var(--orange-doux);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .driver-info-container {
         padding: 1rem;
@@ -91,13 +141,11 @@
     .vehicle-form select,
     .vehicle-form button[type="submit"] {
         width: 100%;
-
     }
 
-     .vehicle-form button [type="submit"] {
-        text-align: center;
-     }
-
+    .vehicle-buttons {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 480px) {
@@ -105,15 +153,7 @@
         font-size: 1.5rem;
     }
 
-    .vehicle-form {
-        font-size: 1.3rem;
+    .vehicle-card p {
+        font-size: 0.95rem;
     }
-}
-
-.form-section {
-    background-color: var(--fond);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px var(--shadow);
 }

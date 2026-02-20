@@ -62,15 +62,13 @@
     </section>
 </main>
 
-<script src="JS/ecoride_js.js"></script>
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+    <script src="../JS/EMP-signalement.js"></script>
+
 </body>
 </html>
 
-<!-- A faire : 
-
-- CSS
-- Modifier les passagers
-- Mettre img
-- Remettre droit les elements des passagers concernes
+<!-- 
+- CSS général
+- Mettre infos personas
 -->

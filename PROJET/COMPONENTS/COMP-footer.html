@@ -1,8 +1,17 @@
 <footer>
     <div class="footer-container">
-        <a href ="#">Mentions légales</a>
+        <a href="#">Mentions légales</a>
         <a href="#">Règlement de la plateforme</a>
         <a href="#">Contact</a>
+        <!-- Bouton déconnexion si l'utilisateur est connecté -->
+        <?php
+        include('../UTILISATEUR/auth.php'); // Démarre la session et charge les fonctions
+        if(isset($_SESSION['user_id'])) {
+            echo '<a href="../UTILISATEUR/USR-deconnexion.php" 
+                     onclick="return confirm(\'Voulez-vous vraiment vous déconnecter ?\');" 
+                     style="color:red;">Déconnexion</a>';
+        }
+        ?>
     </div>
 
     <div class="footer-social">

@@ -1,30 +1,93 @@
+/* ---------- CARTES TRAJETS ---------- */
 .ride {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+
     background-color: var(--fond);
-    color: var(--texte);
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 4px 8px var(--shadow);
-    font-family: 'Quicksand', sans-serif;  
+    border-radius: 14px;
+    padding: 1.5rem;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    font-family: 'Quicksand', sans-serif;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ride img {
-    width: 50px;
-    height: 50px;
+.ride:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- CHAUFFEUR ---------- */
+.ride-driver {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 90px;
+}
+
+.ride-driver img {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 10px;
+    object-fit: cover;
+    margin-bottom: 0.4rem;
 }
 
-.ride button {
-    margin-top: 1rem;
+.driver-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gris-doux);
+    text-align: center;
+}
+
+/* ---------- CONTENU ---------- */
+.ride-content {
+    flex: 1;
+}
+
+.ride-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem 0;
+    color: var(--texte);
+}
+
+.ride-infos {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    color: var(--gris-doux);
+}
+
+.ride-infos p {
+    margin: 0;
+}
+
+/* ---------- ACTION ---------- */
+.ride-action {
+    display: flex;
+    align-items: center;
+}
+
+.ride-btn {
     background-color: var(--vert-doux);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
 }
 
+.ride-btn:hover {
+    background-color: var(--orange-doux);
+}
+
+/* ---------- NAVIGATION JOURS ---------- */
 .day-navigation {
     display: flex;
     justify-content: space-between;
@@ -40,13 +103,68 @@
     cursor: pointer;
 }
 
+/* ---------- SECTION RECHERCHE ---------- */
+.search-section {
+    padding: 2rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    background-color: var(--beige-fonce);
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    color: var(--gris-doux);
+    white-space: nowrap;
+}
+
+.form-group input {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ---------- BOUTON RECHERCHE ---------- */
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    width: 50px;
+    background-color: var(--orange-doux);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.search-btn img {
+    width: 22px;
+    height: 22px;
+}
+
+/* ---------- SECTION RÉSULTATS ---------- */
 .results-section {
     display: flex;
-    flex-direction: row;
     padding: 2rem;
     gap: 2rem;
 }
 
+/* ---------- FILTRES ---------- */
 .filters {
     width: 30%;
     background-color: var(--beige-fonce);
@@ -60,8 +178,7 @@
     color: var(--gris-doux);
 }
 
-.filters .filters-input {
-    display: block;
+.filter-input {
     width: 100%;
     margin-bottom: 1rem;
     padding: 0.5rem;
@@ -79,6 +196,7 @@
     float: right;
 }
 
+/* ---------- RÉSULTATS ---------- */
 .search-results {
     width: 70%;
     display: flex;
@@ -86,7 +204,37 @@
     gap: 1.5rem;
 }
 
-.search-btn {
-    width: 60px;
-    width: 60px;
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .search-container {
+        flex-wrap: wrap;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .results-section {
+        flex-direction: column;
+    }
+
+    .filters,
+    .search-results {
+        width: 100%;
+    }
+
+    .ride {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ride-driver {
+        flex-direction: row;
+        gap: 0.6rem;
+    }
+
+    .ride-action {
+        width: 100%;
+        justify-content: flex-end;
+    }
 }

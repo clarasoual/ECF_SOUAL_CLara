@@ -1,3 +1,7 @@
+<?php
+include('../PHP/auth.php'); // Démarre la session et charge les fonctions
+requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -67,8 +71,7 @@
         </div>
     </div>
 </section>
- <script src="JS/ecoride_js.js"></script>
-
+<script src="../JS/USR-mes-trajets.js"></script>
  </main>
 
     <!-- Footer commun -->

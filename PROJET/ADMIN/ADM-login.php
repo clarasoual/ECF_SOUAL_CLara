@@ -45,3 +45,9 @@
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
+
+<!-- 
+- Mot de passe oublie
+- Se souvenir de moi
+- En haut à droite
+--> 

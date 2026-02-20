@@ -59,3 +59,8 @@
         font-size: 0.95rem;
     }
 }
+
+.confetti {
+    pointer-events: none;
+    mix-blend-mode: screen;
+}

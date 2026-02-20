@@ -1,3 +1,7 @@
+<?php
+include('../PHP/auth.php'); // Démarre la session et charge les fonctions
+requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,74 +14,67 @@
 </head>
 <body>
 
-<!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.html'); ?>
 
-    <!-- Formulaire trajet -->
-    <section class="trip-step1">
-        <h2 class="step-title">Votre trajet - Etape 1 sur 2</h2>
-        <p class="required-note">Champs obligatoires</p>
+<section class="trip-step1">
+    <h2 class="step-title">Votre trajet - Etape 1 sur 2</h2>
+    <p class="required-note">Champs obligatoires</p>
 
+    <form action="USR-proposer-trajet-2.php" method="POST">
         <table class="trip-table">
             <tr>
-            <td class="trip-info">
-                <h3 class="trip-subtitle">D'où partons-nous ?</h3>
+                <!-- COLONNE GAUCHE -->
+                <td class="trip-info">
+                    <h3 class="trip-subtitle">D'où partons-nous ?</h3>
 
-                <label for="departure">Adresse de départ</label><br>
-                <input type="text" id="departure" name="departure" placeholder="Adresse de départ"><br>
+                    <label for="departure">Adresse de départ *</label><br>
+                    <input type="text" id="departure" name="departure" placeholder="Adresse de départ" required><br><br>
 
-                <label for="step1">Arrêt n°1 (optionnel)</label><br>
-                <input type="text" id="step1" name="step1" placeholder="Ajouter un arrêt"><br><br>
+                    <label for="step1">Arrêt n°1 (optionnel)</label><br>
+                    <input type="text" id="step1" name="step1" placeholder="Ajouter un arrêt"><br><br>
 
-                <button type="button">+ Ajouter un arrêt</button><br><br>
+                    <button type="button">+ Ajouter un arrêt</button><br><br>
 
-                <label for="vehicle-used">Véhicule utilisé</label><br>
-                <select id="vehicle-used" name="vehicle-used">
-                    <option value="">-- Sélectionnez un véhicule --</option>
-                    <option value="veh1">Clio grise</option>
-                    <option value="veh2">Kangoo blanc</option>
-                </select><br><br>
+                    <label for="vehicle-used">Véhicule utilisé *</label><br>
+                    <select id="vehicle-used" name="vehicle_used" required>
+                        <option value="">-- Sélectionnez un véhicule --</option>
+                        <option value="Clio grise">Clio grise</option>
+                        <option value="Kangoo blanc">Kangoo blanc</option>
+                    </select><br><br>
 
-                <label for="date">Date de départ</label><br>
-                <input type="date" id="date" name="date"><br><br>
+                    <label for="date">Date de départ *</label><br>
+                    <input type="date" id="date" name="date" required><br><br>
 
-                <label for="time">Heure de départ</label><br>
-                <input type="time" id="time" name="time"><br><br>
-            </td>
+                    <label for="time">Heure de départ *</label><br>
+                    <input type="time" id="time" name="time" required><br><br>
+                </td>
 
-            <td class="trip-info-destination">
-                <h3 class="trip-subtitle">Où allons-nous ?</h3>
+                <!-- COLONNE DROITE -->
+                <td class="trip-info-destination">
+                    <h3 class="trip-subtitle">Où allons-nous ?</h3>
 
-                <label for="arrival">Adresse d'arrivée</label><br>
-                <input type="text" id="arrival" name="arrival" placeholder="Adresse d'arrivée"><br><br>
+                    <label for="arrival">Adresse d'arrivée *</label><br>
+                    <input type="text" id="arrival" name="arrival" placeholder="Adresse d'arrivée" required><br><br>
 
-                <label for="places">Nombre de places passagers disponibles</label><br>
-                <input type="number" id="places" name="places" min="1" max="8"><br><br>
+                    <label for="places">Nombre de places disponibles *</label><br>
+                    <input type="number" id="places" name="places" min="1" max="8" required><br><br>
 
-                <label for="commentaire">Autres précisions (optionnel)</label><br>
-                <textarea id="commentaire" name="commentaire" rows="4" cols="40" placeholder="Ex : passage par autoroute, coffre petit, ..."></textarea><br><br>
+                    <label for="commentaire">Autres précisions (optionnel)</label><br>
+                    <textarea id="commentaire" name="commentaire" rows="4" cols="40" placeholder="Ex : passage par autoroute, coffre petit..."></textarea><br><br>
 
-                <p class="credit-infos">Ce trajet vous fera gagner <strong>  5 crédits</strong> par passager une fois effectué dans de bonns conditions.</p>
-                <button type="submit" class="btn-submit">Valider</button>
-            </td>   
+                    <p class="credit-infos">
+                        Ce trajet vous fera gagner <strong>5 crédits</strong> par passager une fois effectué dans de bonnes conditions.
+                    </p>
+
+                    <button type="submit" class="btn-submit">Valider</button>
+                </td>
             </tr>
         </table>
-    </section>
+    </form>
+</section>
 
-    <script src="JS/ecoride_js.js"></script>
+<script src="../JS/USR-proposer-trajet.js"></script>
+<?php include('../COMPONENTS/COMP-footer.html'); ?>
 
-    <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>
-
-<!-- A modifier ici : 
-- Enlever le hover vert
-- Espace entre les labels et inputs
-- Styliser d'ou partons nous etc pour différencier du reste
-- Styliser titre
-- Limite nombre de passagers par rapport au véhicule choisi
-- Champs obligatoire à mettre
-- Résumé de la proposition de trajet lorsqu'on valide (étape 2 sur 2, proposer_trajet2.php)
-- Aérer un peu le tout
-- Encadrés orange à enlever -->

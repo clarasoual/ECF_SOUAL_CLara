@@ -1,0 +1,156 @@
+/* ============================= */
+/* Mobile & Tablette Responsive */
+/* ============================= */
+@media screen and (max-width: 768px) {
+
+    /* Suppression du padding horizontal du body et scroll horizontal */
+    body {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow-x: hidden;
+    }
+
+    /* Header et footer full width */
+    .header-employe,
+    footer {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 1rem !important;
+        box-sizing: border-box !important;
+        position: relative;
+    }
+
+    /* Main et sections prennent toute la largeur */
+    main, .principal-menu-section {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0.5rem !important;
+        box-sizing: border-box;
+    }
+
+    /* Menu burger */
+    .menu-admin {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100vh;
+        background-color: #f5f5f5;
+        padding: 1rem;
+        box-sizing: border-box;
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        z-index: 1001;
+    }
+
+    .menu-admin.active {
+        left: 0;
+    }
+
+    /* Overlay */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.4);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    }
+
+    .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Burger Button */
+    .burger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 24px;
+        width: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        position: relative;
+        z-index: 1002;
+    }
+
+    .burger-line {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: #333;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    /* Animation burger -> X */
+    .burger-btn.active .burger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .burger-btn.active .burger-line:nth-child(2) {
+        opacity: 0;
+    }
+    .burger-btn.active .burger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Tableau responsive */
+    .table-responsive {
+        width: 100% !important;
+        overflow-x: auto !important;
+    }
+
+    .table-responsive table {
+        width: 100% !important;
+        border-collapse: collapse;
+        table-layout: auto;
+    }
+
+    .table-responsive th,
+    .table-responsive td {
+        padding: 0.4rem !important;
+        font-size: 0.85rem !important;
+        word-break: break-word !important;
+    }
+
+    /* Boutons et inputs */
+    .principal-menu-section button,
+    .principal-menu-section input {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        font-size: 0.9rem !important;
+        margin: 0.25rem 0 !important;
+    }
+
+    /* Popups */
+    .popup form {
+        width: 95% !important;
+        max-width: 400px !important;
+    }
+
+    /* Ajustements très petits écrans */
+    @media screen and (max-width: 480px) {
+        .principal-menu-section h2 {
+            font-size: 1.2rem !important;
+        }
+        .table-responsive th,
+        .table-responsive td {
+            font-size: 0.75rem !important;
+            padding: 0.2rem !important;
+        }
+        .principal-menu-section button,
+        .principal-menu-section input {
+            font-size: 0.8rem !important;
+        }
+        .logo-text {
+            font-size: 1.2rem !important;
+        }
+    }
+}

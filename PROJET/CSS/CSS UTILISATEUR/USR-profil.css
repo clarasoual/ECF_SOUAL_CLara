@@ -72,5 +72,76 @@ h2, .section-title {
     left: 0;
 }
 
+/* === ACCORDÉON AVIS (harmonisé avec ton thème) === */
+.avis-accordeon {
+    background-color: var(--beige-fonce);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    max-width: 700px;
+    box-shadow: 0 2px 8px var(--shadow);
+    color: var(--vert-doux);
+}
+
+.avis-accordeon h3 {
+    color: var(--vert-doux);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Chaque avis */
+.avis-item {
+    margin-bottom: 1rem;
+}
+
+/* Bouton d’en-tête de l’avis */
+.avis-titre {
+    width: 100%;
+    text-align: left;
+    background-color: var(--beige-fonce);
+    border: 1px solid var(--vert-doux);
+    color: var(--vert-doux);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.avis-titre:hover {
+    background-color: var(--orange-doux);
+    color: black;
+}
+
+/* Contenu déroulant */
+.avis-contenu {
+    display: none;
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    padding: 0.8rem 1rem;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.08);
+    color: black;
+}
+
+.avis-contenu.ouvert {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Étoiles */
+.stars {
+    color: var(--orange-doux);
+    font-size: 1.3rem;
+    margin-top: 0.3rem;
+}
+
+/* Animation douce d’ouverture */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 

@@ -92,3 +92,23 @@
         font-size: 1rem;
     }
 }
+
+.message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--vert-doux);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.message.visible {
+    opacity: 1;
+}

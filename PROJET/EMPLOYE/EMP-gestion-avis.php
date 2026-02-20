@@ -132,6 +132,15 @@
 </main>
 </div>
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+<script src="../JS/EMP-gestion-avis.js"></script>
 
 </body>
 </html>
+
+<!--
+- Tri tableau
+- Conducteur a ajouter
+- Lien du trajet a ajouter ?
+- Presentation du filtrer (en ligne ?)
+- CSS général
+--> 

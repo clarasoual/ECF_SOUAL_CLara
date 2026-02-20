@@ -1,3 +1,7 @@
+<?php
+include('../PHP/auth.php'); // Démarre la session et charge les fonctions
+requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -58,15 +62,18 @@
     </form>
 </div>
 </section>
-<script src="JS/ecoride_js.js"></script>
+
 </main>
 
     <!-- Footer commun -->
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
+    <script src="../JS/USR-aide.js"></script>
+
 </body>
 </html>
 
 <!-- A FAIRE 
- - aligner avec le menu
+- Faire des sections ?
+- Recherche mot clé ?
  - Ajouter des questions à la FAQ
  -->

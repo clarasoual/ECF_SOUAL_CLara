@@ -86,6 +86,7 @@
 
     <?php include('../COMPONENTS/COMP-footer.html'); ?>
 
-    
+    <script src="../JS/EMP-aide.js"></script>
+
 </body>
 </html>
