@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once('auth.php');
 require_once('connexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -10,14 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
-// 🔹 récupère la page à rediriger après login (POST ou GET)
 $redirect = $_POST['redirect'] ?? $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php';
 
 if ($email === '' || $password === '') {
     die('Champs manquants.');
 }
 
-$stmt = $bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
+$stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE email = :email");
 $stmt->execute(['email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -29,11 +28,14 @@ if (!password_verify($password, $user['mot_de_passe'])) {
     die('Mot de passe incorrect.');
 }
 
-// ✅ connexion réussie
-$_SESSION['user_id'] = $user['id'];
-$_SESSION['user_email'] = $user['email'];
-$_SESSION['user_role'] = $user['role'];
+// Connexion réussie
+loginUser(
+    $user['id'],
+    $user['pseudo'] ?? '',
+    $user['email'],
+    $user['photo'] ?? 'default.jpg'
+);
 
-// 🔹 redirection vers la page initiale demandée
 header('Location: ' . $redirect);
 exit;
+?>

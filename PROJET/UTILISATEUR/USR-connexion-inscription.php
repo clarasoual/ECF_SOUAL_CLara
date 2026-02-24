@@ -60,7 +60,7 @@
     </div>
 </main>
 
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 
 </body>
 </html>

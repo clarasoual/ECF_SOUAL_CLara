@@ -1,10 +1,10 @@
 <?php
-include('connexion.php');
+require_once('connexion.php'); // utilise $pdo pour la cohérence avec tes autres pages
 
 // Fonction pour chercher les trajets
-function chercherTrajets($bdd, $depart, $arrivee, $date) {
+function chercherTrajets($pdo, $depart, $arrivee, $date) {
     try {
-        $stmt = $bdd->prepare("
+        $stmt = $pdo->prepare("
             SELECT 
                 t.*, 
                 u.nom AS nom_conducteur, 
@@ -18,14 +18,14 @@ function chercherTrajets($bdd, $depart, $arrivee, $date) {
         ");
 
         $stmt->execute([
-            ':depart' => '%' . $depart . '%',
-            ':arrivee' => '%' . $arrivee . '%',
+            ':depart' => '%' . trim($depart) . '%',
+            ':arrivee' => '%' . trim($arrivee) . '%',
             ':date' => $date
         ]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (PDOException $e) {
-        die("Erreur SQL : " . $e->getMessage());
+        die("Erreur SQL : " . htmlspecialchars($e->getMessage()));
     }
 }

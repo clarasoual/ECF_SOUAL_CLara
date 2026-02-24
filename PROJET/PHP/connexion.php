@@ -1,16 +1,14 @@
 <?php
-// connexion.php : se connecte à la BDD
+// connexion.php : connexion à la BDD
 
-$host = "localhost";      // XAMPP = localhost
-$db   = "eco_ride";       // nom de ta base
-$user = "root";           // utilisateur par défaut XAMPP
-$pass = "";               // mot de passe par défaut XAMPP (vide)
+$host = "localhost";
+$db   = "eco_ride";
+$user = "root";
+$pass = "";
 
-// On essaie de se connecter
 try {
-    $bdd = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connexion OK !"; // juste pour tester
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }

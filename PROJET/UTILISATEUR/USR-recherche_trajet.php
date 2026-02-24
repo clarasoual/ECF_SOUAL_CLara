@@ -1,5 +1,5 @@
 <?php
-include('../PHP/recherche_trajets.php'); 
+require_once('../PHP/recherche_trajets.php'); 
 
 $trajets = [];
 
@@ -12,7 +12,7 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     $arrivee = $_GET['destination'];
     $date = $_GET['date'];
 
-    $trajets = chercherTrajets($bdd, $depart, $arrivee, $date);
+    $trajets = chercherTrajets($pdo, $depart, $arrivee, $date); // ✅ utiliser $pdo
 }
 ?>
 
@@ -30,7 +30,7 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <section class="search-section">
     <form method="get">
@@ -92,7 +92,7 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                     <div class="ride-driver">
                         <img src="../../IMAGES/antoine.jpg" alt="Chauffeur">
                         <span class="driver-name">
-                            <?= htmlspecialchars($trajet['prenom_conducteur']) ?>
+                            <?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?>
                         </span>
                     </div>
 
@@ -109,7 +109,6 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                     </div>
 
                     <div class="ride-action">
-                        <!-- ✅ LIEN CORRIGÉ -->
                         <a class="ride-btn" href="../UTILISATEUR/USR-details-trajet.php?id=<?= (int)$trajet['id'] ?>">
                             Voir détails
                         </a>
@@ -125,7 +124,7 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 
 <script src="../JS/ecoride_js.js"></script>
 
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 
 </body>
 </html>

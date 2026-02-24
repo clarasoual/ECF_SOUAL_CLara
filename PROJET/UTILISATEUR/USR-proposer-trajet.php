@@ -1,7 +1,23 @@
 <?php
-include('../PHP/auth.php'); // Démarre la session et charge les fonctions
-requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+include('../PHP/auth.php'); 
+requireLogin();
+require('../PHP/connexion.php'); // connexion PDO à la BDD
+
+$userId = $_SESSION['user_id'] ?? 0;
+
+// Récupération des véhicules de l'utilisateur
+$vehicules = [];
+if ($userId && isset($pdo)) {
+    try {
+        $stmt = $pdo->prepare("SELECT vehicule_id, marque, modele, couleur FROM vehicules WHERE id_utilisateur = ? ORDER BY marque, modele");
+        $stmt->execute([$userId]);
+        $vehicules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Erreur PDO : " . htmlspecialchars($e->getMessage()));
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,7 +30,7 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <section class="trip-step1">
     <h2 class="step-title">Votre trajet - Etape 1 sur 2</h2>
@@ -26,20 +42,25 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
                 <!-- COLONNE GAUCHE -->
                 <td class="trip-info">
                     <h3 class="trip-subtitle">D'où partons-nous ?</h3>
-
                     <label for="departure">Adresse de départ *</label><br>
                     <input type="text" id="departure" name="departure" placeholder="Adresse de départ" required><br><br>
 
-                    <label for="step1">Arrêt n°1 (optionnel)</label><br>
-                    <input type="text" id="step1" name="step1" placeholder="Ajouter un arrêt"><br><br>
-
-                    <button type="button">+ Ajouter un arrêt</button><br><br>
+                    <label>Arrêts (optionnel)</label><br>
+                    <div id="etapes-container">
+                        <div class="stop-container">
+                            <input type="text" id="step1" name="step1" placeholder="Arrêt n°1">
+                        </div>
+                    </div>
+                    <button type="button" id="add-stop-btn">+ Ajouter un arrêt</button><br><br>
 
                     <label for="vehicle-used">Véhicule utilisé *</label><br>
                     <select id="vehicle-used" name="vehicle_used" required>
                         <option value="">-- Sélectionnez un véhicule --</option>
-                        <option value="Clio grise">Clio grise</option>
-                        <option value="Kangoo blanc">Kangoo blanc</option>
+                        <?php foreach ($vehicules as $vehicule): 
+                            $vehicule_label = htmlspecialchars($vehicule['marque'] . ' ' . $vehicule['modele'] . ' ' . $vehicule['couleur']); 
+                        ?>
+                            <option value="<?= $vehicule['vehicule_id'] ?>"><?= $vehicule_label ?></option>
+                        <?php endforeach; ?>
                     </select><br><br>
 
                     <label for="date">Date de départ *</label><br>
@@ -52,7 +73,6 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
                 <!-- COLONNE DROITE -->
                 <td class="trip-info-destination">
                     <h3 class="trip-subtitle">Où allons-nous ?</h3>
-
                     <label for="arrival">Adresse d'arrivée *</label><br>
                     <input type="text" id="arrival" name="arrival" placeholder="Adresse d'arrivée" required><br><br>
 
@@ -63,10 +83,10 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
                     <textarea id="commentaire" name="commentaire" rows="4" cols="40" placeholder="Ex : passage par autoroute, coffre petit..."></textarea><br><br>
 
                     <p class="credit-infos">
-                        Ce trajet vous fera gagner <strong>5 crédits</strong> par passager une fois effectué dans de bonnes conditions.
+                        Ce trajet vous fera gagner <strong>5 crédits</strong> par passager une fois effectué.
                     </p>
 
-                    <button type="submit" class="btn-submit">Valider</button>
+                    <button type="submit" class="btn-submit">Étape suivante</button>
                 </td>
             </tr>
         </table>
@@ -74,7 +94,6 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
 </section>
 
 <script src="../JS/USR-proposer-trajet.js"></script>
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
-
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>

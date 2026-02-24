@@ -1,3 +1,30 @@
+<?php
+session_start();
+include('../PHP/auth.php'); 
+requireLogin();
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: USR-proposer-trajet.php');
+    exit;
+}
+
+// Stocker les données de l'étape 1 en session
+$_SESSION['trajet_temp'] = [
+    'departure' => $_POST['departure'] ?? '',
+    'arrival' => $_POST['arrival'] ?? '',
+    'date' => $_POST['date'] ?? '',
+    'time' => $_POST['time'] ?? '',
+    'vehicle_used' => $_POST['vehicle_used'] ?? '',
+    'places' => $_POST['places'] ?? '',
+    'commentaire' => $_POST['commentaire'] ?? '',
+    'etapes' => array_filter($_POST, function($key) {
+        return strpos($key, 'step') === 0;
+    }, ARRAY_FILTER_USE_KEY)
+];
+
+$trajet = $_SESSION['trajet_temp'];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,7 +36,7 @@
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main class="trip-step2">
     <h2 class="step-title">Résumé de votre trajet - Étape 2 sur 2</h2>
@@ -17,18 +44,18 @@
 
     <section class="trip-summary">
         <table class="summary-table">
-            <tr><td class="summary-label">Adresse de départ :</td><td class="summary-value" id="summary-departure"></td></tr>
-            <tr><td class="summary-label">Arrêts :</td><td class="summary-value" id="summary-stops"></td></tr>
-            <tr><td class="summary-label">Adresse d'arrivée :</td><td class="summary-value" id="summary-arrival"></td></tr>
-            <tr><td class="summary-label">Date :</td><td class="summary-value" id="summary-date"></td></tr>
-            <tr><td class="summary-label">Heure :</td><td class="summary-value" id="summary-time"></td></tr>
-            <tr><td class="summary-label">Véhicule utilisé :</td><td class="summary-value" id="summary-vehicle"></td></tr>
-            <tr><td class="summary-label">Places disponibles :</td><td class="summary-value" id="summary-places"></td></tr>
-            <tr><td class="summary-label">Commentaires :</td><td class="summary-value" id="summary-comments"></td></tr>
+            <tr><td class="summary-label">Adresse de départ :</td><td class="summary-value"><?= htmlspecialchars($trajet['departure']) ?></td></tr>
+            <tr><td class="summary-label">Arrêts :</td><td class="summary-value"><?= htmlspecialchars(implode(', ', $trajet['etapes'])) ?></td></tr>
+            <tr><td class="summary-label">Adresse d'arrivée :</td><td class="summary-value"><?= htmlspecialchars($trajet['arrival']) ?></td></tr>
+            <tr><td class="summary-label">Date :</td><td class="summary-value"><?= htmlspecialchars($trajet['date']) ?></td></tr>
+            <tr><td class="summary-label">Heure :</td><td class="summary-value"><?= htmlspecialchars($trajet['time']) ?></td></tr>
+            <tr><td class="summary-label">Véhicule utilisé :</td><td class="summary-value"><?= htmlspecialchars($trajet['vehicle_used']) ?></td></tr>
+            <tr><td class="summary-label">Places disponibles :</td><td class="summary-value"><?= htmlspecialchars($trajet['places']) ?></td></tr>
+            <tr><td class="summary-label">Commentaires :</td><td class="summary-value"><?= htmlspecialchars($trajet['commentaire']) ?></td></tr>
         </table>
 
         <section class="trip-actions">
-            <form action="../UTILISATEUR/USR-proposer-trajet-3.php" method="POST">
+            <form action="USR-proposer-trajet-3.php" method="POST">
                 <button type="submit" class="btn-submit">Confirmer le trajet</button>
             </form>
             <p class="edit-link"><a href="USR-proposer-trajet.php" id="edit-link">Modifier les informations du trajet</a></p>
@@ -39,6 +66,6 @@
 </main>
 
 <script src="../JS/USR-proposer-trajet2.js"></script>
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>

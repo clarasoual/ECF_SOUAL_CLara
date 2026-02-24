@@ -1,17 +1,62 @@
+<?php
+session_start();
+include('../PHP/auth.php'); 
+requireLogin();
+require('../PHP/connexion.php'); // PDO
+
+if (!isset($_SESSION['trajet_temp'])) {
+    header('Location: USR-proposer-trajet.php');
+    exit;
+}
+
+$trajet = $_SESSION['trajet_temp'];
+$id_conducteur = $_SESSION['user_id'] ?? 0;
+
+if (!$id_conducteur) {
+    die("Utilisateur non identifié.");
+}
+
+// Gestion des étapes
+$etapes = array_values(array_filter($trajet['etapes']));
+$etapes_str = !empty($etapes) ? json_encode($etapes, JSON_UNESCAPED_UNICODE) : null;
+
+try {
+    $sql = "INSERT INTO trajets
+            (id_conducteur, depart, arrivee, date_depart, heure_depart, vehicule_id, places_disponibles, statut, etapes, commentaire)
+            VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :vehicule_id, :places_disponibles, 'futur', :etapes, :commentaire)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':id_conducteur' => $id_conducteur,
+        ':depart' => $trajet['departure'],
+        ':arrivee' => $trajet['arrival'],
+        ':date_depart' => $trajet['date'],
+        ':heure_depart' => $trajet['time'],
+        ':vehicule_id' => $trajet['vehicle_used'],
+        ':places_disponibles' => $trajet['places'],
+        ':etapes' => $etapes_str,
+        ':commentaire' => $trajet['commentaire']
+    ]);
+
+    // Nettoyer session temporaire pour éviter réinsertion
+    unset($_SESSION['trajet_temp']);
+
+} catch (PDOException $e) {
+    die("Erreur lors de l'enregistrement du trajet : " . htmlspecialchars($e->getMessage()));
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposer un trajet</title>
+    <title>Trajet confirmé</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-proposer-trajet-3.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main class="trip-confirmation">
     <section class="confirmation-message">
@@ -28,9 +73,6 @@
 </main>
 
 <script src="../JS/USR-proposer-trajet3.js"></script>
-
-    <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
-
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>
