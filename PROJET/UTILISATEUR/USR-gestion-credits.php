@@ -37,7 +37,7 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
     <form action="#" method="post">
         <button type="submit">Demander des crédits à Eco Ride</button>
     </form>
-    <p><strong> Remarque :</strong>Votre demande sera étudiée par notre équipe. Vous recevrez une réponse sous peu.</p>
+    <p><strong> Remarque :</strong> Votre demande sera étudiée par notre équipe. Vous recevrez une réponse sous peu.</p>
 
 <!-- Historique des crédits -->
 <h3>Historique des crédits</h3>

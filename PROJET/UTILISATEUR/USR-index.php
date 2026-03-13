@@ -1,6 +1,16 @@
 <?php
-include('../PHP/trajets.php'); // anciennement ../SQL/trajets.php
-$trajets = getTrajetsActifs($bdd);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Inclure la connexion à la base (définit $pdo)
+include('../PHP/connexion.php'); 
+
+// Inclure les fonctions liées aux trajets
+include('../PHP/trajets.php');
+
+// Récupérer les trajets actifs avec $pdo
+$trajets = getTrajetsActifs($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +25,7 @@ $trajets = getTrajetsActifs($bdd);
 </head>
 <body>
     <!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+    <?php include('../COMPONENTS/COMP-header.php'); ?>
 
     <!-- Section accueil avec image et slogan -->
     <section class="hero">
@@ -29,71 +39,66 @@ $trajets = getTrajetsActifs($bdd);
 
     <!-- Formulaire de recherche -->
     <section class="search-section">
-    <form action="USR-recherche_trajet.php" method="get">
-            <div class = "search-container">
+        <form action="USR-recherche_trajet.php" method="get">
+            <div class="search-container">
 
-                <!-- Champ de départ -->
                 <div class="form-group">
-                <label for="departure">Je pars de ...</label>
-                <input type ="text" id="departure" name="departure" placeholder="Ville de départ" required>
+                    <label for="departure">Je pars de ...</label>
+                    <input type="text" id="departure" name="departure" placeholder="Ville de départ" required>
                 </div>
 
-                <!-- Champ de destination -->
                 <div class="form-group">
-                <label for="destination">Je vais à ...</label>
-                <input type ="text" id="destination" name="destination" placeholder="Ville d'arrivée" required>
+                    <label for="destination">Je vais à ...</label>
+                    <input type="text" id="destination" name="destination" placeholder="Ville d'arrivée" required>
                 </div>
 
-                <!-- Champ de date -->
                 <div class="form-group">
-                <label for ="date">Date</label>
-                <input type ="date" id="date" name="date" required>
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
                 </div>
 
-                <!-- Champ du nombre de passagers -->
                 <div class="form-group">
-                <label for="passenger">Passagers</label>
-                <input type="number" id="passenger" name="passenger" min="1" value="1" required>
+                    <label for="passenger">Passagers</label>
+                    <input type="number" id="passenger" name="passenger" min="1" value="1" required>
                 </div>
 
-                <!-- Bouton recherche avec icône -->
                 <button type="submit" class="search-btn">
-                    <img src="../../IMAGES/logo recherche.png" alt="Rechercher"  class="search-icon">
+                    <img src="../../IMAGES/logo recherche.png" alt="Rechercher" class="search-icon">
                 </button>
             </div>
         </form>
     </section> 
+
+    <!-- Liste des trajets -->
     <section class="liste-trajets">
-    <h2>Trajets disponibles</h2>
+        <h2>Trajets disponibles</h2>
 
-    <?php foreach($trajets as $trajet): ?>
-        <div class="trajet">
-            <p>Départ : <?= $trajet['depart'] ?></p>
-            <p>Arrivée : <?= $trajet['arrivee'] ?></p>
-            <p>Date : <?= $trajet['date_depart'] ?> à <?= $trajet['heure_depart'] ?></p>
-            <p>Places disponibles : <?= $trajet['places_disponibles'] ?></p>
-        </div>
-    <?php endforeach; ?>
-</section>
-
-
-    <!-- Présentation du fondateur (peut-être à déplacer) -->
-    <section class="founder-section">
-        <div class="founder-container">
-        <img src="../../IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
-        <div class="founder-bio">
-            <h2>José Marceau</h2>
-            <p>
-                Originaire d’Annecy, José Marceau a fondé Eco Ride en 2022 avec une conviction forte : rendre les modes de transport durables plus visibles, accessibles et attractifs.
-                Après plusieurs années à travailler dans le secteur associatif et environnemental, il constate que de nombreuses initiatives locales peinent à se faire connaître, malgré leur impact positif. C’est ainsi qu’est née Eco Ride : une plateforme dédiée aux mobilités douces, au service de celles et ceux qui souhaitent se déplacer autrement, à leur échelle.
-                José croit en un changement progressif, porté par l’information, la confiance et des solutions concrètes. À travers Eco Ride, il souhaite créer un lien entre les citoyens, les acteurs locaux et les alternatives de transport, dans un esprit d’ouverture, de simplicité et de respect de l’environnement.
-            </p>
-        </div>
-        </div>
-
+        <?php foreach($trajets as $trajet): ?>
+            <div class="trajet">
+                <p>Départ : <?= $trajet['depart'] ?></p>
+                <p>Arrivée : <?= $trajet['arrivee'] ?></p>
+                <p>Date : <?= $trajet['date_depart'] ?> à <?= $trajet['heure_depart'] ?></p>
+                <p>Places disponibles : <?= $trajet['places_disponibles'] ?></p>
+            </div>
+        <?php endforeach; ?>
     </section>
 
-    <!-- Explication du fonctionnement -->
+    <!-- Présentation du fondateur -->
+    <section class="founder-section">
+        <div class="founder-container">
+            <img src="../../IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
+            <div class="founder-bio">
+                <h2>José Marceau</h2>
+                <p>
+                    Originaire d’Annecy, José Marceau a fondé Eco Ride en 2022 avec une conviction forte : rendre les modes de transport durables plus visibles, accessibles et attractifs.
+                    Après plusieurs années à travailler dans le secteur associatif et environnemental, il constate que de nombreuses initiatives locales peinent à se faire connaître, malgré leur impact positif. C’est ainsi qu’est née Eco Ride : une plateforme dédiée aux mobilités douces, au service de celles et ceux qui souhaitent se déplacer autrement, à leur échelle.
+                    José croit en un changement progressif, porté par l’information, la confiance et des solutions concrètes. À travers Eco Ride, il souhaite créer un lien entre les citoyens, les acteurs locaux et les alternatives de transport, dans un esprit d’ouverture, de simplicité et de respect de l’environnement.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comment ça marche -->
     <section class="how-it-works responsive-section">
         <h2>Comment ça marche ?</h2>
         <ol>
@@ -103,7 +108,7 @@ $trajets = getTrajetsActifs($bdd);
         </ol>
     </section>
 
-    <!-- Témoignages des utilisateurs -->
+    <!-- Témoignages -->
     <section class="testimonials responsive-section">
         <h2>Ils ont voyagé avec Eco Ride</h2>
 
@@ -118,7 +123,7 @@ $trajets = getTrajetsActifs($bdd);
         </article>
     </section>
 
-    <!-- Foire aux questions -->
+    <!-- FAQ -->
     <section class="faq responsive-section">
         <h2>Questions fréquentes</h2>
         <details>
@@ -129,38 +134,17 @@ $trajets = getTrajetsActifs($bdd);
             <summary>Dois-je créer un compte ?</summary>
             <p>Oui, pour réserver ou proposer un trajet, un compte est nécessaire.</p>
         </details>
-
-        <!-- Rajouter un lien vers la FAQ complète -->
     </section>
 
-    <!-- Appel à l'action pour créer un compte -->
+    <!-- CTA -->
     <section class="cta-section responsive-section">
         <h2>Prêt.e à partager la route ?</h2>
         <a href="USR-inscription.php" class="cta-btn">Créer un compte</a>
     </section>
-<script src="../JS/USR-index.js"></script>
-<!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+
+    <script src="../JS/USR-index.js"></script>
+
+    <!-- Footer commun -->
+    <?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>
-
-<!-- A faire
- - Loupe du formulaire à aligner
- - Logo plus lisible, à refaire
- - Comment ça marche à améliorer
- - Aérer le footer
- - Recadrer la photo
- - Responsive !!
- - Relier la photo de profil a l'espace mon compte OU a la connexion/inscription
- - Relier la FAQ à la page dédiée
- - Relier et créer mentions légales
- - Relier et créer Réglement de la plateforme
- - Relier et créer contact
- - Relier et créer les réseaux sociaux
- - Créer newsletter ? 
- - Peut être faire une section à propos pour José
- - Mettre à la place une description de Eco Ride, en incluant le comment ça marche ?
- - Faire un composant pour le formulaire
- -->
-
-

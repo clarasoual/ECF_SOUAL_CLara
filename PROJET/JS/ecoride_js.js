@@ -283,5 +283,3 @@ modifyForm.addEventListener('submit', (e) => {
     currentRow = null;
 });
 
-/* ---------------------- ADM UTILISATEURS ---------------------- */
-
