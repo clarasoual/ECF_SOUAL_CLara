@@ -58,7 +58,9 @@ $trajet = $_SESSION['trajet_temp'];
             <form action="USR-proposer-trajet-3.php" method="POST">
                 <button type="submit" class="btn-submit">Confirmer le trajet</button>
             </form>
-            <p class="edit-link"><a href="USR-proposer-trajet.php" id="edit-link">Modifier les informations du trajet</a></p>
+            <p class="edit-link">
+                <a href="USR-proposer-trajet.php" id="edit-link">Modifier les informations du trajet</a>
+            </p>
         </section>
 
         <p>Ce trajet vous fera gagner 5 crédits par passager.</p>

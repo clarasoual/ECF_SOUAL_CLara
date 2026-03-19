@@ -1,5 +1,12 @@
 <?php
-include('../PHP/trajets.php'); // anciennement ../SQL/trajets.php
+
+// 1️⃣ Inclure la connexion à la BDD
+include('../PHP/connexion.php'); // ✅ crée $bdd
+
+// 2️⃣ Inclure les fonctions pour les trajets
+include('../PHP/trajets.php');   // ✅ utilise $bdd
+
+// 4️⃣ Récupérer les trajets actifs depuis la BDD
 $trajets = getTrajetsActifs($bdd);
 ?>
 
@@ -15,7 +22,7 @@ $trajets = getTrajetsActifs($bdd);
 </head>
 <body>
     <!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.php') ; ?>
 
     <!-- Section accueil avec image et slogan -->
     <section class="hero">
@@ -140,7 +147,7 @@ $trajets = getTrajetsActifs($bdd);
     </section>
 <script src="../JS/USR-index.js"></script>
 <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+    <?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>
 

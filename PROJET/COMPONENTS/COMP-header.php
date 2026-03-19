@@ -1,6 +1,7 @@
 <?php
-// ⚠️ AUCUN session_start ici
-// On suppose que la session est déjà démarrée via auth.php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $isLoggedIn = isset($_SESSION['user_id']);
 $photo = $_SESSION['photo'] ?? 'default.jpg';
@@ -8,8 +9,7 @@ $photo = $_SESSION['photo'] ?? 'default.jpg';
 if ($isLoggedIn) {
     $profilLink = '../UTILISATEUR/USR-infos-perso.php';
 } else {
-    $currentPage = $_SERVER['REQUEST_URI'];
-    $profilLink = '../UTILISATEUR/USR-connexion-inscription.php?redirect=' . urlencode($currentPage);
+    $profilLink = '../UTILISATEUR/USR-connexion-inscription.php?redirect=../UTILISATEUR/USR-infos-perso.php';
 }
 ?>
 

@@ -1,8 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- Préremplir les champs si on vient de la page 2 ---
+    // --- Vérifier si on arrive depuis "nouveau trajet" ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const isNew = urlParams.get('new') === '1';
+
+    if (isNew) {
+        // Vider complètement le sessionStorage pour un nouveau trajet
+        sessionStorage.clear();
+        sessionStorage.setItem('fromStep2', 'false'); // aucun retour depuis étape 2
+    }
+
+    // --- Préremplir les champs uniquement si on revient de la page 2 ---
     const fromStep2 = sessionStorage.getItem('fromStep2') === 'true';
-    if(fromStep2){
+    if (fromStep2) {
         const storedDeparture = sessionStorage.getItem('departure') || '';
         const storedArrival = sessionStorage.getItem('arrival') || '';
         const storedDate = sessionStorage.getItem('date') || '';
@@ -34,8 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <input type="text" id="step${stopNumber}" name="step${stopNumber}" value="${storedStops[i]}">
                     <button type="button" class="remove-stop">Supprimer</button>
                 `;
-                const lastStop = document.querySelector('.stop-container') || firstStop;
-                lastStop.parentNode.insertBefore(stopContainer, lastStop.nextSibling);
+                firstStop.parentNode.appendChild(stopContainer);
 
                 const removeBtn = stopContainer.querySelector('.remove-stop');
                 removeBtn.addEventListener('click', () => {

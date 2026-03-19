@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
     <div class="container-connexion">

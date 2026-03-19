@@ -1,18 +1,24 @@
 <?php
-require_once('../PHP/recherche_trajets.php'); 
+// 1️⃣ Inclure la connexion à la BDD
+include('../PHP/connexion.php'); // $bdd créé ici
 
+// 2️⃣ Inclure les fonctions de recherche
+require_once('../PHP/recherche_trajets.php'); // chercherTrajets($bdd, ...)
+
+// 3️⃣ Initialisation des variables
 $trajets = [];
-
 $depart = '';
 $arrivee = '';
 $date = '';
 
+// 4️⃣ Si le formulaire est soumis, récupérer les trajets
 if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     $depart = $_GET['departure'];
     $arrivee = $_GET['destination'];
     $date = $_GET['date'];
 
-    $trajets = chercherTrajets($pdo, $depart, $arrivee, $date); // ✅ utiliser $pdo
+    // ✅ On utilise $bdd maintenant
+    $trajets = chercherTrajets($bdd, $depart, $arrivee, $date);
 }
 ?>
 

@@ -2,8 +2,11 @@
 session_start();
 include('../PHP/auth.php'); 
 requireLogin();
-require('../PHP/connexion.php'); // PDO
 
+// Connexion à la BDD
+require('../PHP/connexion.php'); // $bdd créé ici
+
+// Vérifier que le trajet temporaire existe
 if (!isset($_SESSION['trajet_temp'])) {
     header('Location: USR-proposer-trajet.php');
     exit;
@@ -16,15 +19,17 @@ if (!$id_conducteur) {
     die("Utilisateur non identifié.");
 }
 
-// Gestion des étapes
-$etapes = array_values(array_filter($trajet['etapes']));
+// Gestion des étapes (optionnelles)
+$etapes = array_values(array_filter($trajet['etapes'] ?? []));
 $etapes_str = !empty($etapes) ? json_encode($etapes, JSON_UNESCAPED_UNICODE) : null;
 
 try {
+    // Préparer la requête avec $bdd
     $sql = "INSERT INTO trajets
             (id_conducteur, depart, arrivee, date_depart, heure_depart, vehicule_id, places_disponibles, statut, etapes, commentaire)
             VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :vehicule_id, :places_disponibles, 'futur', :etapes, :commentaire)";
-    $stmt = $pdo->prepare($sql);
+    
+    $stmt = $bdd->prepare($sql);
     $stmt->execute([
         ':id_conducteur' => $id_conducteur,
         ':depart' => $trajet['departure'],
@@ -34,10 +39,10 @@ try {
         ':vehicule_id' => $trajet['vehicle_used'],
         ':places_disponibles' => $trajet['places'],
         ':etapes' => $etapes_str,
-        ':commentaire' => $trajet['commentaire']
+        ':commentaire' => $trajet['commentaire'] ?? ''
     ]);
 
-    // Nettoyer session temporaire pour éviter réinsertion
+    // Nettoyer la session temporaire pour éviter la réinsertion
     unset($_SESSION['trajet_temp']);
 
 } catch (PDOException $e) {
@@ -66,7 +71,7 @@ try {
         <p>Vous pouvez :</p>
         <ul>
             <li><a href="../UTILISATEUR/USR-mes-trajets.php">Voir vos trajets.</a></li>
-            <li><a href="../UTILISATEUR/USR-proposer-trajet.php">Proposer un nouveau trajet</a></li>
+            <li><a href="../UTILISATEUR/USR-proposer-trajet.php?new=1">Proposer un nouveau trajet</a></li>
             <li><a href="../UTILISATEUR/USR-index.php">Retourner à l'accueil</a></li>
         </ul>
     </section>

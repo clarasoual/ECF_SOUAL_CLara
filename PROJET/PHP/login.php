@@ -1,6 +1,6 @@
 <?php
 require_once('auth.php');
-require_once('connexion.php');
+require_once('connexion.php'); // $bdd créé ici
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../UTILISATEUR/USR-connexion-inscription.php');
@@ -9,14 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
-
 $redirect = $_POST['redirect'] ?? $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php';
 
 if ($email === '' || $password === '') {
     die('Champs manquants.');
 }
 
-$stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE email = :email");
+// ✅ Utiliser $bdd maintenant
+$stmt = $bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
 $stmt->execute(['email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

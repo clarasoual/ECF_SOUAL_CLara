@@ -32,7 +32,7 @@ include('../PHP/infos-perso.php');
     <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
 <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
@@ -145,6 +145,7 @@ include('../PHP/infos-perso.php');
         </form>
     </div>
 </div>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 
 <script src="../JS/USR-modal.js"></script>
 </body>
