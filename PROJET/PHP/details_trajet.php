@@ -62,10 +62,15 @@ $stmt = $bdd->prepare("
     FROM avis a
     JOIN utilisateurs u ON a.id_auteur = u.id
     WHERE a.id_destinataire = :id_conducteur
-      AND a.date_creation < '2026-07-01'
     ORDER BY a.date_creation DESC
 ");
 $stmt->execute([
     ':id_conducteur' => $trajet['id_conducteur']
 ]);
 $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/* =========================
+   VÉRIFICATION PROPRIÉTAIRE
+   ========================= */
+$isOwner = ($_SESSION['user_id'] === $trajet['id_conducteur']);
+?>
