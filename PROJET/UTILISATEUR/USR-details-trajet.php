@@ -1,9 +1,10 @@
 <?php
-include('../PHP/auth.php'); // Démarre la session et charge les fonctions
+// 🔒 Inclure auth et démarrer session
+require_once __DIR__ . '/../PHP/auth.php';
 requireLogin(); // Redirige si l'utilisateur n'est pas connecté
-?>
 
-include('../PHP/details_trajet.php');
+// 🔌 Inclure le script qui prépare $trajet, $passagers, $avis
+require_once __DIR__ . '/../PHP/details_trajet.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,14 +13,13 @@ include('../PHP/details_trajet.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Détails du trajet</title>
-
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-details-trajets.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
 
@@ -145,7 +145,7 @@ include('../PHP/details_trajet.php');
 
 </main>
 
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 
 </body>
 </html>

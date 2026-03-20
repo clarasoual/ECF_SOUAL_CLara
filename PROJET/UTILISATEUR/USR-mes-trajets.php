@@ -1,42 +1,41 @@
 <?php
-// --- Afficher toutes les erreurs ---
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 // --- Inclure auth et les trajets ---
 require_once __DIR__ . '/../PHP/auth.php';
 require_once __DIR__ . '/../PHP/mes_trajets.php';
 
-// --- Trier les trajets par statut ---
+// --- TRI PAR DATE ---
 $trajetsFutur = [];
 $trajetsEnCours = [];
 $trajetsTermine = [];
 
+$now = new DateTime();
+
 foreach ($trajets as $trajet) {
-    switch ($trajet['statut']) {
-        case 'futur':
-            $trajetsFutur[] = $trajet;
-            break;
-        case 'en_cours':
-            $trajetsEnCours[] = $trajet;
-            break;
-        case 'termine':
-            $trajetsTermine[] = $trajet;
-            break;
+    $dateTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+
+    if ($dateTrajet > $now) {
+        $trajetsFutur[] = $trajet;
+    } elseif ($dateTrajet <= $now && $dateTrajet >= (clone $now)->modify('-2 hours')) {
+        $trajetsEnCours[] = $trajet;
+    } else {
+        $trajetsTermine[] = $trajet;
     }
 }
 
 // --- Fonction pour afficher une carte trajet ---
 function afficherTrajet($trajet, $bdd) {
     $passagers = getPassagers($bdd, $trajet['id']);
+
     echo '<div class="trip-card">';
-    echo '<p><strong>Date :</strong> ' . htmlspecialchars($trajet['date_depart']) . '</p>';
+    
+    echo '<p><strong>Date :</strong> ' . htmlspecialchars($trajet['date_depart']) . ' à ' . htmlspecialchars($trajet['heure_depart']) . '</p>';
     echo '<p><strong>Départ :</strong> ' . htmlspecialchars($trajet['depart']) . '</p>';
     echo '<p><strong>Arrivée :</strong> ' . htmlspecialchars($trajet['arrivee']) . '</p>';
+
     if (!empty($trajet['etapes'])) {
         echo '<p><strong>Étapes :</strong> ' . htmlspecialchars($trajet['etapes']) . '</p>';
     }
+
     if (!empty($passagers)) {
         echo '<p><strong>Passagers :</strong> ';
         $listePassagers = array_map(function($p) { 
@@ -45,9 +44,14 @@ function afficherTrajet($trajet, $bdd) {
         echo implode(', ', $listePassagers);
         echo '</p>';
     }
+
+    // ✅ BOUTON VOIR DÉTAILS
+    echo '<a href="USR-details-trajet.php?id=' . $trajet['id'] . '" class="btn-details">Voir détails</a>';
+
     echo '</div>';
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -60,12 +64,12 @@ function afficherTrajet($trajet, $bdd) {
 </head>
 <body>
 
-<!-- Header commun -->
+<!-- Header -->
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
 
-<!-- Menu latéral -->
+<!-- Menu -->
 <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
 <section>
@@ -79,7 +83,7 @@ function afficherTrajet($trajet, $bdd) {
         </ul>
     </nav>
 
-    <!-- Trajets à venir -->
+    <!-- À venir -->
     <div id="upcoming">
         <h3>Trajets à venir</h3>
         <?php
@@ -93,7 +97,7 @@ function afficherTrajet($trajet, $bdd) {
         ?>
     </div>
 
-    <!-- Trajets en cours -->
+    <!-- En cours -->
     <div id="ongoing">
         <h3>Trajets en cours</h3>
         <?php
@@ -107,7 +111,7 @@ function afficherTrajet($trajet, $bdd) {
         ?>
     </div>
 
-    <!-- Trajets passés -->
+    <!-- Passés -->
     <div id="past">
         <h3>Historique des trajets</h3>
         <div class="past-trips">
@@ -127,7 +131,8 @@ function afficherTrajet($trajet, $bdd) {
 <script src="../JS/USR-mes-trajets.js"></script>
 </main>
 
-<!-- Footer commun -->
+<!-- Footer -->
 <?php include('../COMPONENTS/COMP-footer.php'); ?>
+
 </body>
 </html>
