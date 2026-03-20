@@ -1,24 +1,34 @@
 <?php
-// 1️⃣ Inclure la connexion à la BDD
-include('../PHP/connexion.php'); // $bdd créé ici
+// 🔒 Inclure la BDD et la fonction
+require_once('../PHP/connexion.php'); // $bdd
+require_once('../PHP/recherche_trajets.php'); // chercherTrajets()
 
-// 2️⃣ Inclure les fonctions de recherche
-require_once('../PHP/recherche_trajets.php'); // chercherTrajets($bdd, ...)
-
-// 3️⃣ Initialisation des variables
+// --- Initialisation
 $trajets = [];
 $depart = '';
 $arrivee = '';
 $date = '';
 
-// 4️⃣ Si le formulaire est soumis, récupérer les trajets
+// --- Si formulaire soumis
 if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     $depart = $_GET['departure'];
     $arrivee = $_GET['destination'];
     $date = $_GET['date'];
 
-    // ✅ On utilise $bdd maintenant
     $trajets = chercherTrajets($bdd, $depart, $arrivee, $date);
+
+    // --- Optionnel : calcul futur / en cours / passé
+    $now = new DateTime();
+    foreach ($trajets as $key => $trajet) {
+        $trajetDateTime = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+        if ($trajetDateTime > $now) {
+            $trajets[$key]['periode'] = 'futur';
+        } elseif ($trajetDateTime <= $now && $trajetDateTime >= (clone $now)->modify('-2 hours')) {
+            $trajets[$key]['periode'] = 'en_cours';
+        } else {
+            $trajets[$key]['periode'] = 'passe';
+        }
+    }
 }
 ?>
 
@@ -28,10 +38,8 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rechercher un covoiturage</title>
-
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-recherche-trajet.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>

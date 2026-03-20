@@ -1,10 +1,9 @@
 <?php
-require_once('connexion.php'); // utilise $pdo pour la cohérence avec tes autres pages
+require_once('connexion.php'); // utilise $bdd pour cohérence
 
-// Fonction pour chercher les trajets
-function chercherTrajets($pdo, $depart, $arrivee, $date) {
+function chercherTrajets($bdd, $depart, $arrivee, $date) {
     try {
-        $stmt = $pdo->prepare("
+        $stmt = $bdd->prepare("
             SELECT 
                 t.*, 
                 u.nom AS nom_conducteur, 
@@ -14,7 +13,7 @@ function chercherTrajets($pdo, $depart, $arrivee, $date) {
             WHERE LOWER(t.depart) LIKE LOWER(:depart)
               AND LOWER(t.arrivee) LIKE LOWER(:arrivee)
               AND t.date_depart = :date
-              AND t.statut IN ('futur', 'en_cours')
+              AND t.statut = 'reserve'
         ");
 
         $stmt->execute([
