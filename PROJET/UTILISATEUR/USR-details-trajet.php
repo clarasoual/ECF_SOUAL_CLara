@@ -23,6 +23,11 @@ if (!empty($trajet['etapes'])) {
     $etapes = json_decode($trajet['etapes'], true);
     if (!is_array($etapes)) $etapes = [];
 }
+
+// Calculer date/heure du trajet
+$trajetDateTime = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+$now = new DateTime();
+$isPast = $trajetDateTime < $now; // true si le trajet est passé
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +43,14 @@ if (!empty($trajet['etapes'])) {
 <body>
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
+
 <?php if ($success): ?>
     <div id="toast-success" class="toast-success">
         ✅ Trajet modifié avec succès !
     </div>
 <?php endif; ?>
-<main>
 
+<main>
     <a href="USR-recherche_trajet.php" class="back-arrow">← Retour</a>
 
     <h1 class="page-title">Détails du trajet</h1>
@@ -69,7 +75,7 @@ if (!empty($trajet['etapes'])) {
                         <p>🕒 Heure : <?= htmlspecialchars($trajet['heure_depart']) ?></p>
                         <p>💺 Places disponibles : <?= htmlspecialchars($trajet['places_disponibles']) ?></p>
                     </div>
-                    <div class="driver-reviews">
+                    <div id="driver-reviews" class="driver-reviews">
                         <h4>Avis sur le conducteur</h4>
                         <?php if (empty($avis)): ?>
                             <p class="empty">Aucun avis pour le moment.</p>
@@ -126,22 +132,31 @@ if (!empty($trajet['etapes'])) {
         </section>
     </div>
 
+    <!-- BOUTONS / MESSAGE -->
     <div class="cta-container">
-        <?php if (!$isOwner): ?>
-            <a href="#" class="cta-reserver">Réserver ce trajet</a>
-        <?php else: ?>
+        <?php if ($isPast): ?>
+            <!-- Trajet passé -->
+            <p class="trajet-termine">Ce trajet est terminé ✅</p>
+            <?php if (!empty($avis)) : ?>
+                <p><a href="#driver-reviews">Voir les avis</a></p>
+            <?php endif; ?>
+        <?php elseif ($isOwner): ?>
+            <!-- Trajet à venir et propriétaire -->
             <button id="btn-modifier" class="cta-modifier">Modifier</button>
-          <form action="../PHP/supprimer-trajet.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');" style="display:inline;">
-    <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
-    <button type="submit" class="cta-supprimer">Supprimer</button>
-</form>
+            <form action="../PHP/supprimer-trajet.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');" style="display:inline;">
+                <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
+                <button type="submit" class="cta-supprimer">Supprimer</button>
+            </form>
+        <?php else: ?>
+            <!-- Trajet à venir, utilisateur non propriétaire -->
+            <a href="#" class="cta-reserver">Réserver ce trajet</a>
         <?php endif; ?>
     </div>
 
 </main>
 
 <!-- MODAL COMPLET MODIFIER -->
-<?php if ($isOwner): ?>
+<?php if ($isOwner && !$isPast): ?>
 <div id="modal-modifier" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -154,7 +169,6 @@ if (!empty($trajet['etapes'])) {
                 <tr>
                     <td class="trip-info">
                         <h3 class="trip-subtitle">D'où partons-nous ?</h3>
-
                         <label for="departure">Adresse de départ *</label><br>
                         <input type="text" id="departure" name="departure" required value="<?= htmlspecialchars($trajet['depart']) ?>"><br><br>
 
@@ -162,8 +176,7 @@ if (!empty($trajet['etapes'])) {
                         <div id="etapes-container">
                             <?php foreach ($etapes as $i => $etape): ?>
                                 <div class="stop-container">
-                                    <input type="text" name="step<?= $i+1 ?>" placeholder="Arrêt n°<?= $i+1 ?>" 
-                                           value="<?= htmlspecialchars($etape) ?>">
+                                    <input type="text" name="step<?= $i+1 ?>" placeholder="Arrêt n°<?= $i+1 ?>" value="<?= htmlspecialchars($etape) ?>">
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -189,7 +202,6 @@ if (!empty($trajet['etapes'])) {
 
                     <td class="trip-info-destination">
                         <h3 class="trip-subtitle">Où allons-nous ?</h3>
-
                         <label for="arrival">Adresse d'arrivée *</label><br>
                         <input type="text" id="arrival" name="arrival" required value="<?= htmlspecialchars($trajet['arrivee']) ?>"><br><br>
 
@@ -204,13 +216,12 @@ if (!empty($trajet['etapes'])) {
                 </tr>
             </table>
         </form>
-
     </div>
 </div>
 <?php endif; ?>
 
 <script>
-<?php if ($isOwner): ?>
+<?php if ($isOwner && !$isPast): ?>
 const modal = document.getElementById('modal-modifier');
 const btnModifier = document.getElementById('btn-modifier');
 const closeModal = document.querySelector('.close-modal');

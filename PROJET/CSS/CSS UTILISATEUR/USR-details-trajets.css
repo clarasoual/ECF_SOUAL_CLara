@@ -266,3 +266,96 @@ main {
     font-weight: 600;
 }
 
+/* --- MODAL --- */
+
+/* Conteneur du modal : caché par défaut et centré */
+#modal-modifier {
+    display: none;                   /* caché au chargement */
+    position: fixed;                 /* reste à l'écran même en scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* fond semi-transparent */
+    z-index: 1000;                   /* au-dessus de tout */
+    display: flex;                   /* flex pour centrer le contenu */
+    justify-content: center;         /* centrer horizontalement */
+    align-items: center;             /* centrer verticalement */
+    padding: 1rem;                   /* petit padding pour mobile */
+    box-sizing: border-box;
+}
+
+/* Contenu du modal */
+#modal-modifier .modal-content {
+    background-color: var(--fond);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90%;
+    overflow-y: auto;                /* scroll si trop grand */
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Bouton de fermeture */
+#modal-modifier .close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+/* --- Form inputs inside modal --- */
+#modal-modifier .modal-content form label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--texte);
+}
+
+#modal-modifier .modal-content form input[type="text"],
+#modal-modifier .modal-content form input[type="email"],
+#modal-modifier .modal-content form input[type="date"],
+#modal-modifier .modal-content form input[type="file"],
+#modal-modifier .modal-content form input[type="time"],
+#modal-modifier .modal-content form input[type="number"],
+#modal-modifier .modal-content form textarea,
+#modal-modifier .modal-content form select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid var(--gris-doux);
+    font-size: 1rem;
+    background-color: var(--fond);
+    color: var(--texte);
+    box-sizing: border-box;
+}
+
+/* Inputs désactivés */
+#modal-modifier .modal-content form input[disabled] {
+    background-color: #f0f0f0;
+    color: #555;
+    cursor: not-allowed;
+}
+
+/* Boutons dans le modal */
+#modal-modifier .modal-content button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+}
+
+#modal-modifier .modal-content button:hover {
+    background-color: var(--primary-hover);
+}
