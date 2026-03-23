@@ -27,7 +27,7 @@ try {
     // Préparer la requête avec $bdd
     $sql = "INSERT INTO trajets
             (id_conducteur, depart, arrivee, date_depart, heure_depart, vehicule_id, places_disponibles, statut, etapes, commentaire)
-            VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :vehicule_id, :places_disponibles, 'futur', :etapes, :commentaire)";
+            VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :vehicule_id, :places_disponibles, 'publie', :etapes, :commentaire)";
     
     $stmt = $bdd->prepare($sql);
     $stmt->execute([

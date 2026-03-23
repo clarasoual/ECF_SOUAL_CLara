@@ -2,6 +2,10 @@
 // --- Inclure auth et les trajets ---
 require_once __DIR__ . '/../PHP/auth.php';
 require_once __DIR__ . '/../PHP/mes_trajets.php';
+requireLogin();
+
+// Récupérer l'ID de l'utilisateur connecté
+$id_utilisateur = $_SESSION['id'] ?? 0;
 
 // --- TRI PAR DATE ---
 $trajetsFutur = [];
@@ -23,7 +27,7 @@ foreach ($trajets as $trajet) {
 }
 
 // --- Fonction pour afficher une carte trajet ---
-function afficherTrajet($trajet, $bdd) {
+function afficherTrajet($trajet, $bdd, $dateTrajet, $id_utilisateur) {
     $passagers = getPassagers($bdd, $trajet['id']);
 
     echo '<div class="trip-card">';
@@ -47,6 +51,15 @@ function afficherTrajet($trajet, $bdd) {
 
     // ✅ BOUTON VOIR DÉTAILS
     echo '<a href="USR-details-trajet.php?id=' . $trajet['id'] . '" class="btn-details">Voir détails</a>';
+
+    // ⚠️ Modifier et supprimer uniquement si le trajet appartient à l'utilisateur et n'est pas passé
+    if ($trajet['id_conducteur'] == $id_utilisateur && $dateTrajet > new DateTime()) {
+        echo '<a href="USR-details-trajet.php?id=' . $trajet['id'] . '&edit=1" class="btn-modifier" style="margin-left:10px;">Modifier</a>';
+        echo '<form action="../PHP/supprimer-trajet.php" method="POST" onsubmit="return confirm(\'Voulez-vous vraiment supprimer ce trajet ?\');" style="display:inline; margin-left:10px;">
+                <input type="hidden" name="id_trajet" value="' . $trajet['id'] . '">
+                <button type="submit" class="cta-supprimer">Supprimer</button>
+              </form>';
+    }
 
     echo '</div>';
 }
@@ -89,7 +102,8 @@ function afficherTrajet($trajet, $bdd) {
         <?php
         if (!empty($trajetsFutur)) {
             foreach ($trajetsFutur as $trajet) {
-                afficherTrajet($trajet, $bdd);
+                $dateTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+                afficherTrajet($trajet, $bdd, $dateTrajet, $id_utilisateur);
             }
         } else {
             echo '<p>Aucun trajet à venir.</p>';
@@ -103,7 +117,8 @@ function afficherTrajet($trajet, $bdd) {
         <?php
         if (!empty($trajetsEnCours)) {
             foreach ($trajetsEnCours as $trajet) {
-                afficherTrajet($trajet, $bdd);
+                $dateTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+                afficherTrajet($trajet, $bdd, $dateTrajet, $id_utilisateur);
             }
         } else {
             echo '<p>Aucun trajet en cours.</p>';
@@ -118,7 +133,8 @@ function afficherTrajet($trajet, $bdd) {
         <?php
         if (!empty($trajetsTermine)) {
             foreach ($trajetsTermine as $trajet) {
-                afficherTrajet($trajet, $bdd);
+                $dateTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+                afficherTrajet($trajet, $bdd, $dateTrajet, $id_utilisateur);
             }
         } else {
             echo '<p>Aucun trajet passé.</p>';
@@ -128,11 +144,21 @@ function afficherTrajet($trajet, $bdd) {
     </div>
 </section>
 
-<script src="../JS/USR-mes-trajets.js"></script>
+<!-- Toast succès suppression -->
+<?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
+<div id="toast-success" class="toast-success">
+    ✅ Trajet supprimé avec succès !
+</div>
+<?php endif; ?>
+
 </main>
 
 <!-- Footer -->
 <?php include('../COMPONENTS/COMP-footer.php'); ?>
+
+<!-- Scripts -->
+<script src="../JS/USR-mes-trajets.js"></script>
+<script src="../JS/USR-toast.js"></script>
 
 </body>
 </html>

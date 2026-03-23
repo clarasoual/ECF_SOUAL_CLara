@@ -2,6 +2,27 @@
 require_once __DIR__ . '/../PHP/auth.php';
 requireLogin(); 
 require_once __DIR__ . '/../PHP/details_trajet.php';
+
+// Vérifie si on doit afficher le toast succès
+$success = isset($_GET['success']) && $_GET['success'] == 1;
+
+// Vérifie si c'est le trajet de l'utilisateur
+$isOwner = isset($_SESSION['user_id']) && $_SESSION['user_id'] == $trajet['id_conducteur'];
+
+// Récupérer les véhicules de l'utilisateur pour le select
+$vehicules = [];
+if ($isOwner) {
+    $stmt = $bdd->prepare("SELECT * FROM vehicules WHERE id_utilisateur = :id_user");
+    $stmt->execute([':id_user' => $_SESSION['user_id']]);
+    $vehicules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Décoder les étapes JSON
+$etapes = [];
+if (!empty($trajet['etapes'])) {
+    $etapes = json_decode($trajet['etapes'], true);
+    if (!is_array($etapes)) $etapes = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +38,11 @@ require_once __DIR__ . '/../PHP/details_trajet.php';
 <body>
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
-
+<?php if ($success): ?>
+    <div id="toast-success" class="toast-success">
+        ✅ Trajet modifié avec succès !
+    </div>
+<?php endif; ?>
 <main>
 
     <a href="USR-recherche_trajet.php" class="back-arrow">← Retour</a>
@@ -105,14 +130,109 @@ require_once __DIR__ . '/../PHP/details_trajet.php';
         <?php if (!$isOwner): ?>
             <a href="#" class="cta-reserver">Réserver ce trajet</a>
         <?php else: ?>
-            <a href="USR-modifier-trajet.php?id=<?= $trajet['id'] ?>" class="cta-modifier">Modifier</a>
-            <a href="USR-supprimer-trajet.php?id=<?= $trajet['id'] ?>" class="cta-supprimer">Supprimer</a>
+            <button id="btn-modifier" class="cta-modifier">Modifier</button>
+          <form action="../PHP/supprimer-trajet.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');" style="display:inline;">
+    <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
+    <button type="submit" class="cta-supprimer">Supprimer</button>
+</form>
         <?php endif; ?>
     </div>
 
 </main>
 
-<?php include('../COMPONENTS/COMP-footer.php'); ?>
+<!-- MODAL COMPLET MODIFIER -->
+<?php if ($isOwner): ?>
+<div id="modal-modifier" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Modifier votre trajet</h2>
 
+        <form action="../PHP/modifier-trajet-traitement.php" method="POST">
+            <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
+
+            <table class="trip-table">
+                <tr>
+                    <td class="trip-info">
+                        <h3 class="trip-subtitle">D'où partons-nous ?</h3>
+
+                        <label for="departure">Adresse de départ *</label><br>
+                        <input type="text" id="departure" name="departure" required value="<?= htmlspecialchars($trajet['depart']) ?>"><br><br>
+
+                        <label>Arrêts (optionnel)</label><br>
+                        <div id="etapes-container">
+                            <?php foreach ($etapes as $i => $etape): ?>
+                                <div class="stop-container">
+                                    <input type="text" name="step<?= $i+1 ?>" placeholder="Arrêt n°<?= $i+1 ?>" 
+                                           value="<?= htmlspecialchars($etape) ?>">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <button type="button" id="add-stop-btn">+ Ajouter un arrêt</button><br><br>
+
+                        <label for="vehicle-used">Véhicule utilisé *</label><br>
+                        <select id="vehicle-used" name="vehicle_used" required>
+                            <option value="">-- Sélectionnez un véhicule --</option>
+                            <?php foreach ($vehicules as $vehicule): 
+                                $vehicule_label = htmlspecialchars($vehicule['marque'] . ' ' . $vehicule['modele'] . ' ' . $vehicule['couleur']); 
+                                $selected = ($trajet['vehicule_id'] == $vehicule['vehicule_id']) ? 'selected' : '';
+                            ?>
+                                <option value="<?= $vehicule['vehicule_id'] ?>" <?= $selected ?>><?= $vehicule_label ?></option>
+                            <?php endforeach; ?>
+                        </select><br><br>
+
+                        <label for="date">Date de départ *</label><br>
+                        <input type="date" id="date" name="date" required value="<?= htmlspecialchars($trajet['date_depart']) ?>"><br><br>
+
+                        <label for="time">Heure de départ *</label><br>
+                        <input type="time" id="time" name="time" required value="<?= htmlspecialchars($trajet['heure_depart']) ?>"><br><br>
+                    </td>
+
+                    <td class="trip-info-destination">
+                        <h3 class="trip-subtitle">Où allons-nous ?</h3>
+
+                        <label for="arrival">Adresse d'arrivée *</label><br>
+                        <input type="text" id="arrival" name="arrival" required value="<?= htmlspecialchars($trajet['arrivee']) ?>"><br><br>
+
+                        <label for="places">Nombre de places disponibles *</label><br>
+                        <input type="number" id="places" name="places" min="1" max="8" required value="<?= htmlspecialchars($trajet['places_disponibles']) ?>"><br><br>
+
+                        <label for="commentaire">Autres précisions (optionnel)</label><br>
+                        <textarea id="commentaire" name="commentaire" rows="4"><?= htmlspecialchars($trajet['commentaire']) ?></textarea><br><br>
+
+                        <button type="submit" class="btn-submit">Enregistrer les modifications</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+</div>
+<?php endif; ?>
+
+<script>
+<?php if ($isOwner): ?>
+const modal = document.getElementById('modal-modifier');
+const btnModifier = document.getElementById('btn-modifier');
+const closeModal = document.querySelector('.close-modal');
+
+btnModifier.addEventListener('click', () => modal.style.display = 'block');
+closeModal.addEventListener('click', () => modal.style.display = 'none');
+window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
+
+// Ajouter dynamiquement des étapes
+const addStopBtn = document.getElementById('add-stop-btn');
+const etapesContainer = document.getElementById('etapes-container');
+addStopBtn.addEventListener('click', () => {
+    const index = etapesContainer.children.length + 1;
+    const div = document.createElement('div');
+    div.className = 'stop-container';
+    div.innerHTML = `<input type="text" name="step${index}" placeholder="Arrêt n°${index}">`;
+    etapesContainer.appendChild(div);
+});
+<?php endif; ?>
+</script>
+
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
+<script src="../JS/toast.js"></script>
 </body>
 </html>

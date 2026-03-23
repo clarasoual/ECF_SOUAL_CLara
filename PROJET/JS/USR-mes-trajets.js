@@ -1,4 +1,4 @@
-// Sélection des onglets
+// Sélection des onglets et des sections
 const tabs = document.querySelectorAll('.trips-tab a');
 const sections = {
   upcoming: document.getElementById('upcoming'),
@@ -6,9 +6,11 @@ const sections = {
   past: document.getElementById('past')
 };
 
-// Fonction pour afficher la section correspondant à l'onglet
+// Fonction pour afficher la section correspondante
 function showSection(event) {
-  if (event) event.preventDefault(); // empêche le # dans l'URL
+  if (event) {
+    event.preventDefault(); // empêche le # dans l'URL pour les onglets
+  }
 
   const targetId = event ? this.getAttribute('href').substring(1) : 'upcoming';
 
@@ -16,9 +18,11 @@ function showSection(event) {
   Object.values(sections).forEach(sec => sec.style.display = 'none');
 
   // Afficher la section ciblée
-  sections[targetId].style.display = 'block';
+  if (sections[targetId]) {
+    sections[targetId].style.display = 'block';
+  }
 
-  // Gestion classe active
+  // Gestion de la classe active sur les onglets
   tabs.forEach(tab => tab.classList.remove('active'));
   const activeTab = Array.from(tabs).find(tab => tab.getAttribute('href').substring(1) === targetId);
   if (activeTab) activeTab.classList.add('active');
@@ -27,5 +31,5 @@ function showSection(event) {
 // Attacher l'événement à chaque onglet
 tabs.forEach(tab => tab.addEventListener('click', showSection));
 
-// --- Initialisation au chargement : afficher "À venir" ---
+// Afficher "À venir" par défaut au chargement
 showSection();
