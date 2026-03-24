@@ -5,7 +5,7 @@
         <a href="#">Contact</a>
         <!-- Bouton déconnexion si l'utilisateur est connecté -->
         <?php
-        include('../UTILISATEUR/auth.php'); // Démarre la session et charge les fonctions
+        include('..//auth.php'); // Démarre la session et charge les fonctions
         if(isset($_SESSION['user_id'])) {
             echo '<a href="../UTILISATEUR/USR-deconnexion.php" 
                      onclick="return confirm(\'Voulez-vous vraiment vous déconnecter ?\');" 

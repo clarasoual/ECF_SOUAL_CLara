@@ -133,25 +133,34 @@ $isPast = $trajetDateTime < $now; // true si le trajet est passé
     </div>
 
     <!-- BOUTONS / MESSAGE -->
-    <div class="cta-container">
-        <?php if ($isPast): ?>
-            <!-- Trajet passé -->
-            <p class="trajet-termine">Ce trajet est terminé ✅</p>
-            <?php if (!empty($avis)) : ?>
-                <p><a href="#driver-reviews">Voir les avis</a></p>
-            <?php endif; ?>
-        <?php elseif ($isOwner): ?>
-            <!-- Trajet à venir et propriétaire -->
+<div class="cta-container">
+    <?php if ($isPast): ?>
+        <p>Ce trajet est terminé ✅</p>
+        <?php if (!empty($avis)) : ?>
+            <p><a href="#driver-reviews">Voir les avis</a></p>
+        <?php endif; ?>
+    
+    <?php else: ?>
+        <?php if ($isOwner): ?>
             <button id="btn-modifier" class="cta-modifier">Modifier</button>
             <form action="../PHP/supprimer-trajet.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');" style="display:inline;">
                 <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
                 <button type="submit" class="cta-supprimer">Supprimer</button>
             </form>
-        <?php else: ?>
-            <!-- Trajet à venir, utilisateur non propriétaire -->
-            <a href="#" class="cta-reserver">Réserver ce trajet</a>
         <?php endif; ?>
-    </div>
+
+        <?php if ($isPassenger && !$isOwner): ?>
+            <form action="../PHP/desinscrire-trajet.php" method="POST" style="display:inline;">
+                <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
+                <button type="submit" class="cta-desinscrire">Se désinscrire</button>
+            </form>
+        <?php endif; ?>
+
+        <?php if (!$isOwner && !$isPassenger): ?>
+            <a href="../PHP/reserver-trajet.php?id=<?= $trajet['id'] ?>" class="cta-reserver">Réserver ce trajet</a>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
 
 </main>
 

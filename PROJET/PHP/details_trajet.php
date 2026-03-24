@@ -33,6 +33,7 @@ if (!$trajet) {
     die("Trajet introuvable.");
 }
 
+
 /* =========================
    PASSAGERS RÉSERVÉS
    ========================= */
