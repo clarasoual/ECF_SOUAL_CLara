@@ -14,11 +14,8 @@ if (!$id_utilisateur) {
     die("Erreur : utilisateur non connecté.");
 }
 
-// Inclure la récupération des trajets
+// Inclure la récupération et le tri des trajets
 require_once __DIR__ . '/../PHP/mes_trajets.php';
-
-// ⚠️ Debug temporaire pour vérifier
-// var_dump($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -49,24 +46,49 @@ require_once __DIR__ . '/../PHP/mes_trajets.php';
         </ul>
     </nav>
 
-    <div id="upcoming"><h3>Trajets à venir</h3></div>
-    <div id="ongoing"><h3>Trajets en cours</h3></div>
-    <div id="past"><h3>Historique des trajets</h3><div class="past-trips"></div></div>
+<!-- Section Trajets à venir -->
+<div id="upcoming">
+    <h3>Trajets à venir</h3>
+    <?php if (!empty($trajetsFutur)): ?>
+        <?php foreach ($trajetsFutur as $trajet): ?>
+            <?php afficherTrajet($trajet, $bdd, $id_utilisateur); ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Aucun trajet à venir.</p>
+    <?php endif; ?>
+</div>
 
-    <?php
-    // Afficher tous les trajets, le JS les trie dans les bons onglets
-    foreach ($trajets as $trajet) {
-        afficherTrajet($trajet, $bdd, $id_utilisateur);
-    }
-    ?>
+<!-- Section Trajets en cours -->
+<div id="ongoing">
+    <h3>Trajets en cours</h3>
+    <?php if (!empty($trajetsEnCours)): ?>
+        <?php foreach ($trajetsEnCours as $trajet): ?>
+            <?php afficherTrajet($trajet, $bdd, $id_utilisateur); ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Aucun trajet en cours.</p>
+    <?php endif; ?>
+</div>
 
-</section>
+<!-- Section Trajets passés -->
+<div id="past">
+    <h3>Historique des trajets</h3>
+    <?php if (!empty($trajetsTermine)): ?>
+        <?php foreach ($trajetsTermine as $trajet): ?>
+            <?php afficherTrajet($trajet, $bdd, $id_utilisateur); ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Aucun trajet passé.</p>
+    <?php endif; ?>
+</div>
 
 <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
-<div id="toast-success" class="toast-success">
-    ✅ Trajet supprimé avec succès !
-</div>
+    <div id="toast-success" class="toast-success">
+        ✅ Trajet supprimé avec succès !
+    </div>
 <?php endif; ?>
+
+</section>
 
 </main>
 

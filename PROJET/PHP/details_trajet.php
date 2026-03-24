@@ -33,7 +33,6 @@ if (!$trajet) {
     die("Trajet introuvable.");
 }
 
-
 /* =========================
    PASSAGERS RÉSERVÉS
    ========================= */
@@ -74,4 +73,19 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
    VÉRIFICATION PROPRIÉTAIRE
    ========================= */
 $isOwner = ($_SESSION['user_id'] === $trajet['id_conducteur']);
-?>
+
+/* =========================
+   VÉRIFICATION PASSAGER INSCRIT
+   ========================= */
+/* =========================
+   VÉRIFICATION PASSAGER INSCRIT
+   ========================= */
+$isPassenger = false;
+if (isset($_SESSION['user_id'])) {
+    foreach ($passagers as $p) {
+        if ($_SESSION['user_id'] == $p['id']) {
+            $isPassenger = true;
+            break;
+        }
+    }
+}

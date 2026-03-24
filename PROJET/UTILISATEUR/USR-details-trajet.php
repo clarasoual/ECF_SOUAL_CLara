@@ -1,8 +1,11 @@
 <?php
+
 require_once __DIR__ . '/../PHP/auth.php';
 requireLogin(); 
 require_once __DIR__ . '/../PHP/details_trajet.php';
 
+error_reporting(0);
+ini_set('display_errors', 0);
 // Vérifie si on doit afficher le toast succès
 $success = isset($_GET['success']) && $_GET['success'] == 1;
 
@@ -135,12 +138,14 @@ $isPast = $trajetDateTime < $now; // true si le trajet est passé
     <!-- BOUTONS / MESSAGE -->
 <div class="cta-container">
     <?php if ($isPast): ?>
+        <!-- Si le trajet est déjà passé -->
         <p>Ce trajet est terminé ✅</p>
         <?php if (!empty($avis)) : ?>
             <p><a href="#driver-reviews">Voir les avis</a></p>
         <?php endif; ?>
     
     <?php else: ?>
+        <!-- Boutons pour le conducteur -->
         <?php if ($isOwner): ?>
             <button id="btn-modifier" class="cta-modifier">Modifier</button>
             <form action="../PHP/supprimer-trajet.php" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');" style="display:inline;">
@@ -149,19 +154,18 @@ $isPast = $trajetDateTime < $now; // true si le trajet est passé
             </form>
         <?php endif; ?>
 
-        <?php if ($isPassenger && !$isOwner): ?>
+        <!-- Bouton pour passager inscrit sur ce trajet -->
+        <?php if ($isPassenger): ?>
             <form action="../PHP/desinscrire-trajet.php" method="POST" style="display:inline;">
                 <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
                 <button type="submit" class="cta-desinscrire">Se désinscrire</button>
             </form>
-        <?php endif; ?>
-
-        <?php if (!$isOwner && !$isPassenger): ?>
+        <!-- Bouton pour passager non inscrit sur ce trajet -->
+        <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'passager'): ?>
             <a href="../PHP/reserver-trajet.php?id=<?= $trajet['id'] ?>" class="cta-reserver">Réserver ce trajet</a>
         <?php endif; ?>
     <?php endif; ?>
 </div>
-
 </main>
 
 <!-- MODAL COMPLET MODIFIER -->

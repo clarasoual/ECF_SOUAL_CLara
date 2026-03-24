@@ -43,6 +43,25 @@ try {
 // --- Fusionner les trajets ---
 $trajets = array_merge($trajetsConducteur, $trajetsPassager);
 
+// --- Trier les trajets selon la date ---
+$trajetsFutur = [];
+$trajetsEnCours = [];
+$trajetsTermine = [];
+
+$now = new DateTime();
+
+foreach ($trajets as $trajet) {
+    $dateTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+
+    if ($dateTrajet > $now) {
+        $trajetsFutur[] = $trajet;      // Trajets à venir
+    } elseif ($dateTrajet <= $now && $dateTrajet >= (clone $now)->modify('-2 hours')) {
+        $trajetsEnCours[] = $trajet;    // Trajets en cours
+    } else {
+        $trajetsTermine[] = $trajet;    // Trajets passés
+    }
+}
+
 // --- Fonction pour récupérer les passagers d'un trajet ---
 function getPassagers($bdd, $id_trajet) {
     $stmt = $bdd->prepare("
@@ -77,15 +96,8 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
     echo '<p><strong>Rôle :</strong> ' . ($trajet['role'] === 'conducteur' ? 'Conducteur' : 'Passager') . '</p>';
     echo '<a href="USR-details-trajet.php?id=' . $trajet['id'] . '" class="btn-details">Voir détails</a>';
 
-    // Modifier / supprimer seulement si utilisateur conducteur et trajet futur
-    if ($trajet['id_conducteur'] == $id_utilisateur && $dateTrajet > new DateTime()) {
-        echo '<a href="USR-details-trajet.php?id=' . $trajet['id'] . '&edit=1" class="btn-modifier" style="margin-left:10px;">Modifier</a>';
-        echo '<form action="../PHP/supprimer-trajet.php" method="POST" onsubmit="return confirm(\'Voulez-vous vraiment supprimer ce trajet ?\');" style="display:inline; margin-left:10px;">
-                <input type="hidden" name="id_trajet" value="' . $trajet['id'] . '">
-                <button type="submit" class="cta-supprimer">Supprimer</button>
-              </form>';
     }
 
     echo '</div>';
-}
+
 ?>
