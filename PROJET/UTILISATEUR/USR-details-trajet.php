@@ -154,14 +154,15 @@ $isPast = $trajetDateTime < $now; // true si le trajet est passé
             </form>
         <?php endif; ?>
 
-        <!-- Bouton pour passager inscrit sur ce trajet -->
+        <!-- Boutons pour passager inscrit sur ce trajet -->
         <?php if ($isPassenger): ?>
             <form action="../PHP/desinscrire-trajet.php" method="POST" style="display:inline;">
                 <input type="hidden" name="id_trajet" value="<?= $trajet['id'] ?>">
                 <button type="submit" class="cta-desinscrire">Se désinscrire</button>
             </form>
-        <!-- Bouton pour passager non inscrit sur ce trajet -->
-        <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'passager'): ?>
+
+        <!-- Bouton pour utilisateur pas impliqué (ni conducteur ni passager) -->
+        <?php elseif (!$isOwner && !$isPassenger): ?>
             <a href="../PHP/reserver-trajet.php?id=<?= $trajet['id'] ?>" class="cta-reserver">Réserver ce trajet</a>
         <?php endif; ?>
     <?php endif; ?>

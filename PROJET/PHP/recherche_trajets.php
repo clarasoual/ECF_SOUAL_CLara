@@ -10,10 +10,10 @@ function chercherTrajets($bdd, $depart, $arrivee, $date) {
                 u.prenom AS prenom_conducteur
             FROM trajets t
             JOIN utilisateurs u ON t.id_conducteur = u.id
-            WHERE LOWER(t.depart) LIKE LOWER(:depart)
-              AND LOWER(t.arrivee) LIKE LOWER(:arrivee)
+            WHERE LOWER(TRIM(t.depart)) LIKE LOWER(:depart)
+              AND LOWER(TRIM(t.arrivee)) LIKE LOWER(:arrivee)
               AND t.date_depart = :date
-              AND t.statut = 'reserve'
+              AND t.statut = 'publie'
         ");
 
         $stmt->execute([
