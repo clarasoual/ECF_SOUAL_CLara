@@ -3,6 +3,29 @@ session_start();
 include('../PHP/auth.php'); 
 requireLogin();
 require('../PHP/connexion.php'); // $bdd créé ici
+// Vérification du rôle : seul le conducteur ou passager-conducteur peut accéder
+$userId = $_SESSION['user_id'] ?? 0;
+
+if ($userId) {
+    try {
+        $stmt = $bdd->prepare("SELECT role FROM utilisateurs WHERE id = ?");
+        $stmt->execute([$userId]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user || !in_array($user['role'], ['conducteur', 'passager-conducteur'])) {
+            // Redirection si ce n'est pas un conducteur
+            header('Location: ../PHP/403.php'); // Crée une page simple "Accès refusé"
+            exit;
+        }
+    } catch (PDOException $e) {
+        die("Erreur PDO : " . htmlspecialchars($e->getMessage()));
+    }
+} else {
+    // Redirection si non connecté (sécurité supplémentaire)
+    header('Location: ../PHP/login.php');
+    exit;
+}
+
 
 // --- Réinitialiser le trajet temporaire uniquement si on arrive ici depuis "Proposer un nouveau trajet" ---
 if (isset($_GET['new']) && $_GET['new'] == 1) {
