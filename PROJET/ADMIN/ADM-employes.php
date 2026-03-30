@@ -18,33 +18,24 @@ $admin = $stmt->fetch();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Compte employés</title>
+    <title>Admin - Compte utilisateurs</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
-    <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-employe.css">
-    <link rel="stylesheet" href="../CSS/CSS ADMIN/CSS MOBILE/ADM-employe-mobile.css">
+        <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-utilisateurs.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Header commun employés -->
-<?php include('../COMPONENTS/COMP-header-admin.php'); ?>
-
-<!-- Bouton Burger pour mobile/tablette -->
-<button class="burger-btn" id="burger-btn">
-    <span class="burger-line"></span>
-    <span class="burger-line"></span>
-    <span class="burger-line"></span>
-</button>
-
-<!-- Overlay derrière le menu burger -->
-<div class="menu-overlay" id="menu-overlay"></div>
-
-<!-- Menu Admin -->
-<?php include('../COMPONENTS/COMP-menu-admin.html'); ?>
+<?php include('../COMPONENTS/COMP-header-admin.php') ; ?>
 
 <hr>
 
 <main>
+
+<?php include('../COMPONENTS/COMP-menu-admin.html') ; ?>
+
+<hr>
     <!-- Section principale : tableau des employés -->
     <section class="principal-menu-section">
         <h2>Comptes Employés</h2>
@@ -101,10 +92,6 @@ $admin = $stmt->fetch();
         </div>
     </section>
 </main>
-
-<!-- Footer commun -->
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
-
 <script>
     const burgerBtn = document.getElementById('burger-btn');
     const menuAdmin = document.querySelector('.menu-admin');

@@ -13,9 +13,7 @@
                 <p><span class="label-employe">Nom :</span> <?= htmlspecialchars($admin['prenom']) ?></p>
                 <p><span class="label-employe">Email :</span> <?= htmlspecialchars($admin['email']) ?></p>
             </div>
-            <div class="profil-container">
-                <img src="../../IMAGES/default-avatar.jpg" alt="Photo de profil par défaut" class="photo-profil" id="profil-click">
-                
+            <div class="profil-container">                
                 <div class="menu-profil">
                     <a href="moncompte.php">Mon compte</a>
                 </div>
