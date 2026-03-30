@@ -7,6 +7,10 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+$stmt_admin = $bdd->prepare("SELECT * FROM admins WHERE id = ?");
+$stmt_admin->execute([$_SESSION['admin_id']]);
+$admin = $stmt_admin->fetch(PDO::FETCH_ASSOC);
+
 // Période par défaut : 30 derniers jours
 $date_fin   = isset($_GET['date_fin'])   ? $_GET['date_fin']   : date('Y-m-d');
 $date_debut = isset($_GET['date_debut']) ? $_GET['date_debut'] : date('Y-m-d', strtotime('-30 days'));
