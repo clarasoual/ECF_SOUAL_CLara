@@ -126,9 +126,7 @@ $utilisateurs = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
 
 <td>
 
-<button class="btn-voir" data-id="<?= $user['id'] ?>">
-Voir
-</button>
+<button><a href="ADM-user-profil.php?id=<?= $user['id'] ?>" class="btn-voir">Voir</a></button>
 
 <form method="POST"
 style="display:inline;"
