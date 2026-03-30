@@ -1,3 +1,18 @@
+<?php
+session_start();
+include('../PHP/connexion.php'); // $bdd
+
+// Vérifier si l'admin est connecté
+if (!isset($_SESSION['admin_id'])) {
+    header('Location: ADM-login.php'); // redirige vers login si pas connecté
+    exit();
+}
+
+// Récupérer les infos de l'admin connecté
+$stmt = $bdd->prepare("SELECT prenom, email FROM admins WHERE id = ?");
+$stmt->execute([$_SESSION['admin_id']]);
+$admin = $stmt->fetch();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,7 +27,7 @@
 <body>
 
 <!-- Header commun employés -->
-<?php include('../COMPONENTS/COMP-header-admin.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-admin.php') ; ?>
 
 <hr>
 
@@ -91,8 +106,7 @@
 
 <script src="../JS/ADM-utilisateurs.js"></script>
 
-    <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer-adm-emp.php'); ?>
 </body>
 </html>
 

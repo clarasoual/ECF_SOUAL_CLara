@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="connexion-page">
 
-<?php include('../COMPONENTS/COMP-header-admin.html'); ?>
+<?php include('../COMPONENTS/COMP-header-admin.php'); ?>
 
 <main>
     <div class="container-connexion">
