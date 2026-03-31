@@ -4,12 +4,12 @@
         <a href="#">Règlement de la plateforme</a>
         <a href="#">Contact</a>
         <!-- Bouton déconnexion si l'utilisateur est connecté -->
-        <?php
-        include('..//auth.php'); // Démarre la session et charge les fonctions
-        if(isset($_SESSION['user_id'])) {
+            <?php
+        require_once(__DIR__ . '/../PHP/auth.php'); // plus sûr que include relatif
+        if (isset($_SESSION['user_id'])) {
             echo '<a href="../UTILISATEUR/USR-deconnexion.php" 
-                     onclick="return confirm(\'Voulez-vous vraiment vous déconnecter ?\');" 
-                     style="color:red;">Déconnexion</a>';
+                    onclick="return confirm(\'Voulez-vous vraiment vous déconnecter ?\');" 
+                    style="color:red;">Déconnexion</a>';
         }
         ?>
     </div>

@@ -1,0 +1,32 @@
+[
+    {
+        "id": "log_69cc11434653b9.53369485",
+        "date": "2026-03-31 20:24:03",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Bordeaux → Mussidan le 2026-09-22 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Bordeaux&destination=Mussidan&date=2026-09-22&passenger=1"
+    },
+    {
+        "id": "log_69cc11428c42a4.94804299",
+        "date": "2026-03-31 20:24:02",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Bordeaux → Mussidan le 2026-09-22 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Bordeaux&destination=Mussidan&date=2026-09-22&passenger=1"
+    },
+    {
+        "id": "log_69cc1120158c18.55780263",
+        "date": "2026-03-31 20:23:28",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Bordeaux → Mussidan le 2026-09-22 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Bordeaux&destination=Mussidan&date=2026-09-22&passenger=1"
+    }
+]
