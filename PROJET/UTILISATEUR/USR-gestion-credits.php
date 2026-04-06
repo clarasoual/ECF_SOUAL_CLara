@@ -1,94 +1,99 @@
 <?php
-include('../PHP/auth.php'); // Démarre la session et charge les fonctions
-requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+include('../PHP/auth.php');
+requireLogin();
+include('../PHP/connexion.php');
+include('../PHP/transactions.php');
+
+$id_utilisateur = $_SESSION['user_id'];
+
+// Récupère le solde depuis MySQL
+$stmt = $bdd->prepare("SELECT solde FROM credits WHERE id_utilisateur = ?");
+$stmt->execute([$id_utilisateur]);
+$credit = $stmt->fetch(PDO::FETCH_ASSOC);
+$solde = $credit ? $credit['solde'] : 0;
+
+// Récupère l'historique depuis le JSON
+$transactions = getTransactions($id_utilisateur);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mon compte - Crédits </title>
+    <title>Mon compte - Crédits</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-gestion-credits.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-
-<!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
 
-<!-- Menu latéral -->
 <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
-<!-- Section crédits -->
-<section>
+<section class="credits-section">
+
+    <!-- Solde actuel -->
     <h2>Mes crédits</h2>
-
-    <p><strong>Solde actuel :</strong> 15 crédits</p>
-
+    <p class="solde-actuel"><strong>Solde actuel :</strong> <?= $solde ?> crédits</p>
     <p>Vous gagnez des crédits en proposant des trajets à d'autres utilisateurs, lorsque vous êtes conducteur.</p>
 
+    <!-- Historique -->
+    <h3>Historique des crédits</h3>
+    <?php if (empty($transactions)): ?>
+        <p>Aucune transaction pour le moment.</p>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Montant</th>
+                <th>Solde à ce jour</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($transactions as $t): ?>
+            <tr class="transaction-<?= $t['type'] ?>">
+                <td><?= date('d/m/Y', strtotime($t['date'])) ?></td>
+                <td><?= $t['type'] === 'entree' ? 'Entrée' : 'Sortie' ?></td>
+                <td>
+                    <?php if ($t['id_trajet']): ?>
+                        <a href="USR-details-trajet.php?id=<?= $t['id_trajet'] ?>">
+                            <?= htmlspecialchars($t['description']) ?>
+                        </a>
+                    <?php else: ?>
+                        <?= htmlspecialchars($t['description']) ?>
+                    <?php endif; ?>
+                </td>
+                <td><?= $t['type'] === 'entree' ? '+' : '-' ?><?= $t['montant'] ?></td>
+                <td><?= $t['solde_apres'] ?></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+    </table>
+    <?php endif; ?>
+
     <!-- Demande de crédits -->
-    <p><em>Besoin de plus de crédits pour continuer à covoiturer ?</em></p>
-
-    <form action="#" method="post">
-        <button type="submit">Demander des crédits à Eco Ride</button>
+    <h3>Besoin de crédits ?</h3>
+    <p><em>Vous pouvez faire une demande de crédits à EcoRide.</em></p>
+    <form action="../PHP/demande-credits.php" method="post">
+        <button type="submit">Demander des crédits à EcoRide</button>
     </form>
-    <p><strong> Remarque :</strong>Votre demande sera étudiée par notre équipe. Vous recevrez une réponse sous peu.</p>
+    <p><strong>Remarque :</strong> Votre demande sera étudiée par notre équipe. Vous recevrez une réponse sous peu.</p>
 
-<!-- Historique des crédits -->
-<h3>Historique des crédits</h3>
-<table border="1">
-    <thead>
-        <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Type</th>
-            <th scope="col">Description</th>
-            <th scope="col">Montant</th>
-            <th scope="col">Solde à ce jour</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td>04/02/2024</td>
-            <td>Sortie</td>
-            <td>Réservation du trajet n°2.1</td>
-            <td>- 5</td>
-            <td>15</td>
-        </tr>
-        <tr>
-
-        <td>01/02/2024</td>
-        <td>Entrée</td>
-        <td>Crédits de bienvenue</td>
-        <td>+ 20</td>
-        <td>20</td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- Infos générales sur le système de crédits -->
-<h3>A propos des crédits</h3>
-<p>Chez <strong>EcoRide</strong>, chaque trajet partagé est un pas vers un monde plus solidaire et écologique.</p>
-<p>Notre système de crédit permet de vérifier régulièrement si l'ensemble de nos trajets se passent dans le respect de notre charte de confiance (sécurité, respect, fiabilité.), tout en encourageant les utilisateurs à adopter un comportement éco-responsable.</p>
+    <!-- À propos -->
+    <h3>À propos des crédits</h3>
+    <p>Chez <strong>EcoRide</strong>, chaque trajet partagé est un pas vers un monde plus solidaire et écologique.</p>
+    <p>Notre système de crédit permet de vérifier régulièrement si l'ensemble de nos trajets se passent dans le respect de notre charte de confiance (sécurité, respect, fiabilité), tout en encourageant les utilisateurs à adopter un comportement éco-responsable.</p>
 
 </section>
 
-<script src="../JS/USR-gestion-credits.js"></script>
+</main>
 
- </main>
-    <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>
-
-<!-- A FAIRE :
-
- - CSS
- - Aérer le tout
- - Mettre lien vers la trajet en question dans le tableau
- - Mettre historique avant la demande de crédits ? -->
