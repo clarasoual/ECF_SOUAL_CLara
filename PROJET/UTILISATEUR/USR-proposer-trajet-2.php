@@ -8,23 +8,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Stocker les données de l'étape 1 en session
 $_SESSION['trajet_temp'] = [
-    'departure' => $_POST['departure'] ?? '',
-    'arrival' => $_POST['arrival'] ?? '',
-    'date' => $_POST['date'] ?? '',
-    'time' => $_POST['time'] ?? '',
+    'departure'    => $_POST['departure'] ?? '',
+    'arrival'      => $_POST['arrival'] ?? '',
+    'date'         => $_POST['date'] ?? '',
+    'time'         => $_POST['time'] ?? '',
     'vehicle_used' => $_POST['vehicle_used'] ?? '',
-    'places' => $_POST['places'] ?? '',
-    'commentaire' => $_POST['commentaire'] ?? '',
-    'etapes' => array_filter($_POST, function($key) {
+    'places'       => $_POST['places'] ?? '',
+    'prix'         => $_POST['prix'] ?? 2,
+    'commentaire'  => $_POST['commentaire'] ?? '',
+    'etapes'       => array_filter($_POST, function($key) {
         return strpos($key, 'step') === 0;
     }, ARRAY_FILTER_USE_KEY)
 ];
 
 $trajet = $_SESSION['trajet_temp'];
+$gains = max(0, (int)$trajet['prix'] - 2);
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -51,6 +51,8 @@ $trajet = $_SESSION['trajet_temp'];
             <tr><td class="summary-label">Heure :</td><td class="summary-value"><?= htmlspecialchars($trajet['time']) ?></td></tr>
             <tr><td class="summary-label">Véhicule utilisé :</td><td class="summary-value"><?= htmlspecialchars($trajet['vehicle_used']) ?></td></tr>
             <tr><td class="summary-label">Places disponibles :</td><td class="summary-value"><?= htmlspecialchars($trajet['places']) ?></td></tr>
+            <tr><td class="summary-label">Prix par passager :</td><td class="summary-value"><?= htmlspecialchars($trajet['prix']) ?> crédits</td></tr>
+            <tr><td class="summary-label">Vos gains par passager :</td><td class="summary-value"><?= $gains ?> crédits</td></tr>
             <tr><td class="summary-label">Commentaires :</td><td class="summary-value"><?= htmlspecialchars($trajet['commentaire']) ?></td></tr>
         </table>
 
@@ -62,8 +64,6 @@ $trajet = $_SESSION['trajet_temp'];
                 <a href="USR-proposer-trajet.php" id="edit-link">Modifier les informations du trajet</a>
             </p>
         </section>
-
-        <p>Ce trajet vous fera gagner 5 crédits par passager.</p>
     </section>
 </main>
 

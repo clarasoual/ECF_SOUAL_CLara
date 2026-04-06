@@ -2,8 +2,8 @@
 session_start();
 include('../PHP/auth.php'); 
 requireLogin();
-require('../PHP/connexion.php'); // $bdd créé ici
-// Vérification du rôle : seul le conducteur ou passager-conducteur peut accéder
+require('../PHP/connexion.php');
+
 $userId = $_SESSION['user_id'] ?? 0;
 
 if ($userId) {
@@ -13,24 +13,21 @@ if ($userId) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$user || !in_array($user['role'], ['conducteur', 'passager-conducteur'])) {
-            // Redirection si ce n'est pas un conducteur
-            header('Location: ../PHP/403.php'); // Crée une page simple "Accès refusé"
+            header('Location: ../PHP/403.php');
             exit;
         }
     } catch (PDOException $e) {
         die("Erreur PDO : " . htmlspecialchars($e->getMessage()));
     }
 } else {
-    // Redirection si non connecté (sécurité supplémentaire)
     header('Location: ../PHP/login.php');
     exit;
 }
 
-
-// --- Réinitialiser le trajet temporaire uniquement si on arrive ici depuis "Proposer un nouveau trajet" ---
 if (isset($_GET['new']) && $_GET['new'] == 1) {
     unset($_SESSION['trajet_temp']);
 }
+
 $userId = $_SESSION['user_id'] ?? 0;
 
 $vehicules = [];
@@ -49,7 +46,6 @@ if ($userId) {
     }
 }
 
-// --- Pré-remplir les champs uniquement si $_SESSION['trajet_temp'] existe ---
 $trajet_temp = $_SESSION['trajet_temp'] ?? [
     'departure' => '',
     'arrival' => '',
@@ -57,6 +53,7 @@ $trajet_temp = $_SESSION['trajet_temp'] ?? [
     'time' => '',
     'vehicle_used' => '',
     'places' => '',
+    'prix' => 2,
     'commentaire' => '',
     'etapes' => ['']
 ];
@@ -130,13 +127,18 @@ if (empty($etapes)) { $etapes = ['']; }
                 <input type="number" id="places" name="places" min="1" max="8" required
                        value="<?= htmlspecialchars($trajet_temp['places']) ?>"><br><br>
 
+                <label for="prix">Prix par passager (en crédits) *</label><br>
+                <p class="credit-infos">⚠️ 2 crédits sont retenus par la plateforme. Minimum : 2 crédits.</p>
+                <input type="number" id="prix" name="prix" min="2" max="20" required
+                       value="<?= htmlspecialchars($trajet_temp['prix'] ?? 2) ?>"><br><br>
+
+                <p class="credit-infos" id="gains-info">
+                    Vous gagnerez <strong id="gains-calcul"><?= max(0, ($trajet_temp['prix'] ?? 2) - 2) ?></strong> crédits par passager (après retenue plateforme).
+                </p>
+
                 <label for="commentaire">Autres précisions (optionnel)</label><br>
                 <textarea id="commentaire" name="commentaire" rows="4" cols="40" 
                           placeholder="Ex : passage par autoroute, coffre petit..."><?= htmlspecialchars($trajet_temp['commentaire']) ?></textarea><br><br>
-
-                <p class="credit-infos">
-                    Ce trajet vous fera gagner <strong>5 crédits</strong> par passager une fois effectué.
-                </p>
 
                 <button type="submit" class="btn-submit">Étape suivante</button>
             </td>
@@ -146,6 +148,14 @@ if (empty($etapes)) { $etapes = ['']; }
 </section>
 
 <script src="../JS/USR-proposer-trajet.js"></script>
+<script>
+document.getElementById('prix').addEventListener('input', function() {
+    const prix = parseInt(this.value) || 0;
+    const gains = Math.max(0, prix - 2);
+    document.getElementById('gains-calcul').textContent = gains;
+});
+</script>
+
 <?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>

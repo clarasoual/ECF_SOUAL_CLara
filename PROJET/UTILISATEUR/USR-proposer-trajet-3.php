@@ -26,9 +26,8 @@ $etapes_str = !empty($etapes) ? json_encode($etapes, JSON_UNESCAPED_UNICODE) : n
 try {
     // Préparer la requête avec $bdd
     $sql = "INSERT INTO trajets
-            (id_conducteur, depart, arrivee, date_depart, heure_depart, vehicule_id, places_disponibles, statut, etapes, commentaire)
-            VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :vehicule_id, :places_disponibles, 'publie', :etapes, :commentaire)";
-    
+        (id_conducteur, depart, arrivee, date_depart, heure_depart, vehicule_id, places_disponibles, prix, statut, etapes, commentaire)
+        VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :vehicule_id, :places_disponibles, :prix, 'publie', :etapes, :commentaire)";
     $stmt = $bdd->prepare($sql);
     $stmt->execute([
         ':id_conducteur' => $id_conducteur,
@@ -38,6 +37,7 @@ try {
         ':heure_depart' => $trajet['time'],
         ':vehicule_id' => $trajet['vehicle_used'],
         ':places_disponibles' => $trajet['places'],
+        ':prix'               => intval($trajet['prix'] ?? 2),
         ':etapes' => $etapes_str,
         ':commentaire' => $trajet['commentaire'] ?? ''
     ]);
