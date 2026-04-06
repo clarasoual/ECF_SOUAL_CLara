@@ -1,5 +1,15 @@
 [
     {
+        "id": "log_69d3924de1f106.62520012",
+        "date": "2026-04-06 13:00:29",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
         "id": "log_69cc11434653b9.53369485",
         "date": "2026-03-31 20:24:03",
         "niveau": "INFO",
