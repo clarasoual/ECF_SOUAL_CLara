@@ -1,0 +1,12 @@
+[
+    {
+        "id": "transaction_69d39c181e383",
+        "date": "2026-04-06 13:42:16",
+        "id_utilisateur": 47,
+        "type": "entree",
+        "description": "Cr\u00e9dits de bienvenue",
+        "montant": 20,
+        "solde_apres": 20,
+        "id_trajet": null
+    }
+]

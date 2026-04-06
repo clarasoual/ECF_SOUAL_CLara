@@ -72,6 +72,19 @@ $stmt->execute([
 
 // Connexion automatique
 $new_user_id = $bdd->lastInsertId();
+// Création du portefeuille de crédits (20 crédits de bienvenue)
+$stmt = $bdd->prepare("INSERT INTO credits (id_utilisateur, solde) VALUES (?, 20)");
+$stmt->execute([$new_user_id]);
+
+// Enregistrement de la transaction de bienvenue dans le JSON
+include('transactions.php');
+ajouterTransaction(
+    $new_user_id,
+    'entree',
+    'Crédits de bienvenue',
+    20,
+    20
+);
 $_SESSION['user_id'] = $new_user_id;
 $_SESSION['user_email'] = $email;
 $_SESSION['user_role'] = $role;

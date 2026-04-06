@@ -6,8 +6,7 @@ define('TRANSACTIONS_FILE', __DIR__ . '/../../transactions.json');
 function initTransactionsFile() {
     if (!file_exists(TRANSACTIONS_FILE)) {
         file_put_contents(TRANSACTIONS_FILE, json_encode([]));
-        chmod(TRANSACTIONS_FILE, 0664);
-    }
+        chmod(TRANSACTIONS_FILE, 0666);    }
 }
 
 // Enregistre une transaction
@@ -18,7 +17,7 @@ function ajouterTransaction($id_utilisateur, $type, $description, $montant, $sol
         'id'             => 'transaction_' . uniqid(),
         'date'           => date('Y-m-d H:i:s'),
         'id_utilisateur' => (int) $id_utilisateur,
-        'type'           => $type, // 'entree' ou 'sortie'
+        'type'           => $type,
         'description'    => $description,
         'montant'        => (int) $montant,
         'solde_apres'    => (int) $solde_apres,
@@ -47,7 +46,7 @@ function getTransactions($id_utilisateur, $limite = 20, $offset = 0) {
 
     // Filtre par utilisateur
     $filtrees = array_filter($transactions, function($t) use ($id_utilisateur) {
-        return $t['id_utilisateur'] === (int) $id_utilisateur;
+        return (int)$t['id_utilisateur'] === (int)$id_utilisateur;
     });
 
     // Tri par date décroissante (plus récent en premier)
@@ -67,6 +66,6 @@ function countTransactions($id_utilisateur) {
     $transactions = json_decode($contenu, true) ?? [];
 
     return count(array_filter($transactions, function($t) use ($id_utilisateur) {
-        return $t['id_utilisateur'] === (int) $id_utilisateur;
+        return (int)$t['id_utilisateur'] === (int)$id_utilisateur;
     }));
 }
