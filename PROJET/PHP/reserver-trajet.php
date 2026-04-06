@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmer'])) {
     );
 
     // Inscrire le passager
-    $stmt = $bdd->prepare("INSERT INTO trajets_passagers (id_trajet, id_passager) VALUES (?, ?)");
+    $stmt = $bdd->prepare("INSERT INTO trajets_passagers (id_trajet, id_passager, statut) VALUES (?, ?, 'reserve')");
     $stmt->execute([$id_trajet, $id_utilisateur]);
 
     // Mettre à jour les places disponibles
