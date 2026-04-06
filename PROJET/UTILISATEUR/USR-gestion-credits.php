@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include('../PHP/auth.php');
 requireLogin();
 include('../PHP/connexion.php');
@@ -27,7 +29,7 @@ $transactions = getTransactions($id_utilisateur);
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.php'); ?>
+<?php include('../COMPONENTS/COMP-header.html'); ?>
 
 <main>
 
@@ -35,8 +37,12 @@ $transactions = getTransactions($id_utilisateur);
 
 <section class="credits-section">
 
-    <!-- Solde actuel -->
     <h2>Mes crédits</h2>
+
+    <?php if (isset($_GET['demande']) && $_GET['demande'] === 'ok'): ?>
+        <p class="message-succes">✅ Votre demande a bien été envoyée. Notre équipe reviendra vers vous rapidement.</p>
+    <?php endif; ?>
+
     <p class="solde-actuel"><strong>Solde actuel :</strong> <?= $solde ?> crédits</p>
     <p>Vous gagnez des crédits en proposant des trajets à d'autres utilisateurs, lorsque vous êtes conducteur.</p>
 
@@ -73,14 +79,14 @@ $transactions = getTransactions($id_utilisateur);
                 <td><?= $t['solde_apres'] ?></td>
             </tr>
             <?php endforeach; ?>
-            </tbody>
+        </tbody>
     </table>
     <?php endif; ?>
 
     <!-- Demande de crédits -->
     <h3>Besoin de crédits ?</h3>
     <p><em>Vous pouvez faire une demande de crédits à EcoRide.</em></p>
-    <form action="../PHP/demande-credits.php" method="post">
+    <form action="../PHP/demande_credits.php" method="post" onsubmit="return confirmerDemande()">
         <button type="submit">Demander des crédits à EcoRide</button>
     </form>
     <p><strong>Remarque :</strong> Votre demande sera étudiée par notre équipe. Vous recevrez une réponse sous peu.</p>
@@ -94,6 +100,12 @@ $transactions = getTransactions($id_utilisateur);
 
 </main>
 
-<?php include('../COMPONENTS/COMP-footer.php'); ?>
+<script>
+function confirmerDemande() {
+    return confirm("Confirmez-vous votre demande de crédits à EcoRide ?");
+}
+</script>
+
+<?php include('../COMPONENTS/COMP-footer.html'); ?>
 </body>
 </html>

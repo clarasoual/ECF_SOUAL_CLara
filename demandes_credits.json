@@ -1,0 +1,29 @@
+[
+    {
+        "id": "demande_69d39f8589906",
+        "date": "2026-04-06 13:56:53",
+        "id_utilisateur": 47,
+        "prenom": "testcredits",
+        "nom": "testcredits",
+        "email": "test.credits@example.com",
+        "statut": "en_attente"
+    },
+    {
+        "id": "demande_69d3a0c9db47f",
+        "date": "2026-04-06 14:02:17",
+        "id_utilisateur": 47,
+        "prenom": "testcredits",
+        "nom": "testcredits",
+        "email": "test.credits@example.com",
+        "statut": "en_attente"
+    },
+    {
+        "id": "demande_69d3a1498e30d",
+        "date": "2026-04-06 14:04:25",
+        "id_utilisateur": 47,
+        "prenom": "testcredits",
+        "nom": "testcredits",
+        "email": "test.credits@example.com",
+        "statut": "en_attente"
+    }
+]
