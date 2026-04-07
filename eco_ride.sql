@@ -6,7 +6,7 @@
 -- Généré le : mar. 07 avr. 2026 à 14:36
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
-
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -106,7 +106,7 @@ CREATE TABLE `employes` (
   `prenom` varchar(50) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `service` varchar(100) DEFAULT NULL,
-  `date_embauche` date NOT NULL DEFAULT curdate()
+`date_embauche` date NOT NULL DEFAULT (curdate())
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
