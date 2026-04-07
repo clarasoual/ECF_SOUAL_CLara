@@ -7,7 +7,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./PROJET:/var/www/html
+      - ./:/var/www/html
     depends_on:
       - mysql
     environment:

@@ -35,8 +35,7 @@ if ($isLoggedIn) {
                     <div class="user-info">
                         <a href="<?= $profilLink ?>">
                             <img
-                                src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($photo) ?>"
-                                alt="Photo de profil"
+                                src="../../IMAGES/profiles/<?= htmlspecialchars($photo) ?>"                                alt="Photo de profil"
                                 class="photo-profil"
                                 id="profil-click">
                         </a>
