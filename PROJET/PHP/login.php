@@ -1,6 +1,6 @@
 <?php
 require_once('auth.php');
-require_once('connexion.php'); // $bdd créé ici
+require_once('connexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../UTILISATEUR/USR-connexion-inscription.php');
@@ -15,7 +15,6 @@ if ($email === '' || $password === '') {
     die('Champs manquants.');
 }
 
-// ✅ Utiliser $bdd maintenant
 $stmt = $bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
 $stmt->execute(['email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -26,6 +25,12 @@ if (!$user) {
 
 if (!password_verify($password, $user['mot_de_passe'])) {
     die('Mot de passe incorrect.');
+}
+
+// Vérifier si le compte est suspendu
+if ($user['suspendu']) {
+    header('Location: ../UTILISATEUR/USR-connexion-inscription.php?error=suspendu');
+    exit;
 }
 
 // Connexion réussie

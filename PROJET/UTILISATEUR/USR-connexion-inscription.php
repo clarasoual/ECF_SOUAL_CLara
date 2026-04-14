@@ -1,3 +1,4 @@
+```php
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,8 +28,14 @@
         <div id="connexion">
             <h2>Se connecter</h2>
 
+            <?php if (isset($_GET['error']) && $_GET['error'] === 'suspendu'): ?>
+                <p class="error-message" style="color: red; font-weight: 600;">
+                    ⚠️ Votre compte a été suspendu.
+                    <a href="mailto:support@ecoride.fr" target="_blank">Contacter le support EcoRide</a>
+                </p>
+            <?php endif; ?>
+
             <?php
-            // 🔹 On récupère l'URL vers laquelle rediriger après connexion
             $redirect = $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php';
             ?>
 
@@ -36,7 +43,6 @@
                   action="../PHP/login.php"
                   method="POST">
 
-                <!-- 🔹 Champ caché pour mémoriser la page cible -->
                 <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
 
                 <label for="email">Adresse mail :</label>
@@ -64,3 +70,6 @@
 
 </body>
 </html>
+```
+
+Teste ! 🚀
