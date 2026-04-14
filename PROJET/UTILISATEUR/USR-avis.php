@@ -1,6 +1,49 @@
 <?php
-include('../PHP/auth.php'); // Démarre la session et charge les fonctions
-requireLogin(); // Redirige si l'utilisateur n'est pas connecté
+include('../PHP/auth.php');
+requireLogin();
+include('../PHP/connexion.php');
+
+$id_utilisateur = $_SESSION['user_id'];
+
+// Avis reçus (statut valide uniquement)
+$stmt = $bdd->prepare("
+    SELECT 
+        a.note,
+        a.commentaire,
+        a.date_creation,
+        t.depart,
+        t.arrivee,
+        u.prenom AS prenom_auteur,
+        u.nom AS nom_auteur
+    FROM avis a
+    JOIN trajets t ON t.id = a.id_trajet
+    JOIN utilisateurs u ON u.id = a.id_auteur
+    WHERE a.id_destinataire = ?
+    AND a.statut = 'valide'
+    ORDER BY a.date_creation DESC
+");
+$stmt->execute([$id_utilisateur]);
+$avis_recus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Avis donnés
+$stmt = $bdd->prepare("
+    SELECT 
+        a.note,
+        a.commentaire,
+        a.date_creation,
+        a.statut,
+        t.depart,
+        t.arrivee,
+        u.prenom AS prenom_destinataire,
+        u.nom AS nom_destinataire
+    FROM avis a
+    JOIN trajets t ON t.id = a.id_trajet
+    JOIN utilisateurs u ON u.id = a.id_destinataire
+    WHERE a.id_auteur = ?
+    ORDER BY a.date_creation DESC
+");
+$stmt->execute([$id_utilisateur]);
+$avis_donnes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,73 +57,63 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
 </head>
 <body>
 
-<!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
-    <!-- Menu latéral -->
     <div class="menu-column">
         <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
     </div>
 
-    <!-- Contenu principal -->
     <div class="content-column">
         <section class="reviews-section">
             <h2>Mes avis</h2>
 
-            <!-- Container pour les boutons et le tri -->
-            <div class="btn-container"></div>
-
             <!-- Avis reçus -->
             <div id="reviews-received">
                 <h3>Avis reçus</h3>
-
-                <div class="review">
-                    <p><strong>Date :</strong> 12/05/2025</p>
-                    <p><strong>Trajet :</strong> Toulouse - Bordeaux</p>
-                    <p><strong>Rôle :</strong> Conducteur</p>
-                    <p><strong>Note :</strong> 4/5</p>
-                    <p><strong>Commentaire :</strong> Trajet très agréable, merci.</p>
-                </div>
-
-                <div class="review">
-                    <p><strong>Date :</strong> 28/04/2025</p>
-                    <p><strong>Trajet :</strong> Nantes - Rennes</p>
-                    <p><strong>Rôle :</strong> Passager</p>
-                    <p><strong>Note :</strong> 4/5</p>
-                    <p><strong>Commentaire :</strong> Très ponctuelle et sympa !</p>
-                </div>
+                <?php if (empty($avis_recus)): ?>
+                    <p>Aucun avis reçu pour le moment.</p>
+                <?php else: ?>
+                    <?php foreach ($avis_recus as $a): ?>
+                    <div class="review">
+                        <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($a['date_creation'])) ?></p>
+                        <p><strong>Trajet :</strong> <?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></p>
+                        <p><strong>De :</strong> <?= htmlspecialchars($a['prenom_auteur'] . ' ' . $a['nom_auteur']) ?></p>
+                        <p><strong>Note :</strong> <?= $a['note'] ?>/5</p>
+                        <?php if ($a['commentaire']): ?>
+                            <p><strong>Commentaire :</strong> <?= htmlspecialchars($a['commentaire']) ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
             <!-- Avis donnés -->
             <div id="reviews-given">
                 <h3>Avis donnés</h3>
-
-                <div class="review">
-                    <p><strong>Date :</strong> 19/04/2025</p>
-                    <p><strong>Trajet :</strong> Lyon - Grenoble</p>
-                    <p><strong>Rôle :</strong> Passager</p>
-                    <p><strong>Note :</strong> 3/5</p>
-                    <p><strong>Commentaire :</strong> Chauffeur correct, un peu en retard.</p>
-                </div>
-
-                <div class="review">
-                    <p><strong>Date :</strong> 03/04/2025</p>
-                    <p><strong>Trajet :</strong> Lille - Paris</p>
-                    <p><strong>Rôle :</strong> Conducteur</p>
-                    <p><strong>Note :</strong> 5/5</p>
-                    <p><strong>Commentaire :</strong> Très bon passager, respectueux et à l'heure.</p>
-                </div>
+                <?php if (empty($avis_donnes)): ?>
+                    <p>Vous n'avez pas encore donné d'avis.</p>
+                <?php else: ?>
+                    <?php foreach ($avis_donnes as $a): ?>
+                    <div class="review">
+                        <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($a['date_creation'])) ?></p>
+                        <p><strong>Trajet :</strong> <?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></p>
+                        <p><strong>Pour :</strong> <?= htmlspecialchars($a['prenom_destinataire'] . ' ' . $a['nom_destinataire']) ?></p>
+                        <p><strong>Note :</strong> <?= $a['note'] ?>/5</p>
+                        <?php if ($a['commentaire']): ?>
+                            <p><strong>Commentaire :</strong> <?= htmlspecialchars($a['commentaire']) ?></p>
+                        <?php endif; ?>
+                        <p><em>Statut : <?= $a['statut'] === 'valide' ? '✅ Publié' : ($a['statut'] === 'refuse' ? '❌ Refusé' : '⏳ En attente') ?></em></p>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
-            <!-- Diagramme des notes -->
-            <div class="chart-container"></div>
         </section>
     </div>
 </main>
 
-<!-- Footer commun -->
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 <script src="../JS/USR-avis.js"></script>
 </body>
 </html>
