@@ -12,15 +12,17 @@ $stmt->execute([$_SESSION['admin_id']]);
 $admin = $stmt->fetch();
 
 // ====== AJOUTER EMPLOYÉ ======
-if (isset($_POST['add_prenom'], $_POST['add_email'], $_POST['add_service'])) {
-    $stmt_add = $bdd->prepare("INSERT INTO employes (prenom, email, service, date_embauche) VALUES (?, ?, ?, ?)");
+if (isset($_POST['add_prenom'], $_POST['add_email'], $_POST['add_service'], $_POST['add_password'])) {
+    $mot_de_passe = password_hash($_POST['add_password'], PASSWORD_DEFAULT);
+    $stmt_add = $bdd->prepare("INSERT INTO employes (prenom, email, service, mot_de_passe, date_embauche) VALUES (?, ?, ?, ?, ?)");
     $stmt_add->execute([
         $_POST['add_prenom'],
         $_POST['add_email'],
         $_POST['add_service'],
+        $mot_de_passe,
         date('Y-m-d')
     ]);
-    header("Location: " . $_SERVER['PHP_SELF']);
+    header("Location: " . $_SERVER['PHP_SELF'] . "?toast=add");
     exit();
 }
 
@@ -33,7 +35,7 @@ if (isset($_POST['edit_emp_id'])) {
         $_POST['edit_service'],
         $_POST['edit_emp_id']
     ]);
-    header("Location: " . $_SERVER['PHP_SELF']);
+    header("Location: " . $_SERVER['PHP_SELF'] . "?toast=edit");
     exit();
 }
 
@@ -148,8 +150,6 @@ $employes = $stmt_emp->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                         <td>
                             <button class="btn-modifier">Modifier</button>
-
-                            <!-- Suspendre / Réactiver -->
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="suspend_emp_id" value="<?= $emp['id'] ?>">
                                 <input type="hidden" name="suspend_value" value="<?= $emp['suspendu'] ? 0 : 1 ?>">
@@ -172,6 +172,7 @@ $employes = $stmt_emp->fetchAll(PDO::FETCH_ASSOC);
                 <input type="text" name="add_prenom" placeholder="Prénom" required>
                 <input type="email" name="add_email" placeholder="Email" required>
                 <input type="text" name="add_service" placeholder="Service" required>
+                <input type="password" name="add_password" placeholder="Mot de passe" required>
                 <button type="submit">Enregistrer</button>
                 <button type="button" class="popup-close">X</button>
             </form>
@@ -192,8 +193,14 @@ $employes = $stmt_emp->fetchAll(PDO::FETCH_ASSOC);
     </section>
 </main>
 
-<?php if (isset($_GET['toast']) && $_GET['toast'] === 'suspend'): ?>
-    <div id="toast-success" class="toast">Statut du compte mis à jour !</div>
+<?php if (isset($_GET['toast'])): ?>
+    <?php if ($_GET['toast'] === 'suspend'): ?>
+        <div id="toast-success" class="toast">Statut du compte mis à jour !</div>
+    <?php elseif ($_GET['toast'] === 'add'): ?>
+        <div id="toast-success" class="toast">Employé ajouté avec succès !</div>
+    <?php elseif ($_GET['toast'] === 'edit'): ?>
+        <div id="toast-success" class="toast">Employé modifié avec succès !</div>
+    <?php endif; ?>
 <?php endif; ?>
 
 <script>
