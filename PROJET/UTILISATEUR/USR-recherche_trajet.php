@@ -10,6 +10,7 @@ $trajets = [];
 $depart  = '';
 $arrivee = '';
 $date    = '';
+$prochain = null;
 
 if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     $depart  = trim($_GET['departure']);
@@ -24,6 +25,11 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
         'INFO',
         $_SESSION['user_id'] ?? null
     );
+
+    // Si aucun trajet, chercher le prochain disponible
+    if (empty($trajets)) {
+        $prochain = prochainTrajetDisponible($bdd, $depart, $arrivee, $date);
+    }
 
     $now = new DateTime();
     foreach ($trajets as $key => $trajet) {
@@ -84,27 +90,53 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
         <h2>Filtrer</h2>
         <button type="button" class="fillers-clear-btn">Tout effacer</button>
         <label>
-            <input type="checkbox" class="filter-input">
-            Trajet écologique
+            <input type="checkbox" class="filter-input" id="filter-eco">
+            Trajet écologique 🌿
         </label>
         <label>
             Note chauffeur minimale
-            <input type="number" step="0.1" class="filter-input">
+            <input type="number" step="0.1" min="0" max="5" class="filter-input" id="filter-note">
+        </label>
+        <label>
+            Prix maximum
+            <input type="number" min="0" class="filter-input" id="filter-prix">
         </label>
     </div>
 
     <div class="search-results">
 
-        <?php if (empty($trajets)): ?>
-            <p>Aucun trajet trouvé.</p>
+        <?php if (empty($trajets) && !isset($_GET['departure'])): ?>
+            <p>Effectuez une recherche pour voir les trajets disponibles.</p>
+
+        <?php elseif (empty($trajets)): ?>
+            <p>Aucun trajet trouvé pour cette recherche.</p>
+            <?php if ($prochain): ?>
+                <p>Le prochain trajet disponible sur cet itinéraire est le <strong><?= date('d/m/Y', strtotime($prochain['date_depart'])) ?></strong>.</p>
+                <a href="?departure=<?= urlencode($depart) ?>&destination=<?= urlencode($arrivee) ?>&date=<?= $prochain['date_depart'] ?>&passenger=1" class="ride-btn">
+                    Voir les trajets du <?= date('d/m/Y', strtotime($prochain['date_depart'])) ?>
+                </a>
+            <?php endif; ?>
+
         <?php else: ?>
             <?php foreach ($trajets as $trajet): ?>
-                <article class="ride">
+                <?php $eco = strtolower($trajet['carburant'] ?? '') === 'électrique'; ?>
+                <article class="ride" 
+                    data-eco="<?= $eco ? '1' : '0' ?>"
+                    data-note="<?= $trajet['note_moyenne'] ?>"
+                    data-prix="<?= $trajet['prix'] ?>">
+
                     <div class="ride-driver">
-<img src="../../IMAGES/profiles/<?= htmlspecialchars($trajet['photo_conducteur'] ?? 'default.jpg') ?>" alt="Chauffeur">                        <span class="driver-name">
+                        <img src="../../IMAGES/profiles/<?= htmlspecialchars($trajet['photo_conducteur'] ?? 'default.jpg') ?>" alt="Chauffeur">
+                        <span class="driver-name">
                             <?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?>
                         </span>
+                        <?php if ($trajet['note_moyenne'] > 0): ?>
+                            <span class="driver-note">⭐ <?= number_format($trajet['note_moyenne'], 1) ?>/5</span>
+                        <?php else: ?>
+                            <span class="driver-note">Aucun avis</span>
+                        <?php endif; ?>
                     </div>
+
                     <div class="ride-content">
                         <h3 class="ride-title">
                             <?= htmlspecialchars($trajet['depart']) ?> → <?= htmlspecialchars($trajet['arrivee']) ?>
@@ -113,11 +145,16 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                             <p>🕒 <?= htmlspecialchars($trajet['heure_depart']) ?></p>
                             <p>📅 <?= htmlspecialchars($trajet['date_depart']) ?></p>
                             <p>💺 <?= htmlspecialchars($trajet['places_disponibles']) ?> place(s)</p>
+                            <p>💳 <?= $trajet['prix'] ?> crédit(s)</p>
+                            <?php if ($eco): ?>
+                                <p class="eco-badge">🌿 Trajet écologique</p>
+                            <?php endif; ?>
                         </div>
                         <?php if ($trajet['statut'] === 'complet'): ?>
                             <p class="trajet-complet">🚫 Complet</p>
                         <?php endif; ?>
                     </div>
+
                     <div class="ride-action">
                         <?php if ($trajet['statut'] === 'complet'): ?>
                             <span class="ride-btn disabled">Complet</span>
@@ -133,6 +170,40 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 
     </div>
 </section>
+
+<script>
+// Filtres JS
+const btnClear = document.querySelector('.fillers-clear-btn');
+const filterEco = document.getElementById('filter-eco');
+const filterNote = document.getElementById('filter-note');
+const filterPrix = document.getElementById('filter-prix');
+
+function appliquerFiltres() {
+    const eco = filterEco.checked;
+    const noteMin = parseFloat(filterNote.value) || 0;
+    const prixMax = parseFloat(filterPrix.value) || Infinity;
+
+    document.querySelectorAll('.ride').forEach(ride => {
+        const rideEco = ride.dataset.eco === '1';
+        const rideNote = parseFloat(ride.dataset.note);
+        const ridePrix = parseFloat(ride.dataset.prix);
+
+        const ok = (!eco || rideEco) && (rideNote >= noteMin) && (ridePrix <= prixMax);
+        ride.style.display = ok ? '' : 'none';
+    });
+}
+
+filterEco.addEventListener('change', appliquerFiltres);
+filterNote.addEventListener('input', appliquerFiltres);
+filterPrix.addEventListener('input', appliquerFiltres);
+
+btnClear.addEventListener('click', () => {
+    filterEco.checked = false;
+    filterNote.value = '';
+    filterPrix.value = '';
+    appliquerFiltres();
+});
+</script>
 
 <script src="../JS/ecoride_js.js"></script>
 <?php include(__DIR__ . '/../COMPONENTS/COMP-footer.php'); ?>
