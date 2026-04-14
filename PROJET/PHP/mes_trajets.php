@@ -1,5 +1,4 @@
 <?php
-// 🔒 Sécurité et session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -70,7 +69,6 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
     $passagers = getPassagers($bdd, $trajet['id']);
 
     echo '<div class="trip-card">';
-    echo '<p>DEBUG statut: ' . $trajet['statut'] . ' | role: ' . $trajet['role'] . '</p>';
     echo '<p><strong>Date :</strong> ' . htmlspecialchars($trajet['date_depart']) . ' à ' . htmlspecialchars($trajet['heure_depart']) . '</p>';
     echo '<p><strong>Départ :</strong> ' . htmlspecialchars($trajet['depart']) . '</p>';
     echo '<p><strong>Arrivée :</strong> ' . htmlspecialchars($trajet['arrivee']) . '</p>';
@@ -89,11 +87,12 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
 
     // Boutons conducteur
     if ($trajet['role'] === 'conducteur') {
-$heureTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
-$uneHureAvant = (clone $heureTrajet)->modify('-1 hour');
-$now = new DateTime();
+        $heureTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+        $uneHeureAvant = (clone $heureTrajet)->modify('-1 hour');
+        $now = new DateTime();
 
-if (($trajet['statut'] === 'publie' || $trajet['statut'] === 'complet') && $now >= $uneHureAvant) {            echo '
+        if (($trajet['statut'] === 'publie' || $trajet['statut'] === 'complet') && $now >= $uneHeureAvant) {
+            echo '
             <form action="../PHP/demarrer-trajet.php" method="POST" style="display:inline;">
                 <input type="hidden" name="id_trajet" value="' . $trajet['id'] . '">
                 <button type="submit" class="btn-demarrer" onclick="return confirm(\'Démarrer ce trajet ?\')">🚗 Démarrer</button>
@@ -107,26 +106,17 @@ if (($trajet['statut'] === 'publie' || $trajet['statut'] === 'complet') && $now 
         }
     }
 
-    // Bouton validation passager après trajet terminé
+    // Bouton avis passager après trajet terminé
     if ($trajet['role'] === 'passager' && $trajet['statut'] === 'termine') {
-        // Vérifier si le passager a déjà validé
-        $dejValide = false;
-foreach ($passagers as $p) {
-    if ($p['id'] == $id_utilisateur && ($p['statut'] === 'valide' || $p['statut'] === 'litige')) {
-        $dejValide = true;
-        break;
-    }
-}
-        if (!$dejValide) {
-            echo '
-            <div class="validation-trajet">
-                <p>Ce trajet est terminé. Comment s\'est-il passé ?</p>
-                <form action="../PHP/valider-trajet.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="id_trajet" value="' . $trajet['id'] . '">
-                    <button type="submit" name="validation" value="ok" class="btn-ok">👍 Tout s\'est bien passé</button>
-                    <button type="submit" name="validation" value="probleme" class="btn-probleme">👎 Problème</button>
-                </form>
-            </div>';
+        $dejaAvis = false;
+        foreach ($passagers as $p) {
+            if ($p['id'] == $id_utilisateur && $p['statut'] === 'avis_laisse') {
+                $dejaAvis = true;
+                break;
+            }
+        }
+        if (!$dejaAvis) {
+            echo '<a href="USR-avis-trajet.php?id_trajet=' . $trajet['id'] . '" class="btn-avis">⭐ Laisser un avis</a>';
         }
     }
 

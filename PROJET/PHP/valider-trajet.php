@@ -62,8 +62,7 @@ if ($validation === 'ok') {
     $stmt = $bdd->prepare("UPDATE trajets_passagers SET statut = 'valide' WHERE id_trajet = ? AND id_passager = ?");
     $stmt->execute([$id_trajet, $id_utilisateur]);
 
-    header('Location: ../UTILISATEUR/USR-mes-trajets.php?validated=1');
-
+    header('Location: ../UTILISATEUR/USR-avis-trajet.php?id_trajet=' . $id_trajet);
 } elseif ($validation === 'probleme') {
     // Problème → marquer pour l'employé
     $stmt = $bdd->prepare("UPDATE trajets_passagers SET statut = 'litige' WHERE id_trajet = ? AND id_passager = ?");

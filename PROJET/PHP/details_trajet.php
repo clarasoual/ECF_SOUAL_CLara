@@ -45,7 +45,7 @@ $stmt = $bdd->prepare("
     FROM trajets_passagers tp
     JOIN utilisateurs u ON tp.id_passager = u.id
     WHERE tp.id_trajet = :id
-      AND tp.statut = 'reserve'
+    AND tp.statut IN ('reserve', 'termine', 'valide', 'litige', 'avis_laisse')
 ");
 $stmt->execute([':id' => $id_trajet]);
 $passagers = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -62,6 +62,7 @@ $stmt = $bdd->prepare("
     FROM avis a
     JOIN utilisateurs u ON a.id_auteur = u.id
     WHERE a.id_destinataire = :id_conducteur
+    AND a.statut = 'valide'
     ORDER BY a.date_creation DESC
 ");
 $stmt->execute([
@@ -74,9 +75,6 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
    ========================= */
 $isOwner = ($_SESSION['user_id'] === $trajet['id_conducteur']);
 
-/* =========================
-   VÉRIFICATION PASSAGER INSCRIT
-   ========================= */
 /* =========================
    VÉRIFICATION PASSAGER INSCRIT
    ========================= */

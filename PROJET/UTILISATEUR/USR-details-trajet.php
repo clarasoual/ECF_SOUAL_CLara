@@ -30,8 +30,7 @@ if (!empty($trajet['etapes'])) {
 // Calculer date/heure du trajet
 $trajetDateTime = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
 $now = new DateTime();
-$isPast = $trajetDateTime < $now; // true si le trajet est passé
-?>
+$isPast = $trajetDateTime < $now || $trajet['statut'] === 'termine';?>
 
 <!DOCTYPE html>
 <html lang="fr">
