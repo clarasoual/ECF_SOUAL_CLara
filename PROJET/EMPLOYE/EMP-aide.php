@@ -1,3 +1,7 @@
+<?php
+require_once('../PHP/auth.php');
+requireEmploye();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,7 +18,7 @@
 
 
 
-<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.php') ; ?>
 
 <main>
 
@@ -84,8 +88,7 @@
 
     </main>
 
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
-
+<?php include('../COMPONENTS/COMP-footer-employe.php'); ?>
     <script src="../JS/EMP-aide.js"></script>
 
 </body>

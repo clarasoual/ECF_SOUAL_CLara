@@ -43,4 +43,24 @@ if (!function_exists('logoutUser')) {
         exit();
     }
 }
+
+// --- Fonctions pour gérer la connexion employé ---
+
+if (!function_exists('requireEmploye')) {
+    function requireEmploye() {
+        if (!isset($_SESSION['employe_id'])) {
+            header("Location: ../EMPLOYE/EMP-login-employe.php");
+            exit();
+        }
+    }
+}
+
+if (!function_exists('logoutEmploye')) {
+    function logoutEmploye() {
+        session_unset();
+        session_destroy();
+        header('Location: ../EMPLOYE/EMP-login-employe.php');
+        exit();
+    }
+}
 ?>

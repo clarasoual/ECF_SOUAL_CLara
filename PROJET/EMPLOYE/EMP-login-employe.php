@@ -12,19 +12,15 @@
 <body>
 
 <!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.php') ; ?>
 
     <main>
-
-    <?php include('../COMPONENTS/COMP-menu-employe.html') ; ?>
-
 
         <!-- Section globale de la partie connexion/inscription-->
         <div class="container-connexion">
             <div id="connexion">
                 <h2>Se connecter</h2>
-                <form id="formulaire-connexion" action="#" method="POST">
-                    <label for="email-connexion">Adresse mail :</label>
+                <form id="formulaire-connexion" action="../PHP/login-employe.php" method="POST">                    <label for="email-connexion">Adresse mail :</label>
                     <input type="email" id="email-connexion" name="email-connexion" required>
 
                     <label for="password">Mot de passe :</label>
@@ -46,8 +42,7 @@
 
 
     <!-- Footer commun -->
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
-</body>
+<?php include('../COMPONENTS/COMP-footer-employe.php'); ?></body>
 </html>
 
 <!--

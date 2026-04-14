@@ -1,3 +1,7 @@
+<?php
+require_once('../PHP/auth.php');
+requireEmploye();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +17,7 @@
 
 <!-- Header commun -->
 <div class="layout">
-<?php include('../COMPONENTS/COMP-header-employe.html') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.php') ; ?>
 
 
 <hr>
@@ -131,8 +135,7 @@
     </section>
 </main>
 </div>
-    <?php include('../COMPONENTS/COMP-footer.html'); ?>
-<script src="../JS/EMP-gestion-avis.js"></script>
+<?php include('../COMPONENTS/COMP-footer-employe.php'); ?><script src="../JS/EMP-gestion-avis.js"></script>
 
 </body>
 </html>
