@@ -1,33 +1,23 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Démarrage de la session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 require_once(__DIR__ . '/../PHP/connexion.php');
-require_once(__DIR__ . '/../PHP/recherche_trajets.php'); // charge aussi logs.php
+require_once(__DIR__ . '/../PHP/recherche_trajets.php');
 
-// Initialisation des variables
-$trajets            = [];
-$trajetsAlternatifs = [];
-$depart             = '';
-$arrivee            = '';
-$date               = '';
+$trajets = [];
+$depart  = '';
+$arrivee = '';
+$date    = '';
 
-// Traitement du formulaire
 if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     $depart  = trim($_GET['departure']);
     $arrivee = trim($_GET['destination']);
     $date    = trim($_GET['date']);
 
-    // Recherche des trajets exacts
     $trajets = chercherTrajets($bdd, $depart, $arrivee, $date);
 
-    // Log de la recherche (un seul endroit)
     logAction(
         'recherche_trajet',
         "Recherche : $depart → $arrivee le $date (" . count($trajets) . " résultat(s))",
@@ -35,10 +25,6 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
         $_SESSION['user_id'] ?? null
     );
 
-    // Trajets alternatifs depuis villes proches
-    $trajetsAlternatifs = chercherTrajetsAlternatifs($bdd, $depart, $arrivee, $date, $trajets);
-
-    // Calcul de la période (futur / en_cours / passé)
     $now = new DateTime();
     foreach ($trajets as $key => $trajet) {
         $trajetDateTime = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
@@ -67,7 +53,6 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 
 <?php include(__DIR__ . '/../COMPONENTS/COMP-header.php'); ?>
 
-<!-- ===== FORMULAIRE DE RECHERCHE ===== -->
 <section class="search-section">
     <form method="get">
         <div class="search-container">
@@ -94,7 +79,6 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     </form>
 </section>
 
-<!-- ===== RÉSULTATS ===== -->
 <section class="results-section">
     <div class="filters">
         <h2>Filtrer</h2>
@@ -111,18 +95,13 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 
     <div class="search-results">
 
-        <?php if (empty($trajets) && empty($trajetsAlternatifs)): ?>
+        <?php if (empty($trajets)): ?>
             <p>Aucun trajet trouvé.</p>
-
-        <?php elseif (empty($trajets)): ?>
-            <p>Aucun trajet exact trouvé pour cette recherche.</p>
-
         <?php else: ?>
             <?php foreach ($trajets as $trajet): ?>
                 <article class="ride">
                     <div class="ride-driver">
-                        <img src="../../IMAGES/antoine.jpg" alt="Chauffeur">
-                        <span class="driver-name">
+<img src="../../IMAGES/profiles/<?= htmlspecialchars($trajet['photo_conducteur'] ?? 'default.jpg') ?>" alt="Chauffeur">                        <span class="driver-name">
                             <?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?>
                         </span>
                     </div>
@@ -135,41 +114,18 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                             <p>📅 <?= htmlspecialchars($trajet['date_depart']) ?></p>
                             <p>💺 <?= htmlspecialchars($trajet['places_disponibles']) ?> place(s)</p>
                         </div>
+                        <?php if ($trajet['statut'] === 'complet'): ?>
+                            <p class="trajet-complet">🚫 Complet</p>
+                        <?php endif; ?>
                     </div>
                     <div class="ride-action">
-                        <a class="ride-btn" href="../UTILISATEUR/USR-details-trajet.php?id=<?= (int)$trajet['id'] ?>">
-                            Voir détails
-                        </a>
-                    </div>
-                </article>
-            <?php endforeach; ?>
-        <?php endif; ?>
-
-        <!-- Trajets alternatifs -->
-        <?php if (!empty($trajetsAlternatifs)): ?>
-            <h2 class="alternatives-title">🗺️ Trajets depuis villes proches</h2>
-            <?php foreach ($trajetsAlternatifs as $trajet): ?>
-                <article class="ride ride-alternative">
-                    <div class="ride-driver">
-                        <img src="../../IMAGES/antoine.jpg" alt="Chauffeur">
-                        <span class="driver-name">
-                            <?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?>
-                        </span>
-                    </div>
-                    <div class="ride-content">
-                        <h3 class="ride-title">
-                            <?= htmlspecialchars($trajet['depart']) ?> → <?= htmlspecialchars($trajet['arrivee']) ?>
-                        </h3>
-                        <div class="ride-infos">
-                            <p>🕒 <?= htmlspecialchars($trajet['heure_depart']) ?></p>
-                            <p>📅 <?= htmlspecialchars($trajet['date_depart']) ?></p>
-                            <p>💺 <?= htmlspecialchars($trajet['places_disponibles']) ?> place(s)</p>
-                        </div>
-                    </div>
-                    <div class="ride-action">
-                        <a class="ride-btn" href="../UTILISATEUR/USR-details-trajet.php?id=<?= (int)$trajet['id'] ?>">
-                            Voir détails
-                        </a>
+                        <?php if ($trajet['statut'] === 'complet'): ?>
+                            <span class="ride-btn disabled">Complet</span>
+                        <?php else: ?>
+                            <a class="ride-btn" href="../UTILISATEUR/USR-details-trajet.php?id=<?= (int)$trajet['id'] ?>">
+                                Voir détails
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </article>
             <?php endforeach; ?>

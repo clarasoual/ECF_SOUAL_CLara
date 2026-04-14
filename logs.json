@@ -1,5 +1,305 @@
 [
     {
+        "id": "log_69d510ae633348.49607961",
+        "date": "2026-04-07 14:11:58",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : bordeaux → bayonne le 2026-10-25 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=bordeaux&destination=bayonne&date=2026-10-25&passenger=1"
+    },
+    {
+        "id": "log_69d50ffe1891c4.94813675",
+        "date": "2026-04-07 14:09:02",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f9fcb3709.53242658",
+        "date": "2026-04-07 14:07:27",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f9cdc3e05.61047193",
+        "date": "2026-04-07 14:07:24",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f9c1a7601.31989378",
+        "date": "2026-04-07 14:07:24",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f95be1740.26500724",
+        "date": "2026-04-07 14:07:17",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f3edaab74.89275382",
+        "date": "2026-04-07 14:05:50",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f3eabe055.30431622",
+        "date": "2026-04-07 14:05:50",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f3e78caf9.61972331",
+        "date": "2026-04-07 14:05:50",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f3d1ccc57.83651960",
+        "date": "2026-04-07 14:05:49",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50f006849d2.70232422",
+        "date": "2026-04-07 14:04:48",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50ddba5a2d3.80905431",
+        "date": "2026-04-07 13:59:55",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50d109ad031.69049971",
+        "date": "2026-04-07 13:56:32",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50d10269a40.83669593",
+        "date": "2026-04-07 13:56:32",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50cfaec2151.61823690",
+        "date": "2026-04-07 13:56:10",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d50ce86524e8.80333043",
+        "date": "2026-04-07 13:55:52",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : bordeaux → bayonne le 2026-10-25 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=bordeaux&destination=bayonne&date=2026-10-25&passenger=1"
+    },
+    {
+        "id": "log_69d50ccf789292.63732737",
+        "date": "2026-04-07 13:55:27",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : bordeaux → bayonne le 2026-10-24 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=bordeaux&destination=bayonne&date=2026-10-24&passenger=1"
+    },
+    {
+        "id": "log_69d50c48e359f6.37570195",
+        "date": "2026-04-07 13:53:12",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : bordeaux → bayonne le 2026-10-24 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=bordeaux&destination=bayonne&date=2026-10-24&passenger=1"
+    },
+    {
+        "id": "log_69d50bb6812151.65096619",
+        "date": "2026-04-07 13:50:46",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : begles → gradignan le 2026-04-05 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=begles&destination=gradignan&date=2026-04-05"
+    },
+    {
+        "id": "log_69d50a5591cc78.94391436",
+        "date": "2026-04-07 13:44:53",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d7937113.05172368",
+        "date": "2026-04-07 13:42:47",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d71bd596.41011976",
+        "date": "2026-04-07 13:42:47",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d6e3f4f7.22628866",
+        "date": "2026-04-07 13:42:46",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d6b64244.44014701",
+        "date": "2026-04-07 13:42:46",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d253bba6.10419548",
+        "date": "2026-04-07 13:42:42",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d225d023.16189341",
+        "date": "2026-04-07 13:42:42",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d1efdfe9.27910004",
+        "date": "2026-04-07 13:42:41",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d1c196d4.31351525",
+        "date": "2026-04-07 13:42:41",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509d12e2ff0.27428381",
+        "date": "2026-04-07 13:42:41",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_69d509cf425615.27220756",
+        "date": "2026-04-07 13:42:39",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
         "id": "log_69d3924de1f106.62520012",
         "date": "2026-04-06 13:00:29",
         "niveau": "INFO",
