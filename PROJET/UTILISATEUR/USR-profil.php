@@ -160,10 +160,6 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php endif; ?>
 
 <?php if (!$isOwnProfile): ?>
-<section class="contact-driver">
-    <h3 class="section-title">Contacter <?= htmlspecialchars($user['prenom']) ?></h3>
-    <a href="USR-messagerie.php?contact=<?= $id ?>" class="btn-message">Envoyer un message</a>
-</section>
 <?php endif; ?>
 
 <script src="../JS/USR-profil.js"></script>
