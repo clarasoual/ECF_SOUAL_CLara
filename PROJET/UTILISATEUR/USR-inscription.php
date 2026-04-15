@@ -10,37 +10,35 @@
 </head>
 <body>
 
-<!-- Header commun -->
 <?php include('../COMPONENTS/COMP-header.html'); ?>
 
 <main>
-    <!-- Formulaire d'inscription -->
     <div class="account-creation-container">
         <h1>Création de votre compte</h1>
         <p class="required-notes">* Champs obligatoires</p>
 
-        <form action="../PHP/inscription.php" method="POST" class="form-inscription">
+        <form action="../PHP/inscription.php" method="POST" class="form-inscription" novalidate>
 
             <label for="prenom">Prénom * :</label>
-            <input type="text" id="prenom" name="prenom" required>
+            <input type="text" id="prenom" name="prenom">
 
             <label for="nom">Nom * :</label>
-            <input type="text" id="nom" name="nom" required>
+            <input type="text" id="nom" name="nom">
 
             <label for="email">Adresse mail * :</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email">
 
             <label for="password">Mot de passe * :</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password">
             <p class="conditions-password">
                 Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
             </p>
 
             <label for="password_confirm">Confirmer le mot de passe * :</label>
-            <input type="password" id="password_confirm" name="password_confirm" required>
+            <input type="password" id="password_confirm" name="password_confirm">
 
             <label class="accept-conditions">
-                <input type="checkbox" name="accept-conditions" required>
+                <input type="checkbox" name="accept-conditions">
                 J'accepte les <a href="#">conditions d'utilisation</a>
             </label>
 
@@ -49,9 +47,8 @@
     </div>
 </main>
 
-<script src="../JS/ecoride_js.js"></script>
+<script src="../JS/USR-inscription.js"></script>
 
-<!-- Footer commun -->
 <?php include('../COMPONENTS/COMP-footer.html'); ?>
 
 </body>
