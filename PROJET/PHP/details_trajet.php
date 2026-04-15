@@ -71,6 +71,16 @@ $stmt->execute([
 $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 /* =========================
+   NOTE MOYENNE
+   ========================= */
+$note_moyenne = 0;
+$nb_avis = count($avis);
+if ($nb_avis > 0) {
+    $total = array_sum(array_column($avis, 'note'));
+    $note_moyenne = round($total / $nb_avis, 1);
+}
+
+/* =========================
    VÉRIFICATION PROPRIÉTAIRE
    ========================= */
 $isOwner = ($_SESSION['user_id'] === $trajet['id_conducteur']);

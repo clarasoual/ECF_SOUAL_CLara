@@ -66,8 +66,13 @@ $isPast = $trajetDateTime < $now || $trajet['statut'] === 'termine';?>
                      alt="Photo du conducteur" class="driver-photo-lg">
                 <div class="driver-infos">
                     <h2><?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?></h2>
-                    <p class="driver-rating">⭐ 4.8 / 5 · Conducteur vérifié</p>
-                    <p class="driver-car">
+                        <p class="driver-rating">
+                            <?php if ($nb_avis > 0): ?>
+                                ⭐ <?= $note_moyenne ?> / 5 · <?= $nb_avis ?> avis
+                            <?php else: ?>
+                                Aucun avis pour le moment
+                            <?php endif; ?>
+                        </p>                    <p class="driver-car">
                         🚗 <?= htmlspecialchars($trajet['marque'] . ' ' . $trajet['modele']) ?> ·
                         <?= htmlspecialchars($trajet['couleur']) ?> ·
                         <?= htmlspecialchars($trajet['carburant']) ?>
