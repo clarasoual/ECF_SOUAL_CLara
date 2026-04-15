@@ -1,0 +1,98 @@
+window.addEventListener('load', () => {
+
+    const form          = document.getElementById('formulaire-connexion');
+    const inputEmail    = document.getElementById('email');
+    const inputPassword = document.getElementById('password');
+
+    if (!form) {
+        console.error('Formulaire connexion introuvable');
+        return;
+    }
+
+    console.log('Formulaire connexion trouvé ✅');
+
+    // ────────────────────────────────────────
+    // Utilitaires
+    // ────────────────────────────────────────
+
+    function afficherErreur(input, message) {
+        const ancienne = input.parentNode.querySelector('.erreur-champ');
+        if (ancienne) ancienne.remove();
+
+        input.classList.add('input-error');
+        const msg = document.createElement('span');
+        msg.className   = 'erreur-champ';
+        msg.textContent = message;
+        msg.style.color     = '#e74c3c';
+        msg.style.fontSize  = '0.8rem';
+        msg.style.display   = 'block';
+        msg.style.marginTop = '4px';
+        input.parentNode.insertBefore(msg, input.nextSibling);
+    }
+
+    function supprimerErreur(input) {
+        const ancienne = input.parentNode.querySelector('.erreur-champ');
+        if (ancienne) ancienne.remove();
+        input.classList.remove('input-error');
+    }
+
+    // ────────────────────────────────────────
+    // Règles de validation
+    // ────────────────────────────────────────
+
+    function validerEmail() {
+        const val = inputEmail.value.trim();
+        if (!val) {
+            afficherErreur(inputEmail, 'L\'adresse mail est obligatoire.');
+            return false;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) {
+            afficherErreur(inputEmail, 'L\'adresse mail n\'est pas valide.');
+            return false;
+        }
+        supprimerErreur(inputEmail);
+        return true;
+    }
+
+    function validerPassword() {
+        const val = inputPassword.value;
+        if (!val) {
+            afficherErreur(inputPassword, 'Le mot de passe est obligatoire.');
+            return false;
+        }
+        if (val.length < 8) {
+            afficherErreur(inputPassword, 'Le mot de passe doit contenir au moins 8 caractères.');
+            return false;
+        }
+        supprimerErreur(inputPassword);
+        return true;
+    }
+
+    // ────────────────────────────────────────
+    // Validation en live
+    // ────────────────────────────────────────
+
+    inputEmail.addEventListener('blur',  validerEmail);
+    inputEmail.addEventListener('input', () => supprimerErreur(inputEmail));
+
+    inputPassword.addEventListener('blur',  validerPassword);
+    inputPassword.addEventListener('input', () => supprimerErreur(inputPassword));
+
+    // ────────────────────────────────────────
+    // Validation à la soumission
+    // ────────────────────────────────────────
+
+    form.addEventListener('submit', (e) => {
+        console.log('Submit intercepté ✅');
+        e.preventDefault();
+
+        let valide = true;
+        if (!validerEmail())    valide = false;
+        if (!validerPassword()) valide = false;
+
+        console.log('Valide :', valide);
+
+        if (valide) form.submit();
+    });
+
+});

@@ -1,4 +1,3 @@
-```php
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -41,21 +40,20 @@
 
             <form id="formulaire-connexion"
                   action="../PHP/login.php"
-                  method="POST">
+                  method="POST"
+                  novalidate>
 
                 <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
 
-                <label for="email">Adresse mail :</label>
-                <input type="email"
-                       id="email"
-                       name="email"
-                       required>
+                <div class="form-group">
+                    <label for="email">Adresse mail :</label>
+                    <input type="text" id="email" name="email" autocomplete="email">
+                </div>
 
-                <label for="password">Mot de passe :</label>
-                <input type="password"
-                       id="password"
-                       name="password"
-                       required>
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password">
+                </div>
 
                 <button type="submit" class="btn-connexion">
                     Connexion
@@ -66,10 +64,9 @@
     </div>
 </main>
 
+<script src="../JS/USR-connexion-inscription.js"></script>
+
 <?php include('../COMPONENTS/COMP-footer.php'); ?>
 
 </body>
 </html>
-```
-
-Teste ! 🚀

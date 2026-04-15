@@ -50,6 +50,5 @@
 <script src="../JS/USR-inscription.js"></script>
 
 <?php include('../COMPONENTS/COMP-footer.html'); ?>
-
-</body>
+<script src="../JS/USR-connexion-inscription.js"></script></body>
 </html>
