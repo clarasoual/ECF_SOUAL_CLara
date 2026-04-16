@@ -10,7 +10,6 @@ if (!$id_trajet) {
     exit;
 }
 
-// Récupérer le trajet et le conducteur
 $stmt = $bdd->prepare("
     SELECT t.*, u.prenom AS prenom_conducteur, u.nom AS nom_conducteur
     FROM trajets t
@@ -45,21 +44,25 @@ if (!$trajet) {
     <p>Conducteur : <strong><?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?></strong></p>
 
     <!-- Formulaire avis -->
-    <form action="../PHP/soumettre-avis.php" method="POST">
+    <form action="../PHP/soumettre-avis.php" method="POST" novalidate>
         <input type="hidden" name="id_trajet" value="<?= $id_trajet ?>">
 
-        <label for="note">Note (1 à 5) *</label>
-        <select name="note" id="note" required>
-            <option value="">-- Choisir une note --</option>
-            <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
-            <option value="4">⭐⭐⭐⭐ - Bien</option>
-            <option value="3">⭐⭐⭐ - Correct</option>
-            <option value="2">⭐⭐ - Décevant</option>
-            <option value="1">⭐ - Mauvais</option>
-        </select>
+        <div class="form-group">
+            <label for="note">Note (1 à 5) *</label>
+            <select name="note" id="note">
+                <option value="">-- Choisir une note --</option>
+                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                <option value="4">⭐⭐⭐⭐ - Bien</option>
+                <option value="3">⭐⭐⭐ - Correct</option>
+                <option value="2">⭐⭐ - Décevant</option>
+                <option value="1">⭐ - Mauvais</option>
+            </select>
+        </div>
 
-        <label for="commentaire">Commentaire (optionnel)</label>
-        <textarea name="commentaire" id="commentaire" rows="4" placeholder="Décrivez votre expérience..."></textarea>
+        <div class="form-group">
+            <label for="commentaire">Commentaire (optionnel)</label>
+            <textarea name="commentaire" id="commentaire" rows="4" placeholder="Décrivez votre expérience..."></textarea>
+        </div>
 
         <button type="submit" class="btn-submit">Envoyer mon avis</button>
         <a href="USR-mes-trajets.php" class="btn-annuler">Passer</a>
@@ -69,14 +72,23 @@ if (!$trajet) {
     <hr>
     <h2>Un problème avec ce trajet ?</h2>
     <p>Si ce trajet s'est mal passé, vous pouvez le signaler. Un employé prendra contact avec le conducteur.</p>
-    <form action="../PHP/signaler-trajet.php" method="POST" onsubmit="return confirm('Confirmer le signalement de ce trajet ?')">
+
+    <form action="../PHP/signaler-trajet.php" method="POST" novalidate
+          onsubmit="return confirm('Confirmer le signalement de ce trajet ?')">
         <input type="hidden" name="id_trajet" value="<?= $id_trajet ?>">
-        <label for="commentaire_signalement">Décrivez le problème *</label>
-        <textarea name="commentaire_signalement" id="commentaire_signalement" rows="4" placeholder="Décrivez ce qui s'est mal passé..." required></textarea>
+
+        <div class="form-group">
+            <label for="commentaire_signalement">Décrivez le problème *</label>
+            <textarea name="commentaire_signalement" id="commentaire_signalement" rows="4"
+                      placeholder="Décrivez ce qui s'est mal passé..."></textarea>
+        </div>
+
         <button type="submit" class="btn-probleme">🚨 Signaler ce trajet</button>
     </form>
 
 </main>
+
+<script src="../JS/USR-avis-trajet.js"></script>
 
 <?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
