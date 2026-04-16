@@ -1,126 +1,104 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const table = document.querySelector('.reviews-list table tbody');
-    const form = document.querySelector('.search-container');
-    const selectAllCheckbox = document.getElementById('select-all');
-    const bulkActions = document.querySelector('.bulk-actions');
 
-    // ---------------- Filtrage et tri ----------------
-    function filterAndSortTable() {
-        const text = form.q.value.toLowerCase().trim();
-        const status = form['status'].value;
-        const note = form['note'].value;
-        const from = form['from'].value;
-        const to = form['to'].value;
-        const sort = form['sort'].value;
+    // ────────────────────────────────────────
+    // Toast
+    // ────────────────────────────────────────
 
-        const statusMap = {
-            flagged: "signalé",
-            published: "publié",
-            archivec: "archivé"
-        };
-        const statusValue = statusMap[status] || "";
+    function afficherToast(message, type = 'success') {
+        const ancien = document.getElementById('toast-dynamique');
+        if (ancien) ancien.remove();
 
-        const rows = Array.from(table.querySelectorAll('tr'));
+        const toast = document.createElement('div');
+        toast.id = 'toast-dynamique';
+        toast.textContent = message;
+        toast.style.position     = 'fixed';
+        toast.style.bottom       = '20px';
+        toast.style.right        = '20px';
+        toast.style.background   = type === 'success' ? '#4BB543' : '#e74c3c';
+        toast.style.color        = 'white';
+        toast.style.padding      = '12px 20px';
+        toast.style.borderRadius = '8px';
+        toast.style.fontFamily   = 'Quicksand, sans-serif';
+        toast.style.zIndex       = 9999;
+        toast.style.transition   = 'opacity 0.5s';
+        document.body.appendChild(toast);
 
-        rows.forEach(row => {
-            const cells = row.children;
-            const rowText = `${cells[3].textContent} ${cells[4].textContent} ${cells[6].textContent}`.toLowerCase();
-            const rowStatus = cells[7].textContent.toLowerCase();
-            const rowNote = cells[5].textContent;
-            const rowDate = cells[2].textContent;
-
-            let show = true;
-            if (text && !rowText.includes(text)) show = false;
-            if (statusValue && rowStatus !== statusValue) show = false;
-            if (note && rowNote !== note) show = false;
-            if (from && new Date(rowDate) < new Date(from)) show = false;
-            if (to && new Date(rowDate) > new Date(to)) show = false;
-
-            row.style.display = show ? '' : 'none';
-        });
-
-        // Trier après filtrage
-        const visibleRows = Array.from(table.querySelectorAll('tr')).filter(r => r.style.display !== 'none');
-        visibleRows.sort((a, b) => {
-            let valA, valB;
-            switch (sort) {
-                case 'newest':
-                    valA = new Date(a.children[2].textContent);
-                    valB = new Date(b.children[2].textContent);
-                    return valB - valA;
-                case 'oldest':
-                    valA = new Date(a.children[2].textContent);
-                    valB = new Date(b.children[2].textContent);
-                    return valA - valB;
-                case 'rating_desc':
-                    valA = parseInt(a.children[5].textContent);
-                    valB = parseInt(b.children[5].textContent);
-                    return valB - valA;
-                case 'rating_asc':
-                    valA = parseInt(a.children[5].textContent);
-                    valB = parseInt(b.children[5].textContent);
-                    return valA - valB;
-                default:
-                    return 0;
-            }
-        });
-
-        visibleRows.forEach(row => table.appendChild(row));
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 500);
+        }, 3000);
     }
 
-    form.addEventListener('submit', e => e.preventDefault());
-    form.addEventListener('input', filterAndSortTable);
-    form.addEventListener('change', filterAndSortTable);
+    // ────────────────────────────────────────
+    // Intercepter les clics sur les boutons d'action
+    // ────────────────────────────────────────
 
-    // ---------------- Réinitialisation ----------------
-    const resetButton = form.querySelector('.btn-reset');
-    if (resetButton) {
-        resetButton.addEventListener('click', e => {
-            e.preventDefault();
-            form.reset();
-            filterAndSortTable();
-        });
-    }
+    document.querySelector('tbody')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
 
-    // ---------------- Sélection "Tout cocher" ----------------
-    if (selectAllCheckbox) {
-        selectAllCheckbox.addEventListener('change', () => {
-            const checkboxes = table.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
-        });
-    }
+        e.preventDefault();
 
-    // ---------------- Actions sur la selection ----------------
-    if (bulkActions) {
-        const archiveBtn = bulkActions.querySelector('button[value="archive"]');
-        const flagBtn = bulkActions.querySelector('button[value="flag"]');
+        const action  = btn.dataset.action;
+        const avisId  = btn.dataset.avisId;
+        const ligne   = btn.closest('tr');
 
-        function performAction(action) {
-            const selectedRows = table.querySelectorAll('input[type="checkbox"]:checked');
-            if (selectedRows.length === 0) {
-                alert("Veuillez sélectionner au moins un avis.");
-                return;
-            }
-
-            selectedRows.forEach(cb => {
-                const row = cb.closest('tr');
-                if (action === 'archive') row.children[7].textContent = 'Archivé';
-                if (action === 'flag') row.children[7].textContent = 'Signalé';
-                cb.checked = false; // décocher après action
-            });
-
-            // décocher la checkbox "select-all"
-            if (selectAllCheckbox) selectAllCheckbox.checked = false;
+        // Confirmation pour suppression
+        if (action === 'supprimer') {
+            if (!confirm('Supprimer définitivement cet avis ?')) return;
         }
 
-        archiveBtn.addEventListener('click', e => {
-            e.preventDefault();
-            performAction('archive');
-        });
+        // Désactiver le bouton pendant le fetch
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
 
-        flagBtn.addEventListener('click', e => {
-            e.preventDefault();
-            performAction('flag');
+        const formData = new FormData();
+        formData.append('avis_id', avisId);
+        formData.append('action', action);
+
+        fetch('../PHP/traiter-avis.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                // Faire disparaître la ligne avec animation
+                ligne.style.transition = 'opacity 0.4s';
+                ligne.style.opacity    = '0';
+                setTimeout(() => {
+                    ligne.remove();
+
+                    // Si plus aucune ligne, afficher message
+                    const tbody = document.querySelector('tbody');
+                    if (tbody && tbody.querySelectorAll('tr').length === 0) {
+                        const table = document.querySelector('table');
+                        if (table) {
+                            table.insertAdjacentHTML('afterend', '<p>Aucun avis dans cette catégorie.</p>');
+                            table.remove();
+                        }
+                    }
+                }, 400);
+
+                const messages = {
+                    'valider'            : '✅ Avis validé !',
+                    'refuser'            : '❌ Avis refusé.',
+                    'remettre_en_attente': '🔄 Avis remis en attente.',
+                    'supprimer'          : '🗑️ Avis supprimé.'
+                };
+                afficherToast(messages[action] || '✅ Action effectuée.');
+
+            } else {
+                afficherToast('❌ Erreur : ' + (data.message || 'réessayez.'), 'error');
+                btn.disabled      = false;
+                btn.style.opacity = '1';
+            }
+        })
+        .catch(() => {
+            afficherToast('❌ Erreur réseau, réessayez.', 'error');
+            btn.disabled      = false;
+            btn.style.opacity = '1';
         });
-    }
+    });
+
 });

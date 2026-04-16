@@ -3,32 +3,8 @@ require_once('../PHP/auth.php');
 requireEmploye();
 require_once('../PHP/connexion.php');
 
-// Traitement des actions
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['avis_id'], $_POST['action'])) {
-    $avis_id = (int)$_POST['avis_id'];
-    $action = $_POST['action'];
-
-    if ($action === 'valider') {
-        $stmt = $bdd->prepare("UPDATE avis SET statut = 'valide' WHERE id = ?");
-        $stmt->execute([$avis_id]);
-    } elseif ($action === 'refuser') {
-        $stmt = $bdd->prepare("UPDATE avis SET statut = 'refuse' WHERE id = ?");
-        $stmt->execute([$avis_id]);
-    } elseif ($action === 'remettre_en_attente') {
-        $stmt = $bdd->prepare("UPDATE avis SET statut = 'en_attente' WHERE id = ?");
-        $stmt->execute([$avis_id]);
-    } elseif ($action === 'supprimer') {
-        $stmt = $bdd->prepare("DELETE FROM avis WHERE id = ?");
-        $stmt->execute([$avis_id]);
-    }
-
-    header("Location: " . $_SERVER['PHP_SELF'] . "?onglet=" . ($_POST['onglet'] ?? 'en_attente') . "&toast=ok");
-    exit;
-}
-
 $onglet = $_GET['onglet'] ?? 'en_attente';
 
-// Récupérer les avis selon l'onglet
 $stmt = $bdd->prepare("
     SELECT 
         a.id,
@@ -71,18 +47,17 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <hr>
 
 <main>
-<?php include('../COMPONENTS/COMP-menu-employe.html'); ?>
+    <?php include('../COMPONENTS/COMP-menu-employe.html'); ?>
 
     <section class="reviews-moderation">
         <h2 id="title-reviews">Avis utilisateurs - Modération</h2>
 
-        <!-- Menu déroulant -->
         <form method="GET" style="margin-bottom: 1rem;">
             <label for="onglet">Afficher :</label>
             <select name="onglet" id="onglet" onchange="this.form.submit()">
                 <option value="en_attente" <?= $onglet === 'en_attente' ? 'selected' : '' ?>>⏳ En attente</option>
-                <option value="valide" <?= $onglet === 'valide' ? 'selected' : '' ?>>✅ Validés</option>
-                <option value="refuse" <?= $onglet === 'refuse' ? 'selected' : '' ?>>❌ Refusés</option>
+                <option value="valide"     <?= $onglet === 'valide'     ? 'selected' : '' ?>>✅ Validés</option>
+                <option value="refuse"     <?= $onglet === 'refuse'     ? 'selected' : '' ?>>❌ Refusés</option>
             </select>
         </form>
 
@@ -113,18 +88,29 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $a['note'] ?>/5</td>
                     <td><?= htmlspecialchars($a['commentaire'] ?? '—') ?></td>
                     <td>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="avis_id" value="<?= $a['id'] ?>">
-                            <input type="hidden" name="onglet" value="<?= $onglet ?>">
-
-                            <?php if ($onglet === 'en_attente'): ?>
-                                <button type="submit" name="action" value="valider" class="btn-valider">✅ Valider</button>
-                                <button type="submit" name="action" value="refuser" class="btn-refuser">❌ Refuser</button>
-                            <?php else: ?>
-                                <button type="submit" name="action" value="remettre_en_attente" class="btn-attente">🔄 Remettre en attente</button>
-                                <button type="submit" name="action" value="supprimer" class="btn-supprimer" onclick="return confirm('Supprimer définitivement cet avis ?')">🗑️ Supprimer</button>
-                            <?php endif; ?>
-                        </form>
+                        <?php if ($onglet === 'en_attente'): ?>
+                            <button type="button" class="btn-valider"
+                                    data-action="valider"
+                                    data-avis-id="<?= $a['id'] ?>">
+                                ✅ Valider
+                            </button>
+                            <button type="button" class="btn-refuser"
+                                    data-action="refuser"
+                                    data-avis-id="<?= $a['id'] ?>">
+                                ❌ Refuser
+                            </button>
+                        <?php else: ?>
+                            <button type="button" class="btn-attente"
+                                    data-action="remettre_en_attente"
+                                    data-avis-id="<?= $a['id'] ?>">
+                                🔄 Remettre en attente
+                            </button>
+                            <button type="button" class="btn-supprimer"
+                                    data-action="supprimer"
+                                    data-avis-id="<?= $a['id'] ?>">
+                                🗑️ Supprimer
+                            </button>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -136,12 +122,8 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </main>
 </div>
 
-<?php if (isset($_GET['toast'])): ?>
-    <div id="toast-success" style="position:fixed;bottom:20px;right:20px;background:#4BB543;color:white;padding:12px 20px;border-radius:8px;">
-        ✅ Avis mis à jour !
-    </div>
-<?php endif; ?>
-
 <?php include('../COMPONENTS/COMP-footer-employe.php'); ?>
+
+<script src="../JS/EMP-gestion-avis.js"></script>
 </body>
 </html>
