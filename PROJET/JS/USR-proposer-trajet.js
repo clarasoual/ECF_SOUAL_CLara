@@ -1,41 +1,256 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- Vérifier si on arrive depuis "nouveau trajet" ---
+    // ────────────────────────────────────────
+    // Utilitaires erreurs
+    // ────────────────────────────────────────
+
+    function afficherErreur(input, message) {
+        supprimerErreur(input);
+        input.classList.add('input-error');
+        const msg = document.createElement('span');
+        msg.className   = 'erreur-champ';
+        msg.textContent = message;
+        msg.style.color     = '#e74c3c';
+        msg.style.fontSize  = '0.8rem';
+        msg.style.display   = 'block';
+        msg.style.marginTop = '4px';
+        input.parentNode.insertBefore(msg, input.nextSibling);
+    }
+
+    function supprimerErreur(input) {
+        const ancienne = input.parentNode.querySelector('.erreur-champ');
+        if (ancienne) ancienne.remove();
+        input.classList.remove('input-error');
+    }
+
+    function afficherErreurSelect(select, message) {
+        supprimerErreurSelect(select);
+        select.classList.add('input-error');
+        const msg = document.createElement('span');
+        msg.className   = 'erreur-champ';
+        msg.textContent = message;
+        msg.style.color     = '#e74c3c';
+        msg.style.fontSize  = '0.8rem';
+        msg.style.display   = 'block';
+        msg.style.marginTop = '4px';
+        select.parentNode.insertBefore(msg, select.nextSibling);
+    }
+
+    function supprimerErreurSelect(select) {
+        const ancienne = select.parentNode.querySelector('.erreur-champ');
+        if (ancienne) ancienne.remove();
+        select.classList.remove('input-error');
+    }
+
+    // ────────────────────────────────────────
+    // Règles de validation
+    // ────────────────────────────────────────
+
+    function estSaine(valeur) {
+        return /^[a-zA-ZÀ-ÿ0-9\s\-',.]+$/.test(valeur);
+    }
+
+    function validerDepart() {
+        const val = inputDepart.value.trim();
+        if (!val) {
+            afficherErreur(inputDepart, 'L\'adresse de départ est obligatoire.');
+            return false;
+        }
+        if (!estSaine(val)) {
+            afficherErreur(inputDepart, 'L\'adresse de départ contient des caractères non autorisés.');
+            return false;
+        }
+        supprimerErreur(inputDepart);
+        return true;
+    }
+
+    function validerArrivee() {
+        const val = inputArrivee.value.trim();
+        if (!val) {
+            afficherErreur(inputArrivee, 'L\'adresse d\'arrivée est obligatoire.');
+            return false;
+        }
+        if (!estSaine(val)) {
+            afficherErreur(inputArrivee, 'L\'adresse d\'arrivée contient des caractères non autorisés.');
+            return false;
+        }
+        if (val.toLowerCase() === inputDepart.value.trim().toLowerCase()) {
+            afficherErreur(inputArrivee, 'L\'adresse d\'arrivée doit être différente du départ.');
+            return false;
+        }
+        supprimerErreur(inputArrivee);
+        return true;
+    }
+
+    function validerVehicule() {
+        if (!selectVehicule.value) {
+            afficherErreurSelect(selectVehicule, 'Veuillez sélectionner un véhicule.');
+            return false;
+        }
+        supprimerErreurSelect(selectVehicule);
+        return true;
+    }
+
+    function validerDate() {
+        const val = inputDate.value;
+        if (!val) {
+            afficherErreur(inputDate, 'La date de départ est obligatoire.');
+            return false;
+        }
+        const aujourd_hui = new Date();
+        aujourd_hui.setHours(0, 0, 0, 0);
+        const dateChoisie = new Date(val);
+        if (dateChoisie < aujourd_hui) {
+            afficherErreur(inputDate, 'La date ne peut pas être dans le passé.');
+            return false;
+        }
+        supprimerErreur(inputDate);
+        return true;
+    }
+
+    function validerHeure() {
+        const valDate  = inputDate.value;
+        const valHeure = inputTime.value;
+        if (!valHeure) {
+            afficherErreur(inputTime, 'L\'heure de départ est obligatoire.');
+            return false;
+        }
+        // Si la date choisie est aujourd'hui, l'heure ne peut pas être passée
+        if (valDate) {
+            const maintenant   = new Date();
+            const dateChoisie  = new Date(valDate);
+            const aujourd_hui  = new Date();
+            aujourd_hui.setHours(0, 0, 0, 0);
+            dateChoisie.setHours(0, 0, 0, 0);
+
+            if (dateChoisie.getTime() === aujourd_hui.getTime()) {
+                const [h, m]    = valHeure.split(':').map(Number);
+                const heureChoisie = new Date();
+                heureChoisie.setHours(h, m, 0, 0);
+                if (heureChoisie <= maintenant) {
+                    afficherErreur(inputTime, 'L\'heure de départ ne peut pas être dans le passé.');
+                    return false;
+                }
+            }
+        }
+        supprimerErreur(inputTime);
+        return true;
+    }
+
+    function validerPlaces() {
+        const val = parseInt(inputPlaces.value, 10);
+        if (!inputPlaces.value || isNaN(val)) {
+            afficherErreur(inputPlaces, 'Le nombre de places est obligatoire.');
+            return false;
+        }
+        if (val < 1) {
+            afficherErreur(inputPlaces, 'Il faut au moins 1 place disponible.');
+            return false;
+        }
+        if (val > 8) {
+            afficherErreur(inputPlaces, 'Le nombre de places ne peut pas dépasser 8.');
+            return false;
+        }
+        supprimerErreur(inputPlaces);
+        return true;
+    }
+
+    function validerPrix() {
+        const val = parseInt(inputPrix.value, 10);
+        if (!inputPrix.value || isNaN(val)) {
+            afficherErreur(inputPrix, 'Le prix est obligatoire.');
+            return false;
+        }
+        if (val < 2) {
+            afficherErreur(inputPrix, 'Le prix minimum est de 2 crédits.');
+            return false;
+        }
+        if (val > 20) {
+            afficherErreur(inputPrix, 'Le prix maximum est de 20 crédits.');
+            return false;
+        }
+        supprimerErreur(inputPrix);
+        return true;
+    }
+
+    // ────────────────────────────────────────
+    // Références champs
+    // ────────────────────────────────────────
+
+    const inputDepart   = document.getElementById('departure');
+    const inputArrivee  = document.getElementById('arrival');
+    const selectVehicule = document.getElementById('vehicle-used');
+    const inputDate     = document.getElementById('date');
+    const inputTime     = document.getElementById('time');
+    const inputPlaces   = document.getElementById('places');
+    const inputPrix     = document.getElementById('prix');
+
+    // ────────────────────────────────────────
+    // Validation en live
+    // ────────────────────────────────────────
+
+    inputDepart.addEventListener('blur',  validerDepart);
+    inputDepart.addEventListener('input', () => supprimerErreur(inputDepart));
+
+    inputArrivee.addEventListener('blur',  validerArrivee);
+    inputArrivee.addEventListener('input', () => supprimerErreur(inputArrivee));
+
+    selectVehicule.addEventListener('change', validerVehicule);
+
+    inputDate.addEventListener('blur',  validerDate);
+    inputDate.addEventListener('change', () => { validerDate(); if (inputTime.value) validerHeure(); });
+
+    inputTime.addEventListener('blur',  validerHeure);
+    inputTime.addEventListener('input', () => supprimerErreur(inputTime));
+
+    inputPlaces.addEventListener('blur',  validerPlaces);
+    inputPlaces.addEventListener('input', () => supprimerErreur(inputPlaces));
+
+    inputPrix.addEventListener('blur',  validerPrix);
+    inputPrix.addEventListener('input', () => {
+        supprimerErreur(inputPrix);
+        // Mise à jour gains en live
+        const prix  = parseInt(inputPrix.value) || 0;
+        const gains = Math.max(0, prix - 2);
+        document.getElementById('gains-calcul').textContent = gains;
+    });
+
+    // ────────────────────────────────────────
+    // SessionStorage — retour depuis étape 2
+    // ────────────────────────────────────────
+
     const urlParams = new URLSearchParams(window.location.search);
     const isNew = urlParams.get('new') === '1';
 
     if (isNew) {
-        // Vider complètement le sessionStorage pour un nouveau trajet
         sessionStorage.clear();
-        sessionStorage.setItem('fromStep2', 'false'); // aucun retour depuis étape 2
+        sessionStorage.setItem('fromStep2', 'false');
     }
 
-    // --- Préremplir les champs uniquement si on revient de la page 2 ---
     const fromStep2 = sessionStorage.getItem('fromStep2') === 'true';
     if (fromStep2) {
         const storedDeparture = sessionStorage.getItem('departure') || '';
-        const storedArrival = sessionStorage.getItem('arrival') || '';
-        const storedDate = sessionStorage.getItem('date') || '';
-        const storedTime = sessionStorage.getItem('time') || '';
-        const storedVehicle = sessionStorage.getItem('vehicle') || '';
-        const storedPlaces = sessionStorage.getItem('places') || '';
-        const storedComments = sessionStorage.getItem('comments') || '';
-        const storedStops = JSON.parse(sessionStorage.getItem('stops') || '[]');
+        const storedArrival   = sessionStorage.getItem('arrival')   || '';
+        const storedDate      = sessionStorage.getItem('date')      || '';
+        const storedTime      = sessionStorage.getItem('time')      || '';
+        const storedVehicle   = sessionStorage.getItem('vehicle')   || '';
+        const storedPlaces    = sessionStorage.getItem('places')    || '';
+        const storedComments  = sessionStorage.getItem('comments')  || '';
+        const storedStops     = JSON.parse(sessionStorage.getItem('stops') || '[]');
 
-        if(storedDeparture) document.getElementById('departure').value = storedDeparture;
-        if(storedArrival) document.getElementById('arrival').value = storedArrival;
-        if(storedDate) document.getElementById('date').value = storedDate;
-        if(storedTime) document.getElementById('time').value = storedTime;
-        if(storedVehicle) document.getElementById('vehicle-used').value = storedVehicle;
-        if(storedPlaces) document.getElementById('places').value = storedPlaces;
-        if(storedComments) document.getElementById('commentaire').value = storedComments;
+        if (storedDeparture) inputDepart.value          = storedDeparture;
+        if (storedArrival)   inputArrivee.value         = storedArrival;
+        if (storedDate)      inputDate.value            = storedDate;
+        if (storedTime)      inputTime.value            = storedTime;
+        if (storedVehicle)   selectVehicule.value       = storedVehicle;
+        if (storedPlaces)    inputPlaces.value          = storedPlaces;
+        if (storedComments)  document.getElementById('commentaire').value = storedComments;
 
-        // Recréer les arrêts supplémentaires
         const firstStop = document.getElementById('step1');
-        if(storedStops.length){
+        if (storedStops.length) {
             firstStop.value = storedStops[0] || '';
-            for(let i = 1; i < storedStops.length; i++){
-                const stopNumber = i + 1;
+            for (let i = 1; i < storedStops.length; i++) {
+                const stopNumber    = i + 1;
                 const stopContainer = document.createElement('div');
                 stopContainer.classList.add('stop-container');
                 stopContainer.style.marginTop = '10px';
@@ -45,34 +260,36 @@ document.addEventListener("DOMContentLoaded", () => {
                     <button type="button" class="remove-stop">Supprimer</button>
                 `;
                 firstStop.parentNode.appendChild(stopContainer);
-
-                const removeBtn = stopContainer.querySelector('.remove-stop');
-                removeBtn.addEventListener('click', () => {
+                stopContainer.querySelector('.remove-stop').addEventListener('click', () => {
                     stopContainer.remove();
-                    const remainingStops = document.querySelectorAll('.stop-container');
-                    remainingStops.forEach((c, i) => {
-                        const label = c.querySelector('label');
-                        const input = c.querySelector('input');
-                        label.setAttribute('for', `step${i+2}`);
-                        label.textContent = `Arrêt n°${i+2} (optionnel)`;
-                        input.id = `step${i+2}`;
-                        input.name = `step${i+2}`;
-                    });
+                    renumerotterArrets();
                 });
             }
         }
 
-        // --- Après préremplissage, on remet le drapeau à false ---
         sessionStorage.setItem('fromStep2', 'false');
     }
 
-    // --- Ajouter un nouvel arrêt ---
-    const addStopBtn = document.querySelector('.trip-step1 button[type="button"]');
-    addStopBtn.addEventListener('click', () => {
-        const existingStops = document.querySelectorAll('.stop-container');
-        const stopNumber = existingStops.length + 2;
-        if(stopNumber > 6){ alert("Vous ne pouvez ajouter que 5 arrêts maximum."); return; }
+    // ────────────────────────────────────────
+    // Ajouter / supprimer un arrêt
+    // ────────────────────────────────────────
 
+    function renumerotterArrets() {
+        document.querySelectorAll('.stop-container').forEach((c, i) => {
+            const label = c.querySelector('label');
+            const input = c.querySelector('input');
+            if (label) { label.setAttribute('for', `step${i+2}`); label.textContent = `Arrêt n°${i+2} (optionnel)`; }
+            if (input) { input.id = `step${i+2}`; input.name = `step${i+2}`; }
+        });
+    }
+
+    document.getElementById('add-stop-btn').addEventListener('click', () => {
+        const existingStops = document.querySelectorAll('.stop-container');
+        const stopNumber    = existingStops.length + 2;
+        if (stopNumber > 6) {
+            alert("Vous ne pouvez ajouter que 5 arrêts maximum.");
+            return;
+        }
         const stopContainer = document.createElement('div');
         stopContainer.classList.add('stop-container');
         stopContainer.style.marginTop = '10px';
@@ -81,66 +298,55 @@ document.addEventListener("DOMContentLoaded", () => {
             <input type="text" id="step${stopNumber}" name="step${stopNumber}" placeholder="Ajouter un arrêt">
             <button type="button" class="remove-stop">Supprimer</button>
         `;
-        const lastStop = existingStops[existingStops.length - 1] || document.getElementById('step1');
+        const lastStop = existingStops[existingStops.length - 1] || document.getElementById('step1').parentNode;
         lastStop.parentNode.insertBefore(stopContainer, lastStop.nextSibling);
-
-        const removeBtn = stopContainer.querySelector('.remove-stop');
-        removeBtn.addEventListener('click', () => {
+        stopContainer.querySelector('.remove-stop').addEventListener('click', () => {
             stopContainer.remove();
-            const remainingStops = document.querySelectorAll('.stop-container');
-            remainingStops.forEach((c, i) => {
-                const label = c.querySelector('label');
-                const input = c.querySelector('input');
-                label.setAttribute('for', `step${i+2}`);
-                label.textContent = `Arrêt n°${i+2} (optionnel)`;
-                input.id = `step${i+2}`;
-                input.name = `step${i+2}`;
-            });
+            reumerotterArrets();
         });
     });
 
-    // --- Submit : enregistrer dans sessionStorage ---
+    // ────────────────────────────────────────
+    // Soumission
+    // ────────────────────────────────────────
+
     const form = document.querySelector('form');
     form.addEventListener('submit', (e) => {
-        const departure = document.getElementById('departure').value.trim();
-        const arrival = document.getElementById('arrival').value.trim();
-        const date = document.getElementById('date').value;
-        const time = document.getElementById('time').value;
-        const places = document.getElementById('places').value;
-        const vehicle = document.getElementById('vehicle-used').value;
-        const comments = document.getElementById('commentaire').value.trim();
+        e.preventDefault();
 
+        // Réinitialiser toutes les erreurs
+        [inputDepart, inputArrivee, inputDate, inputTime, inputPlaces, inputPrix].forEach(supprimerErreur);
+        supprimerErreurSelect(selectVehicule);
+
+        let valide = true;
+        if (!validerDepart())   valide = false;
+        if (!validerArrivee())  valide = false;
+        if (!validerVehicule()) valide = false;
+        if (!validerDate())     valide = false;
+        if (!validerHeure())    valide = false;
+        if (!validerPlaces())   valide = false;
+        if (!validerPrix())     valide = false;
+
+        if (!valide) return;
+
+        // Stockage sessionStorage
         const stopsInputs = document.querySelectorAll('input[id^="step"]');
         const stops = [];
         stopsInputs.forEach(input => {
-            if(input.value.trim() !== '') stops.push(input.value.trim());
+            if (input.value.trim()) stops.push(input.value.trim());
         });
 
-        // Stockage uniquement pour retour depuis la page 2
-        sessionStorage.setItem('departure', departure);
-        sessionStorage.setItem('arrival', arrival);
-        sessionStorage.setItem('date', date);
-        sessionStorage.setItem('time', time);
-        sessionStorage.setItem('places', places);
-        sessionStorage.setItem('vehicle', vehicle);
-        sessionStorage.setItem('comments', comments);
-        sessionStorage.setItem('stops', JSON.stringify(stops));
-
-        // --- Validation ---
-        if(!departure || !arrival || !date || !time || !places || !vehicle){
-            e.preventDefault();
-            alert("Merci de remplir tous les champs obligatoires.");
-            return;
-        }
-        const maxPlaces = vehicle === 'Kangoo blanc' ? 6 : 4;
-        if(places > maxPlaces){
-            e.preventDefault();
-            alert(`Le véhicule choisi ne peut transporter que ${maxPlaces} passagers.`);
-            return;
-        }
-
-        // --- Définir le drapeau pour que la page 2 sache qu'on vient de la page 1 ---
+        sessionStorage.setItem('departure', inputDepart.value.trim());
+        sessionStorage.setItem('arrival',   inputArrivee.value.trim());
+        sessionStorage.setItem('date',      inputDate.value);
+        sessionStorage.setItem('time',      inputTime.value);
+        sessionStorage.setItem('places',    inputPlaces.value);
+        sessionStorage.setItem('vehicle',   selectVehicule.value);
+        sessionStorage.setItem('comments',  document.getElementById('commentaire').value.trim());
+        sessionStorage.setItem('stops',     JSON.stringify(stops));
         sessionStorage.setItem('fromStep2', 'true');
+
+        form.submit();
     });
 
 });

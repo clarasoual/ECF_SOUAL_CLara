@@ -9,8 +9,6 @@ window.addEventListener('load', () => {
         return;
     }
 
-    console.log('Formulaire connexion trouvé ✅');
-
     // ────────────────────────────────────────
     // Utilitaires
     // ────────────────────────────────────────
@@ -60,10 +58,7 @@ window.addEventListener('load', () => {
             afficherErreur(inputPassword, 'Le mot de passe est obligatoire.');
             return false;
         }
-        if (val.length < 8) {
-            afficherErreur(inputPassword, 'Le mot de passe doit contenir au moins 8 caractères.');
-            return false;
-        }
+        // Pas de vérification de longueur ou complexité à la connexion
         supprimerErreur(inputPassword);
         return true;
     }
@@ -83,14 +78,11 @@ window.addEventListener('load', () => {
     // ────────────────────────────────────────
 
     form.addEventListener('submit', (e) => {
-        console.log('Submit intercepté ✅');
         e.preventDefault();
 
         let valide = true;
         if (!validerEmail())    valide = false;
         if (!validerPassword()) valide = false;
-
-        console.log('Valide :', valide);
 
         if (valide) form.submit();
     });
