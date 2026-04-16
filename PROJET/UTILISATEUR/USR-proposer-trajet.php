@@ -45,15 +45,16 @@ if ($userId) {
 }
 
 $trajet_temp = $_SESSION['trajet_temp'] ?? [
-    'departure'   => '',
-    'arrival'     => '',
-    'date'        => '',
-    'time'        => '',
+    'departure'    => '',
+    'arrival'      => '',
+    'date'         => '',
+    'time'         => '',
+    'time_arrivee' => '',
     'vehicle_used' => '',
-    'places'      => '',
-    'prix'        => 2,
-    'commentaire' => '',
-    'etapes'      => ['']
+    'places'       => '',
+    'prix'         => 2,
+    'commentaire'  => '',
+    'etapes'       => ['']
 ];
 
 $etapes = array_values($trajet_temp['etapes'] ?? []);
@@ -80,6 +81,7 @@ if (empty($etapes)) { $etapes = ['']; }
     <form action="USR-proposer-trajet-2.php" method="POST" novalidate>
         <table class="trip-table">
             <tr>
+                <!-- COLONNE GAUCHE : départ -->
                 <td class="trip-info">
                     <h3 class="trip-subtitle">D'où partons-nous ?</h3>
 
@@ -127,6 +129,7 @@ if (empty($etapes)) { $etapes = ['']; }
                     </div>
                 </td>
 
+                <!-- COLONNE DROITE : arrivée -->
                 <td class="trip-info-destination">
                     <h3 class="trip-subtitle">Où allons-nous ?</h3>
 
@@ -134,6 +137,12 @@ if (empty($etapes)) { $etapes = ['']; }
                         <label for="arrival">Adresse d'arrivée *</label>
                         <input type="text" id="arrival" name="arrival" placeholder="Adresse d'arrivée"
                                value="<?= htmlspecialchars($trajet_temp['arrival']) ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time_arrivee">Heure d'arrivée *</label>
+                        <input type="time" id="time_arrivee" name="time_arrivee"
+                               value="<?= htmlspecialchars($trajet_temp['time_arrivee'] ?? '') ?>">
                     </div>
 
                     <div class="form-group">

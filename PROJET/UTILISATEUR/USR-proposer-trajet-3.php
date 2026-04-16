@@ -3,46 +3,43 @@ session_start();
 include('../PHP/auth.php'); 
 requireLogin();
 
-// Connexion à la BDD
-require('../PHP/connexion.php'); // $bdd créé ici
+require('../PHP/connexion.php');
 
-// Vérifier que le trajet temporaire existe
 if (!isset($_SESSION['trajet_temp'])) {
     header('Location: USR-proposer-trajet.php');
     exit;
 }
 
-$trajet = $_SESSION['trajet_temp'];
+$trajet        = $_SESSION['trajet_temp'];
 $id_conducteur = $_SESSION['user_id'] ?? 0;
 
 if (!$id_conducteur) {
     die("Utilisateur non identifié.");
 }
 
-// Gestion des étapes (optionnelles)
-$etapes = array_values(array_filter($trajet['etapes'] ?? []));
+$etapes     = array_values(array_filter($trajet['etapes'] ?? []));
 $etapes_str = !empty($etapes) ? json_encode($etapes, JSON_UNESCAPED_UNICODE) : null;
 
 try {
-    // Préparer la requête avec $bdd
     $sql = "INSERT INTO trajets
-        (id_conducteur, depart, arrivee, date_depart, heure_depart, vehicule_id, places_disponibles, prix, statut, etapes, commentaire)
-        VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :vehicule_id, :places_disponibles, :prix, 'publie', :etapes, :commentaire)";
+        (id_conducteur, depart, arrivee, date_depart, heure_depart, heure_arrivee, vehicule_id, places_disponibles, prix, statut, etapes, commentaire)
+        VALUES (:id_conducteur, :depart, :arrivee, :date_depart, :heure_depart, :heure_arrivee, :vehicule_id, :places_disponibles, :prix, 'publie', :etapes, :commentaire)";
+
     $stmt = $bdd->prepare($sql);
     $stmt->execute([
-        ':id_conducteur' => $id_conducteur,
-        ':depart' => $trajet['departure'],
-        ':arrivee' => $trajet['arrival'],
-        ':date_depart' => $trajet['date'],
-        ':heure_depart' => $trajet['time'],
-        ':vehicule_id' => $trajet['vehicle_used'],
+        ':id_conducteur'    => $id_conducteur,
+        ':depart'           => $trajet['departure'],
+        ':arrivee'          => $trajet['arrival'],
+        ':date_depart'      => $trajet['date'],
+        ':heure_depart'     => $trajet['time'],
+        ':heure_arrivee'    => $trajet['time_arrivee'] ?? null,
+        ':vehicule_id'      => $trajet['vehicle_used'],
         ':places_disponibles' => $trajet['places'],
-        ':prix'               => intval($trajet['prix'] ?? 2),
-        ':etapes' => $etapes_str,
-        ':commentaire' => $trajet['commentaire'] ?? ''
+        ':prix'             => intval($trajet['prix'] ?? 2),
+        ':etapes'           => $etapes_str,
+        ':commentaire'      => $trajet['commentaire'] ?? ''
     ]);
 
-    // Nettoyer la session temporaire pour éviter la réinsertion
     unset($_SESSION['trajet_temp']);
 
 } catch (PDOException $e) {

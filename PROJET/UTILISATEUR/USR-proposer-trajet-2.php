@@ -9,21 +9,22 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $_SESSION['trajet_temp'] = [
-    'departure'    => $_POST['departure'] ?? '',
-    'arrival'      => $_POST['arrival'] ?? '',
-    'date'         => $_POST['date'] ?? '',
-    'time'         => $_POST['time'] ?? '',
+    'departure'    => $_POST['departure']    ?? '',
+    'arrival'      => $_POST['arrival']      ?? '',
+    'date'         => $_POST['date']         ?? '',
+    'time'         => $_POST['time']         ?? '',
+    'time_arrivee' => $_POST['time_arrivee'] ?? '',
     'vehicle_used' => $_POST['vehicle_used'] ?? '',
-    'places'       => $_POST['places'] ?? '',
-    'prix'         => $_POST['prix'] ?? 2,
-    'commentaire'  => $_POST['commentaire'] ?? '',
+    'places'       => $_POST['places']       ?? '',
+    'prix'         => $_POST['prix']         ?? 2,
+    'commentaire'  => $_POST['commentaire']  ?? '',
     'etapes'       => array_filter($_POST, function($key) {
         return strpos($key, 'step') === 0;
     }, ARRAY_FILTER_USE_KEY)
 ];
 
 $trajet = $_SESSION['trajet_temp'];
-$gains = max(0, (int)$trajet['prix'] - 2);
+$gains  = max(0, (int)$trajet['prix'] - 2);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -48,7 +49,8 @@ $gains = max(0, (int)$trajet['prix'] - 2);
             <tr><td class="summary-label">Arrêts :</td><td class="summary-value"><?= htmlspecialchars(implode(', ', $trajet['etapes'])) ?></td></tr>
             <tr><td class="summary-label">Adresse d'arrivée :</td><td class="summary-value"><?= htmlspecialchars($trajet['arrival']) ?></td></tr>
             <tr><td class="summary-label">Date :</td><td class="summary-value"><?= htmlspecialchars($trajet['date']) ?></td></tr>
-            <tr><td class="summary-label">Heure :</td><td class="summary-value"><?= htmlspecialchars($trajet['time']) ?></td></tr>
+            <tr><td class="summary-label">Heure de départ :</td><td class="summary-value"><?= htmlspecialchars($trajet['time']) ?></td></tr>
+            <tr><td class="summary-label">Heure d'arrivée :</td><td class="summary-value"><?= htmlspecialchars($trajet['time_arrivee']) ?></td></tr>
             <tr><td class="summary-label">Véhicule utilisé :</td><td class="summary-value"><?= htmlspecialchars($trajet['vehicle_used']) ?></td></tr>
             <tr><td class="summary-label">Places disponibles :</td><td class="summary-value"><?= htmlspecialchars($trajet['places']) ?></td></tr>
             <tr><td class="summary-label">Prix par passager :</td><td class="summary-value"><?= htmlspecialchars($trajet['prix']) ?> crédits</td></tr>
