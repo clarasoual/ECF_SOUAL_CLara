@@ -3,50 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Espace employé - Messagerie </title>
+    <title>Espace employé - Connexion</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
-            <link rel="stylesheet" href="../CSS/CSS EMPLOYE/EMP-login-employe.css">
-
+    <link rel="stylesheet" href="../CSS/CSS EMPLOYE/EMP-login-employe.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header-employe.php') ; ?>
+<?php include('../COMPONENTS/COMP-header-employe.php'); ?>
 
-    <main>
+<main>
+    <div class="container-connexion">
+        <div id="connexion">
+            <h2>Se connecter</h2>
 
-        <!-- Section globale de la partie connexion/inscription-->
-        <div class="container-connexion">
-            <div id="connexion">
-                <h2>Se connecter</h2>
-                <form id="formulaire-connexion" action="../PHP/login-employe.php" method="POST">                    <label for="email-connexion">Adresse mail :</label>
-                    <input type="email" id="email-connexion" name="email-connexion" required>
+            <form id="formulaire-connexion" action="../PHP/login-employe.php" method="POST" novalidate>
 
+                <div class="form-group">
+                    <label for="email-connexion">Adresse mail :</label>
+                    <input type="text" id="email-connexion" name="email-connexion"
+                           autocomplete="email">
+                </div>
+
+                <div class="form-group">
                     <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password">
+                </div>
 
-                    <div id="options-connexion">
-                        <label>
-                            <input type="checkbox" name="remember">
-                            Se souvenir de moi
-                        </label>
-                        <a href="#" id="link-password">Mot de passe oublié ?</a>
-                    </div>
+                <div id="options-connexion">
+                    <label>
+                        <input type="checkbox" name="remember">
+                        Se souvenir de moi
+                    </label>
+                    <a href="#" id="link-password">Mot de passe oublié ?</a>
+                </div>
 
-                    <button type="submit" class="btn-connexion">Connexion</button>
-                </form>
-            </div>
+                <button type="submit" class="btn-connexion">Connexion</button>
+            </form>
         </div>
-    </main>
+    </div>
+</main>
 
+<script src="../JS/EMP-login-employe.js"></script>
 
-    <!-- Footer commun -->
-<?php include('../COMPONENTS/COMP-footer-employe.php'); ?></body>
+<?php include('../COMPONENTS/COMP-footer-employe.php'); ?>
+</body>
 </html>
-
-<!--
-- Re centrer
-- Mdp oublié
-- Enlever menu
--->
