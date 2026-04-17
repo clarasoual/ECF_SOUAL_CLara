@@ -13,9 +13,6 @@ $date     = '';
 $prochain = null;
 $erreurs  = [];
 
-// ─────────────────────────────────────────────
-// VALIDATION CÔTÉ SERVEUR
-// ─────────────────────────────────────────────
 if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 
     $depart  = trim($_GET['departure']);
@@ -200,8 +197,11 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                             → <?= htmlspecialchars($trajet['arrivee'], ENT_QUOTES, 'UTF-8') ?>
                         </h3>
                         <div class="ride-infos">
-                            <p>🕒 <?= htmlspecialchars($trajet['heure_depart'], ENT_QUOTES, 'UTF-8') ?></p>
                             <p>📅 <?= htmlspecialchars($trajet['date_depart'], ENT_QUOTES, 'UTF-8') ?></p>
+                            <p>🕒 Départ : <?= htmlspecialchars($trajet['heure_depart'], ENT_QUOTES, 'UTF-8') ?></p>
+                            <?php if (!empty($trajet['heure_arrivee'])): ?>
+                                <p>🏁 Arrivée : <?= htmlspecialchars($trajet['heure_arrivee'], ENT_QUOTES, 'UTF-8') ?></p>
+                            <?php endif; ?>
                             <p>💺 <?= (int)$trajet['places_disponibles'] ?> place(s)</p>
                             <p>💳 <?= (int)$trajet['prix'] ?> crédit(s)</p>
                             <?php if ($eco): ?>
