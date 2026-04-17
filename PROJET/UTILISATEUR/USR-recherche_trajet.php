@@ -85,6 +85,17 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
             } else {
                 $trajets[$key]['periode'] = 'passe';
             }
+
+            // Calcul durée en minutes pour le filtre JS
+            if (!empty($trajet['heure_depart']) && !empty($trajet['heure_arrivee'])) {
+                [$hD, $mD] = explode(':', $trajet['heure_depart']);
+                [$hA, $mA] = explode(':', $trajet['heure_arrivee']);
+                $duree = ((int)$hA * 60 + (int)$mA) - ((int)$hD * 60 + (int)$mD);
+                if ($duree < 0) $duree += 24 * 60; // trajet sur 2 jours
+                $trajets[$key]['duree_minutes'] = $duree;
+            } else {
+                $trajets[$key]['duree_minutes'] = -1; // pas de durée calculable
+            }
         }
     }
 }
@@ -138,17 +149,26 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
     <div class="filters">
         <h2>Filtrer</h2>
         <button type="button" class="fillers-clear-btn">Tout effacer</button>
+
         <label>
             <input type="checkbox" class="filter-input" id="filter-eco">
             Trajet écologique 🌿
         </label>
+
+        <label>
+            Prix maximum (crédits)
+            <input type="number" min="0" class="filter-input" id="filter-prix">
+        </label>
+
+        <label>
+            Durée maximum (heures)
+            <input type="number" min="0" step="0.5" class="filter-input" id="filter-duree"
+                   placeholder="ex: 2.5">
+        </label>
+
         <label>
             Note chauffeur minimale
             <input type="number" step="0.1" min="0" max="5" class="filter-input" id="filter-note">
-        </label>
-        <label>
-            Prix maximum
-            <input type="number" min="0" class="filter-input" id="filter-prix">
         </label>
     </div>
 
@@ -177,7 +197,8 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                 <article class="ride"
                     data-eco="<?= $eco ? '1' : '0' ?>"
                     data-note="<?= (float)$trajet['note_moyenne'] ?>"
-                    data-prix="<?= (float)$trajet['prix'] ?>">
+                    data-prix="<?= (float)$trajet['prix'] ?>"
+                    data-duree="<?= (int)$trajet['duree_minutes'] ?>">
 
                     <div class="ride-driver">
                         <img src="../../IMAGES/profiles/<?= htmlspecialchars($trajet['photo_conducteur'] ?? 'default.jpg', ENT_QUOTES, 'UTF-8') ?>" alt="Chauffeur">
@@ -201,6 +222,9 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                             <p>🕒 Départ : <?= htmlspecialchars($trajet['heure_depart'], ENT_QUOTES, 'UTF-8') ?></p>
                             <?php if (!empty($trajet['heure_arrivee'])): ?>
                                 <p>🏁 Arrivée : <?= htmlspecialchars($trajet['heure_arrivee'], ENT_QUOTES, 'UTF-8') ?></p>
+                                <?php if ($trajet['duree_minutes'] > 0): ?>
+                                    <p>⏱️ Durée : <?= floor($trajet['duree_minutes'] / 60) ?>h<?= str_pad($trajet['duree_minutes'] % 60, 2, '0', STR_PAD_LEFT) ?></p>
+                                <?php endif; ?>
                             <?php endif; ?>
                             <p>💺 <?= (int)$trajet['places_disponibles'] ?> place(s)</p>
                             <p>💳 <?= (int)$trajet['prix'] ?> crédit(s)</p>
@@ -230,22 +254,33 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 </section>
 
 <script>
-const btnClear   = document.querySelector('.fillers-clear-btn');
-const filterEco  = document.getElementById('filter-eco');
-const filterNote = document.getElementById('filter-note');
-const filterPrix = document.getElementById('filter-prix');
+const btnClear    = document.querySelector('.fillers-clear-btn');
+const filterEco   = document.getElementById('filter-eco');
+const filterNote  = document.getElementById('filter-note');
+const filterPrix  = document.getElementById('filter-prix');
+const filterDuree = document.getElementById('filter-duree');
 
 function appliquerFiltres() {
-    const eco     = filterEco.checked;
-    const noteMin = parseFloat(filterNote.value) || 0;
-    const prixMax = parseFloat(filterPrix.value) || Infinity;
+    const eco      = filterEco.checked;
+    const noteMin  = parseFloat(filterNote.value) || 0;
+    const prixMax  = parseFloat(filterPrix.value) || Infinity;
+    // Convertir heures en minutes pour comparer avec data-duree
+    const dureeMax = filterDuree.value ? parseFloat(filterDuree.value) * 60 : Infinity;
 
     document.querySelectorAll('.ride').forEach(ride => {
-        const rideEco  = ride.dataset.eco === '1';
-        const rideNote = parseFloat(ride.dataset.note);
-        const ridePrix = parseFloat(ride.dataset.prix);
+        const rideEco   = ride.dataset.eco === '1';
+        const rideNote  = parseFloat(ride.dataset.note);
+        const ridePrix  = parseFloat(ride.dataset.prix);
+        const rideDuree = parseInt(ride.dataset.duree); // -1 si pas de durée
 
-        const ok = (!eco || rideEco) && (rideNote >= noteMin) && (ridePrix <= prixMax);
+        // Pour le filtre durée : si pas de durée calculable (-1), on affiche quand même
+        const dureeOk = dureeMax === Infinity || rideDuree === -1 || rideDuree <= dureeMax;
+
+        const ok = (!eco || rideEco) &&
+                   (rideNote >= noteMin) &&
+                   (ridePrix <= prixMax) &&
+                   dureeOk;
+
         ride.style.display = ok ? '' : 'none';
     });
 }
@@ -253,11 +288,13 @@ function appliquerFiltres() {
 filterEco.addEventListener('change', appliquerFiltres);
 filterNote.addEventListener('input', appliquerFiltres);
 filterPrix.addEventListener('input', appliquerFiltres);
+filterDuree.addEventListener('input', appliquerFiltres);
 
 btnClear.addEventListener('click', () => {
     filterEco.checked = false;
     filterNote.value  = '';
     filterPrix.value  = '';
+    filterDuree.value = '';
     appliquerFiltres();
 });
 </script>
