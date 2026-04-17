@@ -58,5 +58,25 @@
         "montant": 1,
         "solde_apres": 1,
         "id_trajet": 42
+    },
+    {
+        "id": "transaction_69e20fb5751c3",
+        "date": "2026-04-17 12:47:17",
+        "id_utilisateur": 48,
+        "type": "sortie",
+        "description": "R\u00e9servation trajet begles \u2192 gradignan",
+        "montant": 2,
+        "solde_apres": 18,
+        "id_trajet": 43
+    },
+    {
+        "id": "transaction_69e20fcfe1ad1",
+        "date": "2026-04-17 12:47:43",
+        "id_utilisateur": 48,
+        "type": "entree",
+        "description": "Remboursement - trajet annul\u00e9 par le conducteur : begles \u2192 gradignan",
+        "montant": 2,
+        "solde_apres": 20,
+        "id_trajet": 43
     }
 ]

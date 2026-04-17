@@ -3,6 +3,7 @@ require_once __DIR__ . '/auth.php';
 requireLogin();
 require_once __DIR__ . '/connexion.php';
 require_once __DIR__ . '/transactions.php';
+require_once __DIR__ . '/mailer.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_trajet = (int)($_POST['id_trajet'] ?? 0);
@@ -20,12 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Vous n'avez pas la permission de supprimer ce trajet.");
     }
 
-    // Récupérer les passagers inscrits
-    $stmt = $bdd->prepare("SELECT id_passager FROM trajets_passagers WHERE id_trajet = ? AND statut = 'reserve'");
+    // Récupérer les passagers inscrits avec leurs infos pour le mail
+    $stmt = $bdd->prepare("
+        SELECT tp.id_passager, u.email, u.prenom, u.nom
+        FROM trajets_passagers tp
+        JOIN utilisateurs u ON u.id = tp.id_passager
+        WHERE tp.id_trajet = ? AND tp.statut = 'reserve'
+    ");
     $stmt->execute([$id_trajet]);
     $passagers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Rembourser chaque passager
+    // Rembourser chaque passager + envoyer mail
     foreach ($passagers as $p) {
         $id_passager = $p['id_passager'];
 
@@ -33,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $bdd->prepare("SELECT solde FROM credits WHERE id_utilisateur = ?");
         $stmt->execute([$id_passager]);
         $credit = $stmt->fetch(PDO::FETCH_ASSOC);
-        $solde_actuel = $credit ? $credit['solde'] : 0;
-        $nouveau_solde = $solde_actuel + $trajet['prix'];
+        $solde_actuel   = $credit ? $credit['solde'] : 0;
+        $nouveau_solde  = $solde_actuel + $trajet['prix'];
 
         // Rembourser
         $stmt = $bdd->prepare("UPDATE credits SET solde = ? WHERE id_utilisateur = ?");
@@ -49,6 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nouveau_solde,
             $id_trajet
         );
+
+        // Envoyer le mail d'annulation (US10)
+        envoyerMailAnnulation($p, $trajet);
     }
 
     // Supprimer les passagers
