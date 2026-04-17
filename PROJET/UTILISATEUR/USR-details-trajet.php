@@ -10,6 +10,9 @@ ini_set('display_errors', 0);
 $success  = isset($_GET['success']) && $_GET['success'] == 1;
 $isOwner  = isset($_SESSION['user_id']) && $_SESSION['user_id'] == $trajet['id_conducteur'];
 
+// Badge écologique — basé sur le carburant du véhicule
+$eco = strtolower($trajet['carburant'] ?? '') === 'electrique';
+
 $vehicules = [];
 if ($isOwner) {
     $stmt = $bdd->prepare("SELECT * FROM vehicules WHERE id_utilisateur = :id_user");
@@ -73,6 +76,9 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
                         🚗 <?= htmlspecialchars($trajet['marque'] . ' ' . $trajet['modele']) ?> ·
                         <?= htmlspecialchars($trajet['couleur']) ?> ·
                         <?= htmlspecialchars($trajet['carburant']) ?>
+                        <?php if ($eco): ?>
+                            <span class="eco-badge">🌿 Trajet écologique</span>
+                        <?php endif; ?>
                     </p>
                     <div class="driver-schedule">
                         <p>📅 Date : <?= htmlspecialchars($trajet['date_depart']) ?></p>
@@ -253,15 +259,15 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
 
 <script>
 <?php if ($isOwner && !$isPast): ?>
-const modal      = document.getElementById('modal-modifier');
+const modal       = document.getElementById('modal-modifier');
 const btnModifier = document.getElementById('btn-modifier');
-const closeModal = document.querySelector('.close-modal');
+const closeModal  = document.querySelector('.close-modal');
 
 btnModifier.addEventListener('click', () => modal.style.display = 'block');
 closeModal.addEventListener('click',  () => modal.style.display = 'none');
 window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
-const addStopBtn     = document.getElementById('add-stop-btn');
+const addStopBtn      = document.getElementById('add-stop-btn');
 const etapesContainer = document.getElementById('etapes-container');
 addStopBtn.addEventListener('click', () => {
     const index = etapesContainer.children.length + 1;

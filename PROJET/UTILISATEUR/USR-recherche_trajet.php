@@ -193,7 +193,7 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 
         <?php else: ?>
             <?php foreach ($trajets as $trajet): ?>
-                <?php $eco = strtolower($trajet['carburant'] ?? '') === 'électrique'; ?>
+                <?php $eco = strtolower($trajet['carburant'] ?? '') === 'electrique'; ?>
                 <article class="ride"
                     data-eco="<?= $eco ? '1' : '0' ?>"
                     data-note="<?= (float)$trajet['note_moyenne'] ?>"
