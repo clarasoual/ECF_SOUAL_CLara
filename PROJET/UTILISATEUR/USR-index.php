@@ -1,8 +1,19 @@
 <?php
 include __DIR__ . '/../PHP/connexion.php';
-include __DIR__ . '/../PHP/trajets.php';
 
-$trajets = getTrajetsActifs($bdd);
+// Récupérer les 2 derniers avis validés pour les témoignages
+$stmt = $bdd->prepare("
+    SELECT a.commentaire, a.note, u.prenom, u.nom
+    FROM avis a
+    JOIN utilisateurs u ON u.id = a.id_auteur
+    WHERE a.statut = 'valide'
+      AND a.commentaire IS NOT NULL
+      AND a.commentaire != ''
+    ORDER BY a.date_creation DESC
+    LIMIT 2
+");
+$stmt->execute();
+$temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +38,7 @@ $trajets = getTrajetsActifs($bdd);
         </div>
     </section>
 
-    <!-- Formulaire de recherche — les required sont retirés, la validation est gérée par JS -->
+    <!-- Formulaire de recherche -->
     <section class="search-section">
         <form action="USR-recherche_trajet.php" method="get" novalidate>
             <div class="search-container">
@@ -54,18 +65,6 @@ $trajets = getTrajetsActifs($bdd);
         </form>
     </section>
 
-    <section class="liste-trajets">
-        <h2>Trajets disponibles</h2>
-        <?php foreach($trajets as $trajet): ?>
-            <div class="trajet">
-                <p>Départ : <?= htmlspecialchars($trajet['depart'], ENT_QUOTES, 'UTF-8') ?></p>
-                <p>Arrivée : <?= htmlspecialchars($trajet['arrivee'], ENT_QUOTES, 'UTF-8') ?></p>
-                <p>Date : <?= htmlspecialchars($trajet['date_depart'], ENT_QUOTES, 'UTF-8') ?> à <?= htmlspecialchars($trajet['heure_depart'], ENT_QUOTES, 'UTF-8') ?></p>
-                <p>Places disponibles : <?= (int)$trajet['places_disponibles'] ?></p>
-            </div>
-        <?php endforeach; ?>
-    </section>
-
     <section class="founder-section">
         <div class="founder-container">
             <img src="../../IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
@@ -89,16 +88,21 @@ $trajets = getTrajetsActifs($bdd);
         </ol>
     </section>
 
+    <!-- Témoignages dynamiques depuis la BDD -->
     <section class="testimonials responsive-section">
         <h2>Ils ont voyagé avec Eco Ride</h2>
-        <article class="testimonial">
-            <p>Superbe expérience, conducteur sympa. Je recommande à 100 % !</p>
-            <strong>- Nina R.</strong>
-        </article>
-        <article class="testimonial">
-            <p>Nino est très accueillant et prudent. Pratique et écologique, j'utilise Eco Ride toutes les semaines.</p>
-            <strong>- Théo K.</strong>
-        </article>
+        <?php if (!empty($temoignages)): ?>
+            <?php foreach ($temoignages as $t): ?>
+                <article class="testimonial">
+                    <p><?= htmlspecialchars($t['commentaire'], ENT_QUOTES, 'UTF-8') ?></p>
+                    <strong>- <?= htmlspecialchars($t['prenom'] . ' ' . substr($t['nom'], 0, 1) . '.', ENT_QUOTES, 'UTF-8') ?></strong>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <article class="testimonial">
+                <p>Soyez le premier à partager votre expérience EcoRide !</p>
+            </article>
+        <?php endif; ?>
     </section>
 
     <section class="faq responsive-section">
