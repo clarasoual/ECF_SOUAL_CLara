@@ -78,5 +78,15 @@
         "montant": 2,
         "solde_apres": 20,
         "id_trajet": 43
+    },
+    {
+        "id": "transaction_69e21711a9806",
+        "date": "2026-04-17 13:18:41",
+        "id_utilisateur": 47,
+        "type": "entree",
+        "description": "Cr\u00e9dits accord\u00e9s par EcoRide suite \u00e0 votre demande",
+        "montant": 20,
+        "solde_apres": 20,
+        "id_trajet": null
     }
 ]

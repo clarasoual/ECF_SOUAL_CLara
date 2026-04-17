@@ -6,7 +6,7 @@
         "prenom": "testcredits",
         "nom": "testcredits",
         "email": "test.credits@example.com",
-        "statut": "en_attente"
+        "statut": "accepte"
     },
     {
         "id": "demande_69d3a0c9db47f",
