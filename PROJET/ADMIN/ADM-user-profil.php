@@ -84,6 +84,7 @@ $trajets_passager = $stmt_passager->fetchAll(PDO::FETCH_ASSOC);
     <title>Admin - Profil de <?= htmlspecialchars($user['prenom']) ?></title>
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-user-profil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 

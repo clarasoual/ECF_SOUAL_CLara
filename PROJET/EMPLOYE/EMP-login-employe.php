@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="../CSS/CSS EMPLOYE/EMP-login-employe.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
-
+<body class="connexion-page">
 <?php include('../COMPONENTS/COMP-header-employe.php'); ?>
 
 <main>
@@ -28,14 +27,6 @@
                 <div class="form-group">
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="password">
-                </div>
-
-                <div id="options-connexion">
-                    <label>
-                        <input type="checkbox" name="remember">
-                        Se souvenir de moi
-                    </label>
-                    <a href="#" id="link-password">Mot de passe oublié ?</a>
                 </div>
 
                 <button type="submit" class="btn-connexion">Connexion</button>

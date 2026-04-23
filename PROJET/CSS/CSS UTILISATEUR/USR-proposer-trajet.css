@@ -1,48 +1,177 @@
+/* ==============================================*/
+/* USR-PROPOSER-TRAJET */
+/* ==============================================*/
+
+.trip-step1 {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
 .step-title {
     font-size: 1.8rem;
-    margin-bottom: 1rem;
     text-align: center;
+    color: var(--vert-doux);
+    margin-bottom: 0.3rem;
 }
 
-/* Conteneur pour chaque arrêt */
-#container-step1,
-#container-step2,
-#container-step3,
-#container-step4,
-#container-step5 {
-    background-color: #f9f9f9;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin-top: 10px; /* espace entre chaque arrêt */
-    display: block;    /* chaque arrêt prend toute la largeur, un sous l'autre */
+.required-note {
+    text-align: center;
+    color: var(--gris-doux);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    font-family: 'Quicksand', sans-serif;
 }
 
-/* Bouton supprimer */
-.remove-stop {
-    background-color: #ff6666;
+/* ==============================================*/
+/* TABLE — layout deux colonnes */
+/* ==============================================*/
+
+.trip-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 1.5rem;
+    background: none;
     border: none;
+    box-shadow: none;
+}
+
+.trip-table tr {
+    background: none;
+}
+
+.trip-table td {
+    background-color: var(--beige-fonce);
+    border-radius: 16px;
+    padding: 2rem;
+    vertical-align: top;
+    border: none;
+    width: 50%;
+    box-shadow: 0 2px 12px var(--shadow);
+}
+
+/* ==============================================*/
+/* SOUS-TITRES */
+/* ==============================================*/
+
+.trip-subtitle {
+    color: var(--vert-doux);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(168, 213, 186, 0.3);
+}
+
+/* ==============================================*/
+/* ARRÊTS */
+/* ==============================================*/
+
+.stop-container {
+    background-color: var(--fond);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stop-container input {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.remove-stop {
+    background-color: #e74c3c;
     color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 5px; /* un petit espace au-dessus du bouton */
+    font-size: 0.8rem;
+    white-space: nowrap;
+    width: auto;
+    margin-bottom: 0;
 }
 
 .remove-stop:hover {
-    background-color: #ff4444;
+    background-color: #c0392b;
 }
 
-/* Label et input s'affichent en bloc */
-#container-step1 label,
-#container-step1 input,
-#container-step2 label,
-#container-step2 input,
-#container-step3 label,
-#container-step3 input,
-#container-step4 label,
-#container-step4 input,
-#container-step5 label,
-#container-step5 input {
-    display: block;
-    margin-bottom: 5px;
+#add-stop-btn {
+    margin-top: 0.8rem;
+    background: none;
+    border: 1px dashed var(--vert-doux);
+    color: var(--vert-doux);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: none;
+    width: auto;
+}
+
+#add-stop-btn:hover {
+    background-color: rgba(168, 213, 186, 0.15);
+}
+
+/* ==============================================*/
+/* INFOS CRÉDITS */
+/* ==============================================*/
+
+.credit-infos {
+    font-size: 0.85rem;
+    color: var(--orange-doux);
+    font-family: 'Quicksand', sans-serif;
+    margin: 0.3rem 0 0.5rem 0;
+}
+
+#gains-info {
+    background-color: rgba(168, 213, 186, 0.1);
+    border-left: 3px solid var(--vert-doux);
+    padding: 0.5rem 0.8rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* ==============================================*/
+/* BOUTON SUBMIT */
+/* ==============================================*/
+
+.btn-submit {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: var(--vert-doux);
+    color: black;
+    border-radius: 8px;
+}
+
+.btn-submit:hover {
+    background-color: var(--orange-doux);
+}
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 768px) {
+    .trip-table,
+    .trip-table tbody,
+    .trip-table tr,
+    .trip-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .trip-table {
+        border-spacing: 0;
+    }
+
+    .trip-table td {
+        margin-bottom: 1.5rem;
+    }
 }

@@ -32,6 +32,7 @@ $utilisateurs = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
     <title>Admin - Compte utilisateurs</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-utilisateurs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         .toast {
             position: fixed;
@@ -65,8 +66,6 @@ $utilisateurs = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include('../COMPONENTS/COMP-header-admin.php'); ?>
 
-<hr>
-
 <main>
 
 <?php include('../COMPONENTS/COMP-menu-admin.html'); ?>
@@ -76,7 +75,6 @@ $utilisateurs = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
     <h2>Compte Utilisateurs</h2>
 
     <form onsubmit="return false;">
-        <label for="search">Rechercher un utilisateur :</label>
         <input type="text" id="search" name="search" placeholder="Nom, mail...">
         <button type="button">Rechercher</button>
     </form>

@@ -8,16 +8,13 @@
                 <span class="logo-text">Eco Ride</span>
             </a>
         </div>
+        <?php if (!empty($admin) && !empty($admin['prenom'])): ?>
         <div class="user-profile">
             <div class="user-info">
                 <p><span class="label-employe">Nom :</span> <?= htmlspecialchars($admin['prenom']) ?></p>
                 <p><span class="label-employe">Email :</span> <?= htmlspecialchars($admin['email']) ?></p>
             </div>
-            <div class="profil-container">                
-                <div class="menu-profil">
-                    <a href="moncompte.php">Mon compte</a>
-                </div>
-            </div>
         </div>
+        <?php endif; ?>
     </div>
 </header>

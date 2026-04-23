@@ -63,38 +63,10 @@ $employes = $stmt_emp->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<header class="header-employe">
-    <h1 class="espace-employe">Espace Administrateur</h1>
-    <div class="header-bottom">
-        <div class="logo">
-            <a href="ADM-employes.php" class="logo-link">
-                <img src="../../IMAGES/logo.png" alt="Logo Eco Ride">
-                <span class="logo-text">Eco Ride</span>
-            </a>
-        </div>
-        <div class="user-profile">
-            <div class="user-info">
-                <p><span class="label-employe">Nom :</span> <?= htmlspecialchars($admin['prenom']) ?></p>
-                <p><span class="label-employe">Email :</span> <?= htmlspecialchars($admin['email']) ?></p>
-            </div>
-            <div class="profil-container">
-                <img src="../../IMAGES/default-avatar.jpg" alt="Photo de profil par défaut" class="photo-profil">
-                <div class="menu-profil">
-                    <a href="moncompte.php">Mon compte</a>
-                    <a href="ADM-logout.php">Déconnexion</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<hr>
-
+    <?php include('../COMPONENTS/COMP-header-admin.php'); ?>
+    
 <main>
     <?php include('../COMPONENTS/COMP-menu-admin.html'); ?>
-    <hr>
-
     <section class="principal-menu-section">
         <h2>Comptes Employés</h2>
 

@@ -41,35 +41,82 @@ $gains  = max(0, (int)$trajet['prix'] - 2);
 
 <main class="trip-step2">
     <h2 class="step-title">Résumé de votre trajet - Étape 2 sur 2</h2>
-    <p>Vérifiez les informations de votre trajet avant de le confirmer.</p>
+    <p class="step-subtitle">Vérifiez les informations de votre trajet avant de le confirmer.</p>
 
     <section class="trip-summary">
-        <table class="summary-table">
-            <tr><td class="summary-label">Adresse de départ :</td><td class="summary-value"><?= htmlspecialchars($trajet['departure']) ?></td></tr>
-            <tr><td class="summary-label">Arrêts :</td><td class="summary-value"><?= htmlspecialchars(implode(', ', $trajet['etapes'])) ?></td></tr>
-            <tr><td class="summary-label">Adresse d'arrivée :</td><td class="summary-value"><?= htmlspecialchars($trajet['arrival']) ?></td></tr>
-            <tr><td class="summary-label">Date :</td><td class="summary-value"><?= htmlspecialchars($trajet['date']) ?></td></tr>
-            <tr><td class="summary-label">Heure de départ :</td><td class="summary-value"><?= htmlspecialchars($trajet['time']) ?></td></tr>
-            <tr><td class="summary-label">Heure d'arrivée :</td><td class="summary-value"><?= htmlspecialchars($trajet['time_arrivee']) ?></td></tr>
-            <tr><td class="summary-label">Véhicule utilisé :</td><td class="summary-value"><?= htmlspecialchars($trajet['vehicle_used']) ?></td></tr>
-            <tr><td class="summary-label">Places disponibles :</td><td class="summary-value"><?= htmlspecialchars($trajet['places']) ?></td></tr>
-            <tr><td class="summary-label">Prix par passager :</td><td class="summary-value"><?= htmlspecialchars($trajet['prix']) ?> crédits</td></tr>
-            <tr><td class="summary-label">Vos gains par passager :</td><td class="summary-value"><?= $gains ?> crédits</td></tr>
-            <tr><td class="summary-label">Commentaires :</td><td class="summary-value"><?= htmlspecialchars($trajet['commentaire']) ?></td></tr>
-        </table>
+        <div class="summary-columns">
+
+            <!-- COLONNE GAUCHE : départ -->
+            <div class="summary-card">
+                <h3 class="summary-card-title">🗺️ Départ</h3>
+                <div class="summary-row">
+                    <span class="summary-label">Adresse</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['departure']) ?></span>
+                </div>
+                <?php if (!empty(array_filter($trajet['etapes']))): ?>
+                <div class="summary-row">
+                    <span class="summary-label">Arrêts</span>
+                    <span class="summary-value"><?= htmlspecialchars(implode(', ', array_filter($trajet['etapes']))) ?></span>
+                </div>
+                <?php endif; ?>
+                <div class="summary-row">
+                    <span class="summary-label">Date</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['date']) ?></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Heure de départ</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['time']) ?></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Véhicule</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['vehicle_used']) ?></span>
+                </div>
+            </div>
+
+            <!-- COLONNE DROITE : arrivée -->
+            <div class="summary-card">
+                <h3 class="summary-card-title">🏁 Arrivée</h3>
+                <div class="summary-row">
+                    <span class="summary-label">Adresse</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['arrival']) ?></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Heure d'arrivée</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['time_arrivee']) ?></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Places disponibles</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['places']) ?></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Prix par passager</span>
+                    <span class="summary-value highlight"><?= htmlspecialchars($trajet['prix']) ?> crédits</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Vos gains</span>
+                    <span class="summary-value highlight"><?= $gains ?> crédits</span>
+                </div>
+                <?php if (!empty($trajet['commentaire'])): ?>
+                <div class="summary-row">
+                    <span class="summary-label">Commentaires</span>
+                    <span class="summary-value"><?= htmlspecialchars($trajet['commentaire']) ?></span>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
 
         <section class="trip-actions">
             <form action="USR-proposer-trajet-3.php" method="POST">
                 <button type="submit" class="btn-submit">Confirmer le trajet</button>
             </form>
             <p class="edit-link">
-                <a href="USR-proposer-trajet.php" id="edit-link">Modifier les informations du trajet</a>
+                <a href="USR-proposer-trajet.php" id="edit-link">← Modifier les informations</a>
             </p>
         </section>
     </section>
 </main>
 
 <script src="../JS/USR-proposer-trajet2.js"></script>
-<?php include('../COMPONENTS/COMP-footer.php'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 </body>
 </html>

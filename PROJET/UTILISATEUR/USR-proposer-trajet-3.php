@@ -27,17 +27,17 @@ try {
 
     $stmt = $bdd->prepare($sql);
     $stmt->execute([
-        ':id_conducteur'    => $id_conducteur,
-        ':depart'           => $trajet['departure'],
-        ':arrivee'          => $trajet['arrival'],
-        ':date_depart'      => $trajet['date'],
-        ':heure_depart'     => $trajet['time'],
-        ':heure_arrivee'    => $trajet['time_arrivee'] ?? null,
-        ':vehicule_id'      => $trajet['vehicle_used'],
+        ':id_conducteur'      => $id_conducteur,
+        ':depart'             => $trajet['departure'],
+        ':arrivee'            => $trajet['arrival'],
+        ':date_depart'        => $trajet['date'],
+        ':heure_depart'       => $trajet['time'],
+        ':heure_arrivee'      => $trajet['time_arrivee'] ?? null,
+        ':vehicule_id'        => $trajet['vehicle_used'],
         ':places_disponibles' => $trajet['places'],
-        ':prix'             => intval($trajet['prix'] ?? 2),
-        ':etapes'           => $etapes_str,
-        ':commentaire'      => $trajet['commentaire'] ?? ''
+        ':prix'               => intval($trajet['prix'] ?? 2),
+        ':etapes'             => $etapes_str,
+        ':commentaire'        => $trajet['commentaire'] ?? ''
     ]);
 
     unset($_SESSION['trajet_temp']);
@@ -62,15 +62,23 @@ try {
 
 <main class="trip-confirmation">
     <section class="confirmation-message">
+
+        <div class="success-icon">✅</div>
         <h2 class="step-title">Votre trajet est en ligne !</h2>
         <p>Félicitations ! Votre proposition de trajet a été enregistrée et est désormais visible par les passagers.</p>
 
-        <p>Vous pouvez :</p>
-        <ul>
-            <li><a href="../UTILISATEUR/USR-mes-trajets.php">Voir vos trajets.</a></li>
-            <li><a href="../UTILISATEUR/USR-proposer-trajet.php?new=1">Proposer un nouveau trajet</a></li>
-            <li><a href="../UTILISATEUR/USR-index.php">Retourner à l'accueil</a></li>
-        </ul>
+        <div class="confirmation-actions">
+            <a href="../UTILISATEUR/USR-mes-trajets.php" class="btn-action btn-primary">
+                🗓️ Voir mes trajets
+            </a>
+            <a href="../UTILISATEUR/USR-proposer-trajet.php?new=1" class="btn-action btn-secondary">
+                ➕ Proposer un nouveau trajet
+            </a>
+            <a href="../UTILISATEUR/USR-index.php" class="btn-action btn-ghost">
+                ← Retour à l'accueil
+            </a>
+        </div>
+
     </section>
 </main>
 

@@ -1,109 +1,7 @@
-/* ---------- CARTES TRAJETS ---------- */
-.ride {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
+/* ==============================================*/
+/* SECTION RECHERCHE */
+/* ==============================================*/
 
-    background-color: var(--fond);
-    border-radius: 14px;
-    padding: 1.5rem;
-
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-    font-family: 'Quicksand', sans-serif;
-
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.ride:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
-}
-
-/* ---------- CHAUFFEUR ---------- */
-.ride-driver {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 90px;
-}
-
-.ride-driver img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 0.4rem;
-}
-
-.driver-name {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--gris-doux);
-    text-align: center;
-}
-
-/* ---------- CONTENU ---------- */
-.ride-content {
-    flex: 1;
-}
-
-.ride-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin: 0 0 0.6rem 0;
-    color: var(--texte);
-}
-
-.ride-infos {
-    display: flex;
-    gap: 1.2rem;
-    flex-wrap: wrap;
-    font-size: 0.95rem;
-    color: var(--gris-doux);
-}
-
-.ride-infos p {
-    margin: 0;
-}
-
-/* ---------- ACTION ---------- */
-.ride-action {
-    display: flex;
-    align-items: center;
-}
-
-.ride-btn {
-    background-color: var(--vert-doux);
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-}
-
-.ride-btn:hover {
-    background-color: var(--orange-doux);
-}
-
-/* ---------- NAVIGATION JOURS ---------- */
-.day-navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-}
-
-.day-navigation button {
-    background-color: var(--orange-doux);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* ---------- SECTION RECHERCHE ---------- */
 .search-section {
     padding: 2rem;
 }
@@ -117,94 +15,289 @@
     padding: 1.5rem;
     border-radius: 12px;
     font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 2px 12px var(--shadow);
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    min-width: 160px;
+    min-width: 140px;
     flex: 1;
 }
 
 .form-group label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 0.3rem;
     color: var(--gris-doux);
     white-space: nowrap;
+    font-weight: 600;
 }
 
 .form-group input {
     padding: 0.6rem;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--vert-doux);
+    margin-bottom: 0;
 }
 
-/* ---------- BOUTON RECHERCHE ---------- */
+/* ==============================================*/
+/* BOUTON RECHERCHE — loupe fixe */
+/* ==============================================*/
+
 .search-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 42px;
-    width: 50px;
+    width: 42px;
+    min-width: 42px; /* ← empêche la déformation */
     background-color: var(--orange-doux);
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    padding: 0;
+    flex-shrink: 0; /* ← ne se réduit pas */
 }
 
 .search-btn img {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
+    object-fit: contain; /* ← pas de déformation */
+    display: block;
 }
 
-/* ---------- SECTION RÉSULTATS ---------- */
+/* ==============================================*/
+/* SECTION RÉSULTATS */
+/* ==============================================*/
+
 .results-section {
     display: flex;
-    padding: 2rem;
-    gap: 2rem;
+    padding: 1rem 2rem 2rem 0.5rem;    
+    gap: 1.5rem;
 }
 
-/* ---------- FILTRES ---------- */
+/* ==============================================*/
+/* FILTRES — plus compacts à gauche */
+/* ==============================================*/
+
 .filters {
-    width: 30%;
+    width: 220px; /* ← réduit, était 30% */
+    min-width: 200px;
+    flex-shrink: 0;
     background-color: var(--beige-fonce);
-    padding: 1rem;
-    border-radius: 10px;
+    padding: 1.2rem;
+    border-radius: 12px;
     font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 2px 12px var(--shadow);
+    align-self: flex-start;
+    position: sticky;
+    top: 90px;
 }
 
 .filters h2 {
     margin-top: 0;
-    color: var(--gris-doux);
-}
-
-.filter-input {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    font-size: 1.1rem;
+    color: var(--vert-doux);
+    margin-bottom: 0.5rem;
 }
 
 .fillers-clear-btn {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 1rem;
     background: none;
     color: var(--orange-doux);
     border: none;
     cursor: pointer;
-    float: right;
+    box-shadow: none;
+    padding: 0;
+    display: block;
+    text-align: right;
+    width: 100%;
 }
 
-/* ---------- RÉSULTATS ---------- */
+.fillers-clear-btn:hover {
+    background: none;
+    color: #e07b39;
+    text-decoration: underline;
+}
+
+/* Checkbox écologique — alignement */
+.filters label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--texte);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    flex-wrap: wrap;
+}
+
+.filters label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--vert-doux);
+}
+
+.filters label input[type="number"] {
+    width: 100%;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
+}
+
+/* ==============================================*/
+/* RÉSULTATS */
+/* ==============================================*/
+
 .search-results {
-    width: 70%;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* ==============================================*/
+/* CARTES TRAJETS */
+/* ==============================================*/
+
+.ride {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background-color: var(--beige-fonce);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    box-shadow: 0 2px 10px var(--shadow);
+    font-family: 'Quicksand', sans-serif;
+    border-left: 4px solid var(--vert-doux);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ride:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px var(--shadow);
+}
+
+/* ==============================================*/
+/* CHAUFFEUR */
+/* ==============================================*/
+
+.ride-driver {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    gap: 0.3rem;
+}
+
+.ride-driver img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--vert-doux);
+}
+
+.driver-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--texte);
+    text-align: center;
+}
+
+.driver-note {
+    font-size: 0.8rem;
+    color: var(--orange-doux);
+    font-weight: 600;
+}
+
+/* ==============================================*/
+/* CONTENU */
+/* ==============================================*/
+
+.ride-content {
+    flex: 1;
+}
+
+.ride-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem 0;
+    color: var(--texte);
+}
+
+.ride-infos {
+    display: flex;
+    gap: 0.6rem 1rem;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: var(--gris-doux);
+}
+
+.ride-infos p {
+    margin: 0;
+    background-color: rgba(255,255,255,0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.eco-badge {
+    color: var(--vert-doux) !important;
+    font-weight: 700;
+    background-color: rgba(168, 213, 186, 0.15) !important;
+}
+
+.trajet-complet {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.3rem 0 0 0;
+}
+
+/* ==============================================*/
+/* ACTION */
+/* ==============================================*/
+
+.ride-action {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.ride-btn {
+    background-color: var(--vert-doux);
+    color: black;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.ride-btn:hover {
+    background-color: var(--orange-doux);
+    text-decoration: none;
+    color: black;
+}
+
+.ride-btn.disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
 @media (max-width: 900px) {
     .search-container {
         flex-wrap: wrap;
@@ -218,9 +311,10 @@
         flex-direction: column;
     }
 
-    .filters,
-    .search-results {
+    .filters {
         width: 100%;
+        min-width: unset;
+        position: static;
     }
 
     .ride {
@@ -230,7 +324,8 @@
 
     .ride-driver {
         flex-direction: row;
-        gap: 0.6rem;
+        gap: 0.8rem;
+        align-items: center;
     }
 
     .ride-action {

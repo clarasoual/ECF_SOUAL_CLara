@@ -58,14 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" id="password" name="password">
                 </div>
 
-                <div id="options-connexion">
-                    <label>
-                        <input type="checkbox" name="remember">
-                        Se souvenir de moi
-                    </label>
-                    <a href="#" id="link-password">Mot de passe oublié ?</a>
-                </div>
-
                 <button type="submit" class="btn-connexion">Connexion</button>
             </form>
         </div>

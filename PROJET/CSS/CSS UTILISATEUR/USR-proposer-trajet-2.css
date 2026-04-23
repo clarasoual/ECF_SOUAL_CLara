@@ -1,62 +1,150 @@
+/* ==============================================*/
+/* USR-PROPOSER-TRAJET-2 */
+/* ==============================================*/
+
 .trip-step2 {
     flex-direction: column;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: var(--fond);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px var(--shadow);
 }
 
-
-
-.trip-summary {
-    margin-top: 2rem;
+.step-title {
+    font-size: 1.8rem;
+    text-align: center;
+    color: var(--vert-doux);
+    margin-bottom: 0.3rem;
 }
 
-.summary-table {
-    width: 100%;
-    border-collapse: collapse;
+.step-subtitle {
+    text-align: center;
+    color: var(--gris-doux);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
     margin-bottom: 2rem;
 }
 
-.summary-table td {
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid var(--gris-doux);
+/* ==============================================*/
+/* CARTE RÉSUMÉ GLOBALE */
+/* ==============================================*/
+
+.trip-summary {
+    background-color: var(--beige-fonce);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px var(--shadow);
+}
+
+/* ==============================================*/
+/* DEUX COLONNES */
+/* ==============================================*/
+
+.summary-columns {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    flex: 1;
+    background-color: var(--fond);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.summary-card-title {
+    color: var(--vert-doux);
+    font-size: 1.1rem;
+    margin: 0 0 1.2rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(168, 213, 186, 0.3);
+}
+
+/* ==============================================*/
+/* LIGNES RÉSUMÉ */
+/* ==============================================*/
+
+.summary-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.9rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.summary-row:last-child {
+    margin-bottom: 0;
 }
 
 .summary-label {
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 700;
     color: var(--vert-doux);
-    width: 40%;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
 }
 
 .summary-value {
+    font-size: 0.95rem;
     color: var(--texte);
 }
+
+.summary-value.highlight {
+    color: var(--orange-doux);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* ==============================================*/
+/* ACTIONS */
+/* ==============================================*/
 
 .trip-actions {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(168, 213, 186, 0.2);
 }
 
+.trip-actions .btn-submit {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: var(--vert-doux);
+    color: black;
+    border-radius: 8px;
+    font-weight: 700;
+}
 
+.trip-actions .btn-submit:hover {
+    background-color: var(--orange-doux);
+}
+
+.edit-link {
+    margin: 0;
+}
 
 .edit-link a {
-    font-size: 0.9 rem;
+    font-size: 0.9rem;
     color: var(--orange-doux);
     text-decoration: underline;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .edit-link a:hover {
     color: #e07b39;
 }
 
-.trip-summary p {
-    text-align: center;
-    font-size: 1rem;
-    color: var(--texte);
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 700px) {
+    .summary-columns {
+        flex-direction: column;
+    }
 }

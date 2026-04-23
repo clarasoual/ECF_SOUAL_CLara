@@ -82,6 +82,7 @@ $credits_values_json = json_encode($credits_values);
     <title>Admin — Statistiques</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-statistiques.css">
 </head>
 <body>

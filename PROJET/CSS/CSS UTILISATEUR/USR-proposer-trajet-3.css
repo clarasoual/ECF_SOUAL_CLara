@@ -1,66 +1,129 @@
+/* ==============================================*/
+/* USR-PROPOSER-TRAJET-3 */
+/* ==============================================*/
+
 .trip-confirmation {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh-160px);
+    min-height: calc(100vh - 160px);
     padding: 2rem 1rem;
 }
 
 .confirmation-message {
     background-color: var(--beige-fonce);
-    padding: 2.5rem 3rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15PX var(--shadow);
-    max-width: 600PX;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px var(--shadow);
+    max-width: 520px;
+    width: 100%;
     text-align: center;
+    border-top: 4px solid var(--vert-doux);
 }
 
+/* ==============================================*/
+/* ICÔNE SUCCÈS */
+/* ==============================================*/
+
+.success-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+/* ==============================================*/
+/* TITRE */
+/* ==============================================*/
+
 .confirmation-message h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
     color: var(--vert-doux);
 }
 
 .confirmation-message p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    color: var(--texte);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    color: var(--gris-doux);
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1.6;
 }
 
-.confirmation-message ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 1rem;
+/* ==============================================*/
+/* BOUTONS */
+/* ==============================================*/
+
+.confirmation-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-.confirmation-message ul li {
-    margin: 0.5rem 0;
-}
-
-.confirmation-message ul li a {
+.btn-action {
+    display: block;
+    padding: 0.75rem 1.2rem;
+    border-radius: 8px;
     font-weight: 600;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--vert-doux);
+    color: black;
+}
+
+.btn-primary:hover {
+    background-color: #8ec9a2;
+    text-decoration: none;
+    color: black;
+}
+
+.btn-secondary {
+    background-color: var(--orange-doux);
+    color: black;
+}
+
+.btn-secondary:hover {
+    background-color: #e07b39;
+    text-decoration: none;
+    color: black;
+}
+
+.btn-ghost {
+    background: none;
+    border: 1px solid var(--gris-doux);
+    color: var(--gris-doux);
+}
+
+.btn-ghost:hover {
+    border-color: var(--vert-doux);
     color: var(--vert-doux);
+    text-decoration: none;
 }
 
-.confirmation-message ul li a:hover {
-    color: #e07b39;
-    text-decoration: underline;
-}
-
-@media screen and (max-width : 768px) {
-    .confirmation-message {
-        padding: 1.5rem 1.5rem;
-        max-width: 90%;
-    }
-    .confirmation-message h2 {
-        font-size: 1.6rem;
-    }
-    .confirmation-message p {
-        font-size: 0.95rem;
-    }
-}
+/* ==============================================*/
+/* CONFETTIS */
+/* ==============================================*/
 
 .confetti {
     pointer-events: none;
     mix-blend-mode: screen;
+}
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 768px) {
+    .confirmation-message {
+        padding: 2rem 1.5rem;
+        max-width: 90%;
+    }
+
+    .confirmation-message h2 {
+        font-size: 1.5rem;
+    }
 }
