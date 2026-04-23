@@ -1,48 +1,15 @@
 /* ==============================================*/
-/* ADM-UTILISATEURS */
+/* ADM-EMPLOYES */
 /* ==============================================*/
 
-#account-user {
+.principal-menu-section {
     flex: 1;
     padding: 1rem;
 }
 
-#account-user h2 {
+.principal-menu-section h2 {
     color: var(--vert-doux);
     margin-bottom: 1.5rem;
-}
-
-/* ==============================================*/
-/* RECHERCHE */
-/* ==============================================*/
-
-#account-user form {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-#account-user form label {
-    color: var(--vert-doux);
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-#account-user form input {
-    width: 250px;
-    margin-bottom: 0;
-}
-
-#account-user form button {
-    width: auto;
-    background-color: var(--vert-doux);
-    color: black;
-}
-
-#account-user form button:hover {
-    background-color: var(--orange-doux);
 }
 
 /* ==============================================*/
@@ -54,7 +21,7 @@
     overflow-x: auto;
 }
 
-.table-users {
+.table-responsive table {
     white-space: nowrap;
 }
 
@@ -68,38 +35,73 @@
     font-size: 0.75rem;
     padding: 2px 8px;
     border-radius: 12px;
+    margin-left: 6px;
 }
 
 /* ==============================================*/
 /* BOUTONS */
 /* ==============================================*/
 
-.btn-voir {
+.btn-modifier {
+    background-color: var(--orange-doux);
     color: black;
-    text-decoration: none;
-}
-
-td button {
     margin-bottom: 0.3rem;
 }
 
-td button:has(.btn-voir) {
-    background-color: var(--orange-doux);
-}
-
-td button:has(.btn-voir):hover {
+.btn-modifier:hover {
     background-color: #e07b39;
 }
 
+.btn-open-popup {
+    margin-top: 1.5rem;
+    background-color: var(--vert-doux);
+    color: black;
+}
+
+.btn-open-popup:hover {
+    background-color: var(--orange-doux);
+}
+
 /* ==============================================*/
-/* MESSAGE AUCUN RÉSULTAT */
+/* POPUPS */
 /* ==============================================*/
 
-#no-results {
-    color: var(--orange-doux);
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1rem;
-    margin-top: 1rem;
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--beige-fonce);
+    border: 1px solid var(--vert-doux);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 400px;
+    max-width: 90%;
+    z-index: 1000;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.popup input {
+    margin-bottom: 1rem;
+}
+
+.popup button[type="submit"] {
+    background-color: var(--vert-doux);
+    color: black;
+    margin-right: 0.5rem;
+}
+
+.popup button[type="submit"]:hover {
+    background-color: var(--orange-doux);
+}
+
+.popup-close {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.popup-close:hover {
+    background-color: #c0392b;
 }
 
 /* ==============================================*/
@@ -118,12 +120,11 @@ td button:has(.btn-voir):hover {
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
     z-index: 1000;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .toast.hide {
     opacity: 0;
-    transform: translateY(20px);
 }
 
 /* ==============================================*/
@@ -135,12 +136,8 @@ td button:has(.btn-voir):hover {
         flex-direction: column;
     }
 
-    #account-user form input {
-        width: 100%;
-    }
-
-    #account-user form {
-        flex-direction: column;
-        align-items: flex-start;
+    .popup {
+        width: 90%;
+        padding: 1.5rem;
     }
 }

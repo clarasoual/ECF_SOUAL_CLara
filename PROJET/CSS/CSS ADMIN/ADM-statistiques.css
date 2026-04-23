@@ -1,0 +1,179 @@
+/* ==============================================*/
+/* ADM-STATISTIQUES */
+/* ==============================================*/
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 0;
+    padding: 0.5rem 0;
+}
+
+/* ==============================================*/
+/* TITRE */
+/* ==============================================*/
+
+.page-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--vert-doux);
+    margin: 0 0 0.2rem 0;
+}
+
+.page-subtitle {
+    font-size: 0.9rem;
+    color: var(--gris-doux);
+    margin: 0;
+}
+
+/* ==============================================*/
+/* FILTRE — compact */
+/* ==============================================*/
+
+.stats-filter {
+    background-color: var(--beige-fonce);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px var(--shadow);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    width: fit-content; /* ← ne prend que la place nécessaire */
+}
+
+.stats-filter label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--vert-doux);
+    white-space: nowrap;
+}
+
+.stats-filter input[type="date"] {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--vert-doux);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    width: auto; /* ← ne prend pas toute la largeur */
+    margin-bottom: 0;
+}
+
+.btn-filtrer {
+    padding: 0.4rem 1rem;
+    background-color: var(--vert-doux);
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-filtrer:hover {
+    background-color: var(--orange-doux);
+}
+
+/* ==============================================*/
+/* CARDS STATS */
+/* ==============================================*/
+
+.stats-cards {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: var(--beige-fonce);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 12px var(--shadow);
+    flex: 1;
+    min-width: 180px;
+    border-top: 4px solid var(--vert-doux);
+}
+
+.stat-card .stat-label {
+    font-size: 0.85rem;
+    color: var(--gris-doux);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--vert-doux);
+    line-height: 1;
+}
+
+.stat-card .stat-sub {
+    font-size: 0.8rem;
+    color: var(--gris-doux);
+    margin-top: 0.3rem;
+}
+
+/* ==============================================*/
+/* GRAPHIQUES */
+/* ==============================================*/
+
+.charts-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.charts-wrapper .chart-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.chart-section {
+    background-color: var(--beige-fonce);
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px var(--shadow);
+}
+
+.chart-section h2 {
+    color: var(--vert-doux);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 300px;
+}
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .stats-filter {
+        width: 100%;
+    }
+
+    .stats-filter input[type="date"] {
+        width: 100%;
+    }
+
+    .charts-wrapper {
+        flex-direction: column;
+    }
+}

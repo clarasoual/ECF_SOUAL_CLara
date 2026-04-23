@@ -1,0 +1,228 @@
+/* ===================================================
+   ADM-user-profil.css — Style sobre et pro
+=================================================== */
+
+/* ====== LAYOUT GÉNÉRAL ====== */
+
+main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+}
+
+/* ====== WRAPPER CONTENU ====== */
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 0;
+    padding: 0.5rem 0;
+}
+
+/* ====== SECTIONS COMMUNES ====== */
+
+.driver-profile-section,
+.profile-driver-details,
+.trip-history,
+.avis-section,
+.admin-actions {
+    background-color: var(--beige-fonce);
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px var(--shadow);
+    width: 100%;
+    max-width: 750px;
+}
+
+h2, .section-title {
+    color: var(--vert-doux);
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.subsection-title {
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--orange-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+hr {
+    display: none;
+}
+
+/* ====== SECTION PROFIL ====== */
+
+.driver-profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-top: 4px solid var(--vert-doux);
+}
+
+.driver-profile-section h2 {
+    font-size: 1.6rem;
+    margin-top: 0.5rem;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--vert-doux);
+    box-shadow: 0 2px 8px var(--shadow);
+    margin: 1rem 0;
+}
+
+.driver-profile-section p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+    color: var(--texte);
+}
+
+.driver-profile-section .bio {
+    margin-top: 0.8rem;
+    font-style: italic;
+    color: var(--gris-doux);
+    max-width: 500px;
+}
+
+/* Badge rôle */
+.driver-profile-section p:nth-of-type(1) {
+    display: inline-block;
+    background-color: var(--vert-doux);
+    color: var(--beige-fonce);
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* ====== PRÉFÉRENCES ====== */
+
+.preferences-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.preferences-list li {
+    background-color: var(--fond);
+    border: 1px solid var(--vert-doux);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    color: var(--vert-doux);
+}
+
+/* ====== VÉHICULES ====== */
+
+.profile-driver-details ul:not(.preferences-list) {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.profile-driver-details ul:not(.preferences-list) li {
+    background-color: var(--fond);
+    border-left: 3px solid var(--orange-doux);
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: var(--texte);
+}
+
+/* ====== TRAJETS ====== */
+
+.trip {
+    background-color: var(--fond);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+    border-left: 3px solid var(--vert-doux);
+    font-size: 0.9rem;
+}
+
+.trip h4 {
+    margin: 0 0 0.3rem 0;
+    color: var(--vert-doux);
+    font-size: 0.95rem;
+}
+
+.trip p {
+    margin: 0.2rem 0;
+    color: var(--texte);
+}
+
+/* ====== AVIS ====== */
+
+.avis {
+    background-color: var(--fond);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+    border-left: 3px solid var(--orange-doux);
+    font-size: 0.9rem;
+    color: var(--texte);
+}
+
+.avis p {
+    margin: 0.2rem 0;
+}
+
+/* ====== ACTIONS ADMIN ====== */
+
+.admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-retour {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--fond);
+    border: 1px solid var(--vert-doux);
+    color: var(--vert-doux);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-retour:hover {
+    background-color: var(--vert-doux);
+    color: var(--beige-fonce);
+}
+
+/* ====== RESPONSIVE ====== */
+
+@media (max-width: 600px) {
+    .driver-profile-section,
+    .profile-driver-details,
+    .trip-history,
+    .avis-section,
+    .admin-actions {
+        padding: 1rem;
+    }
+
+    .preferences-list {
+        flex-direction: column;
+    }
+}

@@ -83,7 +83,7 @@ $trajets_passager = $stmt_passager->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Profil de <?= htmlspecialchars($user['prenom']) ?></title>
     <link rel="stylesheet" href="../CSS/style_global.css">
-    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-profil.css">
+    <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-user-profil.css">
 </head>
 <body>
 

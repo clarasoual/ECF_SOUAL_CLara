@@ -59,32 +59,8 @@ $employes = $stmt_emp->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Comptes Employés</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
-    <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-utilisateurs.css">
+    <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-employes.css">    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4BB543;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            opacity: 1;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        .toast.hide { opacity: 0; }
-        .badge-suspendu {
-            background-color: #e74c3c;
-            color: white;
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin-left: 6px;
-        }
-    </style>
 </head>
 <body>
 
