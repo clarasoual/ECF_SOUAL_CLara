@@ -1,12 +1,6 @@
 /* ==============================================*/
-/* EMP-GESTION-AVIS */
+/* EMP-LITIGES */
 /* ==============================================*/
-
-.layout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
 
 .reviews-moderation {
     flex: 1;
@@ -16,34 +10,6 @@
 .reviews-moderation h2 {
     color: var(--vert-doux);
     margin-bottom: 1.5rem;
-}
-
-/* ==============================================*/
-/* FILTRE ONGLET */
-/* ==============================================*/
-
-.reviews-moderation form {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.reviews-moderation form label {
-    color: var(--vert-doux);
-    font-weight: 600;
-}
-
-.reviews-moderation form select {
-    width: auto;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: 1px solid var(--orange-doux);
-    background-color: #f9f9f9;
-    color: #222;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
 }
 
 /* ==============================================*/
@@ -91,23 +57,75 @@
     background-color: #e07b39;
 }
 
-.btn-supprimer {
-    background-color: var(--beige-fonce);
-    color: var(--texte);
-    border: 1px solid #e74c3c;
-    margin-bottom: 0.3rem;
+/* ==============================================*/
+/* MODALE NOTE EMPLOYÉ */
+/* ==============================================*/
+
+.modal-note {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn-supprimer:hover {
-    background-color: #e74c3c;
-    color: white;
+.modal-note.active {
+    display: flex;
+}
+
+.modal-note-content {
+    background-color: var(--beige-fonce);
+    border: 1px solid var(--vert-doux);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 520px;
+    max-width: 90%;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.modal-note-content h3 {
+    color: var(--vert-doux);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.modal-note-content textarea {
+    width: 100%;
+    height: 160px;
+    padding: 0.75rem;
+    border: 1px solid var(--orange-doux);
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    color: #222;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+.modal-note-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+/* ==============================================*/
+/* STATUTS */
+/* ==============================================*/
+
+.statut-cell {
+    white-space: nowrap;
+    font-weight: 600;
 }
 
 /* ==============================================*/
 /* TOAST */
 /* ==============================================*/
 
-#toast-dynamique {
+#toast-litige {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -118,26 +136,4 @@
     font-weight: 600;
     z-index: 9999;
     box-shadow: 0 2px 8px var(--shadow);
-}
-
-/* ==============================================*/
-/* RESPONSIVE */
-/* ==============================================*/
-
-@media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
-    .reviews-moderation table {
-        font-size: 0.85rem;
-    }
-
-    .btn-valider,
-    .btn-refuser,
-    .btn-attente,
-    .btn-supprimer {
-        font-size: 0.8rem;
-        padding: 0.4em 0.8em;
-    }
 }

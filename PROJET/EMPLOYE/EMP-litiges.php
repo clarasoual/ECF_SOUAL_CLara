@@ -36,40 +36,8 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace employé - Litiges</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
-    <link rel="stylesheet" href="../CSS/CSS EMPLOYE/EMP-gestion-avis.css">
+    <link rel="stylesheet" href="../CSS/CSS EMPLOYE/EMP-litiges.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        .modal-note {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-note.active { display: flex; }
-        .modal-note-content {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            width: 500px;
-            max-width: 90%;
-        }
-        .modal-note-content h3 { margin-top: 0; }
-        .modal-note-content textarea {
-            width: 100%;
-            height: 150px;
-            margin: 1rem 0;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: 'Quicksand', sans-serif;
-            resize: vertical;
-            box-sizing: border-box;
-        }
-        .modal-note-actions { display: flex; gap: 1rem; justify-content: flex-end; }
-    </style>
 </head>
 <body>
 
