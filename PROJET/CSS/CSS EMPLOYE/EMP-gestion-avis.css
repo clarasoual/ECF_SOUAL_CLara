@@ -18,6 +18,11 @@
     margin-bottom: 1.5rem;
 }
 
+.layout {
+    display: flex;
+    flex-direction: column;
+}
+
 /* ==============================================*/
 /* FILTRE ONGLET */
 /* ==============================================*/
@@ -44,6 +49,7 @@
     font-family: 'Quicksand', sans-serif;
     font-size: 1rem;
     cursor: pointer;
+    margin-bottom: 0;
 }
 
 /* ==============================================*/
@@ -52,50 +58,73 @@
 
 .reviews-moderation table {
     width: 100%;
-    overflow-x: auto;
-    display: block;
+    display: table;
+    white-space: normal;
+}
+
+/* Colonnes sans retour à la ligne */
+.reviews-moderation td:nth-child(1),
+.reviews-moderation td:nth-child(2),
+.reviews-moderation td:nth-child(6) {
+    white-space: nowrap;
+}
+
+/* Colonne commentaire — limitée */
+.reviews-moderation td:nth-child(7) {
+    max-width: 200px;
+    white-space: normal;
+    word-break: break-word;
+    font-size: 0.85rem;
+}
+
+/* ==============================================*/
+/* BOUTONS EMPILÉS */
+/* ==============================================*/
+
+.actions-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 130px;
+}
+
+.actions-cell button {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: 0.82rem;
+    padding: 0.4em 0.7em;
     white-space: nowrap;
 }
 
 /* ==============================================*/
-/* BOUTONS D'ACTION */
+/* COULEURS BOUTONS */
 /* ==============================================*/
 
 .btn-valider {
     background-color: #4BB543;
     color: white;
-    margin-bottom: 0.3rem;
 }
 
-.btn-valider:hover {
-    background-color: #3a9e34;
-}
+.btn-valider:hover { background-color: #3a9e34; }
 
 .btn-refuser {
     background-color: #e74c3c;
     color: white;
-    margin-bottom: 0.3rem;
 }
 
-.btn-refuser:hover {
-    background-color: #c0392b;
-}
+.btn-refuser:hover { background-color: #c0392b; }
 
 .btn-attente {
     background-color: var(--orange-doux);
     color: black;
-    margin-bottom: 0.3rem;
 }
 
-.btn-attente:hover {
-    background-color: #e07b39;
-}
+.btn-attente:hover { background-color: #e07b39; }
 
 .btn-supprimer {
     background-color: var(--beige-fonce);
     color: var(--texte);
     border: 1px solid #e74c3c;
-    margin-bottom: 0.3rem;
 }
 
 .btn-supprimer:hover {
@@ -120,24 +149,17 @@
     box-shadow: 0 2px 8px var(--shadow);
 }
 
+
 /* ==============================================*/
 /* RESPONSIVE */
 /* ==============================================*/
 
 @media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
+    main { flex-direction: column; }
 
     .reviews-moderation table {
-        font-size: 0.85rem;
-    }
-
-    .btn-valider,
-    .btn-refuser,
-    .btn-attente,
-    .btn-supprimer {
-        font-size: 0.8rem;
-        padding: 0.4em 0.8em;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }

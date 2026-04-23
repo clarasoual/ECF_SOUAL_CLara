@@ -41,11 +41,7 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-<div class="layout">
 <?php include('../COMPONENTS/COMP-header-employe.php'); ?>
-
-<hr>
-
 <main>
     <?php include('../COMPONENTS/COMP-menu-employe.html'); ?>
 
@@ -88,6 +84,7 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $a['note'] ?>/5</td>
                     <td><?= htmlspecialchars($a['commentaire'] ?? '—') ?></td>
                     <td>
+                        <div class="actions-cell">
                         <?php if ($onglet === 'en_attente'): ?>
                             <button type="button" class="btn-valider"
                                     data-action="valider"
@@ -111,6 +108,7 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 🗑️ Supprimer
                             </button>
                         <?php endif; ?>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>

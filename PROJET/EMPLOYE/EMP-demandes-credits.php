@@ -90,10 +90,7 @@ if (file_exists(FICHIER_DEMANDES)) {
 </head>
 <body>
 
-<div class="layout">
 <?php include('../COMPONENTS/COMP-header-employe.php'); ?>
-<hr>
-
 <main>
     <?php include('../COMPONENTS/COMP-menu-employe.html'); ?>
 

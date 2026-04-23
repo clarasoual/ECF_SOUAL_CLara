@@ -52,6 +52,7 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php if (empty($litiges)): ?>
             <p>Aucun litige. ✅</p>
         <?php else: ?>
+        <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -59,27 +60,24 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Trajet</th>
                     <th>Date</th>
                     <th>Passager</th>
-                    <th>Mail passager</th>
                     <th>Conducteur</th>
-                    <th>Mail conducteur</th>
-                    <th>Motif</th>
                     <th>Statut</th>
-                    <th>Note employé</th>
+                    <th>Détails</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($litiges as $l): ?>
                 <tr data-id="<?= $l['id_signalement'] ?>"
-                    data-note="<?= htmlspecialchars($l['note_employe'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                    data-note="<?= htmlspecialchars($l['note_employe'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                    data-motif="<?= htmlspecialchars($l['motif'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                    data-email-passager="<?= htmlspecialchars($l['email_passager'], ENT_QUOTES, 'UTF-8') ?>"
+                    data-email-conducteur="<?= htmlspecialchars($l['email_conducteur'], ENT_QUOTES, 'UTF-8') ?>">
                     <td><?= $l['id_trajet'] ?></td>
                     <td><?= htmlspecialchars($l['depart']) ?> → <?= htmlspecialchars($l['arrivee']) ?></td>
                     <td><?= date('d/m/Y', strtotime($l['date_depart'])) ?> à <?= htmlspecialchars($l['heure_depart']) ?></td>
                     <td><?= htmlspecialchars($l['prenom_passager'] . ' ' . $l['nom_passager']) ?></td>
-                    <td><a href="mailto:<?= htmlspecialchars($l['email_passager']) ?>"><?= htmlspecialchars($l['email_passager']) ?></a></td>
                     <td><?= htmlspecialchars($l['prenom_conducteur'] . ' ' . $l['nom_conducteur']) ?></td>
-                    <td><a href="mailto:<?= htmlspecialchars($l['email_conducteur']) ?>"><?= htmlspecialchars($l['email_conducteur']) ?></a></td>
-                    <td><?= htmlspecialchars($l['motif'] ?? '—') ?></td>
                     <td class="statut-cell">
                         <?php if ($l['statut_signalement'] === 'en_cours'): ?>
                             ⏳ En cours
@@ -89,10 +87,10 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ❌ Crédits bloqués
                         <?php endif; ?>
                     </td>
-                    <td class="note-cell">
-                        <button type="button" class="btn-attente btn-ouvrir-note"
+                    <td>
+                        <button type="button" class="btn-attente btn-ouvrir-details"
                                 data-id="<?= $l['id_signalement'] ?>">
-                            <?= !empty($l['note_employe']) ? '✏️ Voir la note' : '✏️ Ajouter une note' ?>
+                            🔍 Voir détails
                         </button>
                     </td>
                     <td>
@@ -100,12 +98,12 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <button type="button" class="btn-valider"
                                     data-id="<?= $l['id_signalement'] ?>"
                                     data-action="debloquer">
-                                ✅ Débloquer crédits
+                                ✅ Débloquer
                             </button>
                             <button type="button" class="btn-refuser"
                                     data-id="<?= $l['id_signalement'] ?>"
                                     data-action="bloquer">
-                                ❌ Bloquer crédits
+                                ❌ Bloquer
                             </button>
                         <?php else: ?>
                             <span>Traité</span>
@@ -115,18 +113,45 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
         <?php endif; ?>
     </section>
 </main>
 
-<!-- Modale note employé -->
-<div id="modal-note" class="modal-note">
-    <div class="modal-note-content">
-        <h3>✏️ Note de l'employé</h3>
-        <textarea id="textarea-note" placeholder="Décrivez ici votre analyse du litige, les contacts pris, la décision..."></textarea>
-        <div class="modal-note-actions">
-            <button type="button" id="btn-fermer-note" class="btn-refuser">Fermer</button>
-            <button type="button" id="btn-sauver-note" class="btn-valider">Enregistrer</button>
+<!-- MODALE DÉTAILS -->
+<div id="modal-details" class="modal-litige">
+    <div class="modal-litige-content">
+        <div class="modal-litige-header">
+            <h3>🔍 Détails du litige</h3>
+            <button type="button" id="btn-fermer-details" class="btn-close">✕</button>
+        </div>
+
+        <div class="modal-litige-body">
+            <div class="detail-row">
+                <span class="detail-label">Mail passager</span>
+                <a id="detail-email-passager" href="#" class="detail-value"></a>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Mail conducteur</span>
+                <a id="detail-email-conducteur" href="#" class="detail-value"></a>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Motif</span>
+                <span id="detail-motif" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Note employé</span>
+                <span id="detail-note" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Ajouter / modifier la note</span>
+                <textarea id="textarea-note" placeholder="Votre analyse, contacts pris, décision..."></textarea>
+            </div>
+        </div>
+
+        <div class="modal-litige-actions">
+            <button type="button" id="btn-fermer-details-bas" class="btn-refuser">Fermer</button>
+            <button type="button" id="btn-sauver-note" class="btn-valider">Enregistrer la note</button>
         </div>
     </div>
 </div>
@@ -136,28 +161,38 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>
 let idSignalementActif = null;
 
-// Ouvrir la modale avec la note existante
-document.querySelectorAll('.btn-ouvrir-note').forEach(btn => {
+// Ouvrir modale détails
+document.querySelectorAll('.btn-ouvrir-details').forEach(btn => {
     btn.addEventListener('click', () => {
         idSignalementActif = btn.dataset.id;
         const ligne = btn.closest('tr');
+
+        document.getElementById('detail-email-passager').textContent = ligne.dataset.emailPassager;
+        document.getElementById('detail-email-passager').href = 'mailto:' + ligne.dataset.emailPassager;
+        document.getElementById('detail-email-conducteur').textContent = ligne.dataset.emailConducteur;
+        document.getElementById('detail-email-conducteur').href = 'mailto:' + ligne.dataset.emailConducteur;
+        document.getElementById('detail-motif').textContent = ligne.dataset.motif || '—';
+        document.getElementById('detail-note').textContent = ligne.dataset.note || '—';
         document.getElementById('textarea-note').value = ligne.dataset.note || '';
-        document.getElementById('modal-note').classList.add('active');
+
+        document.getElementById('modal-details').classList.add('active');
     });
 });
 
-// Fermer la modale
-document.getElementById('btn-fermer-note').addEventListener('click', () => {
-    document.getElementById('modal-note').classList.remove('active');
+// Fermer modale
+['btn-fermer-details', 'btn-fermer-details-bas'].forEach(id => {
+    document.getElementById(id).addEventListener('click', () => {
+        document.getElementById('modal-details').classList.remove('active');
+    });
 });
 
-document.getElementById('modal-note').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('modal-note')) {
-        document.getElementById('modal-note').classList.remove('active');
+document.getElementById('modal-details').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modal-details')) {
+        document.getElementById('modal-details').classList.remove('active');
     }
 });
 
-// Enregistrer la note en BDD via Fetch
+// Enregistrer la note
 document.getElementById('btn-sauver-note').addEventListener('click', () => {
     const note = document.getElementById('textarea-note').value.trim();
     if (!idSignalementActif) return;
@@ -173,10 +208,11 @@ document.getElementById('btn-sauver-note').addEventListener('click', () => {
                 const ligne = document.querySelector(`tr[data-id="${idSignalementActif}"]`);
                 if (ligne) {
                     ligne.dataset.note = note;
-                    const btnNote = ligne.querySelector('.btn-ouvrir-note');
-                    if (btnNote) btnNote.textContent = note ? '✏️ Voir la note' : '✏️ Ajouter une note';
+                    const btnDetails = ligne.querySelector('.btn-ouvrir-details');
+                    if (btnDetails) btnDetails.textContent = '🔍 Voir détails';
                 }
-                document.getElementById('modal-note').classList.remove('active');
+                document.getElementById('detail-note').textContent = note || '—';
+                document.getElementById('modal-details').classList.remove('active');
                 afficherToast('✅ Note enregistrée !');
             } else {
                 afficherToast('❌ Erreur lors de l\'enregistrement.', 'error');
@@ -226,7 +262,6 @@ document.querySelector('tbody')?.addEventListener('click', (e) => {
         .then(data => {
             if (data.success) {
                 ligne.querySelector('.statut-cell').textContent = action === 'debloquer' ? '✅ Crédits versés' : '❌ Crédits bloqués';
-                ligne.querySelector('.note-cell').innerHTML     = note || '—';
                 ligne.querySelector('td:last-child').innerHTML  = '<span>Traité</span>';
                 afficherToast(action === 'debloquer' ? '✅ Crédits débloqués et versés au chauffeur !' : '❌ Crédits bloqués définitivement.');
             } else {
