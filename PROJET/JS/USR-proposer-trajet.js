@@ -108,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const valHeure        = inputTime.value;
         const valHeureArrivee = inputTimeArrivee.value;
         if (!valHeureArrivee) { afficherErreur(inputTimeArrivee, 'L\'heure d\'arrivée est obligatoire.'); return false; }
-        // L'heure d'arrivée doit être après l'heure de départ
         if (valHeure && valHeureArrivee <= valHeure) {
             afficherErreur(inputTimeArrivee, 'L\'heure d\'arrivée doit être après l\'heure de départ.');
             return false;
@@ -135,6 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
     }
 
+    function validerCommentaire() {
+        const val = inputCommentaire.value.trim();
+        if (!val) { afficherErreur(inputCommentaire, 'Le point de rendez-vous est obligatoire.'); return false; }
+        supprimerErreur(inputCommentaire);
+        return true;
+    }
+
     // ────────────────────────────────────────
     // Références champs
     // ────────────────────────────────────────
@@ -147,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputTimeArrivee  = document.getElementById('time_arrivee');
     const inputPlaces       = document.getElementById('places');
     const inputPrix         = document.getElementById('prix');
+    const inputCommentaire  = document.getElementById('commentaire');
 
     // ────────────────────────────────────────
     // Validation en live
@@ -180,6 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('gains-calcul').textContent = gains;
     });
 
+    inputCommentaire.addEventListener('blur',  validerCommentaire);
+    inputCommentaire.addEventListener('input', () => supprimerErreur(inputCommentaire));
+
     // ────────────────────────────────────────
     // SessionStorage — retour depuis étape 2
     // ────────────────────────────────────────
@@ -204,14 +214,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const storedComments     = sessionStorage.getItem('comments')     || '';
         const storedStops        = JSON.parse(sessionStorage.getItem('stops') || '[]');
 
-        if (storedDeparture)   inputDepart.value         = storedDeparture;
-        if (storedArrival)     inputArrivee.value         = storedArrival;
-        if (storedDate)        inputDate.value            = storedDate;
-        if (storedTime)        inputTime.value            = storedTime;
-        if (storedTimeArrivee) inputTimeArrivee.value     = storedTimeArrivee;
-        if (storedVehicle)     selectVehicule.value       = storedVehicle;
-        if (storedPlaces)      inputPlaces.value          = storedPlaces;
-        if (storedComments)    document.getElementById('commentaire').value = storedComments;
+        if (storedDeparture)   inputDepart.value        = storedDeparture;
+        if (storedArrival)     inputArrivee.value       = storedArrival;
+        if (storedDate)        inputDate.value          = storedDate;
+        if (storedTime)        inputTime.value          = storedTime;
+        if (storedTimeArrivee) inputTimeArrivee.value   = storedTimeArrivee;
+        if (storedVehicle)     selectVehicule.value     = storedVehicle;
+        if (storedPlaces)      inputPlaces.value        = storedPlaces;
+        if (storedComments)    inputCommentaire.value   = storedComments;
 
         const firstStop = document.getElementById('step1');
         if (storedStops.length) {
@@ -278,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        [inputDepart, inputArrivee, inputDate, inputTime, inputTimeArrivee, inputPlaces, inputPrix].forEach(supprimerErreur);
+        [inputDepart, inputArrivee, inputDate, inputTime, inputTimeArrivee, inputPlaces, inputPrix, inputCommentaire].forEach(supprimerErreur);
         supprimerErreurSelect(selectVehicule);
 
         let valide = true;
@@ -290,6 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!validerHeureArrivee()) valide = false;
         if (!validerPlaces())       valide = false;
         if (!validerPrix())         valide = false;
+        if (!validerCommentaire())  valide = false;
 
         if (!valide) return;
 
@@ -304,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem('time_arrivee', inputTimeArrivee.value);
         sessionStorage.setItem('places',       inputPlaces.value);
         sessionStorage.setItem('vehicle',      selectVehicule.value);
-        sessionStorage.setItem('comments',     document.getElementById('commentaire').value.trim());
+        sessionStorage.setItem('comments',     inputCommentaire.value.trim());
         sessionStorage.setItem('stops',        JSON.stringify(stops));
         sessionStorage.setItem('fromStep2',    'true');
 

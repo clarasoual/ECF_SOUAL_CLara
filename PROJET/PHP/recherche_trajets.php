@@ -17,17 +17,25 @@ function chercherTrajets($bdd, $depart, $arrivee, $date) {
             JOIN utilisateurs u ON t.id_conducteur = u.id
             LEFT JOIN vehicules v ON t.vehicule_id = v.vehicule_id
             LEFT JOIN avis a ON a.id_destinataire = t.id_conducteur AND a.statut = 'valide'
-            WHERE LOWER(TRIM(t.depart)) LIKE LOWER(:depart)
-              AND LOWER(TRIM(t.arrivee)) LIKE LOWER(:arrivee)
-              AND t.date_depart = :date
-              AND t.statut IN ('publie', 'complet')
+            WHERE (
+                LOWER(TRIM(t.depart)) LIKE LOWER(:depart)
+                OR LOWER(t.etapes) LIKE LOWER(:depart_etape)
+            )
+            AND (
+                LOWER(TRIM(t.arrivee)) LIKE LOWER(:arrivee)
+                OR LOWER(t.etapes) LIKE LOWER(:arrivee_etape)
+            )
+            AND t.date_depart = :date
+            AND t.statut IN ('publie', 'complet')
             GROUP BY t.id
         ");
 
         $stmt->execute([
-            ':depart'  => '%' . trim($depart) . '%',
-            ':arrivee' => '%' . trim($arrivee) . '%',
-            ':date'    => $date
+            ':depart'        => '%' . trim($depart) . '%',
+            ':depart_etape'  => '%' . trim($depart) . '%',
+            ':arrivee'       => '%' . trim($arrivee) . '%',
+            ':arrivee_etape' => '%' . trim($arrivee) . '%',
+            ':date'          => $date
         ]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -43,18 +51,26 @@ function prochainTrajetDisponible($bdd, $depart, $arrivee, $date) {
         $stmt = $bdd->prepare("
             SELECT t.date_depart
             FROM trajets t
-            WHERE LOWER(TRIM(t.depart)) LIKE LOWER(:depart)
-              AND LOWER(TRIM(t.arrivee)) LIKE LOWER(:arrivee)
-              AND t.date_depart > :date
-              AND t.statut IN ('publie', 'complet')
+            WHERE (
+                LOWER(TRIM(t.depart)) LIKE LOWER(:depart)
+                OR LOWER(t.etapes) LIKE LOWER(:depart_etape)
+            )
+            AND (
+                LOWER(TRIM(t.arrivee)) LIKE LOWER(:arrivee)
+                OR LOWER(t.etapes) LIKE LOWER(:arrivee_etape)
+            )
+            AND t.date_depart > :date
+            AND t.statut IN ('publie', 'complet')
             ORDER BY t.date_depart ASC
             LIMIT 1
         ");
 
         $stmt->execute([
-            ':depart'  => '%' . trim($depart) . '%',
-            ':arrivee' => '%' . trim($arrivee) . '%',
-            ':date'    => $date
+            ':depart'        => '%' . trim($depart) . '%',
+            ':depart_etape'  => '%' . trim($depart) . '%',
+            ':arrivee'       => '%' . trim($arrivee) . '%',
+            ':arrivee_etape' => '%' . trim($arrivee) . '%',
+            ':date'          => $date
         ]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);

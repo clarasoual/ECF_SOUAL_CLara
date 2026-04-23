@@ -29,7 +29,7 @@ $transactions = getTransactions($id_utilisateur);
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
 

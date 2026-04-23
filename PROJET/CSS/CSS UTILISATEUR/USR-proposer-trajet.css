@@ -3,7 +3,7 @@
 /* ==============================================*/
 
 .trip-step1 {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
 }
@@ -24,29 +24,20 @@
 }
 
 /* ==============================================*/
-/* TABLE — layout deux colonnes */
+/* 3 COLONNES */
 /* ==============================================*/
 
-.trip-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 1.5rem;
-    background: none;
-    border: none;
-    box-shadow: none;
+.trip-columns {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
 }
 
-.trip-table tr {
-    background: none;
-}
-
-.trip-table td {
+.trip-card {
+    flex: 1;
     background-color: var(--beige-fonce);
     border-radius: 16px;
-    padding: 2rem;
-    vertical-align: top;
-    border: none;
-    width: 50%;
+    padding: 1.8rem;
     box-shadow: 0 2px 12px var(--shadow);
 }
 
@@ -56,9 +47,9 @@
 
 .trip-subtitle {
     color: var(--vert-doux);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-top: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(168, 213, 186, 0.3);
 }
@@ -93,6 +84,7 @@
     white-space: nowrap;
     width: auto;
     margin-bottom: 0;
+    box-shadow: none;
 }
 
 .remove-stop:hover {
@@ -148,6 +140,7 @@
     background-color: var(--vert-doux);
     color: black;
     border-radius: 8px;
+    font-weight: 700;
 }
 
 .btn-submit:hover {
@@ -158,20 +151,12 @@
 /* RESPONSIVE */
 /* ==============================================*/
 
-@media (max-width: 768px) {
-    .trip-table,
-    .trip-table tbody,
-    .trip-table tr,
-    .trip-table td {
-        display: block;
+@media (max-width: 900px) {
+    .trip-columns {
+        flex-direction: column;
+    }
+
+    .trip-card {
         width: 100%;
-    }
-
-    .trip-table {
-        border-spacing: 0;
-    }
-
-    .trip-table td {
-        margin-bottom: 1.5rem;
     }
 }

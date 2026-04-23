@@ -15,10 +15,8 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
 </head>
 <body>
 <!-- Header commun -->
-<?php include('../COMPONENTS/COMP-header.html') ; ?>
+<?php include('../COMPONENTS/COMP-header.php') ; ?>
 <main>
-<!-- Menu latéral -->
-<?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
 <section>
     <h2>Aide & Support</h2>
@@ -46,22 +44,6 @@ requireLogin(); // Redirige si l'utilisateur n'est pas connecté
         <p>Utilisez la messagerie intégrée dans votre espace personnel.</p>
     </div>
 </div>
-
-<!-- Section contact -->
-<div class="contact-section">
-    <h3>Nous contacter</h3>
-    <p>Vous n'avez pas trouvé votre réponse ? Laissez-nous un message :</p>
-    <form>
-        <label for="email">Votre email :</label><br>
-        <input type="email" id="email" name="email" placeholder="exemple@email.com"><br><br>
-
-        <label for="message">Votre message :</label><br>
-        <textarea id="message" name="message" rows="4" cols="50" placeholder="Expliquez votre problème..."></textarea><br><br>
-
-        <button type="submit">Envoyer</button>
-    </form>
-</div>
-</section>
 
 </main>
 

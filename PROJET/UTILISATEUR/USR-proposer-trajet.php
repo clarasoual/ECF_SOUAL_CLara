@@ -69,6 +69,7 @@ if (empty($etapes)) { $etapes = ['']; }
     <title>Proposer un trajet</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-proposer-trajet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -76,102 +77,108 @@ if (empty($etapes)) { $etapes = ['']; }
 
 <section class="trip-step1">
     <h2 class="step-title">Votre trajet - Étape 1 sur 2</h2>
-    <p class="required-note">Champs obligatoires</p>
+    <p class="required-note">* Champs obligatoires</p>
 
     <form action="USR-proposer-trajet-2.php" method="POST" novalidate>
-        <table class="trip-table">
-            <tr>
-                <!-- COLONNE GAUCHE : départ -->
-                <td class="trip-info">
-                    <h3 class="trip-subtitle">D'où partons-nous ?</h3>
+        <div class="trip-columns">
 
-                    <div class="form-group">
-                        <label for="departure">Adresse de départ *</label>
-                        <input type="text" id="departure" name="departure" placeholder="Adresse de départ"
-                               value="<?= htmlspecialchars($trajet_temp['departure']) ?>">
-                    </div>
+            <!-- COLONNE 1 : Départ -->
+            <div class="trip-card">
+                <h3 class="trip-subtitle">🗺️ Départ</h3>
 
-                    <label>Arrêts (optionnel)</label>
-                    <div id="etapes-container">
-                        <?php foreach ($etapes as $i => $etape): ?>
-                            <div class="stop-container">
-                                <input type="text" id="step<?= $i+1 ?>" name="step<?= $i+1 ?>"
-                                       placeholder="Arrêt n°<?= $i+1 ?>"
-                                       value="<?= htmlspecialchars($etape) ?>">
-                            </div>
+                <div class="form-group">
+                    <label for="departure">Adresse de départ *</label>
+                    <input type="text" id="departure" name="departure" placeholder="Ville ou adresse de départ"
+                           value="<?= htmlspecialchars($trajet_temp['departure']) ?>">
+                </div>
+
+                <label>Arrêts (optionnel)</label>
+                <div id="etapes-container">
+                    <?php foreach ($etapes as $i => $etape): ?>
+                        <div class="stop-container">
+                            <input type="text" id="step<?= $i+1 ?>" name="step<?= $i+1 ?>"
+                                   placeholder="Arrêt n°<?= $i+1 ?>"
+                                   value="<?= htmlspecialchars($etape) ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <button type="button" id="add-stop-btn">+ Ajouter un arrêt</button>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="date">Date de départ *</label>
+                    <input type="date" id="date" name="date"
+                           value="<?= htmlspecialchars($trajet_temp['date']) ?>">
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Heure de départ *</label>
+                    <input type="time" id="time" name="time"
+                           value="<?= htmlspecialchars($trajet_temp['time']) ?>">
+                </div>
+            </div>
+
+            <!-- COLONNE 2 : Arrivée -->
+            <div class="trip-card">
+                <h3 class="trip-subtitle">🏁 Arrivée</h3>
+
+                <div class="form-group">
+                    <label for="arrival">Adresse d'arrivée *</label>
+                    <input type="text" id="arrival" name="arrival" placeholder="Ville ou adresse d'arrivée"
+                           value="<?= htmlspecialchars($trajet_temp['arrival']) ?>">
+                </div>
+
+                <div class="form-group">
+                    <label for="time_arrivee">Heure d'arrivée *</label>
+                    <input type="time" id="time_arrivee" name="time_arrivee"
+                           value="<?= htmlspecialchars($trajet_temp['time_arrivee'] ?? '') ?>">
+                </div>
+
+                <div class="form-group">
+                    <label for="places">Nombre de places disponibles *</label>
+                    <input type="number" id="places" name="places" min="1" max="8"
+                           value="<?= htmlspecialchars($trajet_temp['places']) ?>">
+                </div>
+
+                <div class="form-group">
+                    <label for="prix">Prix par passager (en crédits) *</label>
+                    <p class="credit-infos">⚠️ 2 crédits sont retenus par la plateforme. Minimum : 2 crédits.</p>
+                    <input type="number" id="prix" name="prix" min="2" max="20"
+                           value="<?= htmlspecialchars($trajet_temp['prix'] ?? 2) ?>">
+                    <p class="credit-infos" id="gains-info">
+                        Vous gagnerez <strong id="gains-calcul"><?= max(0, ($trajet_temp['prix'] ?? 2) - 2) ?></strong> crédits par passager (après retenue plateforme).
+                    </p>
+                </div>
+            </div>
+
+            <!-- COLONNE 3 : Informations pratiques -->
+            <div class="trip-card">
+                <h3 class="trip-subtitle">🚗 Informations pratiques</h3>
+
+                <div class="form-group">
+                    <label for="vehicle-used">Véhicule utilisé *</label>
+                    <select id="vehicle-used" name="vehicle_used">
+                        <option value="">-- Sélectionnez un véhicule --</option>
+                        <?php foreach ($vehicules as $vehicule): 
+                            $vehicule_label = htmlspecialchars($vehicule['marque'] . ' ' . $vehicule['modele'] . ' ' . $vehicule['couleur']); 
+                            $selected = ($trajet_temp['vehicle_used'] == $vehicule['vehicule_id']) ? 'selected' : '';
+                        ?>
+                            <option value="<?= $vehicule['vehicule_id'] ?>" <?= $selected ?>><?= $vehicule_label ?></option>
                         <?php endforeach; ?>
-                    </div>
-                    <button type="button" id="add-stop-btn">+ Ajouter un arrêt</button><br><br>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="vehicle-used">Véhicule utilisé *</label>
-                        <select id="vehicle-used" name="vehicle_used">
-                            <option value="">-- Sélectionnez un véhicule --</option>
-                            <?php foreach ($vehicules as $vehicule): 
-                                $vehicule_label = htmlspecialchars($vehicule['marque'] . ' ' . $vehicule['modele'] . ' ' . $vehicule['couleur']); 
-                                $selected = ($trajet_temp['vehicle_used'] == $vehicule['vehicule_id']) ? 'selected' : '';
-                            ?>
-                                <option value="<?= $vehicule['vehicule_id'] ?>" <?= $selected ?>><?= $vehicule_label ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="commentaire">Point de rendez-vous, lieu de dépose et autres précisions *</label>
+                    <textarea id="commentaire" name="commentaire" rows="6"
+                              placeholder="Ex : départ devant la gare Saint-Jean côté taxis, dépose Place Gambetta devant le café, coffre petit..."><?= htmlspecialchars($trajet_temp['commentaire']) ?></textarea>
+                    <span class="credit-infos">💡 Ces informations sont indispensables pour que vos passagers puissent vous retrouver.</span>
+                </div>
+            </div>
 
-                    <div class="form-group">
-                        <label for="date">Date de départ *</label>
-                        <input type="date" id="date" name="date"
-                               value="<?= htmlspecialchars($trajet_temp['date']) ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="time">Heure de départ *</label>
-                        <input type="time" id="time" name="time"
-                               value="<?= htmlspecialchars($trajet_temp['time']) ?>">
-                    </div>
-                </td>
-
-                <!-- COLONNE DROITE : arrivée -->
-                <td class="trip-info-destination">
-                    <h3 class="trip-subtitle">Où allons-nous ?</h3>
-
-                    <div class="form-group">
-                        <label for="arrival">Adresse d'arrivée *</label>
-                        <input type="text" id="arrival" name="arrival" placeholder="Adresse d'arrivée"
-                               value="<?= htmlspecialchars($trajet_temp['arrival']) ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="time_arrivee">Heure d'arrivée *</label>
-                        <input type="time" id="time_arrivee" name="time_arrivee"
-                               value="<?= htmlspecialchars($trajet_temp['time_arrivee'] ?? '') ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="places">Nombre de places disponibles *</label>
-                        <input type="number" id="places" name="places" min="1" max="8"
-                               value="<?= htmlspecialchars($trajet_temp['places']) ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="prix">Prix par passager (en crédits) *</label>
-                        <p class="credit-infos">⚠️ 2 crédits sont retenus par la plateforme. Minimum : 2 crédits.</p>
-                        <input type="number" id="prix" name="prix" min="2" max="20"
-                               value="<?= htmlspecialchars($trajet_temp['prix'] ?? 2) ?>">
-                        <p class="credit-infos" id="gains-info">
-                            Vous gagnerez <strong id="gains-calcul"><?= max(0, ($trajet_temp['prix'] ?? 2) - 2) ?></strong> crédits par passager (après retenue plateforme).
-                        </p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="commentaire">Autres précisions (optionnel)</label>
-                        <textarea id="commentaire" name="commentaire" rows="4" cols="40"
-                                  placeholder="Ex : passage par autoroute, coffre petit..."><?= htmlspecialchars($trajet_temp['commentaire']) ?></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">Étape suivante</button>
-                </td>
-            </tr>
-        </table>
+        </div>
     </form>
+
+                    <button type="submit" class="btn-submit">Étape suivante →</button>
 </section>
 
 <script src="../JS/USR-proposer-trajet.js"></script>

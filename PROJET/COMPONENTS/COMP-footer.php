@@ -2,7 +2,6 @@
     <div class="footer-container">
         <a href="#">Mentions légales</a>
         <a href="#">Règlement de la plateforme</a>
-        <a href="#">Contact</a>
         <!-- Bouton déconnexion si l'utilisateur est connecté -->
             <?php
         require_once(__DIR__ . '/../PHP/auth.php'); // plus sûr que include relatif
@@ -13,23 +12,8 @@
         }
         ?>
     </div>
-
-    <div class="footer-social">
-        <a href="#" target="_blank">Facebook</a>
-        <a href="#" target="_blank">Twitter</a>
-        <a href="#" target="_blank">Linkedin</a>
-    </div>
-
-    <div class="footer-newsletter">
-        <form action="#" method="POST">
-            <label for="newsletter">Abonnez-vous à notre newsletter :</label>
-            <input type="email" id="newsletter" name="newsletter" placeholder="Votre email" required>
-            <button type="submit">S'abonner</button>
-        </form>
-    </div>
-
     <div class="footer-copyright">
-        <p>&copy; 2025 ECO RIDE. Tous droits réservés</p>
+<a href="mailto:ecoride@contact.com">ecoride@contact.com</a>        <p>&copy; 2025 ECO RIDE. Tous droits réservés</p>
     </div>
 </footer>
 

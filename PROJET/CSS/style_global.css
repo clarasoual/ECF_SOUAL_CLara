@@ -42,6 +42,11 @@ img {
     height: auto;
     display: block;
 }
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
 
 /* ==============================================*/
 /* TYPO */
@@ -332,7 +337,7 @@ header .logo{
         justify-content: space-around;
         flex-direction: column;
         width: 100%;
-        gap: 0.5rem;
+        gap: 1.5rem;
     }
 
     .nav-links {
