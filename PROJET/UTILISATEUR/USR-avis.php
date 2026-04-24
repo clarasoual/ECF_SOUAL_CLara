@@ -60,57 +60,53 @@ $avis_donnes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
-    <div class="menu-column">
-        <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
-    </div>
+    <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
-    <div class="content-column">
-        <section class="reviews-section">
-            <h2>Mes avis</h2>
+    <section class="reviews-section">
+        <h2>Mes avis</h2>
 
-            <!-- Avis reçus -->
-            <div id="reviews-received">
-                <h3>Avis reçus</h3>
-                <?php if (empty($avis_recus)): ?>
-                    <p>Aucun avis reçu pour le moment.</p>
-                <?php else: ?>
-                    <?php foreach ($avis_recus as $a): ?>
-                    <div class="review">
-                        <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($a['date_creation'])) ?></p>
-                        <p><strong>Trajet :</strong> <?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></p>
-                        <p><strong>De :</strong> <?= htmlspecialchars($a['prenom_auteur'] . ' ' . $a['nom_auteur']) ?></p>
-                        <p><strong>Note :</strong> <?= $a['note'] ?>/5</p>
-                        <?php if ($a['commentaire']): ?>
-                            <p><strong>Commentaire :</strong> <?= htmlspecialchars($a['commentaire']) ?></p>
-                        <?php endif; ?>
-                    </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
+        <!-- Avis reçus -->
+        <div id="reviews-received">
+            <h3>Avis reçus</h3>
+            <?php if (empty($avis_recus)): ?>
+                <p>Aucun avis reçu pour le moment.</p>
+            <?php else: ?>
+                <?php foreach ($avis_recus as $a): ?>
+                <div class="review">
+                    <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($a['date_creation'])) ?></p>
+                    <p><strong>Trajet :</strong> <?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></p>
+                    <p><strong>De :</strong> <?= htmlspecialchars($a['prenom_auteur'] . ' ' . $a['nom_auteur']) ?></p>
+                    <p><strong>Note :</strong> <?= $a['note'] ?>/5</p>
+                    <?php if ($a['commentaire']): ?>
+                        <p><strong>Commentaire :</strong> <?= htmlspecialchars($a['commentaire']) ?></p>
+                    <?php endif; ?>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
 
-            <!-- Avis donnés -->
-            <div id="reviews-given">
-                <h3>Avis donnés</h3>
-                <?php if (empty($avis_donnes)): ?>
-                    <p>Vous n'avez pas encore donné d'avis.</p>
-                <?php else: ?>
-                    <?php foreach ($avis_donnes as $a): ?>
-                    <div class="review">
-                        <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($a['date_creation'])) ?></p>
-                        <p><strong>Trajet :</strong> <?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></p>
-                        <p><strong>Pour :</strong> <?= htmlspecialchars($a['prenom_destinataire'] . ' ' . $a['nom_destinataire']) ?></p>
-                        <p><strong>Note :</strong> <?= $a['note'] ?>/5</p>
-                        <?php if ($a['commentaire']): ?>
-                            <p><strong>Commentaire :</strong> <?= htmlspecialchars($a['commentaire']) ?></p>
-                        <?php endif; ?>
-                        <p><em>Statut : <?= $a['statut'] === 'valide' ? '✅ Publié' : ($a['statut'] === 'refuse' ? '❌ Refusé' : '⏳ En attente') ?></em></p>
-                    </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
+        <!-- Avis donnés -->
+        <div id="reviews-given">
+            <h3>Avis donnés</h3>
+            <?php if (empty($avis_donnes)): ?>
+                <p>Vous n'avez pas encore donné d'avis.</p>
+            <?php else: ?>
+                <?php foreach ($avis_donnes as $a): ?>
+                <div class="review">
+                    <p><strong>Date :</strong> <?= date('d/m/Y', strtotime($a['date_creation'])) ?></p>
+                    <p><strong>Trajet :</strong> <?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></p>
+                    <p><strong>Pour :</strong> <?= htmlspecialchars($a['prenom_destinataire'] . ' ' . $a['nom_destinataire']) ?></p>
+                    <p><strong>Note :</strong> <?= $a['note'] ?>/5</p>
+                    <?php if ($a['commentaire']): ?>
+                        <p><strong>Commentaire :</strong> <?= htmlspecialchars($a['commentaire']) ?></p>
+                    <?php endif; ?>
+                    <p><em>Statut : <?= $a['statut'] === 'valide' ? '✅ Publié' : ($a['statut'] === 'refuse' ? '❌ Refusé' : '⏳ En attente') ?></em></p>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
 
-        </section>
-    </div>
+    </section>
 </main>
 
 <?php include('../COMPONENTS/COMP-footer.php'); ?>

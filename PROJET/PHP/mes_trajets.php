@@ -35,7 +35,7 @@ try {
 
 $trajets = array_merge($trajetsConducteur, $trajetsPassager);
 
-$trajetsFutur = [];
+$trajetsFutur   = [];
 $trajetsEnCours = [];
 $trajetsTermine = [];
 $now = new DateTime();
@@ -68,28 +68,46 @@ function getPassagers($bdd, $id_trajet) {
 function afficherTrajet($trajet, $bdd, $id_utilisateur) {
     $passagers = getPassagers($bdd, $trajet['id']);
 
+    // Formatage date et heure
+    $date_fmt  = date('d/m/Y', strtotime($trajet['date_depart']));
+    $heure_fmt = substr($trajet['heure_depart'], 0, 5);
+
+    // Formatage étapes JSON
+    $etapes_fmt = '';
+    if (!empty($trajet['etapes'])) {
+        $etapes = json_decode($trajet['etapes'], true);
+        if (is_array($etapes)) {
+            $etapes = array_filter($etapes);
+            if (!empty($etapes)) {
+                $etapes_fmt = implode(', ', array_map('htmlspecialchars', $etapes));
+            }
+        }
+    }
+
     echo '<div class="trip-card">';
-    echo '<p><strong>Date :</strong> ' . htmlspecialchars($trajet['date_depart']) . ' à ' . htmlspecialchars($trajet['heure_depart']) . '</p>';
+    echo '<p><strong>Date :</strong> ' . $date_fmt . ' à ' . $heure_fmt . '</p>';
     echo '<p><strong>Départ :</strong> ' . htmlspecialchars($trajet['depart']) . '</p>';
     echo '<p><strong>Arrivée :</strong> ' . htmlspecialchars($trajet['arrivee']) . '</p>';
 
-    if (!empty($trajet['etapes'])) {
-        echo '<p><strong>Étapes :</strong> ' . htmlspecialchars($trajet['etapes']) . '</p>';
+    if (!empty($etapes_fmt)) {
+        echo '<p><strong>Arrêts :</strong> ' . $etapes_fmt . '</p>';
     }
 
     if (!empty($passagers)) {
-        $listePassagers = array_map(fn($p) => htmlspecialchars($p['nom'] . ' ' . $p['prenom']), $passagers);
+        $listePassagers = array_map(fn($p) => htmlspecialchars($p['prenom'] . ' ' . $p['nom']), $passagers);
         echo '<p><strong>Passagers :</strong> ' . implode(', ', $listePassagers) . '</p>';
     }
 
     echo '<p><strong>Rôle :</strong> ' . ($trajet['role'] === 'conducteur' ? 'Conducteur' : 'Passager') . '</p>';
+
+    echo '<div class="trip-card-actions">';
     echo '<a href="USR-details-trajet.php?id=' . $trajet['id'] . '" class="btn-details">Voir détails</a>';
 
     // Boutons conducteur
     if ($trajet['role'] === 'conducteur') {
-        $heureTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+        $heureTrajet   = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
         $uneHeureAvant = (clone $heureTrajet)->modify('-1 hour');
-        $now = new DateTime();
+        $now           = new DateTime();
 
         if (($trajet['statut'] === 'publie' || $trajet['statut'] === 'complet') && $now >= $uneHeureAvant) {
             echo '
@@ -120,5 +138,6 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
         }
     }
 
-    echo '</div>';
+    echo '</div>'; // trip-card-actions
+    echo '</div>'; // trip-card
 }

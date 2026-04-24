@@ -2,12 +2,13 @@
 /* USR-MES-TRAJETS */
 /* ==============================================*/
 
-section {
+section.mes-trajets {
     flex: 1;
     padding: 1.5rem;
+    max-width: 700px;
 }
 
-section h2 {
+section.mes-trajets h2 {
     color: var(--vert-doux);
     margin-bottom: 1.5rem;
 }
@@ -94,6 +95,12 @@ section h2 {
     flex-direction: column;
     gap: 0.4rem;
     font-family: 'Quicksand', sans-serif;
+    margin-bottom: 1rem;
+    max-width: 700px;
+}
+
+.trip-card:last-child {
+    margin-bottom: 0;
 }
 
 .trip-card:hover {
@@ -113,7 +120,7 @@ section h2 {
 }
 
 /* Ligne d'actions en bas de carte */
-.trip-card .trip-card-actions {
+.trip-card-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -136,8 +143,6 @@ section h2 {
     font-size: 0.85rem;
     text-decoration: none;
     transition: background-color 0.2s ease;
-    margin-top: 0.8rem;
-    margin-right: 0.5rem;
 }
 
 .btn-details:hover {
@@ -155,14 +160,10 @@ section h2 {
     font-weight: 600;
     font-size: 0.85rem;
     cursor: pointer;
-    margin-top: 0.8rem;
-    margin-right: 0.5rem;
     transition: background-color 0.2s ease;
 }
 
-.btn-demarrer:hover {
-    background-color: #e07b39;
-}
+.btn-demarrer:hover { background-color: #e07b39; }
 
 .btn-terminer {
     padding: 0.45rem 1rem;
@@ -173,14 +174,10 @@ section h2 {
     font-weight: 600;
     font-size: 0.85rem;
     cursor: pointer;
-    margin-top: 0.8rem;
-    margin-right: 0.5rem;
     transition: background-color 0.2s ease;
 }
 
-.btn-terminer:hover {
-    background-color: #3a9e34;
-}
+.btn-terminer:hover { background-color: #3a9e34; }
 
 .btn-avis {
     display: inline-block;
@@ -192,7 +189,6 @@ section h2 {
     font-weight: 600;
     font-size: 0.85rem;
     text-decoration: none;
-    margin-top: 0.8rem;
     transition: all 0.2s ease;
 }
 
@@ -208,8 +204,7 @@ section h2 {
 
 .toast-success {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 20px; right: 20px;
     background-color: #4BB543;
     color: white;
     padding: 12px 20px;
@@ -222,8 +217,7 @@ section h2 {
 
 .toast-error {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 20px; right: 20px;
     background-color: #e74c3c;
     color: white;
     padding: 12px 20px;
@@ -239,26 +233,12 @@ section h2 {
 /* ==============================================*/
 
 @media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
-    .trips-tab ul {
-        flex-wrap: wrap;
-    }
-
-    .trip-card {
-        padding: 1rem;
-    }
+    main { flex-direction: column; }
+    .trips-tab ul { flex-wrap: wrap; }
+    .trip-card { padding: 1rem; }
 }
 
 @media (max-width: 480px) {
-    .trips-tab a {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
-    }
-
-    .trip-card {
-        font-size: 0.9rem;
-    }
+    .trips-tab a { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+    .trip-card { font-size: 0.9rem; }
 }

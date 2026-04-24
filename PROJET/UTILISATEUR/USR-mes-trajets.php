@@ -31,7 +31,7 @@ require_once __DIR__ . '/../PHP/mes_trajets.php';
 <main>
     <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
-    <section>
+    <section class="mes-trajets">
         <h2>Mes trajets</h2>
 
         <nav class="trips-tab">

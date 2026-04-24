@@ -176,9 +176,10 @@ if (empty($etapes)) { $etapes = ['']; }
             </div>
 
         </div>
+    <button type="submit" class="btn-submit">Étape suivante →</button>
+
     </form>
 
-                    <button type="submit" class="btn-submit">Étape suivante →</button>
 </section>
 
 <script src="../JS/USR-proposer-trajet.js"></script>

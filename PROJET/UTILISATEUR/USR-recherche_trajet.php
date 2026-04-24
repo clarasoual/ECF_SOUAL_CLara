@@ -86,14 +86,10 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
                 $trajets[$key]['periode'] = 'passe';
             }
 
-            // Formatage heure HH:MM
             $trajets[$key]['heure_depart_fmt']  = substr($trajet['heure_depart'], 0, 5);
             $trajets[$key]['heure_arrivee_fmt'] = !empty($trajet['heure_arrivee']) ? substr($trajet['heure_arrivee'], 0, 5) : '';
+            $trajets[$key]['date_depart_fmt']   = date('d/m/Y', strtotime($trajet['date_depart']));
 
-            // Formatage date dd/mm/YYYY
-            $trajets[$key]['date_depart_fmt'] = date('d/m/Y', strtotime($trajet['date_depart']));
-
-            // Calcul durée en minutes pour le filtre JS
             if (!empty($trajet['heure_depart']) && !empty($trajet['heure_arrivee'])) {
                 [$hD, $mD] = explode(':', $trajet['heure_depart']);
                 [$hA, $mA] = explode(':', $trajet['heure_arrivee']);
@@ -153,7 +149,13 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 </section>
 
 <section class="results-section">
-    <div class="filters">
+
+    <!-- Bouton filtrer visible uniquement mobile/tablette -->
+    <button type="button" class="btn-toggle-filtres" id="btn-toggle-filtres">
+        🔧 Filtrer les résultats
+    </button>
+
+    <div class="filters" id="filters-panel">
         <h2>Filtrer</h2>
         <button type="button" class="fillers-clear-btn">Tout effacer</button>
 
@@ -221,16 +223,16 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 
                     <div class="ride-content">
                         <h3 class="ride-title">
-    <?= htmlspecialchars($trajet['depart'], ENT_QUOTES, 'UTF-8') ?>
-    → <?= htmlspecialchars($trajet['arrivee'], ENT_QUOTES, 'UTF-8') ?>
-</h3>
-<?php if (!empty($trajet['etapes'])): ?>
-    <?php $etapes = json_decode($trajet['etapes'], true); ?>
-    <?php $etapes = array_filter($etapes ?? []); ?>
-    <?php if (!empty($etapes)): ?>
-        <p class="ride-arrets">Passant par : <?= htmlspecialchars(implode(', ', $etapes), ENT_QUOTES, 'UTF-8') ?></p>
-    <?php endif; ?>
-<?php endif; ?>
+                            <?= htmlspecialchars($trajet['depart'], ENT_QUOTES, 'UTF-8') ?>
+                            → <?= htmlspecialchars($trajet['arrivee'], ENT_QUOTES, 'UTF-8') ?>
+                        </h3>
+                        <?php if (!empty($trajet['etapes'])): ?>
+                            <?php $etapes = json_decode($trajet['etapes'], true); ?>
+                            <?php $etapes = array_filter($etapes ?? []); ?>
+                            <?php if (!empty($etapes)): ?>
+                                <p class="ride-arrets">Passant par : <?= htmlspecialchars(implode(', ', $etapes), ENT_QUOTES, 'UTF-8') ?></p>
+                            <?php endif; ?>
+                        <?php endif; ?>
                         <div class="ride-infos">
                             <p>📅 <?= $trajet['date_depart_fmt'] ?></p>
                             <p>🕒 Départ : <?= $trajet['heure_depart_fmt'] ?></p>
@@ -268,6 +270,7 @@ if (isset($_GET['departure'], $_GET['destination'], $_GET['date'])) {
 </section>
 
 <script>
+// Filtres
 const btnClear    = document.querySelector('.fillers-clear-btn');
 const filterEco   = document.getElementById('filter-eco');
 const filterNote  = document.getElementById('filter-note');
@@ -285,8 +288,7 @@ function appliquerFiltres() {
         const rideNote  = parseFloat(ride.dataset.note);
         const ridePrix  = parseFloat(ride.dataset.prix);
         const rideDuree = parseInt(ride.dataset.duree);
-
-        const dureeOk = dureeMax === Infinity || rideDuree === -1 || rideDuree <= dureeMax;
+        const dureeOk   = dureeMax === Infinity || rideDuree === -1 || rideDuree <= dureeMax;
 
         const ok = (!eco || rideEco) &&
                    (rideNote >= noteMin) &&
@@ -308,6 +310,17 @@ btnClear.addEventListener('click', () => {
     filterPrix.value  = '';
     filterDuree.value = '';
     appliquerFiltres();
+});
+
+// Toggle filtres mobile
+const btnToggle   = document.getElementById('btn-toggle-filtres');
+const filtersPanel = document.getElementById('filters-panel');
+
+btnToggle?.addEventListener('click', () => {
+    filtersPanel.classList.toggle('open');
+    btnToggle.textContent = filtersPanel.classList.contains('open')
+        ? '✕ Fermer les filtres'
+        : '🔧 Filtrer les résultats';
 });
 </script>
 

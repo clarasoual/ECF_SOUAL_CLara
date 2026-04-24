@@ -94,3 +94,36 @@ function envoyerMailFinTrajet(array $passager, array $trajet): bool {
         return false;
     }
 }
+
+/**
+ * Mail envoyé aux passagers quand le chauffeur modifie un trajet
+ */
+function envoyerMailModification(array $passager, array $trajet): bool {
+    try {
+        $mail = getMailer();
+        $mail->addAddress($passager['email'], $passager['prenom'] . ' ' . $passager['nom']);
+        $mail->Subject = '✏️ Votre trajet EcoRide a été modifié';
+        $mail->isHTML(true);
+        $mail->Body = "
+            <h2>Bonjour {$passager['prenom']},</h2>
+            <p>Le conducteur a <strong>modifié</strong> un trajet auquel vous êtes inscrit(e).</p>
+            <ul>
+                <li><strong>Trajet :</strong> {$trajet['depart']} → {$trajet['arrivee']}</li>
+                <li><strong>Nouvelle date :</strong> {$trajet['date_depart']}</li>
+                <li><strong>Nouvelle heure de départ :</strong> " . substr($trajet['heure_depart'], 0, 5) . "</li>
+            </ul>
+            <p>Consultez les détails mis à jour sur votre espace :</p>
+            <p><a href='http://localhost/eco_ride/PROJET/UTILISATEUR/USR-mes-trajets.php'>Voir mes trajets</a></p>
+            <br>
+            <p>L'équipe EcoRide 🌿</p>
+        ";
+        $mail->AltBody = "Bonjour {$passager['prenom']}, le trajet {$trajet['depart']} → {$trajet['arrivee']} a été modifié. Connectez-vous pour voir les nouveaux détails.";
+
+        $mail->send();
+        return true;
+
+    } catch (Exception $e) {
+        error_log("Erreur mail modification : " . $e->getMessage());
+        return false;
+    }
+}

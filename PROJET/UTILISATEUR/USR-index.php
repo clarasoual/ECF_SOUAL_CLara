@@ -1,7 +1,6 @@
 <?php
 include __DIR__ . '/../PHP/connexion.php';
 
-// Récupérer les 2 derniers avis validés pour les témoignages
 $stmt = $bdd->prepare("
     SELECT a.commentaire, a.note, u.prenom, u.nom
     FROM avis a
@@ -38,7 +37,6 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </section>
 
-    <!-- Formulaire de recherche -->
     <section class="search-section">
         <form action="USR-recherche_trajet.php" method="get" novalidate>
             <div class="search-container">
@@ -63,6 +61,14 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </button>
             </div>
         </form>
+
+        <!-- Bloc mobile uniquement -->
+        <div class="search-mobile-wrapper">
+            <p class="search-mobile-accroche">Bienvenue sur EcoRide 🌿<br>Vous avez un trajet en tête ?</p>
+            <a href="USR-recherche_trajet.php" class="search-mobile-btn">
+                Trouver un covoiturage →
+            </a>
+        </div>
     </section>
 
     <section class="founder-section">
@@ -70,25 +76,42 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <img src="../../IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
             <div class="founder-bio">
                 <h2>José Marceau</h2>
-                <p>
+                <p class="bio-short">
                     Originaire d'Annecy, José Marceau a fondé Eco Ride en 2022 avec une conviction forte : rendre les modes de transport durables plus visibles, accessibles et attractifs.
+                </p>
+                <p class="bio-full">
                     Après plusieurs années à travailler dans le secteur associatif et environnemental, il constate que de nombreuses initiatives locales peinent à se faire connaître, malgré leur impact positif. C'est ainsi qu'est née Eco Ride : une plateforme dédiée aux mobilités douces, au service de celles et ceux qui souhaitent se déplacer autrement, à leur échelle.
                     José croit en un changement progressif, porté par l'information, la confiance et des solutions concrètes. À travers Eco Ride, il souhaite créer un lien entre les citoyens, les acteurs locaux et les alternatives de transport, dans un esprit d'ouverture, de simplicité et de respect de l'environnement.
                 </p>
+                <button class="btn-voir-plus" id="btn-voir-plus">Voir plus ▾</button>
             </div>
         </div>
     </section>
 
     <section class="how-it-works responsive-section">
         <h2>Comment ça marche ?</h2>
-        <ol>
-            <li>Recherchez votre trajet</li>
-            <li>Choisissez votre conducteur</li>
-            <li>Réservez et covoiturez !</li>
-        </ol>
+        <div class="how-columns">
+            <div class="how-col">
+                <h3>🧳 En tant que passager</h3>
+                <ol>
+                    <li><strong>🔍 Recherchez</strong> — entrez votre trajet et votre date</li>
+                    <li><strong>🧑 Choisissez</strong> — consultez les profils et avis des conducteurs</li>
+                    <li><strong>✅ Réservez</strong> — payez en crédits en un clic</li>
+                    <li><strong>🌿 Voyagez</strong> — validez et laissez un avis</li>
+                </ol>
+            </div>
+            <div class="how-col">
+                <h3>🚗 En tant que conducteur</h3>
+                <ol>
+                    <li><strong>📝 Proposez</strong> — créez votre trajet en 2 étapes</li>
+                    <li><strong>👥 Accueillez</strong> — les passagers réservent automatiquement</li>
+                    <li><strong>🚦 Démarrez</strong> — lancez le trajet depuis votre espace</li>
+                    <li><strong>💳 Gagnez</strong> — recevez vos crédits à l'arrivée</li>
+                </ol>
+            </div>
+        </div>
     </section>
 
-    <!-- Témoignages dynamiques depuis la BDD -->
     <section class="testimonials responsive-section">
         <h2>Ils ont voyagé avec Eco Ride</h2>
         <?php if (!empty($temoignages)): ?>
@@ -109,12 +132,19 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>Questions fréquentes</h2>
         <details>
             <summary>Comment réserver un trajet ?</summary>
-            <p>Utilisez le formulaire de recherche, puis cliquez sur "Réserver".</p>
+            <p>Recherchez un trajet, consultez les détails et cliquez sur "Réserver". Les crédits sont débités automatiquement.</p>
         </details>
         <details>
-            <summary>Dois-je créer un compte ?</summary>
-            <p>Oui, pour réserver ou proposer un trajet, un compte est nécessaire.</p>
+            <summary>Comment fonctionnent les crédits ?</summary>
+            <p>Les crédits sont la monnaie d'EcoRide. Vous pouvez en obtenir depuis votre espace personnel. 2 crédits sont retenus par la plateforme à chaque trajet.</p>
         </details>
+        <details>
+            <summary>Que se passe-t-il si le conducteur annule ?</summary>
+            <p>Vous êtes notifié par e-mail et vos crédits sont remboursés automatiquement.</p>
+        </details>
+        <p style="margin-top: 1rem; font-family: 'Quicksand', sans-serif;">
+            D'autres questions ? <a href="USR-faq.php">Consultez notre FAQ complète →</a>
+        </p>
     </section>
 
     <section class="cta-section responsive-section">
@@ -122,8 +152,16 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <a href="USR-inscription.php" class="cta-btn">Créer un compte</a>
     </section>
 
-    <script src="../JS/USR-index.js"></script>
+    <script>
+    const btnVoirPlus = document.getElementById('btn-voir-plus');
+    const bioFull     = document.querySelector('.bio-full');
+    btnVoirPlus?.addEventListener('click', () => {
+        bioFull.classList.toggle('visible');
+        btnVoirPlus.textContent = bioFull.classList.contains('visible') ? 'Voir moins ▴' : 'Voir plus ▾';
+    });
+    </script>
 
+    <script src="../JS/USR-index.js"></script>
     <?php include __DIR__ . '/../COMPONENTS/COMP-footer.php'; ?>
 </body>
 </html>
