@@ -6,26 +6,11 @@ RUN apt-get update && apt-get install -y nginx \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . /var/www/html/
+COPY nginx.conf /etc/nginx/sites-available/default
+COPY start.sh /start.sh
 
 RUN chown -R www-data:www-data /var/www/html/ \
-    && chmod -R 755 /var/www/html/
-
-RUN echo 'server {\
-    listen 80;\
-    root /var/www/html/PROJET/UTILISATEUR;\
-    index USR-index.php;\
-    location / {\
-        try_files $uri $uri/ /USR-index.php?$query_string;\
-    }\
-    location ~ \.php$ {\
-        fastcgi_pass 127.0.0.1:9000;\
-        fastcgi_index USR-index.php;\
-        include fastcgi_params;\
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\
-    }\
-}' > /etc/nginx/sites-available/default
-
-RUN echo '#!/bin/bash\nphp-fpm -D\nsleep 2\nnginx -g "daemon off;"' > /start.sh \
+    && chmod -R 755 /var/www/html/ \
     && chmod +x /start.sh
 
 CMD ["/start.sh"]
