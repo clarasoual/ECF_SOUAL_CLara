@@ -1,29 +1,30 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
-RUN docker-php-ext-install pdo pdo_mysql \
-    && a2enmod rewrite \
-    && rm -f /etc/apache2/mods-enabled/mpm_event.conf \
-    && rm -f /etc/apache2/mods-enabled/mpm_event.load \
-    && rm -f /etc/apache2/mods-enabled/mpm_worker.conf \
-    && rm -f /etc/apache2/mods-enabled/mpm_worker.load \
-    && rm -f /etc/apache2/mods-enabled/mpm_prefork.conf \
-    && rm -f /etc/apache2/mods-enabled/mpm_prefork.load \
-    && ln -s /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf \
-    && ln -s /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load
+RUN docker-php-ext-install pdo pdo_mysql
+
+RUN apt-get update && apt-get install -y nginx \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . /var/www/html/
 
 RUN chown -R www-data:www-data /var/www/html/ \
     && chmod -R 755 /var/www/html/
 
-RUN echo '<VirtualHost *:80>\n\
-    DocumentRoot /var/www/html/PROJET/UTILISATEUR\n\
-    DirectoryIndex USR-index.php\n\
-    <Directory /var/www/html/PROJET/UTILISATEUR>\n\
-        Options Indexes FollowSymLinks\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+RUN echo 'server {\
+    listen 80;\
+    root /var/www/html/PROJET/UTILISATEUR;\
+    index USR-index.php;\
+    location / {\
+        try_files $uri $uri/ /USR-index.php?$query_string;\
+    }\
+    location ~ \.php$ {\
+        fastcgi_pass 127.0.0.1:9000;\
+        fastcgi_index USR-index.php;\
+        include fastcgi_params;\
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\
+    }\
+}' > /etc/nginx/sites-available/default
+
+CMD service nginx start && php-fpm
 
 EXPOSE 80
