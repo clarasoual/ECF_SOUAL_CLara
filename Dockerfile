@@ -1,16 +1,15 @@
 FROM php:8.2-apache
 
 RUN docker-php-ext-install pdo pdo_mysql \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && a2dismod mpm_event \
+    && a2enmod mpm_prefork
 
-# Copier TOUT le repo dans le conteneur
 COPY . /var/www/html/
 
-# Corriger les permissions
 RUN chown -R www-data:www-data /var/www/html/ \
     && chmod -R 755 /var/www/html/
 
-# Config Apache : pointer vers le bon dossier, autoriser l'accès, et définir le fichier par défaut
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/PROJET/UTILISATEUR\n\
     DirectoryIndex USR-index.php\n\
