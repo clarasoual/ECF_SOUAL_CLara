@@ -25,6 +25,9 @@ RUN echo 'server {\
     }\
 }' > /etc/nginx/sites-available/default
 
-CMD service nginx start && php-fpm
+RUN echo '#!/bin/bash\nphp-fpm -D\nsleep 2\nnginx -g "daemon off;"' > /start.sh \
+    && chmod +x /start.sh
+
+CMD ["/start.sh"]
 
 EXPOSE 80
