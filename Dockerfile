@@ -1,6 +1,9 @@
 FROM php:8.2-apache
 
 RUN docker-php-ext-install pdo pdo_mysql \
-    && a2dismod mpm_event \
-    && a2enmod mpm_prefork \
     && a2enmod rewrite
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/PROJET/UTILISATEUR
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf

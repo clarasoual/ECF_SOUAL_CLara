@@ -1,3 +1,6 @@
+Options +FollowSymLinks
+RewriteEngine On
+
 <Files "logs.json">
     Order allow,deny
     Deny from all
