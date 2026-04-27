@@ -22,11 +22,10 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <base href="/PROJET/UTILISATEUR/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <link rel="stylesheet" href="../CSS/style_global.css">
-    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-index.css">
+    <link rel="stylesheet" href="/PROJET/CSS/style_global.css">
+    <link rel="stylesheet" href="/PROJET/CSS/CSS UTILISATEUR/USR-index.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -34,7 +33,7 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <section class="hero">
         <div class="hero-image">
-            <img src="../../IMAGES/photoheader.jpg" alt="Image libre de droit covoiturage">
+            <img src="/IMAGES/photoheader.jpg" alt="Image libre de droit covoiturage">
             <div class="slogan">
                 <h1>Ensemble, roulons vers un futur plus vert</h1>
             </div>
@@ -61,7 +60,7 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="number" id="passenger" name="passenger" min="1" max="8" value="1">
                 </div>
                 <button type="submit" class="search-btn">
-                    <img src="../../IMAGES/logo recherche.png" alt="Rechercher" class="search-icon">
+                    <img src="/IMAGES/logo recherche.png" alt="Rechercher" class="search-icon">
                 </button>
             </div>
         </form>
@@ -77,7 +76,7 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <section class="founder-section">
         <div class="founder-container">
-            <img src="../../IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
+            <img src="/IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
             <div class="founder-bio">
                 <h2>José Marceau</h2>
                 <p class="bio-short">
@@ -165,7 +164,7 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     });
     </script>
 
-    <script src="../JS/USR-index.js"></script>
-    <?php include __DIR__ . '/../COMPONENTS/COMP-footer.php'; ?>
+    <script src="/PROJET/JS/USR-index.js"></script>
+    <?php include __DIR__ . '/../COMPONENTS/COMP-header.php'; ?>
 </body>
 </html>
