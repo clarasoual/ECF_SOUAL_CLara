@@ -111,8 +111,7 @@ CREATE TABLE `employes` (
   `email` varchar(255) DEFAULT NULL,
   `mot_de_passe` varchar(255) NOT NULL DEFAULT '',
   `service` varchar(100) DEFAULT NULL,
-  `date_embauche` date NOT NULL DEFAULT curdate(),
-  `suspendu` tinyint(1) NOT NULL DEFAULT 0
+`date_embauche` date NOT NULL DEFAULT (CURRENT_DATE),  `suspendu` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

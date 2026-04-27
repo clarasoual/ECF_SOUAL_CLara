@@ -1,5 +1,8 @@
 <?php
 include __DIR__ . '/../PHP/connexion.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $stmt = $bdd->prepare("
     SELECT a.commentaire, a.note, u.prenom, u.nom
