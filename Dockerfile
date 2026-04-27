@@ -12,7 +12,7 @@ COPY start.sh /start.sh
 RUN chown -R www-data:www-data /var/www/html/ \
     && chmod -R 755 /var/www/html/ \
     && chmod +x /start.sh
-CMD ["/bin/bash", "-c", "php-fpm -D && sleep 2 && envsubst '${PORT}' < /etc/nginx/sites-available/default > /etc/nginx/sites-available/default.tmp && mv /etc/nginx/sites-available/default.tmp /etc/nginx/sites-available/default && nginx -g 'daemon off;'"]
-CMD ["/start.sh"]
 
 EXPOSE 80
+
+CMD ["/start.sh"]
