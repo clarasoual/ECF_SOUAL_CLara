@@ -1,106 +1,79 @@
 # Eco Ride - SOUAL Clara
+## Projet ECF - Session Juin/Juillet - Graduate Développeur Web
 
-## Projet ECF - Session Nov/Dec - Graduate Développeur Front-End
-
-## Présentation du projet 
+## Présentation du projet
 Eco Ride est un site de covoiturage éco-responsable, respectueux de l'environnement.
-Ce projet est pour le moment un site vitrine en HTML et CSS, avec des composants PHP. Il est pour le moment encore en cours de développement.
+Le projet est un site full-stack PHP avec une base de données relationnelle MySQL et un déploiement en production.
 
-## Comment lancer le projet en local ?
-Pour ouvrir le site, il faut utiliser un serveur local comme XAMPP (car le site contient du PHP).
-1. Installer XAMPP (ou un autre serveur local, si ce n'est pas déjà fait).
-2. Placer le dossier "eco_ride" dans le dossier "htdocs" de XAMPP.
-3. Démarrer le serveur Apache via le panneau de contrôle de XAMPP.
-4. Ouvrir un navigateur et aller à l'adresse : "http://localhost/eco_ride/".
-5. Aller dans le dossier "CODE".
-6. Aller dans le dossier "USERS PHP" pour voir la partie utilisateur, dans "ADMIN PHP" pour voir la partie admin puis dans "EMPLOYE PHP" pour voir la partie employé.
-7. Les pages qui ont commencé à être développées sont :
-   **Dans le dossier "USERS PHP"** :
-   - accueil.php
-   - connexion_inscription.php
-   - details_trajet.php
-   - inscription.php
-   - proposer_trajet.php
-   - recherche_covoit.php
-   - Tout le dossier "MON COMPTE"
-   - Dans le dossier "PROFIL USERS" : profilfinn.php
-  
-  **Dans le dossier "ADMIN PHP"** :
-  - admin_employes.php
-  - admin_utilisateurs.php
+## Lancer le projet en local avec XAMPP
+1. Installer XAMPP (ou un autre serveur local).
+2. Placer le dossier `eco_ride` dans le dossier `htdocs` de XAMPP.
+3. Démarrer Apache et MySQL via le panneau de contrôle XAMPP.
+4. Importer le fichier `eco_ride.sql` dans phpMyAdmin.
+5. Ouvrir un navigateur et aller à `http://localhost/eco_ride/PROJET/UTILISATEUR/USR-index.php`.
 
-  **Dans le dossier "EMPLOYES PHP"**
-  - signalement.php
+## Lancer le projet en local avec Docker
+1. Installer Docker Desktop.
+2. À la racine du projet, lancer :
+```bash
+docker-compose up --build
+```
+3. Accéder au site sur `http://localhost:8080`.
+4. Accéder à phpMyAdmin sur `http://localhost:8081`.
 
-## Modifications et ajouts prévus
+## Déploiement en production
+Le site est déployé sur Railway : https://ecfsoualclara-production.up.railway.app
 
-# Front-end :
+- Serveur : Railway (Docker, nginx + php-fpm)
+- Base de données : MySQL hébergée sur Railway
+- Variables d'environnement configurées sur Railway : `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS`
 
-- Amélioration du design avec du CSS avancé.
-- Ajout du responsive design pour les écrans mobiles et tablettes.
-- Intégration de composants interactifs avec JS.
+## Structure du projet
+```
+eco_ride/
+├── IMAGES/
+├── PROJET/
+│   ├── ADMIN/
+│   ├── COMPONENTS/
+│   ├── CSS/
+│   ├── EMPLOYE/
+│   ├── JS/
+│   ├── PHP/
+│   ├── SQL/
+│   └── UTILISATEUR/
+├── Dockerfile
+├── nginx.conf
+├── start.sh
+└── docker-compose.yml
+```
 
-# Back-end :
+## Charte graphique
+Le design du site Eco Ride a été pensé pour refléter des valeurs écologiques et modernes.
 
-- Ajout d'un système de connexion sécurisé (gestion admin/employé/utilisateur).
-- Mise en place d'une base de données relationnelle avec MySQL et non relationnelle avec NoSQL.
-
-# Accessibilité :
-
-- Les contrastes seront adaptés pour les personnes malvoyantes.
-- La lecture sera possible avec un lecteur d'écran.
-- La navigation sera accessible via clavier.
-
-
-### Statut du projet
-Le projet est en phase initiale, il y a uniquement du HTML, du CSS et des composants PHP pour le moment. Le développement de la partie back-end viendra lorsque le front-end sera terminé.
-En commentaires de chaque page PHP, il y a les tâches qu'il reste à faire sur la page en question. 
-Les tâches, notamment les tâches concernant la correction des beugs sont aussi sur un trello pour une vision plus globale du travail restant.
-
-### Charte graphique
-
-Le design du site Eco Ride a été pensé pour refléter des valeurs écologiques et modernes. Le choix des couleurs et des fonctionnalités a été pensé pour minimiser la consommation d'énergie.
-
-**Couleurs principales** : 
-
+**Couleurs principales** :
 - Vert doux : symbolise la nature et l'écologie.
 - Orange doux : pour une touche de modernité.
 - Beige foncé et gris : créent du contraste avec les éléments du site.
 
 **Police** :
-
 - Police sans-sérif, moderne et lisible, pour assurer un bon confort de lecture.
 
 **Responsive design** :
+- Le site est adapté pour s'afficher correctement sur tablette et mobile.
 
-- Le site est en cours d'adaptation pour s'afficher correctement sur tablette et mobile.
-
-**Inspirations** :
-
-Le design et les idées de structures ont été inspirés de :
-- Sites de covoiturages et réservation de voyage (Blablacar, Ouigo).
-
-### Technologies utilisées :
-
-- HTML5
-- CSS3
-- PHP (composants de base)
-- Serveur local XAMPP
-- Visual Studio Code (éditeur)
+## Technologies utilisées
+- HTML5, CSS3, JavaScript
+- PHP 8.2
+- MySQL
+- Docker (nginx + php-fpm)
+- Railway (déploiement)
+- XAMPP (développement local)
+- Visual Studio Code
 - Git et GitHub
 - Trello pour la gestion de projet
-- ProCreate pour le logo, les maquettes, et mon plan de route.
-- Google Docs pour les maquettes écrites
 
-Vous retrouverez mes esquisses, mon plan de route (procreate) et mes maquettes écrites (Google Docs) en PDF dans le dossier "MAQUETTES".
-
-
-### Auteur
-
+## Auteur
 Clara SOUAL
-Etudiante Studi Graduate Développeur Front-end Nov/Déc 2025
+Étudiante Studi Graduate Développeur Web - Session Juin/Juillet 2026
 GitHub : https://github.com/clarasoual/ECF_SOUAL_CLara
 Email : soual.clara@gmail.com
-
-
----
