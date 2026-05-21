@@ -64,7 +64,16 @@ $employes = $stmt_emp->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <?php include('../COMPONENTS/COMP-header-admin.php'); ?>
-    
+
+    <!-- SELECT MOBILE (hors du main pour ne pas être dans le flex) -->
+    <select class="menu-principal-select" onchange="window.location.href=this.value">
+        <option value="">— Navigation —</option>
+        <option value="ADM-employes.php">Employés</option>
+        <option value="ADM-utilisateurs.php">Utilisateurs</option>
+        <option value="ADM-statistiques.php">Statistiques</option>
+        <option value="admin_logs.php">Logs</option>
+    </select>
+
 <main>
     <?php include('../COMPONENTS/COMP-menu-admin.html'); ?>
     <section class="principal-menu-section">

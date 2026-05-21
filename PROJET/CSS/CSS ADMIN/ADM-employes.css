@@ -5,6 +5,8 @@
 .principal-menu-section {
     flex: 1;
     padding: 1rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .principal-menu-section h2 {
@@ -19,10 +21,13 @@
 .table-responsive {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table-responsive table {
     white-space: nowrap;
+    min-width: 600px;
+    width: auto;
 }
 
 /* ==============================================*/
@@ -132,10 +137,6 @@
 /* ==============================================*/
 
 @media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
     .popup {
         width: 90%;
         padding: 1.5rem;

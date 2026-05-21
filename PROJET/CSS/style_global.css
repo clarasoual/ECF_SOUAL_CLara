@@ -12,16 +12,12 @@
     --shadow: rgba(0, 0, 0, 0.3);
 }
 
-main {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem 0.5rem;
-    align-items: flex-start;
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 * { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Century Gothic', 'Montserrat', 'Quicksand', sans-serif;
@@ -31,6 +27,15 @@ body {
     color: var(--texte);
     margin: 0;
     padding: 80px 1.5rem 0 1.5rem;
+    overflow-x: hidden;
+}
+
+main {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0.5rem;
+    align-items: flex-start;
+    min-width: 0;
 }
 
 img {
@@ -75,7 +80,6 @@ a:hover {
     color: #e07b39;
 }
 
-/* Nav links en blanc */
 .nav-links {
     color: var(--texte);
     text-decoration: none;
@@ -376,7 +380,7 @@ a, button { transition: all 0.3s ease; }
 }
 
 /* ==============================================*/
-/* HEADER EMPLOYÉ */
+/* HEADER EMPLOYÉ / ADMIN */
 
 .header-employe {
     background-color: var(--beige-fonce);
@@ -486,6 +490,25 @@ a, button { transition: all 0.3s ease; }
 }
 
 /* ==============================================*/
+/* MENU ADMIN RESPONSIVE - SELECT */
+
+.menu-principal-select {
+    display: none;
+    width: 100%;
+    background-color: var(--beige-fonce) !important;
+    color: var(--texte) !important;
+    border: 1px solid var(--vert-doux) !important;
+    border-radius: 8px;
+    padding: 0.8em 1em;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0.8rem 0;
+    margin-bottom: 0 !important;
+}
+
+/* ==============================================*/
 /* RESPONSIVE CONTAINER */
 
 .responsive-container { padding: 1rem; box-sizing: border-box; }
@@ -510,9 +533,44 @@ a, button { transition: all 0.3s ease; }
     .profil-container { display: none; }
     .burger-btn { display: flex; }
 
-    main { flex-direction: column; }
+    main {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .menu-principal { display: none; }
+    .menu-principal-select { display: block; }
 
     .photo-profil { height: 35px; width: 35px; }
+
+    /* Header admin responsive */
+    .header-employe {
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .header-employe h1.espace-employe {
+        font-size: 1.1rem;
+    }
+
+    .header-employe .header-bottom {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding-right: 0;
+    }
+
+    .header-employe .user-info {
+        margin-left: 0;
+        font-size: 0.85rem;
+    }
+
+    .logo-link img {
+        max-height: 35px;
+    }
+
+    .logo-text {
+        font-size: 1.1rem;
+    }
 
     .responsive-container h2 { font-size: 1.5rem; }
     .responsive-container th,
