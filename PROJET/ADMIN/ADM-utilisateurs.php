@@ -33,38 +33,19 @@ $utilisateurs = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-utilisateurs.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4BB543;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        .toast.hide {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .badge-suspendu {
-            background-color: #e74c3c;
-            color: white;
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin-left: 6px;
-        }
-    </style>
 </head>
 <body>
 
 <?php include('../COMPONENTS/COMP-header-admin.php'); ?>
+
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Navigation —</option>
+    <option value="ADM-employes.php">Employés</option>
+    <option value="ADM-utilisateurs.php">Utilisateurs</option>
+    <option value="ADM-statistiques.php">Statistiques</option>
+    <option value="admin_logs.php">Logs</option>
+</select>
 
 <main>
 
@@ -107,7 +88,6 @@ $utilisateurs = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
                     </td>
                     <td>
                         <button><a href="ADM-user-profil.php?id=<?= $user['id'] ?>" class="btn-voir">Voir</a></button>
-
                         <form method="POST" style="display:inline;">
                             <input type="hidden" name="suspend_user_id" value="<?= $user['id'] ?>">
                             <input type="hidden" name="suspend_value" value="<?= $user['suspendu'] ? 0 : 1 ?>">

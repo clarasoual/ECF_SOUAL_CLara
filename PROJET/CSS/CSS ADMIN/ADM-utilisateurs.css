@@ -5,6 +5,8 @@
 #account-user {
     flex: 1;
     padding: 1rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
 #account-user h2 {
@@ -52,10 +54,13 @@
 .table-responsive {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table-users {
     white-space: nowrap;
+    min-width: 600px;
+    width: auto;
 }
 
 /* ==============================================*/
@@ -142,5 +147,9 @@ td button:has(.btn-voir):hover {
     #account-user form {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    #account-user form button {
+        width: 100%;
     }
 }
