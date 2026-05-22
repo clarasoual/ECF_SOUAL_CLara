@@ -1,3 +1,7 @@
+/* ==============================================*/
+/* USR-AIDE */
+/* ==============================================*/
+
 .faq-section {
     background-color: var(--beige-fonce);
     padding: 2rem;
@@ -8,14 +12,38 @@
 
 .faq-section h3 {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: var(--vert-doux);
 }
+
+/* ==============================================*/
+/* CATÉGORIES */
+/* ==============================================*/
+
+.faq-category {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange-doux);
+    margin: 1.75rem 0 0.75rem 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(244, 177, 131, 0.2);
+}
+
+.faq-category:first-of-type {
+    margin-top: 0;
+}
+
+/* ==============================================*/
+/* QUESTIONS */
+/* ==============================================*/
 
 .faq-question {
     background-color: var(--fond);
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     border-radius: 8px;
     border-left: 4px solid var(--vert-doux);
     box-shadow: 0 2px 5px var(--shadow);
@@ -23,9 +51,23 @@
 
 .faq-question p:first-child {
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+    color: var(--texte);
 }
 
+.faq-question p:last-child {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gris-doux);
+    margin: 0;
+    line-height: 1.6;
+}
 
+.faq-question a {
+    color: var(--orange-doux);
+}
 
+.faq-question a:hover {
+    color: #e07b39;
+}

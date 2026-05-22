@@ -14,32 +14,42 @@
 
 <main>
     <div class="account-creation-container">
-        <h1>Création de votre compte</h1>
+        <h1>Créer un compte</h1>
         <p class="required-notes">* Champs obligatoires</p>
 
         <form action="../PHP/inscription.php" method="POST" class="form-inscription" novalidate>
 
-            <label for="prenom">Prénom * :</label>
-            <input type="text" id="prenom" name="prenom">
+            <div class="form-group">
+                <label for="prenom">Prénom *</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Votre prénom">
+            </div>
 
-            <label for="nom">Nom * :</label>
-            <input type="text" id="nom" name="nom">
+            <div class="form-group">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom">
+            </div>
 
-            <label for="email">Adresse mail * :</label>
-            <input type="email" id="email" name="email">
+            <div class="form-group">
+                <label for="email">Adresse mail *</label>
+                <input type="email" id="email" name="email" placeholder="votre@email.com">
+            </div>
 
-            <label for="password">Mot de passe * :</label>
-            <input type="password" id="password" name="password">
-            <p class="conditions-password">
-                Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
-            </p>
+            <div class="form-group">
+                <label for="password">Mot de passe *</label>
+                <input type="password" id="password" name="password" placeholder="••••••••">
+                <p class="conditions-password">
+                    Au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
+                </p>
+            </div>
 
-            <label for="password_confirm">Confirmer le mot de passe * :</label>
-            <input type="password" id="password_confirm" name="password_confirm">
+            <div class="form-group">
+                <label for="password_confirm">Confirmer le mot de passe *</label>
+                <input type="password" id="password_confirm" name="password_confirm" placeholder="••••••••">
+            </div>
 
             <label class="accept-conditions">
                 <input type="checkbox" name="accept-conditions">
-                J'accepte les <a href="#">conditions d'utilisation</a>
+                J'accepte les <a href="../UTILISATEUR/USR-mentions-legales.php">conditions d'utilisation</a>
             </label>
 
             <button type="submit" class="btn-submit">Créer mon compte</button>
@@ -48,7 +58,7 @@
 </main>
 
 <script src="../JS/USR-inscription.js"></script>
-
 <?php include('../COMPONENTS/COMP-footer.html'); ?>
-<script src="../JS/USR-connexion-inscription.js"></script></body>
+<script src="../JS/USR-connexion-inscription.js"></script>
+</body>
 </html>

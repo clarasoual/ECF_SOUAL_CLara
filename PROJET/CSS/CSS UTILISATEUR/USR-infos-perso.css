@@ -1,244 +1,332 @@
+/* ==============================================*/
+/* USR-INFOS-PERSO */
+/* ==============================================*/
+
 .profile-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    max-width: 900px;
-    margin: 2rem auto;
+    gap: 1.25rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
-.profil-header,
-.profile-verification,
-.user-role,
-.credit-balance {
-    background-color: var(--beige-fonce);
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px var(--shadow);
-}
+/* ==============================================*/
+/* HEADER PROFIL */
+/* ==============================================*/
 
 .profil-header {
+    background-color: var(--beige-fonce);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px var(--shadow);
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.75rem;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
 }
 
-.profil-header .profil-photo {
-    width: 120px;
-    height: 120px;
+.profil-photo {
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--vert-doux);
+    flex-shrink: 0;
 }
 
-.profil-header input[type="file"] {
-    margin-top: 0.5rem;
+.profil-infos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
 }
 
-.profil-header p {
-    margin: 0.3rem 0;
-    font-size: 0.95rem;
+.profil-infos h2 {
+    color: var(--texte);
+    font-size: 1.4rem;
+    margin: 0;
 }
 
-.profil-header input[type="date"],
-.profil-header textarea {
-    width: 90%;
-    padding: 0.5rem;
-    margin: 0.3rem 0;
-    border-radius: 6px;
-    border: 1px solid var(--gris-doux);
-    font-size: 1rem;
+.profil-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
 }
 
-.bio textarea {
-    width: 100%;
-    border: 1px solid var(--vert-doux);
-    border-radius: 6px;
+.profil-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
     background-color: var(--fond);
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem;
+}
+
+.profil-info-full {
+    grid-column: 1 / -1;
+}
+
+.profil-info-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--vert-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.profil-info-value {
+    font-size: 0.95rem;
     color: var(--texte);
     font-family: 'Quicksand', sans-serif;
-    padding: 0.5rem;
 }
 
 .btn-submit {
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-    background-color: var(--vert-fonce);
-    color: white;
-    font-weight: 600;
-    border: none;
+    background-color: var(--vert-doux);
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.5rem;
     border-radius: 8px;
+    border: none;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-start;
 }
 
 .btn-submit:hover {
-    background-color: var(--vert-doux);
+    background-color: #8ec9a4;
+    transform: translateY(-1px);
 }
 
-.user-role label {
-    display: inline-block;
-    margin-right: 1rem;
-    margin-bottom: 0.5rem;
-    cursor: pointer;
+/* ==============================================*/
+/* BLOCS STATUT & VÉHICULES */
+/* ==============================================*/
+
+.profil-block {
+    background-color: var(--beige-fonce);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-.alert-message {
-    margin-top: 0.75rem;
-    padding: 0.5rem;
+.profil-block h3 {
+    color: var(--vert-doux);
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(168, 213, 186, 0.2);
+}
+
+.profil-role {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--texte);
+    margin: 0;
+}
+
+.profil-link {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.88rem;
+    color: var(--orange-doux);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.profil-link:hover {
+    color: #e07b39;
+    text-decoration: none;
+}
+
+.profil-vehicule-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     background-color: var(--fond);
-    border: 1px solid var(--orange-doux);
-    border-radius: 6px;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--vert-doux);
+}
+
+.profil-vehicule-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+.profil-vehicule-nom {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
     font-size: 0.95rem;
     color: var(--texte);
+    margin: 0;
 }
 
-.credit-balance p {
-    margin: 0.5rem 0;
+.profil-vehicule-detail {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.82rem;
+    color: var(--gris-doux);
+    margin: 0.2rem 0 0 0;
 }
 
-@media screen and (min-width: 768px) {
-    .profile-content {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
+/* ==============================================*/
+/* TOAST */
+/* ==============================================*/
 
-    .profil-header,
-    .profile-verification,
-    .user-role,
-    .credit-balance {
-        flex: 1 1 45%;
-    }
-
-    .profil-header {
-        flex: 1 1 100%;
-    }
+.toast-success,
+.toast-error {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    z-index: 9999;
+    box-shadow: 0 2px 10px var(--shadow);
 }
 
-@media screen and (max-width: 480px) {
-    .profil-header .profil-photo {
-        width: 90px;
-        height: 90px;
-    }
+.toast-success { background-color: #4BB543; }
+.toast-error   { background-color: #e74c3c; }
 
-    button, .btn-submit {
-        padding: 0.5em 1em;
-    }
-}
+/* ==============================================*/
+/* MODAL */
+/* ==============================================*/
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
     z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.5);
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
-    background-color: var(--fond);
+    background-color: var(--beige-fonce);
     color: var(--texte);
-    padding: 1.5rem;           /* moins de padding pour réduire la hauteur */
-    border-radius: 10px;
-    max-width: 600px;
-    max-height: 80vh;          /* limite la hauteur à 80% de la fenêtre */
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 560px;
+    max-height: 85vh;
     width: 90%;
     position: relative;
     font-family: 'Quicksand', sans-serif;
-    overflow-y: auto;          /* scroll si contenu trop grand */
-    box-sizing: border-box;    /* pour inclure le padding dans la hauteur */
+    overflow-y: auto;
+    box-shadow: 0 4px 24px var(--shadow);
 }
 
+.modal-content h2 {
+    color: var(--vert-doux);
+    margin-bottom: 1.25rem;
+    font-size: 1.2rem;
+}
 
 .close {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 2rem;
-    font-weight: bold;
+    top: 1rem; right: 1.25rem;
+    font-size: 1.5rem;
     cursor: pointer;
+    color: var(--gris-doux);
+    line-height: 1;
 }
 
-/* Form inputs inside modal */
-.modal-content form label {
-    display: block;
-    margin-top: 1rem;
-    font-weight: 600;
-    color: var(--texte);
+.close:hover { color: #e74c3c; }
+
+.modal-content .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
 }
 
-.modal-content form input[type="text"],
-.modal-content form input[type="email"],
-.modal-content form input[type="date"],
-.modal-content form input[type="file"],
-.modal-content form textarea {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.3rem;
-    border-radius: 6px;
-    border: 1px solid var(--gris-doux);
-    font-size: 1rem;
+.modal-content label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--vert-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="date"],
+.modal-content input[type="file"],
+.modal-content textarea {
     background-color: var(--fond);
+    border: 1px solid rgba(168, 213, 186, 0.3);
     color: var(--texte);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+    font-family: 'Quicksand', sans-serif;
+    width: 100%;
+    margin-bottom: 0;
+    transition: border-color 0.2s ease;
 }
 
-/* Inputs désactivés (nom, prénom, email) */
-.modal-content form input[disabled] {
-    background-color: #f0f0f0;
-    color: #555;
+.modal-content input:focus,
+.modal-content textarea:focus {
+    outline: none;
+    border-color: var(--vert-doux);
+}
+
+.modal-content input[disabled] {
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
-/* Message sous input grisé */
 .contact-note {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--orange-doux);
-    margin-bottom: 0.5rem;
+    font-family: 'Quicksand', sans-serif;
 }
 
-/* Lien mot de passe */
 .password-link {
-    margin-top: 0.5rem;
+    margin-bottom: 1rem;
     font-size: 0.9rem;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .password-link a {
-    color: var(--vert-fonce);
+    color: var(--orange-doux);
     text-decoration: underline;
 }
 
-/* Bouton */
-.modal-content .btn-submit {
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-    background-color: var(--vert-fonce);
-    color: white;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
 
-.modal-content .btn-submit:hover {
-    background-color: var(--vert-doux);
-}
+@media (max-width: 768px) {
+    main { flex-direction: column; }
 
-/* Aperçu photo avant upload */
-#photo-preview {
-    display: block;
-    margin-top: 0.5rem;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--vert-doux);
+    .profile-content { width: 100%; }
+
+    .profil-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .profil-photo { width: 90px; height: 90px; }
+
+    .profil-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profil-info-full { grid-column: 1; }
+
+    .btn-submit { width: 100%; }
+
+    .modal-content { padding: 1.5rem; }
 }

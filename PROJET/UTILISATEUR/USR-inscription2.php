@@ -32,27 +32,6 @@ if (!empty($user['profile_completed']) && $user['profile_completed'] == 1) {
     <link rel="stylesheet" href="../CSS/style_global.css">
     <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-inscription.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: #fff;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            font-family: 'Quicksand', sans-serif;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s;
-            z-index: 1000;
-        }
-        .toast.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-    </style>
 </head>
 <body>
 
@@ -60,35 +39,42 @@ if (!empty($user['profile_completed']) && $user['profile_completed'] == 1) {
 
 <main>
     <div class="account-creation-container">
-        <h2>Complétez votre profil</h2>
+        <h1>Complétez votre profil</h1>
+        <p class="required-notes">* Champs obligatoires</p>
 
-        <form action="../PHP/traitement-profil.php" method="POST" novalidate>
+        <form action="../PHP/traitement-profil.php" method="POST" class="form-inscription" novalidate>
 
-            <div class="form-group-radio">
-                <label>Votre rôle * :</label>
-                <label>
-                    <input type="radio" name="role" value="passager" <?= $user['role'] === 'passager' ? 'checked' : '' ?>> Passager
-                </label>
-                <label>
-                    <input type="radio" name="role" value="conducteur" <?= $user['role'] === 'conducteur' ? 'checked' : '' ?>> Conducteur
-                </label>
-                <label>
-                    <input type="radio" name="role" value="passager-conducteur" <?= $user['role'] === 'passager-conducteur' ? 'checked' : '' ?>> Passager & Conducteur
-                </label>
+            <div class="form-group">
+                <label>Votre rôle *</label>
+                <div class="radio-group">
+                    <label class="radio-option <?= $user['role'] === 'passager' ? 'selected' : '' ?>">
+                        <input type="radio" name="role" value="passager" <?= $user['role'] === 'passager' ? 'checked' : '' ?>>
+                        🧳 Passager
+                    </label>
+                    <label class="radio-option <?= $user['role'] === 'conducteur' ? 'selected' : '' ?>">
+                        <input type="radio" name="role" value="conducteur" <?= $user['role'] === 'conducteur' ? 'checked' : '' ?>>
+                        🚗 Conducteur
+                    </label>
+                    <label class="radio-option <?= $user['role'] === 'passager-conducteur' ? 'selected' : '' ?>">
+                        <input type="radio" name="role" value="passager-conducteur" <?= $user['role'] === 'passager-conducteur' ? 'checked' : '' ?>>
+                        🧳🚗 Passager & Conducteur
+                    </label>
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="date_naissance">Date de naissance * :</label>
+                <label for="date_naissance">Date de naissance *</label>
                 <input type="date" name="date_naissance" id="date_naissance"
                        value="<?= htmlspecialchars($user['date_naissance'] ?? '') ?>">
             </div>
 
             <div class="form-group">
-                <label for="bio">Bio :</label>
-                <textarea name="bio" id="bio" rows="4"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                <label for="bio">Bio <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--gris-doux);">(optionnel)</span></label>
+                <textarea name="bio" id="bio" rows="4"
+                          placeholder="Parlez un peu de vous..."><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
             </div>
 
-            <button type="submit">Enregistrer mon profil</button>
+            <button type="submit" class="btn-submit">Enregistrer mon profil</button>
 
         </form>
     </div>

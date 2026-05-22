@@ -17,9 +17,12 @@
 
         <!-- INSCRIPTION -->
         <div id="inscription">
-            <h2>S'inscrire</h2>
+            <h2>Pas encore inscrit ?</h2>
+            <p style="font-family:'Quicksand',sans-serif; color:#2e2b28; font-size:0.95rem; margin:0; opacity:0.8;">
+                Rejoignez la communauté Eco Ride et partagez vos trajets.
+            </p>
             <a class="btn-inscription-mail" href="USR-inscription.php">
-                Continuer avec une adresse mail
+                Créer un compte
             </a>
         </div>
 
@@ -28,15 +31,13 @@
             <h2>Se connecter</h2>
 
             <?php if (isset($_GET['error']) && $_GET['error'] === 'suspendu'): ?>
-                <p class="error-message" style="color: red; font-weight: 600;">
+                <p class="error-message">
                     ⚠️ Votre compte a été suspendu.
                     <a href="mailto:support@ecoride.fr" target="_blank">Contacter le support EcoRide</a>
                 </p>
             <?php endif; ?>
 
-            <?php
-            $redirect = $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php';
-            ?>
+            <?php $redirect = $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php'; ?>
 
             <form id="formulaire-connexion"
                   action="../PHP/login.php"
@@ -46,13 +47,13 @@
                 <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
 
                 <div class="form-group">
-                    <label for="email">Adresse mail :</label>
-                    <input type="text" id="email" name="email" autocomplete="email">
+                    <label for="email">Adresse mail</label>
+                    <input type="text" id="email" name="email" autocomplete="email" placeholder="votre@email.com">
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" name="password">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••">
                 </div>
 
                 <button type="submit" class="btn-connexion">

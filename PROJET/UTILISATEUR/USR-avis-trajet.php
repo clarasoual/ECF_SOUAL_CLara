@@ -31,6 +31,7 @@ if (!$trajet) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laisser un avis</title>
     <link rel="stylesheet" href="../CSS/style_global.css">
+    <link rel="stylesheet" href="../CSS/CSS UTILISATEUR/USR-avis-trajet.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -38,54 +39,77 @@ if (!$trajet) {
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
-    <h1>Laisser un avis</h1>
+<div class="avis-wrapper">
 
-    <p>Trajet : <strong><?= htmlspecialchars($trajet['depart']) ?> → <?= htmlspecialchars($trajet['arrivee']) ?></strong></p>
-    <p>Conducteur : <strong><?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?></strong></p>
-
-    <!-- Formulaire avis -->
-    <form action="../PHP/soumettre-avis.php" method="POST" novalidate>
-        <input type="hidden" name="id_trajet" value="<?= $id_trajet ?>">
-
-        <div class="form-group">
-            <label for="note">Note (1 à 5) *</label>
-            <select name="note" id="note">
-                <option value="">-- Choisir une note --</option>
-                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
-                <option value="4">⭐⭐⭐⭐ - Bien</option>
-                <option value="3">⭐⭐⭐ - Correct</option>
-                <option value="2">⭐⭐ - Décevant</option>
-                <option value="1">⭐ - Mauvais</option>
-            </select>
+    <!-- CARTE TRAJET -->
+    <div class="trajet-card">
+        <div class="trajet-route">
+            <?= htmlspecialchars($trajet['depart']) ?>
+            <span>→</span>
+            <?= htmlspecialchars($trajet['arrivee']) ?>
         </div>
-
-        <div class="form-group">
-            <label for="commentaire">Commentaire (optionnel)</label>
-            <textarea name="commentaire" id="commentaire" rows="4" placeholder="Décrivez votre expérience..."></textarea>
+        <div class="trajet-conducteur">
+            Conducteur : <strong><?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?></strong>
         </div>
+    </div>
 
-        <button type="submit" class="btn-submit">Envoyer mon avis</button>
-        <a href="USR-mes-trajets.php" class="btn-annuler">Passer</a>
-    </form>
+    <!-- FORMULAIRE AVIS -->
+    <div class="form-block">
+        <h2 class="form-block-title">Laisser un avis</h2>
+        <form action="../PHP/soumettre-avis.php" method="POST" novalidate>
+            <input type="hidden" name="id_trajet" value="<?= $id_trajet ?>">
 
-    <!-- Signalement -->
-    <hr>
-    <h2>Un problème avec ce trajet ?</h2>
-    <p>Si ce trajet s'est mal passé, vous pouvez le signaler. Un employé prendra contact avec le conducteur.</p>
+            <div class="form-group">
+                <label>Note *</label>
+                <div class="star-rating">
+                    <input type="radio" name="note" id="star5" value="5">
+                    <label for="star5" title="Excellent">★</label>
+                    <input type="radio" name="note" id="star4" value="4">
+                    <label for="star4" title="Bien">★</label>
+                    <input type="radio" name="note" id="star3" value="3">
+                    <label for="star3" title="Correct">★</label>
+                    <input type="radio" name="note" id="star2" value="2">
+                    <label for="star2" title="Décevant">★</label>
+                    <input type="radio" name="note" id="star1" value="1">
+                    <label for="star1" title="Mauvais">★</label>
+                </div>
+            </div>
 
-    <form action="../PHP/signaler-trajet.php" method="POST" novalidate
-          onsubmit="return confirm('Confirmer le signalement de ce trajet ?')">
-        <input type="hidden" name="id_trajet" value="<?= $id_trajet ?>">
+            <div class="form-group">
+                <label for="commentaire">Commentaire (optionnel)</label>
+                <textarea name="commentaire" id="commentaire" rows="4" placeholder="Décrivez votre expérience..."></textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="commentaire_signalement">Décrivez le problème *</label>
-            <textarea name="commentaire_signalement" id="commentaire_signalement" rows="4"
-                      placeholder="Décrivez ce qui s'est mal passé..."></textarea>
-        </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Envoyer mon avis</button>
+                <a href="USR-mes-trajets.php" class="btn-annuler">Passer</a>
+            </div>
+        </form>
+    </div>
 
-        <button type="submit" class="btn-probleme">🚨 Signaler ce trajet</button>
-    </form>
+    <!-- SIGNALEMENT -->
+    <div class="form-block">
+        <h2 class="form-block-title danger">🚨 Signaler un problème</h2>
+        <p style="font-family:'Quicksand',sans-serif; font-size:0.95rem; color:var(--gris-doux); margin:0;">
+            Si ce trajet s'est mal passé, vous pouvez le signaler. Un employé prendra contact avec le conducteur.
+        </p>
+        <form action="../PHP/signaler-trajet.php" method="POST" novalidate
+              onsubmit="return confirm('Confirmer le signalement de ce trajet ?')">
+            <input type="hidden" name="id_trajet" value="<?= $id_trajet ?>">
 
+            <div class="form-group">
+                <label for="commentaire_signalement">Décrivez le problème *</label>
+                <textarea name="commentaire_signalement" id="commentaire_signalement" rows="4"
+                          placeholder="Décrivez ce qui s'est mal passé..."></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-probleme">🚨 Signaler ce trajet</button>
+            </div>
+        </form>
+    </div>
+
+</div>
 </main>
 
 <script src="../JS/USR-avis-trajet.js"></script>

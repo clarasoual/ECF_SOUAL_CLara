@@ -1,45 +1,74 @@
-/* Conteneur formulaire/carte véhicule */
+/* ==============================================*/
+/* USR-INFOS-CONDUCTEUR */
+/* ==============================================*/
+
+#vehicles-container {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* ==============================================*/
+/* CONTENEUR FORMULAIRE */
+/* ==============================================*/
+
 .driver-info-container {
-    max-width: 900px;
-    margin: 2rem auto;
+    background-color: var(--beige-fonce);
+    border-radius: 12px;
     padding: 2rem;
-    background-color: var(--fond);
-    border-radius: 10px;
+    margin-bottom: 1.5rem;
     box-shadow: 0 4px 12px var(--shadow);
     font-family: 'Quicksand', sans-serif;
-    width: 100%;
 }
 
-/* Titre véhicule */
 .driver-info-container h2 {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
     margin-bottom: 1.5rem;
     color: var(--vert-doux);
-    text-align: center;
+    text-align: left;
 }
 
-/* Formulaire */
+/* ==============================================*/
+/* FORMULAIRE */
+/* ==============================================*/
+
 .vehicle-form form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+}
+
+.vehicle-form .form-group {
     display: flex;
     flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 0;
 }
 
 .vehicle-form label {
-    font-weight: 600;
-    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--vert-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0;
 }
 
 .vehicle-form input[type="text"],
 .vehicle-form input[type="date"],
 .vehicle-form input[type="number"],
 .vehicle-form select {
-    padding: 0.6rem 0.8rem;
+    background-color: var(--fond);
+    border: 1px solid rgba(168, 213, 186, 0.3);
+    color: var(--texte);
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'Quicksand', sans-serif;
+    transition: border-color 0.2s ease;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
+    width: 100%;
 }
 
 .vehicle-form input[type="text"]:focus,
@@ -50,110 +79,195 @@
     outline: none;
 }
 
-/* Section formulaire */
-.form-section {
-    background-color: var(--fond);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px var(--shadow);
-}
-
-/* Séparateur */
+/* Séparateur pleine largeur */
 .vehicle-form hr {
-    margin: 2rem 0;
-    border: 0.5px solid var(--orange-doux);
+    grid-column: 1 / -1;
+    margin: 0.5rem 0 1.5rem 0;
+    border: none;
+    border-top: 1px solid rgba(244, 177, 131, 0.3);
 }
 
-/* Bouton enregistrer */
-.vehicle-form button[type="submit"] {
-    padding: 0.8rem 1.2rem;
-    background-color: var(--fond);
+/* ==============================================*/
+/* RADIOS ANIMAUX / FUMEUR */
+/* ==============================================*/
+
+.pets-container,
+.smoking-container {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.pets-container p,
+.smoking-container p {
+    font-size: 0.8rem;
+    font-weight: 700;
     color: var(--vert-doux);
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.pets-container label,
+.smoking-container label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--texte);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
     cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-    align-self: flex-start;
+}
+
+.pets-container input[type="radio"],
+.smoking-container input[type="radio"] {
+    width: auto;
+    margin: 0;
+    accent-color: var(--vert-doux);
+}
+
+/* ==============================================*/
+/* BOUTON ENREGISTRER */
+/* ==============================================*/
+
+.vehicle-form button[type="submit"] {
+    grid-column: 1 / -1;
+    background-color: var(--vert-doux);
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    width: fit-content;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 8px var(--shadow);
 }
 
 .vehicle-form button[type="submit"]:hover {
-    background-color: var(--orange-doux);
+    background-color: #8ec9a4;
+    transform: translateY(-1px);
 }
 
-/* Carte véhicule */
+/* ==============================================*/
+/* CARTE VÉHICULE */
+/* ==============================================*/
+
 .vehicle-card {
-    background-color: var(--fond);
-    border-radius: 10px;
+    background-color: var(--beige-fonce);
+    border-radius: 12px;
     box-shadow: 0 4px 12px var(--shadow);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     font-family: 'Quicksand', sans-serif;
+    border-left: 4px solid var(--vert-doux);
 }
 
 .vehicle-card h2 {
-    text-align: center;
     color: var(--vert-doux);
     margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .vehicle-card p {
     margin: 0.4rem 0;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    color: var(--gris-doux);
 }
 
-/* Boutons ajouter/supprimer véhicule */
+/* ==============================================*/
+/* BOUTONS AJOUTER / SUPPRIMER */
+/* ==============================================*/
+
 .vehicle-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
-    margin: 2rem 0;
+    margin: 1rem 0 2rem 0;
+    flex-wrap: wrap;
 }
 
 .vehicle-buttons button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
     font-weight: 600;
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+#addVehicleBtn {
     background-color: var(--vert-doux);
+    color: black;
+}
+
+#addVehicleBtn:hover {
+    background-color: #8ec9a4;
+    transform: translateY(-1px);
+}
+
+#removeVehicleBtn {
+    background: transparent;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    box-shadow: none;
+}
+
+#removeVehicleBtn:hover {
+    background-color: #e74c3c;
     color: white;
-    transition: background-color 0.3s ease;
 }
 
-.vehicle-buttons button:hover {
-    background-color: var(--orange-doux);
-}
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
 
-/* Responsive */
 @media (max-width: 768px) {
-    .driver-info-container {
-        padding: 1rem;
-        margin: 1rem;
+    main { flex-direction: column; }
+
+    .vehicle-form form {
+        grid-template-columns: 1fr;
     }
 
-    .vehicle-form input[type="text"],
-    .vehicle-form input[type="date"],
-    .vehicle-form input[type="number"],
-    .vehicle-form select,
+    .vehicle-form hr {
+        grid-column: 1;
+    }
+
     .vehicle-form button[type="submit"] {
         width: 100%;
+        grid-column: 1;
+    }
+
+    .pets-container,
+    .smoking-container {
+        grid-column: 1;
+    }
+
+    .driver-info-container {
+        padding: 1.25rem;
     }
 
     .vehicle-buttons {
         flex-direction: column;
     }
+
+    .vehicle-buttons button {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
     .driver-info-container h2 {
-        font-size: 1.5rem;
-    }
-
-    .vehicle-card p {
-        font-size: 0.95rem;
+        font-size: 1.2rem;
     }
 }

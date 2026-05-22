@@ -1,0 +1,172 @@
+/* ==============================================*/
+/* USR-GESTION-CREDITS */
+/* ==============================================*/
+
+.credits-section {
+    flex: 1;
+    padding: 1rem;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.credits-section h2 {
+    color: var(--vert-doux);
+    margin-bottom: 1.5rem;
+}
+
+.credits-section h3 {
+    color: var(--vert-doux);
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+/* ==============================================*/
+/* SOLDE */
+/* ==============================================*/
+
+.solde-actuel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--beige-fonce);
+    border-left: 4px solid var(--vert-doux);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    color: var(--texte);
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.solde-actuel strong {
+    color: var(--vert-doux);
+}
+
+/* ==============================================*/
+/* MESSAGE SUCCÈS */
+/* ==============================================*/
+
+.message-succes {
+    background: rgba(168, 213, 186, 0.1);
+    border: 1px solid var(--vert-doux);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--vert-doux);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+}
+
+/* ==============================================*/
+/* TABLEAU */
+/* ==============================================*/
+
+.table-responsive-credits {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.table-responsive-credits table {
+    white-space: nowrap;
+    min-width: 500px;
+    width: auto;
+    font-size: 0.92rem;
+}
+
+.transaction-entree td:nth-child(4) {
+    color: #4BB543;
+    font-weight: 700;
+}
+
+.transaction-sortie td:nth-child(4) {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+/* ==============================================*/
+/* DEMANDE CRÉDITS */
+/* ==============================================*/
+
+.demande-credits-block {
+    background-color: var(--beige-fonce);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.demande-credits-block p {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gris-doux);
+    margin: 0;
+}
+
+.btn-demande-credits {
+    background-color: var(--vert-doux);
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.btn-demande-credits:hover {
+    background-color: #8ec9a4;
+    transform: translateY(-1px);
+}
+
+/* ==============================================*/
+/* À PROPOS */
+/* ==============================================*/
+
+.credits-about {
+    background-color: var(--beige-fonce);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 4px solid var(--orange-doux);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.credits-about p {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gris-doux);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.7;
+}
+
+.credits-about p:last-child { margin: 0; }
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 768px) {
+    main { flex-direction: column; }
+
+    .solde-actuel {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-demande-credits {
+        width: 100%;
+        text-align: center;
+    }
+}

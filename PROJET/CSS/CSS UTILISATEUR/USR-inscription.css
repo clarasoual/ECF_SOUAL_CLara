@@ -1,57 +1,257 @@
-.account-creation-container {
-    max-width: 600px;
-    margin: 2rem auto;
-    background-color: var(--beige-fonce);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px var(--shadow);
+/* ==============================================*/
+/* USR-INSCRIPTION */
+/* ==============================================*/
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 1rem;
 }
 
-.btn-submit {
+.account-creation-container {
     width: 100%;
-    max-width: 250px;
-    text-align: center;
+    max-width: 560px;
+    background-color: var(--beige-fonce);
+    padding: 2.5rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.account-creation-container h1 {
+    font-size: 1.6rem;
+    color: var(--vert-doux);
+    margin-bottom: 0.25rem;
+}
+
+.required-notes {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.82rem;
+    color: var(--gris-doux);
+    margin-bottom: 1.75rem;
+}
+
+/* ==============================================*/
+/* FORMULAIRE */
+/* ==============================================*/
+
+.form-inscription {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.form-inscription .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1.1rem;
 }
 
 .form-inscription label {
-    display: block;
-    margin-top: 1rem;
-    font-weight: 600;
-    color: var(--texte);
-}
-
-.form-inscription input [type="text"]
-.form-inscription input [type="date"]
-.form-inscription input [type="tel"]
-.form-inscription input [type="email"]
-.form-inscription input [type="password"] {
-    width: 100%;
-    padding: 0.75rem;
-    margin-top: 0.3rem;
-    border: 1px solid var(--gris-doux);
-    border-radius: 6px;
-    background-color: var(--beige-fonce);
-    color: var(--texte);
-    font-size: 1rem;
-}
-
-.form-inscription input::placeholder {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
     color: var(--vert-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
-.form-inscription fieldset.gender {
-    border: none;
-    margin: 1rem 0;
-    padding: 0;
-}
-
-.gender legend {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+.form-inscription input[type="text"],
+.form-inscription input[type="email"],
+.form-inscription input[type="password"] {
+    background-color: var(--fond);
+    border: 1px solid rgba(168, 213, 186, 0.3);
     color: var(--texte);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    margin-bottom: 0;
 }
 
-.gender label {
-    margin-right: 1.5rem;
-    font-weight: 500;
+.form-inscription input:focus {
+    outline: none;
+    border-color: var(--vert-doux);
+}
+
+/* ==============================================*/
+/* MOT DE PASSE */
+/* ==============================================*/
+
+.conditions-password {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8rem;
+    color: var(--gris-doux);
+    margin: 0.4rem 0 0 0;
+    line-height: 1.5;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(168, 213, 186, 0.07);
+    border-radius: 6px;
+    border-left: 3px solid rgba(168, 213, 186, 0.3);
+}
+
+/* ==============================================*/
+/* CHECKBOX CGU */
+/* ==============================================*/
+
+.accept-conditions {
+    display: flex !important;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    color: var(--gris-doux);
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.accept-conditions input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--vert-doux);
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.accept-conditions a {
+    color: var(--orange-doux);
+    text-decoration: underline;
+}
+
+/* ==============================================*/
+/* BOUTON */
+/* ==============================================*/
+
+.btn-submit {
+    background-color: var(--vert-doux);
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.85rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.btn-submit:hover {
+    background-color: #8ec9a4;
+    transform: translateY(-1px);
+}
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 768px) {
+    .account-creation-container {
+        padding: 1.5rem;
+    }
+}
+
+/* ==============================================*/
+/* RADIO GROUPE (rôle) */
+/* ==============================================*/
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.radio-option {
+    display: flex !important;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--fond);
+    border: 1px solid rgba(168, 213, 186, 0.25);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--texte);
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.radio-option input[type="radio"] {
+    accent-color: var(--vert-doux);
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.radio-option:has(input:checked),
+.radio-option.selected {
+    border-color: var(--vert-doux);
+    background-color: rgba(168, 213, 186, 0.08);
+}
+
+.radio-option:hover {
+    border-color: var(--vert-doux);
+}
+
+/* ==============================================*/
+/* TEXTAREA */
+/* ==============================================*/
+
+.form-inscription textarea {
+    background-color: var(--fond);
+    border: 1px solid rgba(168, 213, 186, 0.3);
+    color: var(--texte);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    resize: vertical;
+    margin-bottom: 0;
+}
+
+.form-inscription textarea:focus {
+    outline: none;
+    border-color: var(--vert-doux);
+}
+
+/* ==============================================*/
+/* TOAST */
+/* ==============================================*/
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--beige-fonce);
+    color: var(--texte);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    z-index: 1000;
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 1px solid var(--vert-doux);
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
 }

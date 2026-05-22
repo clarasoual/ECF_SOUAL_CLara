@@ -8,13 +8,11 @@ include('../PHP/transactions.php');
 
 $id_utilisateur = $_SESSION['user_id'];
 
-// Récupère le solde depuis MySQL
 $stmt = $bdd->prepare("SELECT solde FROM credits WHERE id_utilisateur = ?");
 $stmt->execute([$id_utilisateur]);
 $credit = $stmt->fetch(PDO::FETCH_ASSOC);
 $solde = $credit ? $credit['solde'] : 0;
 
-// Récupère l'historique depuis le JSON
 $transactions = getTransactions($id_utilisateur);
 ?>
 <!DOCTYPE html>
@@ -44,57 +42,64 @@ $transactions = getTransactions($id_utilisateur);
     <?php endif; ?>
 
     <p class="solde-actuel"><strong>Solde actuel :</strong> <?= $solde ?> crédits</p>
-    <p>Vous gagnez des crédits en proposant des trajets à d'autres utilisateurs, lorsque vous êtes conducteur.</p>
+    <p style="font-family:'Quicksand',sans-serif; font-size:0.95rem; color:var(--gris-doux); margin-bottom:1.5rem;">
+        Vous gagnez des crédits en proposant des trajets à d'autres utilisateurs, lorsque vous êtes conducteur.
+    </p>
 
     <!-- Historique -->
     <h3>Historique des crédits</h3>
     <?php if (empty($transactions)): ?>
-        <p>Aucune transaction pour le moment.</p>
+        <p style="font-family:'Quicksand',sans-serif; color:var(--gris-doux);">Aucune transaction pour le moment.</p>
     <?php else: ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Montant</th>
-                <th>Solde à ce jour</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($transactions as $t): ?>
-            <tr class="transaction-<?= $t['type'] ?>">
-                <td><?= date('d/m/Y', strtotime($t['date'])) ?></td>
-                <td><?= $t['type'] === 'entree' ? 'Entrée' : 'Sortie' ?></td>
-                <td>
-                    <?php if ($t['id_trajet']): ?>
-                        <a href="USR-details-trajet.php?id=<?= $t['id_trajet'] ?>">
+    <div class="table-responsive-credits">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Montant</th>
+                    <th>Solde à ce jour</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($transactions as $t): ?>
+                <tr class="transaction-<?= $t['type'] ?>">
+                    <td><?= date('d/m/Y', strtotime($t['date'])) ?></td>
+                    <td><?= $t['type'] === 'entree' ? 'Entrée' : 'Sortie' ?></td>
+                    <td>
+                        <?php if ($t['id_trajet']): ?>
+                            <a href="USR-details-trajet.php?id=<?= $t['id_trajet'] ?>">
+                                <?= htmlspecialchars($t['description']) ?>
+                            </a>
+                        <?php else: ?>
                             <?= htmlspecialchars($t['description']) ?>
-                        </a>
-                    <?php else: ?>
-                        <?= htmlspecialchars($t['description']) ?>
-                    <?php endif; ?>
-                </td>
-                <td><?= $t['type'] === 'entree' ? '+' : '-' ?><?= $t['montant'] ?></td>
-                <td><?= $t['solde_apres'] ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                        <?php endif; ?>
+                    </td>
+                    <td><?= $t['type'] === 'entree' ? '+' : '-' ?><?= $t['montant'] ?></td>
+                    <td><?= $t['solde_apres'] ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
     <?php endif; ?>
 
     <!-- Demande de crédits -->
     <h3>Besoin de crédits ?</h3>
-    <p><em>Vous pouvez faire une demande de crédits à EcoRide.</em></p>
-    <form action="../PHP/demande_credits.php" method="post" onsubmit="return confirmerDemande()">
-        <button type="submit">Demander des crédits à EcoRide</button>
-    </form>
-    <p><strong>Remarque :</strong> Votre demande sera étudiée par notre équipe. Vous recevrez une réponse sous peu.</p>
+    <div class="demande-credits-block">
+        <p>Vous pouvez faire une demande de crédits à EcoRide. Notre équipe étudiera votre demande et vous recevrez une réponse sous peu.</p>
+        <form action="../PHP/demande_credits.php" method="post" onsubmit="return confirmerDemande()">
+            <button type="submit" class="btn-demande-credits">Demander des crédits à EcoRide</button>
+        </form>
+    </div>
 
     <!-- À propos -->
     <h3>À propos des crédits</h3>
-    <p>Chez <strong>EcoRide</strong>, chaque trajet partagé est un pas vers un monde plus solidaire et écologique.</p>
-    <p>Notre système de crédit permet de vérifier régulièrement si l'ensemble de nos trajets se passent dans le respect de notre charte de confiance (sécurité, respect, fiabilité), tout en encourageant les utilisateurs à adopter un comportement éco-responsable.</p>
+    <div class="credits-about">
+        <p>Chez <strong style="color:var(--texte);">EcoRide</strong>, chaque trajet partagé est un pas vers un monde plus solidaire et écologique.</p>
+        <p>Notre système de crédit permet de vérifier régulièrement si l'ensemble de nos trajets se passent dans le respect de notre charte de confiance (sécurité, respect, fiabilité), tout en encourageant les utilisateurs à adopter un comportement éco-responsable.</p>
+    </div>
 
 </section>
 
@@ -106,6 +111,6 @@ function confirmerDemande() {
 }
 </script>
 
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 </body>
 </html>

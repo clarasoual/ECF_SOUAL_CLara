@@ -1,8 +1,6 @@
 <?php
 include('../PHP/auth.php');
 requireLogin();
-
-session_start();
 include('../PHP/infos-perso.php');
 ?>
 <!DOCTYPE html>
@@ -33,44 +31,93 @@ include('../PHP/infos-perso.php');
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Mon compte —</option>
+    <option value="../UTILISATEUR/USR-infos-perso.php">Informations personnelles</option>
+    <option value="../UTILISATEUR/USR-mes-trajets.php">Mes trajets</option>
+    <option value="../UTILISATEUR/USR-avis.php">Avis</option>
+    <option value="../UTILISATEUR/USR-gestion-credits.php">Crédits</option>
+    <option value="../UTILISATEUR/USR-infos-conducteur.php">Informations conducteur</option>
+    <option value="../UTILISATEUR/USR-aide.php">Aide</option>
+</select>
+
 <main>
     <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
     <div class="profile-content">
 
+        <!-- PHOTO + INFOS -->
         <section class="profil-header">
             <img src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
                  alt="Photo de profil" class="profil-photo">
-            <h2><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></h2>
-            <p><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></p>
-            <button id="openModalBtn" type="button" class="btn-submit">
-                Modifier mes informations
-            </button>
-        </section>
 
-        <section class="user-role">
-            <h3>Vous</h3>
-            <label>
-                <input type="radio" disabled <?= $user['role'] === 'passager' ? 'checked' : '' ?>> Passager
-            </label>
-            <label>
-                <input type="radio" disabled <?= $user['role'] === 'conducteur' ? 'checked' : '' ?>> Conducteur
-            </label>
-            <label>
-                <input type="radio" disabled <?= $user['role'] === 'passager-conducteur' ? 'checked' : '' ?>> Passager-conducteur
-            </label>
-            <div class="alert-message">
-                Merci de compléter vos informations conducteur pour activer ce rôle !
+            <div class="profil-infos">
+                <h2><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></h2>
+
+                <div class="profil-info-grid">
+                    <div class="profil-info-item">
+                        <span class="profil-info-label">Email</span>
+                        <span class="profil-info-value"><?= htmlspecialchars($user['email']) ?></span>
+                    </div>
+                    <div class="profil-info-item">
+                        <span class="profil-info-label">Date de naissance</span>
+                        <span class="profil-info-value">
+                            <?= !empty($user['date_naissance']) ? date('d/m/Y', strtotime($user['date_naissance'])) : '—' ?>
+                        </span>
+                    </div>
+                    <div class="profil-info-item">
+                        <span class="profil-info-label">Rôle</span>
+                        <span class="profil-info-value">
+                            <?php
+                            $roles = [
+                                'passager' => '🧳 Passager',
+                                'conducteur' => '🚗 Conducteur',
+                                'passager-conducteur' => '🧳🚗 Passager & Conducteur',
+                            ];
+                            echo $roles[$user['role']] ?? '—';
+                            ?>
+                        </span>
+                    </div>
+                    <?php if (!empty($user['bio'])): ?>
+                    <div class="profil-info-item profil-info-full">
+                        <span class="profil-info-label">Bio</span>
+                        <span class="profil-info-value"><?= htmlspecialchars($user['bio']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <button id="openModalBtn" type="button" class="btn-submit">Modifier mes informations</button>
             </div>
+
+
+
+
         </section>
 
-        <section class="profile-verification">
-            <h3>Vérifier le profil</h3>
-            <ul>
-                <li>Ajouter une carte d'identité</li>
-                <li>Confirmer l'adresse mail</li>
-                <li>Confirmer le numéro de téléphone</li>
-            </ul>
+        <!-- STATUT -->
+        <section class="profil-block">
+            <h3>Votre statut</h3>
+            <p class="profil-role">
+                <?= $roles[$user['role']] ?? '—' ?>
+            </p>
+            <a href="../UTILISATEUR/USR-infos-conducteur.php" class="profil-link">
+                Gérer mes informations conducteur →
+            </a>
+        </section>
+
+        <!-- VOS VÉHICULES -->
+        <section class="profil-block">
+            <h3>Vos véhicules</h3>
+            <div class="profil-vehicule-item">
+                <span class="profil-vehicule-icon">🚗</span>
+                <div>
+                    <p class="profil-vehicule-nom">Renault Clio — Gris</p>
+                    <p class="profil-vehicule-detail">Essence · 4 places · AB-123-CD</p>
+                </div>
+            </div>
+            <a href="../UTILISATEUR/USR-infos-conducteur.php" class="profil-link">
+                Gérer mes véhicules →
+            </a>
         </section>
 
     </div>
@@ -128,7 +175,6 @@ include('../PHP/infos-perso.php');
 </div>
 
 <?php include('../COMPONENTS/COMP-footer.php'); ?>
-
 <script src="../JS/USR-modal.js"></script>
 </body>
 </html>
