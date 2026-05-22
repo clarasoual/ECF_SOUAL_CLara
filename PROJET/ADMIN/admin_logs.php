@@ -48,6 +48,16 @@ $nbError   = count(array_filter($allLogs, fn($l) => $l['niveau'] === 'ERROR'));
 <body>
 
 <?php include('../COMPONENTS/COMP-header-admin.php'); ?>
+
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Navigation —</option>
+    <option value="ADM-employes.php">Employés</option>
+    <option value="ADM-utilisateurs.php">Utilisateurs</option>
+    <option value="ADM-statistiques.php">Statistiques</option>
+    <option value="admin_logs.php">Logs</option>
+</select>
+
 <main>
     <?php include('../COMPONENTS/COMP-menu-admin.html'); ?>
 

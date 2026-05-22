@@ -43,6 +43,14 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include('../COMPONENTS/COMP-header-employe.php'); ?>
 
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Navigation —</option>
+    <option value="EMP-gestion-avis.php">Avis à valider</option>
+    <option value="EMP-litiges.php">Covoiturages signalés</option>
+    <option value="EMP-demandes-credits.php">Demandes de crédits</option>
+</select>
+
 <main>
     <?php include('../COMPONENTS/COMP-menu-employe.html'); ?>
 
@@ -53,66 +61,66 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>Aucun litige. ✅</p>
         <?php else: ?>
         <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>N° trajet</th>
-                    <th>Trajet</th>
-                    <th>Date</th>
-                    <th>Passager</th>
-                    <th>Conducteur</th>
-                    <th>Statut</th>
-                    <th>Détails</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($litiges as $l): ?>
-                <tr data-id="<?= $l['id_signalement'] ?>"
-                    data-note="<?= htmlspecialchars($l['note_employe'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                    data-motif="<?= htmlspecialchars($l['motif'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
-                    data-email-passager="<?= htmlspecialchars($l['email_passager'], ENT_QUOTES, 'UTF-8') ?>"
-                    data-email-conducteur="<?= htmlspecialchars($l['email_conducteur'], ENT_QUOTES, 'UTF-8') ?>">
-                    <td><?= $l['id_trajet'] ?></td>
-                    <td><?= htmlspecialchars($l['depart']) ?> → <?= htmlspecialchars($l['arrivee']) ?></td>
-                    <td><?= date('d/m/Y', strtotime($l['date_depart'])) ?> à <?= htmlspecialchars($l['heure_depart']) ?></td>
-                    <td><?= htmlspecialchars($l['prenom_passager'] . ' ' . $l['nom_passager']) ?></td>
-                    <td><?= htmlspecialchars($l['prenom_conducteur'] . ' ' . $l['nom_conducteur']) ?></td>
-                    <td class="statut-cell">
-                        <?php if ($l['statut_signalement'] === 'en_cours'): ?>
-                            ⏳ En cours
-                        <?php elseif ($l['statut_signalement'] === 'resolu_credits_verses'): ?>
-                            ✅ Crédits versés
-                        <?php else: ?>
-                            ❌ Crédits bloqués
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <button type="button" class="btn-attente btn-ouvrir-details"
-                                data-id="<?= $l['id_signalement'] ?>">
-                            🔍 Voir détails
-                        </button>
-                    </td>
-                    <td>
-                        <?php if ($l['statut_signalement'] === 'en_cours'): ?>
-                            <button type="button" class="btn-valider"
-                                    data-id="<?= $l['id_signalement'] ?>"
-                                    data-action="debloquer">
-                                ✅ Débloquer
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° trajet</th>
+                        <th>Trajet</th>
+                        <th>Date</th>
+                        <th>Passager</th>
+                        <th>Conducteur</th>
+                        <th>Statut</th>
+                        <th>Détails</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($litiges as $l): ?>
+                    <tr data-id="<?= $l['id_signalement'] ?>"
+                        data-note="<?= htmlspecialchars($l['note_employe'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                        data-motif="<?= htmlspecialchars($l['motif'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                        data-email-passager="<?= htmlspecialchars($l['email_passager'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-email-conducteur="<?= htmlspecialchars($l['email_conducteur'], ENT_QUOTES, 'UTF-8') ?>">
+                        <td><?= $l['id_trajet'] ?></td>
+                        <td><?= htmlspecialchars($l['depart']) ?> → <?= htmlspecialchars($l['arrivee']) ?></td>
+                        <td><?= date('d/m/Y', strtotime($l['date_depart'])) ?> à <?= htmlspecialchars($l['heure_depart']) ?></td>
+                        <td><?= htmlspecialchars($l['prenom_passager'] . ' ' . $l['nom_passager']) ?></td>
+                        <td><?= htmlspecialchars($l['prenom_conducteur'] . ' ' . $l['nom_conducteur']) ?></td>
+                        <td class="statut-cell">
+                            <?php if ($l['statut_signalement'] === 'en_cours'): ?>
+                                ⏳ En cours
+                            <?php elseif ($l['statut_signalement'] === 'resolu_credits_verses'): ?>
+                                ✅ Crédits versés
+                            <?php else: ?>
+                                ❌ Crédits bloqués
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <button type="button" class="btn-attente btn-ouvrir-details"
+                                    data-id="<?= $l['id_signalement'] ?>">
+                                🔍 Voir détails
                             </button>
-                            <button type="button" class="btn-refuser"
-                                    data-id="<?= $l['id_signalement'] ?>"
-                                    data-action="bloquer">
-                                ❌ Bloquer
-                            </button>
-                        <?php else: ?>
-                            <span>Traité</span>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                        </td>
+                        <td>
+                            <?php if ($l['statut_signalement'] === 'en_cours'): ?>
+                                <button type="button" class="btn-valider"
+                                        data-id="<?= $l['id_signalement'] ?>"
+                                        data-action="debloquer">
+                                    ✅ Débloquer
+                                </button>
+                                <button type="button" class="btn-refuser"
+                                        data-id="<?= $l['id_signalement'] ?>"
+                                        data-action="bloquer">
+                                    ❌ Bloquer
+                                </button>
+                            <?php else: ?>
+                                <span>Traité</span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
         <?php endif; ?>
     </section>
@@ -161,7 +169,6 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>
 let idSignalementActif = null;
 
-// Ouvrir modale détails
 document.querySelectorAll('.btn-ouvrir-details').forEach(btn => {
     btn.addEventListener('click', () => {
         idSignalementActif = btn.dataset.id;
@@ -179,7 +186,6 @@ document.querySelectorAll('.btn-ouvrir-details').forEach(btn => {
     });
 });
 
-// Fermer modale
 ['btn-fermer-details', 'btn-fermer-details-bas'].forEach(id => {
     document.getElementById(id).addEventListener('click', () => {
         document.getElementById('modal-details').classList.remove('active');
@@ -192,7 +198,6 @@ document.getElementById('modal-details').addEventListener('click', (e) => {
     }
 });
 
-// Enregistrer la note
 document.getElementById('btn-sauver-note').addEventListener('click', () => {
     const note = document.getElementById('textarea-note').value.trim();
     if (!idSignalementActif) return;
@@ -208,8 +213,6 @@ document.getElementById('btn-sauver-note').addEventListener('click', () => {
                 const ligne = document.querySelector(`tr[data-id="${idSignalementActif}"]`);
                 if (ligne) {
                     ligne.dataset.note = note;
-                    const btnDetails = ligne.querySelector('.btn-ouvrir-details');
-                    if (btnDetails) btnDetails.textContent = '🔍 Voir détails';
                 }
                 document.getElementById('detail-note').textContent = note || '—';
                 document.getElementById('modal-details').classList.remove('active');
@@ -221,7 +224,6 @@ document.getElementById('btn-sauver-note').addEventListener('click', () => {
         .catch(() => afficherToast('❌ Erreur réseau.', 'error'));
 });
 
-// Toast
 function afficherToast(message, type = 'success') {
     const ancien = document.getElementById('toast-litige');
     if (ancien) ancien.remove();
@@ -233,7 +235,6 @@ function afficherToast(message, type = 'success') {
     setTimeout(() => toast.remove(), 3000);
 }
 
-// Actions débloquer / bloquer
 document.querySelector('tbody')?.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;

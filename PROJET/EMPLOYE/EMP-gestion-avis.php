@@ -42,6 +42,15 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 <?php include('../COMPONENTS/COMP-header-employe.php'); ?>
+
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Navigation —</option>
+    <option value="EMP-gestion-avis.php">Avis à valider</option>
+    <option value="EMP-litiges.php">Covoiturages signalés</option>
+    <option value="EMP-demandes-credits.php">Demandes de crédits</option>
+</select>
+
 <main>
     <?php include('../COMPONENTS/COMP-menu-employe.html'); ?>
 
@@ -60,65 +69,66 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php if (empty($avis)): ?>
             <p>Aucun avis dans cette catégorie.</p>
         <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Auteur</th>
-                    <th>Conducteur</th>
-                    <th>Trajet</th>
-                    <th>Note</th>
-                    <th>Commentaire</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($avis as $a): ?>
-                <tr>
-                    <td><?= $a['id'] ?></td>
-                    <td><?= date('d/m/Y', strtotime($a['date_creation'])) ?></td>
-                    <td><?= htmlspecialchars($a['prenom_auteur'] . ' ' . $a['nom_auteur']) ?></td>
-                    <td><?= htmlspecialchars($a['prenom_conducteur'] . ' ' . $a['nom_conducteur']) ?></td>
-                    <td><?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></td>
-                    <td><?= $a['note'] ?>/5</td>
-                    <td><?= htmlspecialchars($a['commentaire'] ?? '—') ?></td>
-                    <td>
-                        <div class="actions-cell">
-                        <?php if ($onglet === 'en_attente'): ?>
-                            <button type="button" class="btn-valider"
-                                    data-action="valider"
-                                    data-avis-id="<?= $a['id'] ?>">
-                                ✅ Valider
-                            </button>
-                            <button type="button" class="btn-refuser"
-                                    data-action="refuser"
-                                    data-avis-id="<?= $a['id'] ?>">
-                                ❌ Refuser
-                            </button>
-                        <?php else: ?>
-                            <button type="button" class="btn-attente"
-                                    data-action="remettre_en_attente"
-                                    data-avis-id="<?= $a['id'] ?>">
-                                🔄 Remettre en attente
-                            </button>
-                            <button type="button" class="btn-supprimer"
-                                    data-action="supprimer"
-                                    data-avis-id="<?= $a['id'] ?>">
-                                🗑️ Supprimer
-                            </button>
-                        <?php endif; ?>
-                        </div>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Auteur</th>
+                        <th>Conducteur</th>
+                        <th>Trajet</th>
+                        <th>Note</th>
+                        <th>Commentaire</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($avis as $a): ?>
+                    <tr>
+                        <td><?= $a['id'] ?></td>
+                        <td><?= date('d/m/Y', strtotime($a['date_creation'])) ?></td>
+                        <td><?= htmlspecialchars($a['prenom_auteur'] . ' ' . $a['nom_auteur']) ?></td>
+                        <td><?= htmlspecialchars($a['prenom_conducteur'] . ' ' . $a['nom_conducteur']) ?></td>
+                        <td><?= htmlspecialchars($a['depart']) ?> → <?= htmlspecialchars($a['arrivee']) ?></td>
+                        <td><?= $a['note'] ?>/5</td>
+                        <td><?= htmlspecialchars($a['commentaire'] ?? '—') ?></td>
+                        <td>
+                            <div class="actions-cell">
+                            <?php if ($onglet === 'en_attente'): ?>
+                                <button type="button" class="btn-valider"
+                                        data-action="valider"
+                                        data-avis-id="<?= $a['id'] ?>">
+                                    ✅ Valider
+                                </button>
+                                <button type="button" class="btn-refuser"
+                                        data-action="refuser"
+                                        data-avis-id="<?= $a['id'] ?>">
+                                    ❌ Refuser
+                                </button>
+                            <?php else: ?>
+                                <button type="button" class="btn-attente"
+                                        data-action="remettre_en_attente"
+                                        data-avis-id="<?= $a['id'] ?>">
+                                    🔄 Remettre en attente
+                                </button>
+                                <button type="button" class="btn-supprimer"
+                                        data-action="supprimer"
+                                        data-avis-id="<?= $a['id'] ?>">
+                                    🗑️ Supprimer
+                                </button>
+                            <?php endif; ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
         <?php endif; ?>
 
     </section>
 </main>
-</div>
 
 <?php include('../COMPONENTS/COMP-footer-employe.php'); ?>
 

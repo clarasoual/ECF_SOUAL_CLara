@@ -11,16 +11,13 @@
 .reviews-moderation {
     flex: 1;
     padding: 1rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .reviews-moderation h2 {
     color: var(--vert-doux);
     margin-bottom: 1.5rem;
-}
-
-.layout {
-    display: flex;
-    flex-direction: column;
 }
 
 /* ==============================================*/
@@ -32,6 +29,7 @@
     align-items: center;
     gap: 1rem;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .reviews-moderation form label {
@@ -56,24 +54,24 @@
 /* TABLEAU */
 /* ==============================================*/
 
-.reviews-moderation table {
+.reviews-moderation .table-responsive {
     width: 100%;
-    display: table;
-    white-space: normal;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Colonnes sans retour à la ligne */
-.reviews-moderation td:nth-child(1),
-.reviews-moderation td:nth-child(2),
-.reviews-moderation td:nth-child(6) {
+.reviews-moderation table {
+    width: auto;
+    min-width: 600px;
+    display: table;
     white-space: nowrap;
 }
 
-/* Colonne commentaire — limitée */
 .reviews-moderation td:nth-child(7) {
     max-width: 200px;
-    white-space: normal;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 0.85rem;
 }
 
@@ -149,7 +147,6 @@
     box-shadow: 0 2px 8px var(--shadow);
 }
 
-
 /* ==============================================*/
 /* RESPONSIVE */
 /* ==============================================*/
@@ -157,9 +154,12 @@
 @media (max-width: 768px) {
     main { flex-direction: column; }
 
-    .reviews-moderation table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+    .reviews-moderation form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reviews-moderation form select {
+        width: 100%;
     }
 }

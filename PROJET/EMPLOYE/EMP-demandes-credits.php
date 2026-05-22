@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['demande_id'], $_POST[
     $demande_id = $_POST['demande_id'];
     $action     = $_POST['action'];
 
-    // Lire le fichier JSON
     $fp = fopen(FICHIER_DEMANDES, 'c+');
     if (flock($fp, LOCK_EX)) {
         $contenu  = stream_get_contents($fp);
@@ -25,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['demande_id'], $_POST[
                 if ($action === 'accepter') {
                     $d['statut'] = 'accepte';
 
-                    // Créditer l'utilisateur en BDD
                     $stmt = $bdd->prepare("SELECT solde FROM credits WHERE id_utilisateur = ?");
                     $stmt->execute([$d['id_utilisateur']]);
                     $credit        = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -35,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['demande_id'], $_POST[
                     $stmt = $bdd->prepare("UPDATE credits SET solde = ? WHERE id_utilisateur = ?");
                     $stmt->execute([$nouveau_solde, $d['id_utilisateur']]);
 
-                    // Enregistrer la transaction JSON
                     ajouterTransaction(
                         $d['id_utilisateur'],
                         'entree',
@@ -53,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['demande_id'], $_POST[
         }
         unset($d);
 
-        // Réécrire le fichier
         ftruncate($fp, 0);
         rewind($fp);
         fwrite($fp, json_encode($demandes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
@@ -68,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['demande_id'], $_POST[
 // ─────────────────────────────────────────────
 // LECTURE DES DEMANDES
 // ─────────────────────────────────────────────
-$demandes    = [];
-$onglet      = $_GET['onglet'] ?? 'en_attente';
+$demandes = [];
+$onglet   = $_GET['onglet'] ?? 'en_attente';
 
 if (file_exists(FICHIER_DEMANDES)) {
     $contenu  = file_get_contents(FICHIER_DEMANDES);
@@ -91,6 +87,15 @@ if (file_exists(FICHIER_DEMANDES)) {
 <body>
 
 <?php include('../COMPONENTS/COMP-header-employe.php'); ?>
+
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Navigation —</option>
+    <option value="EMP-gestion-avis.php">Avis à valider</option>
+    <option value="EMP-litiges.php">Covoiturages signalés</option>
+    <option value="EMP-demandes-credits.php">Demandes de crédits</option>
+</select>
+
 <main>
     <?php include('../COMPONENTS/COMP-menu-employe.html'); ?>
 
@@ -109,49 +114,50 @@ if (file_exists(FICHIER_DEMANDES)) {
         <?php if (empty($demandes)): ?>
             <p>Aucune demande dans cette catégorie.</p>
         <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Utilisateur</th>
-                    <th>Email</th>
-                    <th>Crédits accordés</th>
-                    <th>Statut</th>
-                    <?php if ($onglet === 'en_attente'): ?>
-                        <th>Actions</th>
-                    <?php endif; ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($demandes as $d): ?>
-                <tr>
-                    <td><?= date('d/m/Y H:i', strtotime($d['date'])) ?></td>
-                    <td><?= htmlspecialchars($d['prenom'] . ' ' . $d['nom']) ?></td>
-                    <td><?= htmlspecialchars($d['email']) ?></td>
-                    <td><?= CREDITS_ACCORDES ?> crédits</td>
-                    <td>
-                        <?php if ($d['statut'] === 'en_attente'): ?>⏳ En attente
-                        <?php elseif ($d['statut'] === 'accepte'): ?>✅ Acceptée
-                        <?php else: ?>❌ Refusée
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Utilisateur</th>
+                        <th>Email</th>
+                        <th>Crédits accordés</th>
+                        <th>Statut</th>
+                        <?php if ($onglet === 'en_attente'): ?>
+                            <th>Actions</th>
                         <?php endif; ?>
-                    </td>
-                    <?php if ($onglet === 'en_attente'): ?>
-                    <td>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="demande_id" value="<?= htmlspecialchars($d['id']) ?>">
-                            <button type="submit" name="action" value="accepter" class="btn-valider">✅ Accepter</button>
-                            <button type="submit" name="action" value="refuser"  class="btn-refuser">❌ Refuser</button>
-                        </form>
-                    </td>
-                    <?php endif; ?>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($demandes as $d): ?>
+                    <tr>
+                        <td><?= date('d/m/Y H:i', strtotime($d['date'])) ?></td>
+                        <td><?= htmlspecialchars($d['prenom'] . ' ' . $d['nom']) ?></td>
+                        <td><?= htmlspecialchars($d['email']) ?></td>
+                        <td><?= CREDITS_ACCORDES ?> crédits</td>
+                        <td>
+                            <?php if ($d['statut'] === 'en_attente'): ?>⏳ En attente
+                            <?php elseif ($d['statut'] === 'accepte'): ?>✅ Acceptée
+                            <?php else: ?>❌ Refusée
+                            <?php endif; ?>
+                        </td>
+                        <?php if ($onglet === 'en_attente'): ?>
+                        <td>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="demande_id" value="<?= htmlspecialchars($d['id']) ?>">
+                                <button type="submit" name="action" value="accepter" class="btn-valider">✅ Accepter</button>
+                                <button type="submit" name="action" value="refuser"  class="btn-refuser">❌ Refuser</button>
+                            </form>
+                        </td>
+                        <?php endif; ?>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
         <?php endif; ?>
     </section>
 </main>
-</div>
 
 <?php if (isset($_GET['toast'])): ?>
     <div id="toast-success" style="position:fixed;bottom:20px;right:20px;background:<?= $_GET['toast'] === 'accepter' ? '#4BB543' : '#e74c3c' ?>;color:white;padding:12px 20px;border-radius:8px;font-family:'Quicksand',sans-serif;z-index:9999;">

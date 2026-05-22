@@ -5,6 +5,8 @@
 .reviews-moderation {
     flex: 1;
     padding: 1rem;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .reviews-moderation h2 {
@@ -19,11 +21,13 @@
 .table-container {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table-container table {
     white-space: nowrap;
     min-width: 700px;
+    width: auto;
 }
 
 /* ==============================================*/
@@ -85,7 +89,7 @@
     border-radius: 12px;
     padding: 2rem;
     width: 560px;
-    max-width: 90%;
+    max-width: 95%;
     box-shadow: 0 4px 20px var(--shadow);
 }
 
@@ -169,6 +173,7 @@
     justify-content: flex-end;
     padding-top: 1rem;
     border-top: 1px solid rgba(168, 213, 186, 0.2);
+    flex-wrap: wrap;
 }
 
 /* ==============================================*/
@@ -186,4 +191,25 @@
     font-weight: 600;
     z-index: 9999;
     box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 768px) {
+    main { flex-direction: column; }
+
+    .modal-litige-content {
+        padding: 1.25rem;
+        max-width: 95%;
+    }
+
+    .modal-litige-actions {
+        justify-content: stretch;
+    }
+
+    .modal-litige-actions button {
+        flex: 1;
+    }
 }
