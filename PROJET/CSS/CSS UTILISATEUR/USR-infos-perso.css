@@ -4,26 +4,32 @@
 
 .profile-content {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
     min-width: 0;
     max-width: 100%;
 }
 
 /* ==============================================*/
-/* HEADER PROFIL */
+/* BLOC PRINCIPAL */
 /* ==============================================*/
 
 .profil-header {
     background-color: var(--beige-fonce);
+    border-radius: 14px;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px var(--shadow);
+    box-shadow: 0 4px 16px var(--shadow);
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* ==============================================*/
+/* LIGNE HAUTE : photo + infos */
+/* ==============================================*/
+
+.profil-top {
+    display: flex;
     gap: 2rem;
+    align-items: flex-start;
 }
 
 .profil-photo {
@@ -37,16 +43,35 @@
 
 .profil-infos {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-width: 0;
 }
 
-.profil-infos h2 {
+.profil-nom-role {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.profil-nom-role h2 {
     color: var(--texte);
     font-size: 1.4rem;
     margin: 0;
+}
+
+.profil-role-badge {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background-color: rgba(168, 213, 186, 0.12);
+    border: 1px solid rgba(168, 213, 186, 0.3);
+    color: var(--vert-doux);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    white-space: nowrap;
 }
 
 .profil-info-grid {
@@ -64,9 +89,7 @@
     padding: 0.65rem 0.9rem;
 }
 
-.profil-info-full {
-    grid-column: 1 / -1;
-}
+.profil-info-full { grid-column: 1 / -1; }
 
 .profil-info-label {
     font-size: 0.72rem;
@@ -78,73 +101,71 @@
 }
 
 .profil-info-value {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     color: var(--texte);
     font-family: 'Quicksand', sans-serif;
+    word-break: break-word;
 }
 
-.btn-submit {
-    background-color: var(--vert-doux);
-    color: black;
-    font-family: 'Quicksand', sans-serif;
+/* ==============================================*/
+/* STATS */
+/* ==============================================*/
+
+.profil-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(168, 213, 186, 0.2);
+}
+
+.profil-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: var(--fond);
+    border-radius: 10px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+}
+
+.profil-stat-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
     font-weight: 700;
-    font-size: 0.95rem;
-    padding: 0.7rem 1.5rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.15s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
-    align-self: flex-start;
+    color: var(--vert-doux);
 }
 
-.btn-submit:hover {
-    background-color: #8ec9a4;
-    transform: translateY(-1px);
+.profil-stat-label {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.75rem;
+    color: var(--gris-doux);
+    text-align: center;
 }
 
 /* ==============================================*/
-/* BLOCS STATUT & VÉHICULES */
+/* VÉHICULES */
 /* ==============================================*/
 
-.profil-block {
-    background-color: var(--beige-fonce);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px var(--shadow);
+.profil-vehicules {
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(168, 213, 186, 0.2);
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
 }
 
-.profil-block h3 {
+.profil-vehicules h3 {
     color: var(--vert-doux);
     font-size: 1rem;
     margin: 0;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(168, 213, 186, 0.2);
 }
 
-.profil-role {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--texte);
-    margin: 0;
-}
-
-.profil-link {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.88rem;
-    color: var(--orange-doux);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.profil-link:hover {
-    color: #e07b39;
-    text-decoration: none;
+.profil-vehicules-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
 }
 
 .profil-vehicule-item {
@@ -153,25 +174,82 @@
     gap: 1rem;
     background-color: var(--fond);
     border-radius: 8px;
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 1rem;
     border-left: 3px solid var(--vert-doux);
 }
 
-.profil-vehicule-icon { font-size: 1.5rem; flex-shrink: 0; }
+.profil-vehicule-icon { font-size: 1.3rem; flex-shrink: 0; }
 
 .profil-vehicule-nom {
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     color: var(--texte);
     margin: 0;
 }
 
 .profil-vehicule-detail {
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--gris-doux);
-    margin: 0.2rem 0 0 0;
+    margin: 0.15rem 0 0 0;
+}
+
+.profil-vehicule-vide {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.92rem;
+    color: var(--gris-doux);
+    margin: 0;
+}
+
+/* ==============================================*/
+/* ACTIONS */
+/* ==============================================*/
+
+.profil-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(168, 213, 186, 0.2);
+}
+
+.btn-submit {
+    background-color: var(--vert-doux);
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-submit:hover {
+    background-color: #8ec9a4;
+    transform: translateY(-1px);
+}
+
+.btn-gerer-vehicules {
+    background-color: var(--fond);
+    color: var(--vert-doux);
+    border: 1px solid rgba(168, 213, 186, 0.4);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-gerer-vehicules:hover {
+    border-color: var(--vert-doux);
+    background-color: rgba(168, 213, 186, 0.08);
+    text-decoration: none;
+    color: var(--vert-doux);
 }
 
 /* ==============================================*/
@@ -302,6 +380,43 @@
     text-decoration: underline;
 }
 
+.modal-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.modal-radio-option {
+    display: flex !important;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: var(--fond);
+    border: 1px solid rgba(168, 213, 186, 0.25);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--texte);
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.modal-radio-option input[type="radio"] {
+    accent-color: var(--vert-doux);
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.modal-radio-option:has(input:checked) {
+    border-color: var(--vert-doux);
+    background-color: rgba(168, 213, 186, 0.08);
+}
+
 /* ==============================================*/
 /* RESPONSIVE */
 /* ==============================================*/
@@ -311,22 +426,32 @@
 
     .profile-content { width: 100%; }
 
-    .profil-header {
+    .profil-header { padding: 1.25rem; gap: 1.25rem; }
+
+    .profil-top {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 1.5rem;
     }
 
     .profil-photo { width: 90px; height: 90px; }
 
-    .profil-info-grid {
-        grid-template-columns: 1fr;
-    }
+    .profil-nom-role { justify-content: center; }
 
+    .profil-info-grid { grid-template-columns: 1fr; }
     .profil-info-full { grid-column: 1; }
 
-    .btn-submit { width: 100%; }
+    .profil-stats { grid-template-columns: 1fr 1fr; }
+
+    .profil-actions {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-gerer-vehicules {
+        width: 100%;
+        text-align: center;
+    }
 
     .modal-content { padding: 1.5rem; }
 }

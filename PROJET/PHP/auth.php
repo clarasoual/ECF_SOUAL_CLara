@@ -1,19 +1,14 @@
 <?php
-// 🔒 Verrou pour éviter inclusions multiples
 if (defined('AUTH_PHP_LOADED')) return;
 define('AUTH_PHP_LOADED', true);
 
-// --- Afficher toutes les erreurs ---
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// --- Démarrer la session si pas déjà faite ---
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-// --- Fonctions pour gérer la connexion utilisateur ---
 
 if (!function_exists('requireLogin')) {
     function requireLogin() {
@@ -27,11 +22,12 @@ if (!function_exists('requireLogin')) {
 }
 
 if (!function_exists('loginUser')) {
-    function loginUser($id, $username, $email, $photo = 'default.jpg') {
-        $_SESSION['user_id'] = $id;
+    function loginUser($id, $username, $email, $photo = 'default.jpg', $role = 'passager') {
+        $_SESSION['user_id']  = $id;
         $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
-        $_SESSION['photo'] = $photo;
+        $_SESSION['email']    = $email;
+        $_SESSION['photo']    = $photo;
+        $_SESSION['role']     = $role;
     }
 }
 
@@ -43,8 +39,6 @@ if (!function_exists('logoutUser')) {
         exit();
     }
 }
-
-// --- Fonctions pour gérer la connexion employé ---
 
 if (!function_exists('requireEmploye')) {
     function requireEmploye() {

@@ -3,8 +3,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$isLoggedIn = isset($_SESSION['user_id']);
-$photo = $_SESSION['photo'] ?? 'default.jpg';
+$isLoggedIn    = isset($_SESSION['user_id']);
+$photo         = $_SESSION['photo'] ?? 'default.jpg';
+$role          = $_SESSION['role'] ?? 'passager';
+$est_conducteur = in_array($role, ['conducteur', 'passager-conducteur']);
 
 if ($isLoggedIn) {
     $profilLink = '../UTILISATEUR/USR-infos-perso.php';
@@ -28,7 +30,9 @@ if ($isLoggedIn) {
             <div class="user-profile">
                 <nav class="nav-container">
                     <a class="nav-links" href="../UTILISATEUR/USR-index.php">Accueil</a>
+                    <?php if ($est_conducteur): ?>
                     <a class="nav-links" href="../UTILISATEUR/USR-proposer-trajet.php">Proposer un trajet</a>
+                    <?php endif; ?>
                     <a class="nav-links" href="../UTILISATEUR/USR-recherche_trajet.php">Rechercher un covoiturage</a>
                 </nav>
 
@@ -67,7 +71,9 @@ if ($isLoggedIn) {
     <!-- Menu mobile déroulant -->
     <nav class="mobile-nav" id="mobile-nav">
         <a href="../UTILISATEUR/USR-index.php">Accueil</a>
+        <?php if ($est_conducteur): ?>
         <a href="../UTILISATEUR/USR-proposer-trajet.php">Proposer un trajet</a>
+        <?php endif; ?>
         <a href="../UTILISATEUR/USR-recherche_trajet.php">Rechercher un covoiturage</a>
         <div class="mobile-profil-links">
             <?php if ($isLoggedIn): ?>

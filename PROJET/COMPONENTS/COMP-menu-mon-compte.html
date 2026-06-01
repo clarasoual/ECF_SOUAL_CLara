@@ -6,8 +6,9 @@
             <li class="menu-item"><a href="../UTILISATEUR/USR-mes-trajets.php" class="nav-links">Mes trajets</a></li>
             <li class="menu-item"><a href="../UTILISATEUR/USR-avis.php" class="nav-links">Avis</a></li>
             <li class="menu-item"><a href="../UTILISATEUR/USR-gestion-credits.php" class="nav-links">Crédits</a></li>
+            <?php if (isset($user['role']) && in_array($user['role'], ['conducteur', 'passager-conducteur'])): ?>
             <li class="menu-item"><a href="../UTILISATEUR/USR-infos-conducteur.php" class="nav-links">Informations conducteur</a></li>
-            <li class="menu-item"><a href="../UTILISATEUR/USR-aide.php" class="nav-links">Aide</a></li>
+            <?php endif; ?>
         </ul>
     </section>
 </nav>

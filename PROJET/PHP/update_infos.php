@@ -9,15 +9,21 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-// Date de naissance et bio
 $date_naissance = $_POST['date_naissance'] ?? null;
 $bio = trim($_POST['bio'] ?? '');
-
-// Password
 $password = $_POST['password'] ?? '';
+$role = $_POST['role'] ?? null;
+
+// Validation du rôle
+$roles_autorises = ['passager', 'conducteur', 'passager-conducteur'];
+if ($role && !in_array($role, $roles_autorises)) {
+    $_SESSION['error'] = "❌ Rôle invalide.";
+    header("Location: ../UTILISATEUR/USR-infos-perso.php");
+    exit;
+}
 
 // =====================================
-// Gérer l'upload de la photo si fournie
+// Upload photo
 // =====================================
 $photoFileName = null;
 if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
@@ -29,7 +35,6 @@ if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
         exit;
     }
 
-    // Crée un nom unique pour éviter les doublons
     $photoFileName = uniqid() . "_" . basename($_FILES['photo']['name']);
     $targetPath = $uploadDir . $photoFileName;
 
@@ -53,6 +58,11 @@ $sqlParts = [
     'date_naissance = :date_naissance',
     'bio = :bio'
 ];
+
+if ($role !== null) {
+    $sqlParts[] = 'role = :role';
+    $params[':role'] = $role;
+}
 
 if ($password !== '') {
     $sqlParts[] = 'mot_de_passe = :password';

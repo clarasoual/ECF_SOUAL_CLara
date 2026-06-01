@@ -1,8 +1,8 @@
 /* ==============================================*/
-/* USR-MENTIONS-LEGALES */
+/* USR-REGLEMENT */
 /* ==============================================*/
 
-.mentions-wrapper {
+.reglement-wrapper {
     max-width: 960px;
     margin: 0 auto;
     padding: 2rem 1rem;
@@ -12,44 +12,29 @@
 /* HEADER */
 /* ==============================================*/
 
-.mentions-header {
+.reglement-header {
     margin-bottom: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 
-.mentions-header h1 {
+.reglement-header h1 {
     font-size: 2rem;
     color: var(--vert-doux);
-    margin: 0;
+    margin-bottom: 0.5rem;
 }
 
-.mentions-header p {
+.reglement-header p {
     font-family: 'Quicksand', sans-serif;
     color: var(--gris-doux);
     font-size: 1rem;
+    line-height: 1.7;
     margin: 0;
-}
-
-.mentions-badge {
-    display: inline-block;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    background-color: rgba(168, 213, 186, 0.12);
-    border: 1px solid rgba(168, 213, 186, 0.3);
-    color: var(--vert-doux);
-    padding: 0.3rem 0.8rem;
-    border-radius: 999px;
-    width: fit-content;
 }
 
 /* ==============================================*/
 /* GRILLE */
 /* ==============================================*/
 
-.mentions-grid {
+.reglement-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
@@ -59,7 +44,7 @@
 /* BLOCS */
 /* ==============================================*/
 
-.mentions-bloc {
+.reglement-bloc {
     background-color: var(--beige-fonce);
     border-radius: 12px;
     padding: 1.5rem;
@@ -69,7 +54,7 @@
     gap: 1rem;
 }
 
-.mentions-bloc-full {
+.reglement-bloc-full {
     grid-column: 1 / -1;
     flex-direction: row;
     align-items: center;
@@ -78,7 +63,7 @@
     gap: 1rem;
 }
 
-.mentions-bloc-header {
+.reglement-bloc-header {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -86,12 +71,12 @@
     border-bottom: 1px solid rgba(168, 213, 186, 0.2);
 }
 
-.mentions-icon {
-    font-size: 1.4rem;
+.reglement-icon {
+    font-size: 1.5rem;
     flex-shrink: 0;
 }
 
-.mentions-bloc-header h2 {
+.reglement-bloc-header h2 {
     font-size: 1rem;
     color: var(--vert-doux);
     margin: 0;
@@ -99,63 +84,49 @@
 }
 
 /* ==============================================*/
-/* LISTE INFOS */
+/* LISTE */
 /* ==============================================*/
 
-.mentions-liste {
+.reglement-liste {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.6rem;
 }
 
-.mentions-liste li {
+.reglement-liste li {
     font-family: 'Quicksand', sans-serif;
     font-size: 0.92rem;
-    color: var(--texte);
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    color: var(--gris-doux);
+    line-height: 1.6;
+    padding-left: 1.1rem;
+    position: relative;
 }
 
-.mentions-label {
+.reglement-liste li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--vert-doux);
     font-weight: 700;
-    color: var(--gris-doux);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    min-width: 80px;
-    padding-top: 0.1rem;
 }
 
 /* ==============================================*/
-/* TEXTE */
+/* BLOC CONTACT */
 /* ==============================================*/
 
-.mentions-texte {
+.reglement-contact-text {
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: var(--gris-doux);
-    line-height: 1.7;
     margin: 0;
+    flex: 1;
+    line-height: 1.6;
 }
 
-.mentions-texte a {
-    color: var(--orange-doux);
-}
-
-.mentions-texte a:hover {
-    color: #e07b39;
-    text-decoration: underline;
-}
-
-/* ==============================================*/
-/* BOUTON CONTACT */
-/* ==============================================*/
-
-.mentions-btn-contact {
+.reglement-btn-contact {
     background-color: var(--orange-doux);
     color: black;
     font-family: 'Quicksand', sans-serif;
@@ -168,7 +139,7 @@
     transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-.mentions-btn-contact:hover {
+.reglement-btn-contact:hover {
     background-color: #e07b39;
     transform: translateY(-1px);
     text-decoration: none;
@@ -179,22 +150,18 @@
 /* ==============================================*/
 
 @media (max-width: 768px) {
-    .mentions-grid {
+    .reglement-grid {
         grid-template-columns: 1fr;
     }
 
-    .mentions-bloc-full {
+    .reglement-bloc-full {
         grid-column: 1;
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .mentions-btn-contact {
+    .reglement-btn-contact {
         width: 100%;
         text-align: center;
-    }
-
-    .mentions-label {
-        min-width: 70px;
     }
 }

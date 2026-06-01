@@ -29,6 +29,16 @@ $transactions = getTransactions($id_utilisateur);
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Mon compte —</option>
+    <option value="../UTILISATEUR/USR-infos-perso.php">Informations personnelles</option>
+    <option value="../UTILISATEUR/USR-mes-trajets.php">Mes trajets</option>
+    <option value="../UTILISATEUR/USR-avis.php">Avis</option>
+    <option value="../UTILISATEUR/USR-gestion-credits.php">Crédits</option>
+    <option value="../UTILISATEUR/USR-infos-conducteur.php">Informations conducteur</option>
+</select>
+
 <main>
 
 <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
@@ -46,7 +56,6 @@ $transactions = getTransactions($id_utilisateur);
         Vous gagnez des crédits en proposant des trajets à d'autres utilisateurs, lorsque vous êtes conducteur.
     </p>
 
-    <!-- Historique -->
     <h3>Historique des crédits</h3>
     <?php if (empty($transactions)): ?>
         <p style="font-family:'Quicksand',sans-serif; color:var(--gris-doux);">Aucune transaction pour le moment.</p>
@@ -85,7 +94,6 @@ $transactions = getTransactions($id_utilisateur);
     </div>
     <?php endif; ?>
 
-    <!-- Demande de crédits -->
     <h3>Besoin de crédits ?</h3>
     <div class="demande-credits-block">
         <p>Vous pouvez faire une demande de crédits à EcoRide. Notre équipe étudiera votre demande et vous recevrez une réponse sous peu.</p>
@@ -94,7 +102,6 @@ $transactions = getTransactions($id_utilisateur);
         </form>
     </div>
 
-    <!-- À propos -->
     <h3>À propos des crédits</h3>
     <div class="credits-about">
         <p>Chez <strong style="color:var(--texte);">EcoRide</strong>, chaque trajet partagé est un pas vers un monde plus solidaire et écologique.</p>

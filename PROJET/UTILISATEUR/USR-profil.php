@@ -10,7 +10,6 @@ if (!$id) {
     exit;
 }
 
-// Récupérer le profil
 $stmt = $bdd->prepare("SELECT * FROM utilisateurs WHERE id = ?");
 $stmt->execute([$id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,17 +21,14 @@ if (!$user) {
 
 $isOwnProfile = ($_SESSION['user_id'] == $id);
 
-// Note moyenne et nombre d'avis
 $stmt = $bdd->prepare("SELECT AVG(note) as moyenne, COUNT(*) as total FROM avis WHERE id_destinataire = ? AND statut = 'valide'");
 $stmt->execute([$id]);
 $note_info = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Véhicules
 $stmt = $bdd->prepare("SELECT * FROM vehicules WHERE id_utilisateur = ?");
 $stmt->execute([$id]);
 $vehicules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Historique trajets terminés
 $stmt = $bdd->prepare("
     SELECT t.*, COUNT(tp.id_passager) as nb_passagers
     FROM trajets t
@@ -45,7 +41,6 @@ $stmt = $bdd->prepare("
 $stmt->execute([$id]);
 $trajets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Trajets à venir
 $stmt = $bdd->prepare("
     SELECT t.*
     FROM trajets t
@@ -57,7 +52,6 @@ $stmt = $bdd->prepare("
 $stmt->execute([$id]);
 $trajets_avenir = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Avis reçus validés
 $stmt = $bdd->prepare("
     SELECT a.note, a.commentaire, a.date_creation, u.prenom, u.nom
     FROM avis a
@@ -67,6 +61,12 @@ $stmt = $bdd->prepare("
 ");
 $stmt->execute([$id]);
 $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$roles_labels = [
+    'passager' => '🧳 Passager',
+    'conducteur' => '🚗 Conducteur',
+    'passager-conducteur' => '🧳🚗 Passager & Conducteur',
+];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -82,85 +82,137 @@ $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
-<section class="driver-profile-section">
-    <h2>Profil de <strong><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></strong></h2>
-    <img src="../../IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>" class="profile-picture" alt="Photo de profil" width="150" height="150">
-    <p>Rôle : <?= htmlspecialchars(ucfirst($user['role'])) ?></p>
-    <p>Note globale : <?= $note_info['total'] > 0 ? number_format($note_info['moyenne'], 1) . ' / 5 (' . $note_info['total'] . ' avis)' : 'Aucun avis' ?></p>
-</section>
+<main class="profil-main">
 
-<hr>
+    <!-- COLONNE GAUCHE -->
+    <aside class="profil-aside">
 
-<section class="profile-driver-details">
-    <h3 class="section-title">En savoir plus</h3>
+        <div class="profil-card">
+            <img src="../../IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
+                 class="profil-avatar" alt="Photo de profil">
+            <h2 class="profil-nom"><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></h2>
+            <span class="profil-role-badge"><?= $roles_labels[$user['role']] ?? ucfirst($user['role']) ?></span>
 
-    <h4 class="subsection-title">Biographie</h4>
-    <p class="bio"><?= !empty($user['bio']) ? htmlspecialchars($user['bio']) : 'Aucune biographie renseignée.' ?></p>
+            <?php if ($note_info['total'] > 0): ?>
+            <div class="profil-note">
+                <span class="profil-note-value">⭐ <?= number_format($note_info['moyenne'], 1) ?></span>
+                <span class="profil-note-label">/ 5 · <?= $note_info['total'] ?> avis</span>
+            </div>
+            <?php else: ?>
+            <p class="profil-note-empty">Aucun avis pour le moment</p>
+            <?php endif; ?>
 
-    <?php if (!empty($vehicules)): $v = $vehicules[0]; ?>
-    <h4 class="subsection-title">Préférences</h4>
-    <ul class="preferences-list">
-        <li>Fumeur : <?= htmlspecialchars($v['fumeur'] ?? 'Non renseigné') ?></li>
-        <li>Animaux acceptés : <?= htmlspecialchars($v['animaux_acceptes'] ?? 'Non renseigné') ?></li>
-        <li>Musique : <?= htmlspecialchars($v['musique'] ?? 'Non renseigné') ?></li>
-    </ul>
+            <?php if (!empty($user['bio'])): ?>
+            <p class="profil-bio"><?= htmlspecialchars($user['bio']) ?></p>
+            <?php endif; ?>
 
-    <h4 class="subsection-title">Véhicule(s)</h4>
-    <ul>
-        <?php foreach ($vehicules as $v): ?>
-            <li><?= htmlspecialchars($v['marque'] . ' ' . $v['modele']) ?> - <?= htmlspecialchars($v['couleur']) ?> (<?= htmlspecialchars($v['carburant']) ?>)</li>
-        <?php endforeach; ?>
-    </ul>
-    <?php endif; ?>
-</section>
+            <?php if ($isOwnProfile): ?>
+            <a href="USR-infos-perso.php" class="profil-btn-edit">✏️ Modifier mon profil</a>
+            <?php endif; ?>
+        </div>
 
-<hr>
+        <!-- PRÉFÉRENCES & VÉHICULES -->
+        <?php if (!empty($vehicules)): $v = $vehicules[0]; ?>
+        <div class="profil-card">
+            <h3 class="profil-card-title">Préférences à bord</h3>
+            <div class="profil-prefs">
+                <span class="profil-pref-item"><?= $v['fumeur'] === 'oui' ? '🚬 Fumeur' : '🚭 Non-fumeur' ?></span>
+                <span class="profil-pref-item"><?= $v['animaux_acceptes'] === 'oui' ? '🐾 Animaux OK' : '🚫 Sans animaux' ?></span>
+                <?php if (!empty($v['musique']) && $v['musique'] !== 'none'): ?>
+                <span class="profil-pref-item">🎵 <?= htmlspecialchars(ucfirst($v['musique'])) ?></span>
+                <?php else: ?>
+                <span class="profil-pref-item">🔇 Pas de musique</span>
+                <?php endif; ?>
+            </div>
 
-<?php if (!empty($trajets_avenir)): ?>
-<section class="trip-history">
-    <h3 class="section-title">Prochains trajets</h3>
-    <?php foreach ($trajets_avenir as $t): ?>
-    <div class="trip">
-        <h4 class="trip-title">Trajet du <?= date('d/m/Y', strtotime($t['date_depart'])) ?></h4>
-        <p class="trip-route"><?= htmlspecialchars($t['depart']) ?> → <?= htmlspecialchars($t['arrivee']) ?></p>
-        <a href="USR-details-trajet.php?id=<?= $t['id'] ?>">Voir le trajet</a>
-    </div>
-    <?php endforeach; ?>
-</section>
-<hr>
-<?php endif; ?>
-
-<?php if (!empty($trajets)): ?>
-<section class="trip-history">
-    <h3 class="section-title">Historique de trajets</h3>
-    <?php foreach ($trajets as $t): ?>
-    <div class="trip">
-        <h4 class="trip-title">Trajet du <?= date('d/m/Y', strtotime($t['date_depart'])) ?></h4>
-        <p class="trip-route"><?= htmlspecialchars($t['depart']) ?> → <?= htmlspecialchars($t['arrivee']) ?></p>
-        <p><?= $t['nb_passagers'] ?> passager(s)</p>
-    </div>
-    <?php endforeach; ?>
-</section>
-<hr>
-<?php endif; ?>
-
-<?php if (!empty($avis)): ?>
-<section class="avis-section">
-    <h3 class="section-title">Avis reçus</h3>
-    <?php foreach ($avis as $a): ?>
-    <div class="review">
-        <p><strong><?= htmlspecialchars($a['prenom'] . ' ' . $a['nom']) ?></strong> — <?= $a['note'] ?>/5 — <em><?= date('d/m/Y', strtotime($a['date_creation'])) ?></em></p>
-        <?php if ($a['commentaire']): ?>
-            <p><?= htmlspecialchars($a['commentaire']) ?></p>
+            <h3 class="profil-card-title" style="margin-top:1.25rem;">Véhicule(s)</h3>
+            <?php foreach ($vehicules as $v): ?>
+            <div class="profil-vehicule">
+                <span class="profil-vehicule-icon">🚗</span>
+                <div>
+                    <p class="profil-vehicule-nom"><?= htmlspecialchars($v['marque'] . ' ' . $v['modele']) ?> — <?= htmlspecialchars($v['couleur']) ?></p>
+                    <p class="profil-vehicule-detail"><?= htmlspecialchars($v['carburant']) ?> · <?= $v['places'] ?> places</p>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
         <?php endif; ?>
-    </div>
-    <?php endforeach; ?>
-</section>
-<hr>
-<?php endif; ?>
 
-<?php if (!$isOwnProfile): ?>
-<?php endif; ?>
+    </aside>
+
+    <!-- COLONNE DROITE -->
+    <div class="profil-content">
+
+        <!-- Trajets à venir -->
+        <?php if (!empty($trajets_avenir)): ?>
+        <div class="profil-bloc">
+            <h3 class="profil-bloc-title">🗓️ Prochains trajets</h3>
+            <?php foreach ($trajets_avenir as $t): ?>
+            <div class="profil-trajet-item">
+                <div class="profil-trajet-route">
+                    <span><?= htmlspecialchars($t['depart']) ?></span>
+                    <span class="profil-trajet-arrow">→</span>
+                    <span><?= htmlspecialchars($t['arrivee']) ?></span>
+                </div>
+                <div class="profil-trajet-meta">
+                    📅 <?= date('d/m/Y', strtotime($t['date_depart'])) ?>
+                    · 💺 <?= htmlspecialchars($t['places_disponibles']) ?> place(s)
+                    · 💳 <?= (int)$t['prix'] ?> crédit(s)
+                </div>
+                <a href="USR-details-trajet.php?id=<?= $t['id'] ?>" class="profil-trajet-link">Voir le trajet →</a>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
+        <!-- Historique -->
+        <?php if (!empty($trajets)): ?>
+        <div class="profil-bloc">
+            <h3 class="profil-bloc-title">🕓 Trajets effectués</h3>
+            <?php foreach ($trajets as $t): ?>
+            <div class="profil-trajet-item profil-trajet-item--past">
+                <div class="profil-trajet-route">
+                    <span><?= htmlspecialchars($t['depart']) ?></span>
+                    <span class="profil-trajet-arrow">→</span>
+                    <span><?= htmlspecialchars($t['arrivee']) ?></span>
+                </div>
+                <div class="profil-trajet-meta">
+                    📅 <?= date('d/m/Y', strtotime($t['date_depart'])) ?>
+                    · 👥 <?= $t['nb_passagers'] ?> passager(s)
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
+        <!-- Avis -->
+        <?php if (!empty($avis)): ?>
+        <div class="profil-bloc">
+            <h3 class="profil-bloc-title">⭐ Avis reçus</h3>
+            <?php foreach ($avis as $a): ?>
+            <div class="profil-avis-item">
+                <div class="profil-avis-header">
+                    <span class="profil-avis-auteur"><?= htmlspecialchars($a['prenom'] . ' ' . $a['nom']) ?></span>
+                    <span class="profil-avis-note">⭐ <?= $a['note'] ?>/5</span>
+                    <span class="profil-avis-date"><?= date('d/m/Y', strtotime($a['date_creation'])) ?></span>
+                </div>
+                <?php if ($a['commentaire']): ?>
+                <p class="profil-avis-texte"><?= htmlspecialchars($a['commentaire']) ?></p>
+                <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if (empty($trajets_avenir) && empty($trajets) && empty($avis)): ?>
+        <div class="profil-bloc profil-bloc--empty">
+            <p>Aucune activité pour le moment.</p>
+        </div>
+        <?php endif; ?>
+
+    </div>
+
+</main>
 
 <script src="../JS/USR-profil.js"></script>
 <?php include('../COMPONENTS/COMP-footer.php'); ?>

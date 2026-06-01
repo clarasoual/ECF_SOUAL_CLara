@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$email = trim($_POST['email'] ?? '');
+$email    = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 $redirect = $_POST['redirect'] ?? $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php';
 
@@ -27,18 +27,18 @@ if (!password_verify($password, $user['mot_de_passe'])) {
     die('Mot de passe incorrect.');
 }
 
-// Vérifier si le compte est suspendu
 if ($user['suspendu']) {
     header('Location: ../UTILISATEUR/USR-connexion-inscription.php?error=suspendu');
     exit;
 }
 
-// Connexion réussie
+// Connexion réussie — on passe le rôle
 loginUser(
     $user['id'],
     $user['pseudo'] ?? '',
     $user['email'],
-    $user['photo'] ?? 'default.jpg'
+    $user['photo'] ?? 'default.jpg',
+    $user['role'] ?? 'passager'
 );
 
 header('Location: ' . $redirect);

@@ -5,7 +5,6 @@ include('../PHP/connexion.php');
 
 $id_utilisateur = $_SESSION['user_id'];
 
-// Avis reçus (statut valide uniquement)
 $stmt = $bdd->prepare("
     SELECT 
         a.note,
@@ -25,7 +24,6 @@ $stmt = $bdd->prepare("
 $stmt->execute([$id_utilisateur]);
 $avis_recus = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Avis donnés
 $stmt = $bdd->prepare("
     SELECT 
         a.note,
@@ -59,13 +57,22 @@ $avis_donnes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
+<!-- SELECT MOBILE -->
+<select class="menu-principal-select" onchange="window.location.href=this.value">
+    <option value="">— Mon compte —</option>
+    <option value="../UTILISATEUR/USR-infos-perso.php">Informations personnelles</option>
+    <option value="../UTILISATEUR/USR-mes-trajets.php">Mes trajets</option>
+    <option value="../UTILISATEUR/USR-avis.php">Avis</option>
+    <option value="../UTILISATEUR/USR-gestion-credits.php">Crédits</option>
+    <option value="../UTILISATEUR/USR-infos-conducteur.php">Informations conducteur</option>
+</select>
+
 <main>
     <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
     <section class="reviews-section">
         <h2>Mes avis</h2>
 
-        <!-- Avis reçus -->
         <div id="reviews-received">
             <h3>Avis reçus</h3>
             <?php if (empty($avis_recus)): ?>
@@ -85,7 +92,6 @@ $avis_donnes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endif; ?>
         </div>
 
-        <!-- Avis donnés -->
         <div id="reviews-given">
             <h3>Avis donnés</h3>
             <?php if (empty($avis_donnes)): ?>

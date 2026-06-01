@@ -63,10 +63,14 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
         <section class="card driver-card">
             <h3 class="card-title">🧑 Conducteur</h3>
             <div class="driver-main">
-                <img src="../../IMAGES/profiles/<?= htmlspecialchars($trajet['photo_conducteur'] ?? 'default.jpg') ?>" 
-                     alt="Photo du conducteur" class="driver-photo-lg">
+                <a href="USR-profil.php?id=<?= (int)$trajet['id_conducteur'] ?>">
+                    <img src="../../IMAGES/profiles/<?= htmlspecialchars($trajet['photo_conducteur'] ?? 'default.jpg') ?>" 
+                         alt="Photo du conducteur" class="driver-photo-lg">
+                </a>
                 <div class="driver-infos">
-                    <h2><?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?></h2>
+                    <a href="USR-profil.php?id=<?= (int)$trajet['id_conducteur'] ?>" class="driver-name-link">
+                        <h2><?= htmlspecialchars($trajet['prenom_conducteur'] . ' ' . $trajet['nom_conducteur']) ?></h2>
+                    </a>
                     <p class="driver-rating">
                         <?php if ($nb_avis > 0): ?>
                             ⭐ <?= $note_moyenne ?> / 5 · <?= $nb_avis ?> avis
@@ -198,7 +202,7 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
     </div>
 </main>
 
-<!-- MODAL MODIFIER — formulaire comme proposer trajet -->
+<!-- MODAL MODIFIER -->
 <?php if ($isOwner && !$isPast): ?>
 <div id="modal-modifier" class="modal">
     <div class="modal-content modal-content--wide">
@@ -212,15 +216,12 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
 
             <div class="modal-columns">
 
-                <!-- COLONNE 1 : Départ -->
                 <div class="modal-card">
                     <h3 class="modal-card-title">🗺️ Départ</h3>
-
                     <div class="form-group">
                         <label for="departure">Adresse de départ *</label>
                         <input type="text" id="departure" name="departure" value="<?= htmlspecialchars($trajet['depart']) ?>">
                     </div>
-
                     <label>Arrêts (optionnel)</label>
                     <div id="etapes-container">
                         <?php foreach ($etapes as $i => $etape): ?>
@@ -230,42 +231,34 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
                         <?php endforeach; ?>
                     </div>
                     <button type="button" id="add-stop-btn">+ Ajouter un arrêt</button>
-
                     <div class="form-group" style="margin-top:1rem;">
                         <label for="date">Date de départ *</label>
                         <input type="date" id="date" name="date" value="<?= htmlspecialchars($trajet['date_depart']) ?>">
                     </div>
-
                     <div class="form-group">
                         <label for="time">Heure de départ *</label>
                         <input type="time" id="time" name="time" value="<?= htmlspecialchars($trajet['heure_depart']) ?>">
                     </div>
                 </div>
 
-                <!-- COLONNE 2 : Arrivée -->
                 <div class="modal-card">
                     <h3 class="modal-card-title">🏁 Arrivée</h3>
-
                     <div class="form-group">
                         <label for="arrival">Adresse d'arrivée *</label>
                         <input type="text" id="arrival" name="arrival" value="<?= htmlspecialchars($trajet['arrivee']) ?>">
                     </div>
-
                     <div class="form-group">
                         <label for="time_arrivee">Heure d'arrivée *</label>
                         <input type="time" id="time_arrivee" name="time_arrivee" value="<?= htmlspecialchars($trajet['heure_arrivee'] ?? '') ?>">
                     </div>
-
                     <div class="form-group">
                         <label for="places">Nombre de places disponibles *</label>
                         <input type="number" id="places" name="places" min="1" max="8" value="<?= htmlspecialchars($trajet['places_disponibles']) ?>">
                     </div>
                 </div>
 
-                <!-- COLONNE 3 : Infos pratiques -->
                 <div class="modal-card">
                     <h3 class="modal-card-title">🚗 Informations pratiques</h3>
-
                     <div class="form-group">
                         <label for="vehicle-used">Véhicule utilisé *</label>
                         <select id="vehicle-used" name="vehicle_used">
@@ -278,16 +271,14 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
                             <?php endforeach; ?>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="commentaire">Point de rendez-vous, lieu de dépose et autres précisions *</label>
+                        <label for="commentaire">Point de rendez-vous et précisions *</label>
                         <textarea id="commentaire" name="commentaire" rows="5"><?= htmlspecialchars($trajet['commentaire']) ?></textarea>
                     </div>
-
                 </div>
 
             </div>
-        <button type="submit" class="btn-submit">Enregistrer les modifications</button>
+            <button type="submit" class="btn-submit">Enregistrer les modifications</button>
         </form>
     </div>
 </div>
@@ -333,7 +324,6 @@ function renumerotterArrets() {
     });
 }
 
-// Boutons supprimer sur les arrêts existants au chargement
 etapesContainer.querySelectorAll('.stop-container').forEach((c) => {
     if (!c.querySelector('.remove-stop')) {
         const btn = document.createElement('button');

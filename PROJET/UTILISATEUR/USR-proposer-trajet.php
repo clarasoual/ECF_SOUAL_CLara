@@ -13,7 +13,7 @@ if ($userId) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$user || !in_array($user['role'], ['conducteur', 'passager-conducteur'])) {
-            header('Location: ../PHP/403.php');
+            include('../403.php');
             exit;
         }
     } catch (PDOException $e) {
@@ -177,7 +177,6 @@ if (empty($etapes)) { $etapes = ['']; }
 
         </div>
     <button type="submit" class="btn-submit">Étape suivante →</button>
-
     </form>
 
 </section>
