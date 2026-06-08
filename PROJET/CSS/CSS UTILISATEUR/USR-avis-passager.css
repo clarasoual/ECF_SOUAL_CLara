@@ -1,0 +1,347 @@
+/* ==============================================*/
+/* USR-AVIS-PASSAGER */
+/* ==============================================*/
+
+.avis-passager-section {
+    flex: 1;
+    padding: 1.5rem;
+    max-width: 700px;
+}
+
+/* ==============================================*/
+/* EN-TÊTE */
+/* ==============================================*/
+
+.avis-header {
+    margin-bottom: 2rem;
+}
+
+.avis-header h2 {
+    color: var(--vert-doux);
+    margin: 0.5rem 0 0.3rem;
+}
+
+.trajet-resume {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    color: var(--gris-doux);
+    margin: 0;
+}
+
+.btn-retour {
+    display: inline-block;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--vert-doux);
+    text-decoration: none;
+    margin-bottom: 0.75rem;
+    transition: opacity 0.2s;
+}
+
+.btn-retour:hover {
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+/* ==============================================*/
+/* TOASTS INLINE */
+/* ==============================================*/
+
+.toast-inline {
+    padding: 0.75rem 1.2rem;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.toast-inline.toast-success {
+    background-color: rgba(75, 181, 67, 0.12);
+    color: #4BB543;
+    border: 1px solid #4BB543;
+}
+
+.toast-inline.toast-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+/* ==============================================*/
+/* LISTE DE PASSAGERS */
+/* ==============================================*/
+
+.passagers-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ==============================================*/
+/* CARTE PASSAGER */
+/* ==============================================*/
+
+.passager-card {
+    background-color: var(--beige-fonce);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px var(--shadow);
+    border-left: 4px solid var(--vert-doux);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.passager-card.deja-note {
+    border-left-color: #4BB543;
+    opacity: 0.75;
+}
+
+/* ==============================================*/
+/* INFO PASSAGER (avatar + nom) */
+/* ==============================================*/
+
+.passager-info {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.passager-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--vert-doux);
+}
+
+.avatar-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--vert-doux);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.passager-info strong {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    color: var(--texte);
+}
+
+.deja-note-badge {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4BB543;
+    padding: 0.4rem 0.8rem;
+    background-color: rgba(75, 181, 67, 0.1);
+    border: 1px solid #4BB543;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+}
+
+/* ==============================================*/
+/* FORMULAIRE AVIS */
+/* ==============================================*/
+
+.form-avis-passager {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field-label {
+    display: block;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--vert-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+}
+
+.optionnel {
+    font-weight: 400;
+    text-transform: none;
+    color: var(--gris-doux);
+    letter-spacing: 0;
+    font-size: 0.75rem;
+}
+
+.field-group textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid rgba(168, 213, 186, 0.4);
+    border-radius: 8px;
+    background-color: var(--fond);
+    color: var(--texte);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.field-group textarea:focus {
+    outline: none;
+    border-color: var(--vert-doux);
+}
+
+/* ==============================================*/
+/* ÉTOILES */
+/* ==============================================*/
+
+.stars-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.15rem;
+}
+
+.stars input[type="radio"] {
+    display: none;
+}
+
+.stars label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.15s ease, transform 0.1s ease;
+    line-height: 1;
+}
+
+/* Étoile survolée et toutes celles à sa gauche (= valeur plus haute) */
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input[type="radio"]:checked ~ label {
+    color: var(--orange-doux);
+}
+
+.stars label:hover {
+    transform: scale(1.15);
+}
+
+/* Erreur validation */
+.stars.stars-error label {
+    animation: shake 0.3s ease;
+    color: #e74c3c;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+/* ==============================================*/
+/* SIGNALEMENT */
+/* ==============================================*/
+
+.signalement-toggle-group {
+    background-color: rgba(231, 76, 60, 0.04);
+    border: 1px solid rgba(231, 76, 60, 0.2);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+}
+
+.toggle-signalement {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e74c3c;
+    user-select: none;
+}
+
+.toggle-signalement input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #e74c3c;
+    cursor: pointer;
+}
+
+.signalement-motif {
+    margin-top: 0.8rem;
+}
+
+.signalement-motif textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    border-radius: 8px;
+    background-color: var(--fond);
+    color: var(--texte);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.signalement-motif textarea:focus {
+    outline: none;
+    border-color: #e74c3c;
+}
+
+.deja-signale-info {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.85rem;
+    color: #e74c3c;
+    margin: 0;
+}
+
+/* ==============================================*/
+/* BOUTON SOUMETTRE */
+/* ==============================================*/
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-soumettre {
+    padding: 0.55rem 1.4rem;
+    background-color: var(--vert-doux);
+    color: black;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-soumettre:hover {
+    background-color: #8ec9a2;
+}
+
+/* ==============================================*/
+/* RESPONSIVE */
+/* ==============================================*/
+
+@media (max-width: 768px) {
+    main { flex-direction: column; }
+    .avis-passager-section { padding: 1rem; }
+    .stars label { font-size: 1.7rem; }
+}

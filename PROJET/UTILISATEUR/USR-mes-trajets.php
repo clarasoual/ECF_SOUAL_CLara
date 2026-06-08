@@ -86,21 +86,19 @@ require_once __DIR__ . '/../PHP/mes_trajets.php';
         </div>
 
         <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
-            <div id="toast-success" class="toast-success">
-                ✅ Trajet supprimé avec succès !
-            </div>
+            <div class="toast-success">✅ Trajet supprimé avec succès !</div>
         <?php endif; ?>
 
         <?php if (isset($_GET['avis']) && $_GET['avis'] === 'ok'): ?>
-            <div id="toast-success" class="toast-success">
-                ✅ Votre avis a bien été envoyé, il sera publié après modération.
-            </div>
+            <div class="toast-success">✅ Votre avis a bien été envoyé, il sera publié après modération.</div>
         <?php endif; ?>
 
         <?php if (isset($_GET['avis']) && $_GET['avis'] === 'deja_soumis'): ?>
-            <div id="toast-error" class="toast-error">
-                ⚠️ Vous avez déjà laissé un avis pour ce trajet.
-            </div>
+            <div class="toast-error">⚠️ Vous avez déjà laissé un avis pour ce trajet.</div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['litige']) && $_GET['litige'] == 1): ?>
+            <div class="toast-success">🚨 Signalement envoyé, un employé va examiner votre demande.</div>
         <?php endif; ?>
 
     </section>

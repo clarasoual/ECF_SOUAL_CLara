@@ -65,14 +65,40 @@ function getPassagers($bdd, $id_trajet) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Vérifie si le conducteur a déjà noté tous les passagers d'un trajet.
+ * Retourne : 'tous' | 'partiel' | 'aucun'
+ */
+function statutAvisPassagers($bdd, $id_trajet, $id_conducteur) {
+    // Nombre de passagers actifs (non annulés)
+    $stmtTotal = $bdd->prepare("
+        SELECT COUNT(*) FROM trajets_passagers
+        WHERE id_trajet = ? AND statut NOT IN ('annule')
+    ");
+    $stmtTotal->execute([$id_trajet]);
+    $total = (int)$stmtTotal->fetchColumn();
+
+    if ($total === 0) return 'aucun_passager';
+
+    // Nombre d'avis déjà laissés par ce conducteur pour ce trajet
+    $stmtAvis = $bdd->prepare("
+        SELECT COUNT(*) FROM avis
+        WHERE id_trajet = ? AND id_auteur = ?
+    ");
+    $stmtAvis->execute([$id_trajet, $id_conducteur]);
+    $nbAvis = (int)$stmtAvis->fetchColumn();
+
+    if ($nbAvis === 0)           return 'aucun';
+    if ($nbAvis >= $total)       return 'tous';
+    return 'partiel';
+}
+
 function afficherTrajet($trajet, $bdd, $id_utilisateur) {
     $passagers = getPassagers($bdd, $trajet['id']);
 
-    // Formatage date et heure
     $date_fmt  = date('d/m/Y', strtotime($trajet['date_depart']));
     $heure_fmt = substr($trajet['heure_depart'], 0, 5);
 
-    // Formatage étapes JSON
     $etapes_fmt = '';
     if (!empty($trajet['etapes'])) {
         $etapes = json_decode($trajet['etapes'], true);
@@ -103,7 +129,7 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
     echo '<div class="trip-card-actions">';
     echo '<a href="USR-details-trajet.php?id=' . $trajet['id'] . '" class="btn-details">Voir détails</a>';
 
-    // Boutons conducteur
+    // --- Boutons conducteur ---
     if ($trajet['role'] === 'conducteur') {
         $heureTrajet   = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
         $uneHeureAvant = (clone $heureTrajet)->modify('-1 hour');
@@ -122,18 +148,37 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
                 <button type="submit" class="btn-terminer" onclick="return confirm(\'Confirmer l\'arrivée à destination ?\')">✅ Arrivée à destination</button>
             </form>';
         }
+
+        // Bouton "Noter mes passagers" sur les trajets terminés
+        if ($trajet['statut'] === 'termine' && !empty($passagers)) {
+            $statutAvis = statutAvisPassagers($bdd, $trajet['id'], $id_utilisateur);
+
+            if ($statutAvis === 'tous') {
+                echo '<span class="badge-avis badge-vert">✅ Passagers notés</span>';
+            } elseif ($statutAvis === 'partiel') {
+                echo '<a href="USR-avis-passager.php?id_trajet=' . $trajet['id'] . '" class="btn-avis">⭐ Continuer les avis</a>';
+            } else {
+                // 'aucun'
+                echo '<a href="USR-avis-passager.php?id_trajet=' . $trajet['id'] . '" class="btn-avis">⭐ Noter mes passagers</a>';
+            }
+        }
     }
 
-    // Bouton avis passager après trajet terminé
+    // --- Badge avis passager après trajet terminé ---
     if ($trajet['role'] === 'passager' && $trajet['statut'] === 'termine') {
-        $dejaAvis = false;
+        $statutPassager = '';
         foreach ($passagers as $p) {
-            if ($p['id'] == $id_utilisateur && $p['statut'] === 'avis_laisse') {
-                $dejaAvis = true;
+            if ($p['id'] == $id_utilisateur) {
+                $statutPassager = $p['statut'];
                 break;
             }
         }
-        if (!$dejaAvis) {
+
+        if ($statutPassager === 'avis_laisse') {
+            echo '<span class="badge-avis badge-vert">✅ Avis laissé</span>';
+        } elseif ($statutPassager === 'litige') {
+            echo '<span class="badge-avis badge-rouge">🚨 Litige signalé</span>';
+        } else {
             echo '<a href="USR-avis-trajet.php?id_trajet=' . $trajet['id'] . '" class="btn-avis">⭐ Laisser un avis</a>';
         }
     }

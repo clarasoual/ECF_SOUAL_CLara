@@ -70,8 +70,8 @@ try {
     ]);
 
     // --- Signalement optionnel ---
+    $signalement_soumis = false;
     if ($motif_signal !== '') {
-        // Vérifier qu'aucun signalement n'existe déjà pour ce passager sur ce trajet
         $stmtDejaSignal = $bdd->prepare("
             SELECT id FROM signalements
             WHERE id_trajet = ? AND id_utilisateur = ?
@@ -84,12 +84,14 @@ try {
                 VALUES (?, ?, ?, NOW(), 'en_cours')
             ");
             $stmtSignal->execute([$id_trajet, $id_destinataire, $motif_signal]);
+            $signalement_soumis = true;
         }
     }
 
     $bdd->commit();
 
-    header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&succes=1');
+    $param_succes = $signalement_soumis ? 'avis_et_signalement' : 'avis';
+    header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&succes=' . $param_succes);
     exit;
 
 } catch (PDOException $e) {

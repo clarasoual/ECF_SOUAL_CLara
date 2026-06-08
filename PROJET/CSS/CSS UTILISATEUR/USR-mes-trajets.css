@@ -242,3 +242,28 @@ section.mes-trajets h2 {
     .trips-tab a { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
     .trip-card { font-size: 0.9rem; }
 }
+
+/* ==============================================*/
+/* BADGES AVIS / LITIGE */
+/* ==============================================*/
+
+.badge-avis {
+    display: inline-block;
+    padding: 0.45rem 1rem;
+    border-radius: 6px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.badge-vert {
+    background-color: rgba(75, 181, 67, 0.1);
+    color: #4BB543;
+    border: 1px solid #4BB543;
+}
+
+.badge-rouge {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}

@@ -2,8 +2,16 @@
 /* EMP-LITIGES */
 /* ==============================================*/
 
-.reviews-moderation {
+.litiges-container {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.reviews-moderation {
     padding: 1rem;
     min-width: 0;
     max-width: 100%;
@@ -12,6 +20,24 @@
 .reviews-moderation h2 {
     color: var(--vert-doux);
     margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+}
+
+.section-sous-titre {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--gris-doux);
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* Séparateur visuel entre les deux sections */
+.signalements-cp {
+    padding-top: 2rem;
+    border-top: 2px solid rgba(168, 213, 186, 0.25);
+}
+
+.signalements-cp h2 {
+    color: #c0392b;
 }
 
 .table-container {
@@ -24,6 +50,11 @@
     white-space: nowrap;
     min-width: 700px;
     width: auto;
+}
+
+/* Ligne de la section conducteur→passager : légère teinte */
+.row-cp {
+    background-color: rgba(231, 76, 60, 0.025);
 }
 
 /* ==============================================*/
@@ -110,7 +141,7 @@
 }
 
 /* ==============================================*/
-/* MODALE DÉTAILS */
+/* MODALE DÉTAILS (commune aux deux sections) */
 /* ==============================================*/
 
 .modal-litige {
