@@ -1,5 +1,175 @@
 [
     {
+        "id": "log_6a22a2efa57f01.20469133",
+        "date": "2026-06-05 12:20:31",
+        "niveau": "INFO",
+        "action": "connexion_employe",
+        "message": "Connexion employé réussie : balthazar@emp-eco.com",
+        "utilisateur": 2,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login-employe.php"
+    },
+    {
+        "id": "log_6a22a04881ad71.22274719",
+        "date": "2026-06-05 12:09:12",
+        "niveau": "WARNING",
+        "action": "litige_debloquer",
+        "message": "Litige #2 — crédits versés au conducteur #1",
+        "utilisateur": 2,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/traiter-litige.php"
+    },
+    {
+        "id": "log_6a229f3bb71694.76444211",
+        "date": "2026-06-05 12:04:43",
+        "niveau": "WARNING",
+        "action": "litige_bloquer",
+        "message": "Litige #3 — crédits bloqués",
+        "utilisateur": 2,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/traiter-litige.php"
+    },
+    {
+        "id": "log_6a229bd83792a5.88231541",
+        "date": "2026-06-05 11:50:16",
+        "niveau": "INFO",
+        "action": "avis_valide",
+        "message": "Avis #16 validé",
+        "utilisateur": 2,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/traiter-avis.php"
+    },
+    {
+        "id": "log_6a229b644c4ed0.38187193",
+        "date": "2026-06-05 11:48:20",
+        "niveau": "INFO",
+        "action": "trajet_cree",
+        "message": "Nouveau trajet #52 créé : csqw → vsd le 2027-08-22 à 10:00 — 3 place(s) — 2 crédit(s)",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-proposer-trajet-3.php"
+    },
+    {
+        "id": "log_6a229a2a0d65b3.54194789",
+        "date": "2026-06-05 11:43:06",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a2183faedc036.47985516",
+        "date": "2026-06-04 15:56:10",
+        "niveau": "WARNING",
+        "action": "trajet_supprime",
+        "message": "Trajet #39 supprimé (mussidan → montpon) — 0 passager(s) remboursé(s)",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/supprimer-trajet.php"
+    },
+    {
+        "id": "log_6a21837d8eb0c9.75187847",
+        "date": "2026-06-04 15:54:05",
+        "niveau": "INFO",
+        "action": "credits_verses_conducteur",
+        "message": "Versement de 1 crédits au conducteur #1 pour le trajet #42",
+        "utilisateur": 1,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/soumettre-avis.php"
+    },
+    {
+        "id": "log_6a21837d8da9c1.90941994",
+        "date": "2026-06-04 15:54:05",
+        "niveau": "INFO",
+        "action": "avis_soumis",
+        "message": "Avis soumis pour le trajet #42 — note : 4\/5",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/soumettre-avis.php"
+    },
+    {
+        "id": "log_6a218026acef19.43893247",
+        "date": "2026-06-04 15:39:50",
+        "niveau": "INFO",
+        "action": "desinscription",
+        "message": "Désinscription du trajet #8 (Agen → Pau) — 2 crédits remboursés",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/desinscrire-trajet.php"
+    },
+    {
+        "id": "log_6a218024aa84b6.14765825",
+        "date": "2026-06-04 15:39:48",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #8 (Agen → Pau) — 2 crédits débités",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/reserver-trajet.php?id=8"
+    },
+    {
+        "id": "log_6a21802095d346.09181181",
+        "date": "2026-06-04 15:39:44",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_6a217e7edb9ce7.91299235",
+        "date": "2026-06-04 15:32:46",
+        "niveau": "WARNING",
+        "action": "signalement",
+        "message": "Signalement du trajet #42 — motif : fou",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/signaler-trajet.php"
+    },
+    {
+        "id": "log_6a1ed352328ac3.74003966",
+        "date": "2026-06-02 14:57:54",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #8 (Agen → Pau) — 2 crédits débités",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/reserver-trajet.php?id=8"
+    },
+    {
+        "id": "log_6a1ed30105f102.62985801",
+        "date": "2026-06-02 14:56:33",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_6a1ed1cc248b36.59350457",
+        "date": "2026-06-02 14:51:24",
+        "niveau": "WARNING",
+        "action": "inscription_echouee",
+        "message": "Email déjà utilisé : test@test-eco.com",
+        "utilisateur": null,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/inscription.php"
+    },
+    {
+        "id": "log_6a1ed00b2a34c5.86576135",
+        "date": "2026-06-02 14:43:55",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
         "id": "log_69d510ae633348.49607961",
         "date": "2026-04-07 14:11:58",
         "niveau": "INFO",

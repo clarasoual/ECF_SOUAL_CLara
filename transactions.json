@@ -88,5 +88,65 @@
         "montant": 20,
         "solde_apres": 20,
         "id_trajet": null
+    },
+    {
+        "id": "transaction_6a1ed3522e64e",
+        "date": "2026-06-02 14:57:54",
+        "id_utilisateur": 19,
+        "type": "sortie",
+        "description": "R\u00e9servation trajet Agen \u2192 Pau",
+        "montant": 2,
+        "solde_apres": 5,
+        "id_trajet": 8
+    },
+    {
+        "id": "transaction_6a1ed46d8d018",
+        "date": "2026-06-02 15:02:37",
+        "id_utilisateur": 19,
+        "type": "entree",
+        "description": "Remboursement annulation trajet Agen \u2192 Pau",
+        "montant": 2,
+        "solde_apres": 7,
+        "id_trajet": 8
+    },
+    {
+        "id": "transaction_6a218024a838f",
+        "date": "2026-06-04 15:39:48",
+        "id_utilisateur": 19,
+        "type": "sortie",
+        "description": "R\u00e9servation trajet Agen \u2192 Pau",
+        "montant": 2,
+        "solde_apres": 5,
+        "id_trajet": 8
+    },
+    {
+        "id": "transaction_6a218026ac522",
+        "date": "2026-06-04 15:39:50",
+        "id_utilisateur": 19,
+        "type": "entree",
+        "description": "Remboursement annulation trajet Agen \u2192 Pau",
+        "montant": 2,
+        "solde_apres": 7,
+        "id_trajet": 8
+    },
+    {
+        "id": "transaction_6a21837d8e5bf",
+        "date": "2026-06-04 15:54:05",
+        "id_utilisateur": 1,
+        "type": "entree",
+        "description": "Trajet begles \u2192 gradignan valid\u00e9 par un passager",
+        "montant": 1,
+        "solde_apres": 1,
+        "id_trajet": 42
+    },
+    {
+        "id": "transaction_6a22a0488116f",
+        "date": "2026-06-05 12:09:12",
+        "id_utilisateur": 1,
+        "type": "entree",
+        "description": "Cr\u00e9dits d\u00e9bloqu\u00e9s suite \u00e0 r\u00e9solution de litige \u2014 trajet begles \u2192 gradignan",
+        "montant": 1,
+        "solde_apres": 1,
+        "id_trajet": 42
     }
 ]
