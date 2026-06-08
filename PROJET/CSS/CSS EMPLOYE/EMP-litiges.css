@@ -14,10 +14,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* ==============================================*/
-/* TABLEAU */
-/* ==============================================*/
-
 .table-container {
     width: 100%;
     overflow-x: auto;
@@ -38,16 +34,18 @@
     background-color: #4BB543;
     color: white;
     margin-bottom: 0.3rem;
+    display: block;
+    width: 100%;
 }
-
 .btn-valider:hover { background-color: #3a9e34; }
 
 .btn-refuser {
     background-color: #e74c3c;
     color: white;
     margin-bottom: 0.3rem;
+    display: block;
+    width: 100%;
 }
-
 .btn-refuser:hover { background-color: #c0392b; }
 
 .btn-attente {
@@ -55,8 +53,52 @@
     color: black;
     margin-bottom: 0.3rem;
 }
-
 .btn-attente:hover { background-color: #e07b39; }
+
+.btn-suspendre {
+    background-color: #2c2c2c;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    margin-bottom: 0.3rem;
+    display: block;
+    width: 100%;
+}
+.btn-suspendre:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* ==============================================*/
+/* ACTION EFFECTUÉE */
+/* ==============================================*/
+
+.action-effectuee {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    display: inline-block;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.action-verte {
+    background-color: rgba(75, 181, 67, 0.1);
+    color: #4BB543;
+    border: 1px solid #4BB543;
+}
+
+.action-rouge {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+.actions-cell {
+    min-width: 200px;
+    white-space: normal;
+}
 
 /* ==============================================*/
 /* STATUTS */
@@ -118,11 +160,7 @@
     box-shadow: none;
     width: auto;
 }
-
-.btn-close:hover {
-    color: #e74c3c;
-    background: none;
-}
+.btn-close:hover { color: #e74c3c; background: none; }
 
 .modal-litige-body {
     display: flex;
@@ -176,10 +214,6 @@
     flex-wrap: wrap;
 }
 
-/* ==============================================*/
-/* TOAST */
-/* ==============================================*/
-
 #toast-litige {
     position: fixed;
     bottom: 20px;
@@ -193,23 +227,9 @@
     box-shadow: 0 2px 8px var(--shadow);
 }
 
-/* ==============================================*/
-/* RESPONSIVE */
-/* ==============================================*/
-
 @media (max-width: 768px) {
     main { flex-direction: column; }
-
-    .modal-litige-content {
-        padding: 1.25rem;
-        max-width: 95%;
-    }
-
-    .modal-litige-actions {
-        justify-content: stretch;
-    }
-
-    .modal-litige-actions button {
-        flex: 1;
-    }
+    .modal-litige-content { padding: 1.25rem; max-width: 95%; }
+    .modal-litige-actions { justify-content: stretch; }
+    .modal-litige-actions button { flex: 1; }
 }

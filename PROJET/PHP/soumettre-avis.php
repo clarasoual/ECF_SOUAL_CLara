@@ -1,7 +1,10 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include('connexion.php');
 include('transactions.php');
+require_once('logs.php');
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../UTILISATEUR/USR-connexion-inscription.php');
@@ -17,7 +20,6 @@ $id_utilisateur = $_SESSION['user_id'];
 $note           = (float)$_POST['note'];
 $commentaire    = trim($_POST['commentaire'] ?? '');
 
-// Récupérer le trajet
 $stmt = $bdd->prepare("SELECT * FROM trajets WHERE id = ? AND statut = 'termine'");
 $stmt->execute([$id_trajet]);
 $trajet = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -25,7 +27,6 @@ if (!$trajet) {
     die("Trajet invalide.");
 }
 
-// Vérifier que l'utilisateur est bien passager
 $stmt = $bdd->prepare("SELECT * FROM trajets_passagers WHERE id_trajet = ? AND id_passager = ? AND statut = 'termine'");
 $stmt->execute([$id_trajet, $id_utilisateur]);
 $inscription = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,7 +34,6 @@ if (!$inscription) {
     die("Action non autorisée.");
 }
 
-// Vérifier que l'avis n'a pas déjà été soumis
 $stmt = $bdd->prepare("SELECT id FROM avis WHERE id_trajet = ? AND id_auteur = ?");
 $stmt->execute([$id_trajet, $id_utilisateur]);
 if ($stmt->fetch()) {
@@ -41,7 +41,6 @@ if ($stmt->fetch()) {
     exit;
 }
 
-// Insérer l'avis
 $stmt = $bdd->prepare("
     INSERT INTO avis (id_trajet, id_auteur, id_destinataire, note, commentaire, statut)
     VALUES (?, ?, ?, ?, ?, 'en_attente')
@@ -54,11 +53,16 @@ $stmt->execute([
     $commentaire
 ]);
 
-// Mettre à jour le statut du passager
 $stmt = $bdd->prepare("UPDATE trajets_passagers SET statut = 'avis_laisse' WHERE id_trajet = ? AND id_passager = ?");
 $stmt->execute([$id_trajet, $id_utilisateur]);
 
-// ── Verser les crédits au chauffeur ──
+logAction(
+    'avis_soumis',
+    "Avis soumis pour le trajet #$id_trajet — note : $note/5",
+    'INFO',
+    $id_utilisateur
+);
+
 $prix               = $trajet['prix'];
 $credits_conducteur = $prix - 2;
 
@@ -79,6 +83,13 @@ if ($credits_conducteur > 0) {
         $credits_conducteur,
         $nouveau_solde,
         $id_trajet
+    );
+
+    logAction(
+        'credits_verses_conducteur',
+        "Versement de $credits_conducteur crédits au conducteur #{$trajet['id_conducteur']} pour le trajet #$id_trajet",
+        'INFO',
+        $trajet['id_conducteur']
     );
 }
 

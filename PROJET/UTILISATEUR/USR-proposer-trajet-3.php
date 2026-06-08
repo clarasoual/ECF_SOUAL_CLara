@@ -1,9 +1,11 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include('../PHP/auth.php'); 
 requireLogin();
-
 require('../PHP/connexion.php');
+require_once('../PHP/logs.php');
 
 if (!isset($_SESSION['trajet_temp'])) {
     header('Location: USR-proposer-trajet.php');
@@ -39,6 +41,15 @@ try {
         ':etapes'             => $etapes_str,
         ':commentaire'        => $trajet['commentaire'] ?? ''
     ]);
+
+    $id_trajet = $bdd->lastInsertId();
+
+    logAction(
+        'trajet_cree',
+        "Nouveau trajet #$id_trajet créé : {$trajet['departure']} → {$trajet['arrival']} le {$trajet['date']} à {$trajet['time']} — {$trajet['places']} place(s) — " . intval($trajet['prix'] ?? 2) . " crédit(s)",
+        'INFO',
+        $id_conducteur
+    );
 
     unset($_SESSION['trajet_temp']);
 

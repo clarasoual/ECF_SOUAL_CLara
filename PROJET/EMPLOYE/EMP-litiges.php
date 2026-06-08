@@ -43,7 +43,6 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include('../COMPONENTS/COMP-header-employe.php'); ?>
 
-<!-- SELECT MOBILE -->
 <select class="menu-principal-select" onchange="window.location.href=this.value">
     <option value="">— Navigation —</option>
     <option value="EMP-gestion-avis.php">Avis à valider</option>
@@ -86,35 +85,32 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= date('d/m/Y', strtotime($l['date_depart'])) ?> à <?= htmlspecialchars($l['heure_depart']) ?></td>
                         <td><?= htmlspecialchars($l['prenom_passager'] . ' ' . $l['nom_passager']) ?></td>
                         <td><?= htmlspecialchars($l['prenom_conducteur'] . ' ' . $l['nom_conducteur']) ?></td>
+
                         <td class="statut-cell">
-                            <?php if ($l['statut_signalement'] === 'en_cours'): ?>
-                                ⏳ En cours
-                            <?php elseif ($l['statut_signalement'] === 'resolu_credits_verses'): ?>
-                                ✅ Crédits versés
-                            <?php else: ?>
-                                ❌ Crédits bloqués
-                            <?php endif; ?>
+                            <?= $l['statut_signalement'] === 'en_cours' ? '⏳ En cours' : '✅ Traité' ?>
                         </td>
+
                         <td>
-                            <button type="button" class="btn-attente btn-ouvrir-details"
-                                    data-id="<?= $l['id_signalement'] ?>">
+                            <button type="button" class="btn-attente btn-ouvrir-details" data-id="<?= $l['id_signalement'] ?>">
                                 🔍 Voir détails
                             </button>
                         </td>
-                        <td>
+
+                        <td class="actions-cell">
                             <?php if ($l['statut_signalement'] === 'en_cours'): ?>
-                                <button type="button" class="btn-valider"
-                                        data-id="<?= $l['id_signalement'] ?>"
-                                        data-action="debloquer">
-                                    ✅ Débloquer
+                                <button type="button" class="btn-valider" data-id="<?= $l['id_signalement'] ?>" data-action="debloquer">
+                                    ✅ Verser les crédits au conducteur
                                 </button>
-                                <button type="button" class="btn-refuser"
-                                        data-id="<?= $l['id_signalement'] ?>"
-                                        data-action="bloquer">
-                                    ❌ Bloquer
+                                <button type="button" class="btn-refuser" data-id="<?= $l['id_signalement'] ?>" data-action="bloquer">
+                                    ❌ Bloquer les crédits
                                 </button>
+                                <button type="button" class="btn-suspendre" data-id="<?= $l['id_signalement'] ?>" data-action="bloquer_suspendre">
+                                    🚫 Bloquer + Suspendre le conducteur
+                                </button>
+                            <?php elseif ($l['statut_signalement'] === 'resolu_credits_verses'): ?>
+                                <span class="action-effectuee action-verte">✅ Crédits versés au conducteur</span>
                             <?php else: ?>
-                                <span>Traité</span>
+                                <span class="action-effectuee action-rouge">❌ Crédits bloqués</span>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -126,14 +122,12 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 </main>
 
-<!-- MODALE DÉTAILS -->
 <div id="modal-details" class="modal-litige">
     <div class="modal-litige-content">
         <div class="modal-litige-header">
             <h3>🔍 Détails du litige</h3>
             <button type="button" id="btn-fermer-details" class="btn-close">✕</button>
         </div>
-
         <div class="modal-litige-body">
             <div class="detail-row">
                 <span class="detail-label">Mail passager</span>
@@ -156,7 +150,6 @@ $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <textarea id="textarea-note" placeholder="Votre analyse, contacts pris, décision..."></textarea>
             </div>
         </div>
-
         <div class="modal-litige-actions">
             <button type="button" id="btn-fermer-details-bas" class="btn-refuser">Fermer</button>
             <button type="button" id="btn-sauver-note" class="btn-valider">Enregistrer la note</button>
@@ -173,7 +166,6 @@ document.querySelectorAll('.btn-ouvrir-details').forEach(btn => {
     btn.addEventListener('click', () => {
         idSignalementActif = btn.dataset.id;
         const ligne = btn.closest('tr');
-
         document.getElementById('detail-email-passager').textContent = ligne.dataset.emailPassager;
         document.getElementById('detail-email-passager').href = 'mailto:' + ligne.dataset.emailPassager;
         document.getElementById('detail-email-conducteur').textContent = ligne.dataset.emailConducteur;
@@ -181,7 +173,6 @@ document.querySelectorAll('.btn-ouvrir-details').forEach(btn => {
         document.getElementById('detail-motif').textContent = ligne.dataset.motif || '—';
         document.getElementById('detail-note').textContent = ligne.dataset.note || '—';
         document.getElementById('textarea-note').value = ligne.dataset.note || '';
-
         document.getElementById('modal-details').classList.add('active');
     });
 });
@@ -193,27 +184,22 @@ document.querySelectorAll('.btn-ouvrir-details').forEach(btn => {
 });
 
 document.getElementById('modal-details').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('modal-details')) {
+    if (e.target === document.getElementById('modal-details'))
         document.getElementById('modal-details').classList.remove('active');
-    }
 });
 
 document.getElementById('btn-sauver-note').addEventListener('click', () => {
     const note = document.getElementById('textarea-note').value.trim();
     if (!idSignalementActif) return;
-
     const formData = new FormData();
     formData.append('id_signalement', idSignalementActif);
     formData.append('note_employe', note);
-
     fetch('../PHP/sauver-note-litige.php', { method: 'POST', body: formData })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
                 const ligne = document.querySelector(`tr[data-id="${idSignalementActif}"]`);
-                if (ligne) {
-                    ligne.dataset.note = note;
-                }
+                if (ligne) ligne.dataset.note = note;
                 document.getElementById('detail-note').textContent = note || '—';
                 document.getElementById('modal-details').classList.remove('active');
                 afficherToast('✅ Note enregistrée !');
@@ -244,11 +230,13 @@ document.querySelector('tbody')?.addEventListener('click', (e) => {
     const ligne  = btn.closest('tr');
     const note   = ligne.dataset.note || '';
 
-    const confirmMsg = action === 'debloquer'
-        ? 'Confirmer le déblocage des crédits au chauffeur ?'
-        : 'Confirmer le blocage définitif des crédits ?';
+    const confirmMessages = {
+        'debloquer':        'Confirmer le versement des crédits au conducteur ?',
+        'bloquer':          'Confirmer le blocage des crédits ?',
+        'bloquer_suspendre':'Confirmer le blocage des crédits ET la suspension du conducteur ? Cette action est irréversible.'
+    };
 
-    if (!confirm(confirmMsg)) return;
+    if (!confirm(confirmMessages[action])) return;
 
     btn.disabled = true;
     btn.style.opacity = '0.5';
@@ -262,9 +250,15 @@ document.querySelector('tbody')?.addEventListener('click', (e) => {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                ligne.querySelector('.statut-cell').textContent = action === 'debloquer' ? '✅ Crédits versés' : '❌ Crédits bloqués';
-                ligne.querySelector('td:last-child').innerHTML  = '<span>Traité</span>';
-                afficherToast(action === 'debloquer' ? '✅ Crédits débloqués et versés au chauffeur !' : '❌ Crédits bloqués définitivement.');
+                ligne.querySelector('.statut-cell').textContent = '✅ Traité';
+                const actionClasses = {
+                    'debloquer':        'action-verte',
+                    'bloquer':          'action-rouge',
+                    'bloquer_suspendre':'action-rouge'
+                };
+                ligne.querySelector('.actions-cell').innerHTML =
+                    `<span class="action-effectuee ${actionClasses[action]}">${data.statut_affiche}</span>`;
+                afficherToast('Action effectuée avec succès.');
             } else {
                 afficherToast('❌ Erreur : ' + (data.message || 'réessayez.'), 'error');
                 btn.disabled = false;

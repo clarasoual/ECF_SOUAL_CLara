@@ -1,6 +1,7 @@
 <?php
 require_once('auth.php');
 require_once('connexion.php');
+require_once('logs.php');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../UTILISATEUR/USR-connexion-inscription.php');
@@ -20,19 +21,21 @@ $stmt->execute(['email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
+    logAction('connexion_echouee', "Tentative de connexion avec email inconnu : $email", 'WARNING');
     die('Email incorrect.');
 }
 
 if (!password_verify($password, $user['mot_de_passe'])) {
+    logAction('connexion_echouee', "Mot de passe incorrect pour : $email", 'WARNING', $user['id']);
     die('Mot de passe incorrect.');
 }
 
 if ($user['suspendu']) {
+    logAction('connexion_suspendu', "Tentative de connexion d'un compte suspendu : $email", 'WARNING', $user['id']);
     header('Location: ../UTILISATEUR/USR-connexion-inscription.php?error=suspendu');
     exit;
 }
 
-// Connexion réussie — on passe le rôle
 loginUser(
     $user['id'],
     $user['pseudo'] ?? '',
@@ -40,6 +43,8 @@ loginUser(
     $user['photo'] ?? 'default.jpg',
     $user['role'] ?? 'passager'
 );
+
+logAction('connexion', "Connexion réussie : {$user['email']}", 'INFO', $user['id']);
 
 header('Location: ' . $redirect);
 exit;

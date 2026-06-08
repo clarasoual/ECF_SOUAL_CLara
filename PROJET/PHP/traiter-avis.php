@@ -1,13 +1,14 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once('auth.php');
 requireEmploye();
 require_once('connexion.php');
+require_once('logs.php');
 
-// On répond toujours en JSON
 header('Content-Type: application/json');
 
-// Vérifier que c'est bien une requête POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['success' => false, 'message' => 'Méthode non autorisée.']);
     exit;
@@ -27,19 +28,25 @@ if (!in_array($action, $actionsAutorisees)) {
     exit;
 }
 
+$employe_id = $_SESSION['employe_id'] ?? null;
+
 try {
     if ($action === 'valider') {
         $stmt = $bdd->prepare("UPDATE avis SET statut = 'valide' WHERE id = ?");
         $stmt->execute([$avis_id]);
+        logAction('avis_valide', "Avis #$avis_id validé", 'INFO', $employe_id);
     } elseif ($action === 'refuser') {
         $stmt = $bdd->prepare("UPDATE avis SET statut = 'refuse' WHERE id = ?");
         $stmt->execute([$avis_id]);
+        logAction('avis_refuse', "Avis #$avis_id refusé", 'INFO', $employe_id);
     } elseif ($action === 'remettre_en_attente') {
         $stmt = $bdd->prepare("UPDATE avis SET statut = 'en_attente' WHERE id = ?");
         $stmt->execute([$avis_id]);
+        logAction('avis_remis_en_attente', "Avis #$avis_id remis en attente", 'INFO', $employe_id);
     } elseif ($action === 'supprimer') {
         $stmt = $bdd->prepare("DELETE FROM avis WHERE id = ?");
         $stmt->execute([$avis_id]);
+        logAction('avis_supprime', "Avis #$avis_id supprimé", 'WARNING', $employe_id);
     }
 
     echo json_encode(['success' => true, 'action' => $action, 'avis_id' => $avis_id]);
