@@ -97,6 +97,10 @@ require_once __DIR__ . '/../PHP/mes_trajets.php';
             <div class="toast-error">⚠️ Vous avez déjà laissé un avis pour ce trajet.</div>
         <?php endif; ?>
 
+        <?php if (isset($_GET['avis']) && $_GET['avis'] === 'erreur'): ?>
+            <div class="toast-error">❌ Une erreur est survenue, veuillez réessayer.</div>
+        <?php endif; ?>
+
         <?php if (isset($_GET['litige']) && $_GET['litige'] == 1): ?>
             <div class="toast-success">🚨 Signalement envoyé, un employé va examiner votre demande.</div>
         <?php endif; ?>

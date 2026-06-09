@@ -52,10 +52,14 @@ $stmt = $bdd->prepare("
 $stmt->execute([$id]);
 $trajets_avenir = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Avis + trajet associé
 $stmt = $bdd->prepare("
-    SELECT a.note, a.commentaire, a.date_creation, u.prenom, u.nom
+    SELECT a.note, a.commentaire, a.date_creation,
+           u.prenom, u.nom,
+           t.depart AS trajet_depart, t.arrivee AS trajet_arrivee
     FROM avis a
     JOIN utilisateurs u ON u.id = a.id_auteur
+    LEFT JOIN trajets t ON t.id = a.id_trajet
     WHERE a.id_destinataire = ? AND a.statut = 'valide'
     ORDER BY a.date_creation DESC
 ");
@@ -63,9 +67,9 @@ $stmt->execute([$id]);
 $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $roles_labels = [
-    'passager' => '🧳 Passager',
-    'conducteur' => '🚗 Conducteur',
-    'passager-conducteur' => '🧳🚗 Passager & Conducteur',
+    'passager'             => '🧳 Passager',
+    'conducteur'           => '🚗 Conducteur',
+    'passager-conducteur'  => '🧳🚗 Passager & Conducteur',
 ];
 ?>
 <!DOCTYPE html>
@@ -196,6 +200,11 @@ $roles_labels = [
                     <span class="profil-avis-note">⭐ <?= $a['note'] ?>/5</span>
                     <span class="profil-avis-date"><?= date('d/m/Y', strtotime($a['date_creation'])) ?></span>
                 </div>
+                <?php if (!empty($a['trajet_depart']) && !empty($a['trajet_arrivee'])): ?>
+                <span class="profil-avis-trajet">
+                    🚗 <?= htmlspecialchars($a['trajet_depart']) ?> → <?= htmlspecialchars($a['trajet_arrivee']) ?>
+                </span>
+                <?php endif; ?>
                 <?php if ($a['commentaire']): ?>
                 <p class="profil-avis-texte"><?= htmlspecialchars($a['commentaire']) ?></p>
                 <?php endif; ?>

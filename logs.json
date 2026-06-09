@@ -1,5 +1,135 @@
 [
     {
+        "id": "log_6a27ff074df147.26999638",
+        "date": "2026-06-09 13:54:47",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : testdeprofil@example.com",
+        "utilisateur": 52,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a27fdbc207a44.37570965",
+        "date": "2026-06-09 13:49:16",
+        "niveau": "INFO",
+        "action": "inscription",
+        "message": "Nouvel utilisateur inscrit : testdeprofil@example.com",
+        "utilisateur": 52,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/inscription.php"
+    },
+    {
+        "id": "log_6a27dc54dadc73.71639921",
+        "date": "2026-06-09 11:26:44",
+        "niveau": "INFO",
+        "action": "trajet_termine",
+        "message": "Trajet #51 terminé (Agen → bdx) — 1 passager(s)",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/terminer-trajet.php"
+    },
+    {
+        "id": "log_6a27db0f6fe308.70348725",
+        "date": "2026-06-09 11:21:19",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a27daf79e08f7.96271350",
+        "date": "2026-06-09 11:20:55",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #51 (Agen → bdx) — 2 crédits débités",
+        "utilisateur": 47,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/reserver-trajet.php?id=51"
+    },
+    {
+        "id": "log_6a27daf3a5f6c4.01441091",
+        "date": "2026-06-09 11:20:51",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → bdx le 2026-06-09 (1 résultat(s))",
+        "utilisateur": 47,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=bdx&date=2026-06-09&passenger=1"
+    },
+    {
+        "id": "log_6a27daeb49dec2.92850325",
+        "date": "2026-06-09 11:20:43",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : test.credits@example.com",
+        "utilisateur": 47,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a27dabeda0dd9.15370956",
+        "date": "2026-06-09 11:19:58",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a27d9cf7393d2.46875800",
+        "date": "2026-06-09 11:15:59",
+        "niveau": "INFO",
+        "action": "avis_soumis",
+        "message": "Avis soumis pour le trajet #47 — note : 4",
+        "utilisateur": 47,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/soumettre-avis.php"
+    },
+    {
+        "id": "log_6a27d7cd3db4c1.27278074",
+        "date": "2026-06-09 11:07:25",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : test.credits@example.com",
+        "utilisateur": 47,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a27d7aad0e8c7.02291948",
+        "date": "2026-06-09 11:06:50",
+        "niveau": "INFO",
+        "action": "trajet_termine",
+        "message": "Trajet #47 terminé (test1 → test2) — 1 passager(s)",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/terminer-trajet.php"
+    },
+    {
+        "id": "log_6a27d765526bc9.01678797",
+        "date": "2026-06-09 11:05:41",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a27d743e471a1.29708222",
+        "date": "2026-06-09 11:05:07",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #47 (test1 → test2) — 2 crédits débités",
+        "utilisateur": 47,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/reserver-trajet.php?id=47"
+    },
+    {
         "id": "log_6a22a2efa57f01.20469133",
         "date": "2026-06-05 12:20:31",
         "niveau": "INFO",

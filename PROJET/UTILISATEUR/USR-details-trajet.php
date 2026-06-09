@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../PHP/auth.php';
 requireLogin(); 
 require_once __DIR__ . '/../PHP/details_trajet.php';
@@ -33,6 +32,7 @@ if (!empty($trajet['etapes'])) {
 $trajetDateTime = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
 $now            = new DateTime();
 $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
+$trajetTermine  = ($trajet['statut'] === 'termine');
 ?>
 
 <!DOCTYPE html>
@@ -90,9 +90,13 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
             </div>
 
             <div id="driver-reviews" class="driver-reviews">
-                <h4>Avis sur le conducteur</h4>
+                <h4>
+                    <?= $trajetTermine ? 'Avis sur le conducteur pour ce trajet' : 'Avis sur le conducteur' ?>
+                </h4>
                 <?php if (empty($avis)): ?>
-                    <p class="empty">Aucun avis pour le moment.</p>
+                    <p class="empty">
+                        <?= $trajetTermine ? 'Aucun avis laissé pour ce trajet.' : 'Aucun avis pour le moment.' ?>
+                    </p>
                 <?php else: ?>
                     <?php foreach ($avis as $a): ?>
                         <div class="review">
@@ -179,9 +183,6 @@ $isPast         = $trajetDateTime < $now || $trajet['statut'] === 'termine';
     <div class="cta-container">
         <?php if ($isPast): ?>
             <p>Ce trajet est terminé ✅</p>
-            <?php if (!empty($avis)): ?>
-                <a href="#driver-reviews" class="cta-reserver">Voir les avis</a>
-            <?php endif; ?>
         <?php else: ?>
             <?php if ($isOwner): ?>
                 <button id="btn-modifier" class="cta-modifier">Modifier</button>

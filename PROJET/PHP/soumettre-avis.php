@@ -6,95 +6,85 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once('../PHP/auth.php');
 requireLogin();
 require_once('../PHP/connexion.php');
+require_once('../PHP/logs.php');
 
-$id_conducteur   = $_SESSION['user_id'] ?? null;
-$id_trajet       = isset($_POST['id_trajet'])       ? (int)$_POST['id_trajet']       : 0;
-$id_destinataire = isset($_POST['id_destinataire']) ? (int)$_POST['id_destinataire'] : 0;
-$note            = isset($_POST['note'])            ? (int)$_POST['note']            : 0;
-$commentaire     = trim($_POST['commentaire']       ?? '');
-$motif_signal    = trim($_POST['motif_signalement'] ?? '');
+$id_passager = $_SESSION['user_id'] ?? null;
+$id_trajet   = isset($_POST['id_trajet']) ? (int)$_POST['id_trajet'] : 0;
+$note        = isset($_POST['note'])      ? (int)$_POST['note']      : 0;
+$commentaire = trim($_POST['commentaire'] ?? '');
 
 // --- Validations de base ---
-if (!$id_conducteur || !$id_trajet || !$id_destinataire || $note < 1 || $note > 5) {
-    header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&erreur=' . urlencode('Données invalides.'));
+if (!$id_passager || !$id_trajet || $note < 1 || $note > 5) {
+    header('Location: ../UTILISATEUR/USR-mes-trajets.php?avis=erreur');
     exit;
 }
 
-// Vérifier que le trajet appartient bien au conducteur et est terminé
+// Vérifier que l'utilisateur est bien passager de ce trajet et qu'il est terminé
 $stmtCheck = $bdd->prepare("
-    SELECT id FROM trajets
-    WHERE id = ? AND id_conducteur = ? AND statut = 'termine'
+    SELECT tp.id, t.id_conducteur
+    FROM trajets_passagers tp
+    JOIN trajets t ON t.id = tp.id_trajet
+    WHERE tp.id_trajet = ? AND tp.id_passager = ?
+    AND tp.statut IN ('termine', 'valide')
+    AND t.statut = 'termine'
 ");
-$stmtCheck->execute([$id_trajet, $id_conducteur]);
-if (!$stmtCheck->fetch()) {
-    header('Location: ../UTILISATEUR/USR-mes-trajets.php');
+$stmtCheck->execute([$id_trajet, $id_passager]);
+$row = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+
+if (!$row) {
+    header('Location: ../UTILISATEUR/USR-mes-trajets.php?avis=erreur');
     exit;
 }
 
-// Vérifier que le destinataire est bien un passager de ce trajet (non annulé)
-$stmtPass = $bdd->prepare("
-    SELECT id FROM trajets_passagers
-    WHERE id_trajet = ? AND id_passager = ? AND statut NOT IN ('annule')
-");
-$stmtPass->execute([$id_trajet, $id_destinataire]);
-if (!$stmtPass->fetch()) {
-    header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&erreur=' . urlencode('Passager introuvable.'));
-    exit;
-}
+$id_conducteur = $row['id_conducteur'];
 
 // Vérifier que l'avis n'a pas déjà été soumis
 $stmtDeja = $bdd->prepare("
     SELECT id FROM avis
     WHERE id_trajet = ? AND id_auteur = ? AND id_destinataire = ?
 ");
-$stmtDeja->execute([$id_trajet, $id_conducteur, $id_destinataire]);
+$stmtDeja->execute([$id_trajet, $id_passager, $id_conducteur]);
 if ($stmtDeja->fetch()) {
-    header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&erreur=' . urlencode('Vous avez déjà noté ce passager.'));
+    header('Location: ../UTILISATEUR/USR-mes-trajets.php?avis=deja_soumis');
     exit;
 }
 
 try {
     $bdd->beginTransaction();
 
-    // --- Insérer l'avis ---
+    // Insérer l'avis
     $stmtAvis = $bdd->prepare("
         INSERT INTO avis (id_trajet, id_auteur, id_destinataire, note, commentaire, date_creation, statut)
         VALUES (?, ?, ?, ?, ?, NOW(), 'en_attente')
     ");
     $stmtAvis->execute([
         $id_trajet,
+        $id_passager,
         $id_conducteur,
-        $id_destinataire,
         $note,
         $commentaire !== '' ? $commentaire : null,
     ]);
 
-    // --- Signalement optionnel ---
-    if ($motif_signal !== '') {
-        // Vérifier qu'aucun signalement n'existe déjà pour ce passager sur ce trajet
-        $stmtDejaSignal = $bdd->prepare("
-            SELECT id FROM signalements
-            WHERE id_trajet = ? AND id_utilisateur = ?
-        ");
-        $stmtDejaSignal->execute([$id_trajet, $id_destinataire]);
-
-        if (!$stmtDejaSignal->fetch()) {
-            $stmtSignal = $bdd->prepare("
-                INSERT INTO signalements (id_trajet, id_utilisateur, motif, date_creation, statut)
-                VALUES (?, ?, ?, NOW(), 'en_cours')
-            ");
-            $stmtSignal->execute([$id_trajet, $id_destinataire, $motif_signal]);
-        }
-    }
+    // Mettre à jour le statut du passager
+    $bdd->prepare("
+        UPDATE trajets_passagers SET statut = 'avis_laisse'
+        WHERE id_trajet = ? AND id_passager = ?
+    ")->execute([$id_trajet, $id_passager]);
 
     $bdd->commit();
 
-    header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&succes=1');
+    logAction(
+        'avis_soumis',
+        "Avis soumis pour le trajet #$id_trajet — note : $note",
+        'INFO',
+        $id_passager
+    );
+
+    header('Location: ../UTILISATEUR/USR-mes-trajets.php?avis=ok');
     exit;
 
 } catch (PDOException $e) {
     $bdd->rollBack();
-    $msg = urlencode('Erreur lors de l\'enregistrement. Veuillez réessayer.');
-    header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&erreur=' . $msg);
+    header('Location: ../UTILISATEUR/USR-mes-trajets.php?avis=erreur');
     exit;
 }

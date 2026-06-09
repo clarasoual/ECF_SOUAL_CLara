@@ -52,38 +52,72 @@ $passagers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 /* =========================
    AVIS SUR LE CONDUCTEUR
+   Si le trajet est terminé → avis de CE trajet uniquement
+   Sinon → tous les avis validés du conducteur
    ========================= */
-$stmt = $bdd->prepare("
-    SELECT 
-        a.note, 
-        a.commentaire, 
-        u.prenom, 
-        u.nom
-    FROM avis a
-    JOIN utilisateurs u ON a.id_auteur = u.id
-    WHERE a.id_destinataire = :id_conducteur
-    AND a.statut = 'valide'
-    ORDER BY a.date_creation DESC
-");
-$stmt->execute([
-    ':id_conducteur' => $trajet['id_conducteur']
-]);
+$trajetTermine = ($trajet['statut'] === 'termine');
+
+if ($trajetTermine) {
+    // Avis liés spécifiquement à ce trajet
+    $stmt = $bdd->prepare("
+        SELECT 
+            a.note, 
+            a.commentaire, 
+            u.prenom, 
+            u.nom
+        FROM avis a
+        JOIN utilisateurs u ON a.id_auteur = u.id
+        WHERE a.id_trajet = :id_trajet
+        AND a.id_destinataire = :id_conducteur
+        AND a.statut = 'valide'
+        ORDER BY a.date_creation DESC
+    ");
+    $stmt->execute([
+        ':id_trajet'     => $id_trajet,
+        ':id_conducteur' => $trajet['id_conducteur'],
+    ]);
+} else {
+    // Tous les avis validés du conducteur (pour se faire une idée avant de réserver)
+    $stmt = $bdd->prepare("
+        SELECT 
+            a.note, 
+            a.commentaire, 
+            u.prenom, 
+            u.nom
+        FROM avis a
+        JOIN utilisateurs u ON a.id_auteur = u.id
+        WHERE a.id_destinataire = :id_conducteur
+        AND a.statut = 'valide'
+        ORDER BY a.date_creation DESC
+    ");
+    $stmt->execute([
+        ':id_conducteur' => $trajet['id_conducteur'],
+    ]);
+}
+
 $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 /* =========================
    NOTE MOYENNE
+   Toujours calculée sur l'ensemble des avis du conducteur
+   (indépendamment du filtre trajet)
    ========================= */
-$note_moyenne = 0;
-$nb_avis = count($avis);
-if ($nb_avis > 0) {
-    $total = array_sum(array_column($avis, 'note'));
-    $note_moyenne = round($total / $nb_avis, 1);
-}
+$stmtNote = $bdd->prepare("
+    SELECT COUNT(*) AS nb, ROUND(AVG(note), 1) AS moyenne
+    FROM avis
+    WHERE id_destinataire = :id_conducteur
+    AND statut = 'valide'
+");
+$stmtNote->execute([':id_conducteur' => $trajet['id_conducteur']]);
+$statsNote = $stmtNote->fetch(PDO::FETCH_ASSOC);
+
+$nb_avis      = (int)($statsNote['nb'] ?? 0);
+$note_moyenne = $statsNote['moyenne'] ?? 0;
 
 /* =========================
    VÉRIFICATION PROPRIÉTAIRE
    ========================= */
-$isOwner = ($_SESSION['user_id'] === $trajet['id_conducteur']);
+$isOwner = (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $trajet['id_conducteur']);
 
 /* =========================
    VÉRIFICATION PASSAGER INSCRIT

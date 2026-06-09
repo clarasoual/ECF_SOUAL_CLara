@@ -347,3 +347,16 @@
         margin-left: 0;
     }
 }
+
+.profil-avis-trajet {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--vert-doux);
+    background-color: rgba(168, 213, 186, 0.08);
+    border: 1px solid rgba(168, 213, 186, 0.25);
+    border-radius: 5px;
+    padding: 0.2rem 0.6rem;
+    display: inline-block;
+    width: fit-content;
+}

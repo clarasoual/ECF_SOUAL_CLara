@@ -38,21 +38,30 @@ $trajets = array_merge($trajetsConducteur, $trajetsPassager);
 $trajetsFutur   = [];
 $trajetsEnCours = [];
 $trajetsTermine = [];
-$now = new DateTime();
 
 foreach ($trajets as $trajet) {
-    $dateTrajet = new DateTime($trajet['date_depart'] . ' ' . $trajet['heure_depart']);
+    $statut = $trajet['statut'];
 
-    if ($trajet['statut'] === 'termine') {
+    if ($statut === 'termine') {
+        // Terminé uniquement si le conducteur a cliqué "Arrivée à destination"
         $trajetsTermine[] = $trajet;
-    } elseif ($trajet['statut'] === 'en_cours') {
+    } elseif ($statut === 'en_cours') {
+        // En cours uniquement si le conducteur a cliqué "Démarrer"
         $trajetsEnCours[] = $trajet;
-    } elseif ($dateTrajet > $now) {
-        $trajetsFutur[] = $trajet;
     } else {
-        $trajetsTermine[] = $trajet;
+        // publie, complet, annule → à venir
+        // La date passée ne suffit pas, c'est le statut BDD qui fait foi
+        $trajetsFutur[] = $trajet;
     }
 }
+
+// Tri : plus récent en haut pour les passés, plus proche en haut pour les à venir
+$sortDesc = fn($a, $b) => strcmp($b['date_depart'] . $b['heure_depart'], $a['date_depart'] . $a['heure_depart']);
+$sortAsc  = fn($a, $b) => strcmp($a['date_depart'] . $a['heure_depart'], $b['date_depart'] . $b['heure_depart']);
+
+usort($trajetsFutur,   $sortAsc);   // le plus proche en haut
+usort($trajetsEnCours, $sortAsc);   // le plus proche en haut
+usort($trajetsTermine, $sortDesc);  // le plus récent en haut
 
 function getPassagers($bdd, $id_trajet) {
     $stmt = $bdd->prepare("
@@ -67,10 +76,9 @@ function getPassagers($bdd, $id_trajet) {
 
 /**
  * Vérifie si le conducteur a déjà noté tous les passagers d'un trajet.
- * Retourne : 'tous' | 'partiel' | 'aucun'
+ * Retourne : 'tous' | 'partiel' | 'aucun' | 'aucun_passager'
  */
 function statutAvisPassagers($bdd, $id_trajet, $id_conducteur) {
-    // Nombre de passagers actifs (non annulés)
     $stmtTotal = $bdd->prepare("
         SELECT COUNT(*) FROM trajets_passagers
         WHERE id_trajet = ? AND statut NOT IN ('annule')
@@ -80,7 +88,6 @@ function statutAvisPassagers($bdd, $id_trajet, $id_conducteur) {
 
     if ($total === 0) return 'aucun_passager';
 
-    // Nombre d'avis déjà laissés par ce conducteur pour ce trajet
     $stmtAvis = $bdd->prepare("
         SELECT COUNT(*) FROM avis
         WHERE id_trajet = ? AND id_auteur = ?
@@ -88,8 +95,8 @@ function statutAvisPassagers($bdd, $id_trajet, $id_conducteur) {
     $stmtAvis->execute([$id_trajet, $id_conducteur]);
     $nbAvis = (int)$stmtAvis->fetchColumn();
 
-    if ($nbAvis === 0)           return 'aucun';
-    if ($nbAvis >= $total)       return 'tous';
+    if ($nbAvis === 0)     return 'aucun';
+    if ($nbAvis >= $total) return 'tous';
     return 'partiel';
 }
 
@@ -158,7 +165,6 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
             } elseif ($statutAvis === 'partiel') {
                 echo '<a href="USR-avis-passager.php?id_trajet=' . $trajet['id'] . '" class="btn-avis">⭐ Continuer les avis</a>';
             } else {
-                // 'aucun'
                 echo '<a href="USR-avis-passager.php?id_trajet=' . $trajet['id'] . '" class="btn-avis">⭐ Noter mes passagers</a>';
             }
         }
