@@ -10,8 +10,34 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// ==============================================
+// TIMEOUT DE SESSION
+// Déconnexion automatique après inactivité
+// ==============================================
+define('SESSION_TIMEOUT', 30 * 60); // 30 minutes — modifiable ici
+
+function checkSessionTimeout() {
+    if (isset($_SESSION['last_activity'])) {
+        if (time() - $_SESSION['last_activity'] > SESSION_TIMEOUT) {
+            // Session expirée : on nettoie
+            session_unset();
+            session_destroy();
+            session_start();
+            return false;
+        }
+    }
+    // Mettre à jour le timestamp d'activité à chaque requête
+    $_SESSION['last_activity'] = time();
+    return true;
+}
+
+// ==============================================
+// UTILISATEURS
+// ==============================================
+
 if (!function_exists('requireLogin')) {
     function requireLogin() {
+        checkSessionTimeout();
         if (!isset($_SESSION['user_id'])) {
             $currentPage = $_SERVER['REQUEST_URI'];
             $redirectUrl = urlencode($currentPage);
@@ -23,11 +49,12 @@ if (!function_exists('requireLogin')) {
 
 if (!function_exists('loginUser')) {
     function loginUser($id, $username, $email, $photo = 'default.jpg', $role = 'passager') {
-        $_SESSION['user_id']  = $id;
-        $_SESSION['username'] = $username;
-        $_SESSION['email']    = $email;
-        $_SESSION['photo']    = $photo;
-        $_SESSION['role']     = $role;
+        $_SESSION['user_id']       = $id;
+        $_SESSION['username']      = $username;
+        $_SESSION['email']         = $email;
+        $_SESSION['photo']         = $photo;
+        $_SESSION['role']          = $role;
+        $_SESSION['last_activity'] = time(); // démarrer le timer
     }
 }
 
@@ -40,8 +67,13 @@ if (!function_exists('logoutUser')) {
     }
 }
 
+// ==============================================
+// EMPLOYÉS
+// ==============================================
+
 if (!function_exists('requireEmploye')) {
     function requireEmploye() {
+        checkSessionTimeout();
         if (!isset($_SESSION['employe_id'])) {
             header("Location: ../EMPLOYE/EMP-login-employe.php");
             exit();

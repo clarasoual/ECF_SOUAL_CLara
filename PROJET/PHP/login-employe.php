@@ -37,6 +37,7 @@ if ($employe['suspendu']) {
 $_SESSION['employe_id']     = $employe['id'];
 $_SESSION['employe_prenom'] = $employe['prenom'];
 $_SESSION['employe_email']  = $employe['email'];
+$_SESSION['last_activity']  = time(); // démarrer le timer de session
 
 logAction('connexion_employe', "Connexion employé réussie : $email", 'INFO', $employe['id']);
 
