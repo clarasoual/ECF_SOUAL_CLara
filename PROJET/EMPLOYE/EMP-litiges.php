@@ -3,7 +3,7 @@ require_once('../PHP/auth.php');
 requireEmploye();
 require_once('../PHP/connexion.php');
 
-// --- Litiges passager→conducteur (existants) ---
+// --- Litiges passager→conducteur ---
 $stmt = $bdd->prepare("
     SELECT
         s.id AS id_signalement,
@@ -25,26 +25,13 @@ $stmt = $bdd->prepare("
     JOIN trajets t ON t.id = s.id_trajet
     JOIN utilisateurs u_passager ON u_passager.id = s.id_utilisateur
     JOIN utilisateurs u_conducteur ON u_conducteur.id = t.id_conducteur
-    -- Exclure les signalements faits par le conducteur sur ses passagers
-    -- On les distingue : le conducteur du trajet ≠ auteur = passager
-    -- Ici on garde uniquement ceux où id_utilisateur est un PASSAGER du trajet
-    JOIN trajets_passagers tp ON tp.id_trajet = t.id AND tp.id_passager = s.id_utilisateur
+    WHERE s.type = 'passager_vers_conducteur'
     ORDER BY s.date_creation DESC
 ");
 $stmt->execute();
 $litiges = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // --- Signalements conducteur→passager ---
-// id_utilisateur dans signalements = passager signalé
-// Le conducteur est retrouvé via t.id_conducteur
-// On distingue ces signalements en vérifiant que id_utilisateur N'EST PAS passager du trajet
-// (car quand un passager signale, id_utilisateur = passager ; quand conducteur signale, id_utilisateur = passager signalé)
-// La distinction propre : on utilise une colonne source OU on vérifie si l'auteur est le conducteur
-// Ici on récupère tous les signalements où id_utilisateur est passager (tp existe)
-// et on les répartit selon si un avis conducteur existe pour cette paire
-
-// En pratique : on récupère les signalements liés à un passager (via trajets_passagers)
-// et on récupère le conducteur depuis trajets
 $stmtSignalCP = $bdd->prepare("
     SELECT
         s.id AS id_signalement,
@@ -67,11 +54,7 @@ $stmtSignalCP = $bdd->prepare("
     JOIN trajets t ON t.id = s.id_trajet
     JOIN utilisateurs u_passager ON u_passager.id = s.id_utilisateur
     JOIN utilisateurs u_conducteur ON u_conducteur.id = t.id_conducteur
-    -- Signalement vient du conducteur sur le passager :
-    -- il existe un avis de id_conducteur vers id_passager pour ce trajet
-    JOIN avis a ON a.id_trajet = s.id_trajet
-                AND a.id_auteur = t.id_conducteur
-                AND a.id_destinataire = s.id_utilisateur
+    WHERE s.type = 'conducteur_vers_passager'
     ORDER BY s.date_creation DESC
 ");
 $stmtSignalCP->execute();
@@ -103,9 +86,7 @@ $signalementsCP = $stmtSignalCP->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="litiges-container">
 
-        <!-- =============================================
-             SECTION 1 : Litiges passager → conducteur
-             ============================================= -->
+        <!-- SECTION 1 : Litiges passager→conducteur -->
         <section class="reviews-moderation">
             <h2>Covoiturages signalés <span class="section-sous-titre">— Passager signale un conducteur</span></h2>
 
@@ -171,9 +152,7 @@ $signalementsCP = $stmtSignalCP->fetchAll(PDO::FETCH_ASSOC);
             <?php endif; ?>
         </section>
 
-        <!-- =============================================
-             SECTION 2 : Signalements conducteur → passager
-             ============================================= -->
+        <!-- SECTION 2 : Signalements conducteur→passager -->
         <section class="reviews-moderation signalements-cp">
             <h2>Signalements passagers <span class="section-sous-titre">— Conducteur signale un passager</span></h2>
 
@@ -201,9 +180,7 @@ $signalementsCP = $stmtSignalCP->fetchAll(PDO::FETCH_ASSOC);
                             data-note="<?= htmlspecialchars($s['note_employe'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                             data-motif="<?= htmlspecialchars($s['motif'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
                             data-email-passager="<?= htmlspecialchars($s['email_passager'], ENT_QUOTES, 'UTF-8') ?>"
-                            data-email-conducteur="<?= htmlspecialchars($s['email_conducteur'], ENT_QUOTES, 'UTF-8') ?>"
-                            data-label-plaignant="Conducteur"
-                            data-label-vise="Passager signalé">
+                            data-email-conducteur="<?= htmlspecialchars($s['email_conducteur'], ENT_QUOTES, 'UTF-8') ?>">
                             <td><?= $s['id_trajet'] ?></td>
                             <td><?= htmlspecialchars($s['depart']) ?> → <?= htmlspecialchars($s['arrivee']) ?></td>
                             <td><?= date('d/m/Y', strtotime($s['date_depart'])) ?> à <?= htmlspecialchars($s['heure_depart']) ?></td>
@@ -241,10 +218,10 @@ $signalementsCP = $stmtSignalCP->fetchAll(PDO::FETCH_ASSOC);
             <?php endif; ?>
         </section>
 
-    </div><!-- /.litiges-container -->
+    </div>
 </main>
 
-<!-- Modale détails litiges passager→conducteur -->
+<!-- Modale litiges passager→conducteur -->
 <div id="modal-details" class="modal-litige">
     <div class="modal-litige-content">
         <div class="modal-litige-header">
@@ -280,7 +257,7 @@ $signalementsCP = $stmtSignalCP->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<!-- Modale détails signalements conducteur→passager -->
+<!-- Modale signalements conducteur→passager -->
 <div id="modal-details-cp" class="modal-litige">
     <div class="modal-litige-content">
         <div class="modal-litige-header">
@@ -319,9 +296,6 @@ $signalementsCP = $stmtSignalCP->fetchAll(PDO::FETCH_ASSOC);
 <?php include('../COMPONENTS/COMP-footer-employe.php'); ?>
 
 <script>
-/* ===================================================
-   MODALE LITIGES passager→conducteur
-   =================================================== */
 let idSignalementActif = null;
 
 document.querySelectorAll('.btn-ouvrir-details').forEach(btn => {
@@ -354,9 +328,6 @@ document.getElementById('btn-sauver-note').addEventListener('click', () => {
     sauverNote(idSignalementActif, 'textarea-note', 'detail-note', 'modal-details');
 });
 
-/* ===================================================
-   MODALE SIGNALEMENTS conducteur→passager
-   =================================================== */
 let idSignalementCPActif = null;
 
 document.querySelectorAll('.btn-ouvrir-details-cp').forEach(btn => {
@@ -389,9 +360,6 @@ document.getElementById('btn-sauver-note-cp').addEventListener('click', () => {
     sauverNote(idSignalementCPActif, 'cp-textarea-note', 'cp-detail-note', 'modal-details-cp');
 });
 
-/* ===================================================
-   FONCTION COMMUNE : sauvegarder une note employé
-   =================================================== */
 function sauverNote(id, textareaId, detailId, modalId) {
     const note = document.getElementById(textareaId).value.trim();
     if (!id) return;
@@ -414,43 +382,31 @@ function sauverNote(id, textareaId, detailId, modalId) {
         .catch(() => afficherToast('❌ Erreur réseau.', 'error'));
 }
 
-/* ===================================================
-   ACTIONS litiges passager→conducteur
-   =================================================== */
 document.querySelector('.reviews-moderation:not(.signalements-cp) tbody')
     ?.addEventListener('click', e => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
-
     const action = btn.dataset.action;
     const id     = btn.dataset.id;
     const ligne  = btn.closest('tr');
     const note   = ligne.dataset.note || '';
-
     const confirmMessages = {
         'debloquer':        'Confirmer le versement des crédits au conducteur ?',
         'bloquer':          'Confirmer le blocage des crédits ?',
         'bloquer_suspendre':'Confirmer le blocage des crédits ET la suspension du conducteur ? Cette action est irréversible.'
     };
-
     if (!confirm(confirmMessages[action])) return;
     btn.disabled = true; btn.style.opacity = '0.5';
-
     const formData = new FormData();
     formData.append('id_signalement', id);
     formData.append('action', action);
     formData.append('note_employe', note);
-
     fetch('../PHP/traiter-litige.php', { method: 'POST', body: formData })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
                 ligne.querySelector('.statut-cell').textContent = '✅ Traité';
-                const actionClasses = {
-                    'debloquer': 'action-verte',
-                    'bloquer': 'action-rouge',
-                    'bloquer_suspendre': 'action-rouge'
-                };
+                const actionClasses = { 'debloquer': 'action-verte', 'bloquer': 'action-rouge', 'bloquer_suspendre': 'action-rouge' };
                 ligne.querySelector('.actions-cell').innerHTML =
                     `<span class="action-effectuee ${actionClasses[action]}">${data.statut_affiche}</span>`;
                 afficherToast('Action effectuée avec succès.');
@@ -459,35 +415,24 @@ document.querySelector('.reviews-moderation:not(.signalements-cp) tbody')
                 btn.disabled = false; btn.style.opacity = '1';
             }
         })
-        .catch(() => {
-            afficherToast('❌ Erreur réseau.', 'error');
-            btn.disabled = false; btn.style.opacity = '1';
-        });
+        .catch(() => { afficherToast('❌ Erreur réseau.', 'error'); btn.disabled = false; btn.style.opacity = '1'; });
 });
 
-/* ===================================================
-   ACTIONS signalements conducteur→passager
-   =================================================== */
 document.querySelector('.signalements-cp tbody')?.addEventListener('click', e => {
     const btn = e.target.closest('button.btn-cp-action');
     if (!btn) return;
-
     const action = btn.dataset.action;
     const id     = btn.dataset.id;
     const ligne  = btn.closest('tr');
-
     const confirmMessages = {
         'traite':            'Marquer ce signalement comme traité ?',
         'suspendre_passager':'Suspendre ce passager ? Cette action est irréversible.'
     };
-
     if (!confirm(confirmMessages[action])) return;
     btn.disabled = true; btn.style.opacity = '0.5';
-
     const formData = new FormData();
     formData.append('id_signalement', id);
     formData.append('action', action);
-
     fetch('../PHP/traiter-signalement-passager.php', { method: 'POST', body: formData })
         .then(res => res.json())
         .then(data => {
@@ -501,15 +446,9 @@ document.querySelector('.signalements-cp tbody')?.addEventListener('click', e =>
                 btn.disabled = false; btn.style.opacity = '1';
             }
         })
-        .catch(() => {
-            afficherToast('❌ Erreur réseau.', 'error');
-            btn.disabled = false; btn.style.opacity = '1';
-        });
+        .catch(() => { afficherToast('❌ Erreur réseau.', 'error'); btn.disabled = false; btn.style.opacity = '1'; });
 });
 
-/* ===================================================
-   TOAST
-   =================================================== */
 function afficherToast(message, type = 'success') {
     const ancien = document.getElementById('toast-litige');
     if (ancien) ancien.remove();

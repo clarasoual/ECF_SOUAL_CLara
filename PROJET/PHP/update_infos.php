@@ -12,10 +12,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-$date_naissance = $_POST['date_naissance'] ?? null;
-$bio            = trim($_POST['bio'] ?? '');
-$password       = $_POST['password'] ?? '';
-$role           = $_POST['role'] ?? null;
+$bio      = trim($_POST['bio'] ?? '');
+$password = $_POST['password'] ?? '';
+$role     = $_POST['role'] ?? null;
 
 $roles_autorises = ['passager', 'conducteur', 'passager-conducteur'];
 if ($role && !in_array($role, $roles_autorises)) {
@@ -38,14 +37,15 @@ if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
     $targetPath    = $uploadDir . $photoFileName;
 
     if (!move_uploaded_file($_FILES['photo']['tmp_name'], $targetPath)) {
-        $_SESSION['error'] = "❌ Échec de l'upload de la photo.";
+        $err = error_get_last();
+        $_SESSION['error'] = "❌ Échec upload : " . ($err['message'] ?? 'inconnu');
         header("Location: ../UTILISATEUR/USR-infos-perso.php");
         exit;
     }
 }
 
-$params   = [':date_naissance' => $date_naissance, ':bio' => $bio, ':id' => $userId];
-$sqlParts = ['date_naissance = :date_naissance', 'bio = :bio'];
+$params   = [':bio' => $bio, ':id' => $userId];
+$sqlParts = ['bio = :bio'];
 
 if ($role !== null) {
     $sqlParts[]      = 'role = :role';
@@ -58,25 +58,27 @@ if ($password !== '') {
 }
 
 if ($photoFileName !== null) {
-    $sqlParts[]        = 'photo = :photo';
-    $params[':photo']  = $photoFileName;
+    $sqlParts[]       = 'photo = :photo';
+    $params[':photo'] = $photoFileName;
 }
 
 $sql  = "UPDATE utilisateurs SET " . implode(", ", $sqlParts) . " WHERE id = :id";
 $stmt = $bdd->prepare($sql);
 $stmt->execute($params);
 
-// Mettre à jour le rôle en session si changé
 if ($role !== null) {
     $_SESSION['role'] = $role;
 }
 
-// Log
+if ($photoFileName !== null) {
+    $_SESSION['photo'] = $photoFileName;
+}
+
 $details = [];
 if ($role !== null) $details[] = "rôle → $role";
 if ($password !== '') $details[] = "mot de passe modifié";
 if ($photoFileName !== null) $details[] = "photo mise à jour";
-$details_str = !empty($details) ? implode(', ', $details) : "bio/date de naissance";
+$details_str = !empty($details) ? implode(', ', $details) : "bio modifiée";
 
 logAction('profil_modifie', "Profil modifié : $details_str", 'INFO', $userId);
 

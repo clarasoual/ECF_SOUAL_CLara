@@ -19,9 +19,16 @@ window.addEventListener('load', () => {
         setTimeout(() => toast.classList.remove('show'), duration);
     }
 
-    // Toast si rôle conducteur
+    // Mise à jour classe selected + toast si rôle conducteur
     radios.forEach(input => {
         input.addEventListener('change', () => {
+            // Retirer selected de tous les labels
+            document.querySelectorAll('.radio-option').forEach(label => {
+                label.classList.remove('selected');
+            });
+            // Ajouter selected sur le label coché
+            input.closest('.radio-option').classList.add('selected');
+
             if (input.value === 'conducteur' || input.value === 'passager-conducteur') {
                 showToast("⚠️ Votre rôle nécessite des infos véhicule. Elles seront à compléter sur la page suivante.");
             }
@@ -54,7 +61,6 @@ window.addEventListener('load', () => {
         element.classList.remove('input-error');
     }
 
-    // Pour les radios — l'erreur est sur le conteneur parent
     function afficherErreurRadio(message) {
         supprimerErreurRadio();
         const conteneur = radios[0].closest('div') || radios[0].parentNode;
@@ -97,13 +103,11 @@ window.addEventListener('load', () => {
         const dateNaissance = new Date(val);
         const aujourd_hui   = new Date();
 
-        // Date dans le futur
         if (dateNaissance >= aujourd_hui) {
             afficherErreur(inputDate, 'La date de naissance ne peut pas être dans le futur.');
             return false;
         }
 
-        // Moins de 18 ans
         const age = aujourd_hui.getFullYear() - dateNaissance.getFullYear();
         const anniversairePassé =
             aujourd_hui.getMonth() > dateNaissance.getMonth() ||

@@ -28,7 +28,6 @@ require_once __DIR__ . '/../PHP/mes_trajets.php';
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
-<!-- SELECT MOBILE -->
 <select class="menu-principal-select" onchange="window.location.href=this.value">
     <option value="">— Mon compte —</option>
     <option value="../UTILISATEUR/USR-infos-perso.php">Informations personnelles</option>
@@ -84,6 +83,10 @@ require_once __DIR__ . '/../PHP/mes_trajets.php';
                 <p>Aucun trajet passé.</p>
             <?php endif; ?>
         </div>
+
+        <?php if (isset($_GET['finished']) && $_GET['finished'] == 1): ?>
+            <div class="toast-success">✅ Trajet terminé ! Vos crédits seront versés après validation.</div>
+        <?php endif; ?>
 
         <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
             <div class="toast-success">✅ Trajet supprimé avec succès !</div>

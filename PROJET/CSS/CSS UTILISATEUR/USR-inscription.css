@@ -195,7 +195,7 @@ main {
     margin: 0;
 }
 
-.radio-option:has(input:checked),
+/* Uniquement via JS — plus de :has pour éviter les conflits */
 .radio-option.selected {
     border-color: var(--vert-doux);
     background-color: rgba(168, 213, 186, 0.08);

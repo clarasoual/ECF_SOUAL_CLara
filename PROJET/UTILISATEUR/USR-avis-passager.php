@@ -19,7 +19,6 @@ if (!$id_trajet) {
     exit;
 }
 
-// Vérifier que ce trajet appartient bien au conducteur connecté et qu'il est terminé
 $stmtTrajet = $bdd->prepare("
     SELECT * FROM trajets
     WHERE id = ? AND id_conducteur = ? AND statut = 'termine'
@@ -32,7 +31,6 @@ if (!$trajet) {
     exit;
 }
 
-// Récupérer les passagers (non annulés) + savoir si un avis a déjà été laissé
 $stmtPassagers = $bdd->prepare("
     SELECT
         u.id,
@@ -122,7 +120,7 @@ $heure_fmt = substr($trajet['heure_depart'], 0, 5);
                 <div class="passager-info">
                     <div class="passager-avatar">
                         <?php if (!empty($p['photo'])): ?>
-                            <img src="../<?= htmlspecialchars($p['photo']) ?>" alt="Photo">
+                            <img src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($p['photo']) ?>" alt="Photo">
                         <?php else: ?>
                             <div class="avatar-placeholder"><?= strtoupper(substr($p['prenom'], 0, 1)) ?></div>
                         <?php endif; ?>
@@ -140,7 +138,6 @@ $heure_fmt = substr($trajet['heure_depart'], 0, 5);
                     <input type="hidden" name="id_trajet"       value="<?= $id_trajet ?>">
                     <input type="hidden" name="id_destinataire" value="<?= $p['id'] ?>">
 
-                    <!-- Étoiles -->
                     <div class="stars-group">
                         <label class="field-label">Note</label>
                         <div class="stars" data-name="note_<?= $p['id'] ?>">
@@ -151,7 +148,6 @@ $heure_fmt = substr($trajet['heure_depart'], 0, 5);
                         </div>
                     </div>
 
-                    <!-- Commentaire -->
                     <div class="field-group">
                         <label class="field-label" for="commentaire_<?= $p['id'] ?>">Commentaire <span class="optionnel">(optionnel)</span></label>
                         <textarea
@@ -163,7 +159,6 @@ $heure_fmt = substr($trajet['heure_depart'], 0, 5);
                         ></textarea>
                     </div>
 
-                    <!-- Signalement optionnel -->
                     <?php if (!$p['deja_signale']): ?>
                     <div class="field-group signalement-toggle-group">
                         <label class="toggle-signalement">

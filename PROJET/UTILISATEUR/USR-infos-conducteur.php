@@ -14,22 +14,7 @@ $stmt_veh = $bdd->prepare("SELECT * FROM vehicules WHERE id_utilisateur = ? ORDE
 $stmt_veh->execute([$user_id]);
 $vehicules = $stmt_veh->fetchAll(PDO::FETCH_ASSOC);
 
-$marques = ['Peugeot','Renault','Citroën','Toyota','Tesla','Fiat','Ford','Audi','Volkswagen','Kia','Opel','BMW'];
-$modeles = [
-    'Peugeot' => ['208','308','3008'],
-    'Renault' => ['Clio','Captur','Mégane'],
-    'Citroën' => ['C3','C4','C5 Aircross'],
-    'Toyota'  => ['Yaris','Corolla','RAV4'],
-    'Tesla'   => ['Model 3','Model Y','Model S'],
-    'Fiat'    => ['500','Panda','Tipo'],
-    'Ford'    => ['Focus','Fiesta','Puma'],
-    'Audi'    => ['A3','Q3','A1'],
-    'Volkswagen' => ['Golf','Polo','Tiguan'],
-    'Kia'     => ['Ceed','Sportage','Picanto'],
-    'Opel'    => ['Corsa','Astra','Mokka'],
-    'BMW'     => ['Série 1','Série 3','X1'],
-];
-$couleurs   = ['Noir','Bleu','Blanc','Rouge','Gris','Orange'];
+$couleurs   = ['Noir','Bleu','Blanc','Rouge','Gris','Orange','Vert','Jaune','Marron','Beige','Violet','Rose'];
 $carburants = ['Essence','Diesel','Electrique','Hybride'];
 $musiques   = ['none' => 'Pas de musique','classic' => 'Classique','pop' => 'Pop','rock' => 'Rock','jazz' => 'Jazz'];
 
@@ -72,13 +57,18 @@ $icones_carburant = [
             0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
+        .input-hint {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.78rem;
+            color: var(--gris-doux);
+            margin-top: 0.3rem;
+        }
     </style>
 </head>
 <body>
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
-<!-- SELECT MOBILE -->
 <select class="menu-principal-select" onchange="window.location.href=this.value">
     <option value="">— Mon compte —</option>
     <option value="../UTILISATEUR/USR-infos-perso.php">Informations personnelles</option>
@@ -94,11 +84,15 @@ $icones_carburant = [
     <div class="conducteur-section">
         <h2>Mes véhicules</h2>
 
-        <?php if (isset($_GET['success'])): ?>
-            <div class="toast-success" style="margin-bottom:1rem;">✅ <?= htmlspecialchars($_GET['success']) ?></div>
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="toast-success" style="margin-bottom:1rem;">✅ <?= htmlspecialchars($_SESSION['success']) ?></div>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="toast-error" style="margin-bottom:1rem;">❌ <?= htmlspecialchars($_SESSION['error']) ?></div>
+            <?php unset($_SESSION['error']); ?>
         <?php endif; ?>
 
-        <!-- CARTES VÉHICULES -->
         <div class="vehicules-grid">
             <?php if (empty($vehicules)): ?>
                 <p style="font-family:'Quicksand',sans-serif; color:var(--gris-doux);">Aucun véhicule enregistré.</p>
@@ -136,9 +130,7 @@ $icones_carburant = [
             <?php endif; ?>
         </div>
 
-        <!-- BOUTON AJOUTER -->
         <button class="btn-ajouter-vehicule" id="btnAjouterVehicule">+ Ajouter un véhicule</button>
-
     </div>
 </main>
 
@@ -151,25 +143,23 @@ $icones_carburant = [
             <input type="hidden" name="action" value="modifier">
             <input type="hidden" name="vehicule_id" id="mod_vehicule_id">
 
-            <div class="form-group"><label>Plaque</label><input type="text" name="plate" id="mod_plaque" placeholder="AB-123-CD"></div>
-            <div class="form-group"><label>Date de première immatriculation</label><input type="date" name="date" id="mod_date"></div>
+            <div class="form-group">
+                <label>Plaque</label>
+                <input type="text" name="plate" id="mod_plaque" placeholder="AB-123-CD" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label>Date de première immatriculation</label>
+                <input type="date" name="date" id="mod_date">
+            </div>
             <div class="form-group">
                 <label>Marque</label>
-                <select name="marque" id="mod_marque">
-                    <option value="">Choisir une marque</option>
-                    <?php foreach ($marques as $m): ?><option value="<?= $m ?>"><?= $m ?></option><?php endforeach; ?>
-                </select>
+                <input type="text" name="marque" id="mod_marque" placeholder="ex : Renault, Peugeot, Tesla..." maxlength="50">
+                <p class="input-hint">Saisissez librement la marque de votre véhicule</p>
             </div>
             <div class="form-group">
                 <label>Modèle</label>
-                <select name="modele" id="mod_modele">
-                    <option value="">Sélectionner un modèle</option>
-                    <?php foreach ($modeles as $marque => $liste): ?>
-                        <?php foreach ($liste as $mod): ?>
-                        <option value="<?= $mod ?>" data-marque="<?= $marque ?>"><?= $mod ?></option>
-                        <?php endforeach; ?>
-                    <?php endforeach; ?>
-                </select>
+                <input type="text" name="modele" id="mod_modele" placeholder="ex : Clio, 308, Model 3..." maxlength="50">
+                <p class="input-hint">Saisissez librement le modèle de votre véhicule</p>
             </div>
             <div class="form-group">
                 <label>Couleur</label>
@@ -185,8 +175,10 @@ $icones_carburant = [
                     <?php foreach ($carburants as $c): ?><option value="<?= $c ?>"><?= $c ?></option><?php endforeach; ?>
                 </select>
             </div>
-            <div class="form-group"><label>Nombre de places</label><input type="number" name="places" id="mod_places" min="1" max="8"></div>
-
+            <div class="form-group">
+                <label>Nombre de places</label>
+                <input type="number" name="places" id="mod_places" min="1" max="8">
+            </div>
             <div class="form-group">
                 <label>Animaux acceptés</label>
                 <div class="radio-inline">
@@ -207,7 +199,6 @@ $icones_carburant = [
                     <?php foreach ($musiques as $val => $label): ?><option value="<?= $val ?>"><?= $label ?></option><?php endforeach; ?>
                 </select>
             </div>
-
             <div class="modal-vehicule-actions">
                 <button type="submit" class="btn-enregistrer">Enregistrer</button>
                 <button type="button" class="btn-supprimer-vehicule" id="btnSupprimerVehicule">🗑️ Supprimer</button>
@@ -224,25 +215,23 @@ $icones_carburant = [
         <form action="../PHP/traitement-vehicule.php" method="POST" novalidate>
             <input type="hidden" name="action" value="ajouter">
 
-            <div class="form-group"><label>Plaque</label><input type="text" name="plate" placeholder="AB-123-CD"></div>
-            <div class="form-group"><label>Date de première immatriculation</label><input type="date" name="date"></div>
+            <div class="form-group">
+                <label>Plaque</label>
+                <input type="text" name="plate" placeholder="AB-123-CD" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label>Date de première immatriculation</label>
+                <input type="date" name="date">
+            </div>
             <div class="form-group">
                 <label>Marque</label>
-                <select name="marque" class="brand">
-                    <option value="">Choisir une marque</option>
-                    <?php foreach ($marques as $m): ?><option value="<?= $m ?>"><?= $m ?></option><?php endforeach; ?>
-                </select>
+                <input type="text" name="marque" placeholder="ex : Renault, Peugeot, Tesla..." maxlength="50">
+                <p class="input-hint">Saisissez librement la marque de votre véhicule</p>
             </div>
             <div class="form-group">
                 <label>Modèle</label>
-                <select name="modele" class="model">
-                    <option value="">Sélectionner un modèle</option>
-                    <?php foreach ($modeles as $marque => $liste): ?>
-                        <?php foreach ($liste as $mod): ?>
-                        <option value="<?= $mod ?>" data-marque="<?= $marque ?>"><?= $mod ?></option>
-                        <?php endforeach; ?>
-                    <?php endforeach; ?>
-                </select>
+                <input type="text" name="modele" placeholder="ex : Clio, 308, Model 3..." maxlength="50">
+                <p class="input-hint">Saisissez librement le modèle de votre véhicule</p>
             </div>
             <div class="form-group">
                 <label>Couleur</label>
@@ -258,8 +247,10 @@ $icones_carburant = [
                     <?php foreach ($carburants as $c): ?><option value="<?= $c ?>"><?= $c ?></option><?php endforeach; ?>
                 </select>
             </div>
-            <div class="form-group"><label>Nombre de places</label><input type="number" name="places" min="1" max="8"></div>
-
+            <div class="form-group">
+                <label>Nombre de places</label>
+                <input type="number" name="places" min="1" max="8">
+            </div>
             <div class="form-group">
                 <label>Animaux acceptés</label>
                 <div class="radio-inline">
@@ -280,7 +271,6 @@ $icones_carburant = [
                     <?php foreach ($musiques as $val => $label): ?><option value="<?= $val ?>"><?= $label ?></option><?php endforeach; ?>
                 </select>
             </div>
-
             <div class="modal-vehicule-actions">
                 <button type="submit" class="btn-enregistrer">Ajouter</button>
             </div>
@@ -302,7 +292,6 @@ $icones_carburant = [
 </div>
 
 <script>
-// Ouvrir modal modifier
 document.querySelectorAll('.btn-modifier-vehicule').forEach(btn => {
     btn.addEventListener('click', () => {
         const d = btn.dataset;
@@ -322,12 +311,10 @@ document.querySelectorAll('.btn-modifier-vehicule').forEach(btn => {
     });
 });
 
-// Ouvrir modal ajouter
 document.getElementById('btnAjouterVehicule').addEventListener('click', () => {
     document.getElementById('modal-ajouter').style.display = 'flex';
 });
 
-// Fermer modals
 document.getElementById('closeModalModifier').addEventListener('click', () => {
     document.getElementById('modal-modifier').style.display = 'none';
 });
@@ -335,16 +322,13 @@ document.getElementById('closeModalAjouter').addEventListener('click', () => {
     document.getElementById('modal-ajouter').style.display = 'none';
 });
 
-// Fermer en cliquant dehors
 ['modal-modifier','modal-ajouter'].forEach(id => {
     document.getElementById(id).addEventListener('click', e => {
-        if (e.target === document.getElementById(id)) {
+        if (e.target === document.getElementById(id))
             document.getElementById(id).style.display = 'none';
-        }
     });
 });
 
-// Supprimer
 document.getElementById('btnSupprimerVehicule').addEventListener('click', () => {
     if (confirm('Confirmer la suppression de ce véhicule ?')) {
         document.getElementById('form-supprimer').submit();

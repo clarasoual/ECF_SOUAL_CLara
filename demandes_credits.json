@@ -15,7 +15,7 @@
         "prenom": "testcredits",
         "nom": "testcredits",
         "email": "test.credits@example.com",
-        "statut": "en_attente"
+        "statut": "accepte"
     },
     {
         "id": "demande_69d3a1498e30d",
@@ -24,6 +24,15 @@
         "prenom": "testcredits",
         "nom": "testcredits",
         "email": "test.credits@example.com",
-        "statut": "en_attente"
+        "statut": "accepte"
+    },
+    {
+        "id": "demande_6a2819413f0cb",
+        "date": "2026-06-09 15:46:41",
+        "id_utilisateur": 19,
+        "prenom": "Clara",
+        "nom": "Soual",
+        "email": "clara.soual@example.com",
+        "statut": "accepte"
     }
 ]

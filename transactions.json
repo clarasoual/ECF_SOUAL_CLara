@@ -178,5 +178,75 @@
         "montant": 20,
         "solde_apres": 20,
         "id_trajet": null
+    },
+    {
+        "id": "transaction_6a28017725df6",
+        "date": "2026-06-09 14:05:11",
+        "id_utilisateur": 53,
+        "type": "entree",
+        "description": "Cr\u00e9dits de bienvenue",
+        "montant": 20,
+        "solde_apres": 20,
+        "id_trajet": null
+    },
+    {
+        "id": "transaction_6a280e1c48a08",
+        "date": "2026-06-09 14:59:08",
+        "id_utilisateur": 52,
+        "type": "sortie",
+        "description": "R\u00e9servation trajet Agen \u2192 Pau",
+        "montant": 2,
+        "solde_apres": 18,
+        "id_trajet": 8
+    },
+    {
+        "id": "transaction_6a280eed2f94a",
+        "date": "2026-06-09 15:02:37",
+        "id_utilisateur": 19,
+        "type": "sortie",
+        "description": "R\u00e9servation trajet depart \u2192 arriv\u00e9eee",
+        "montant": 5,
+        "solde_apres": 2,
+        "id_trajet": 53
+    },
+    {
+        "id": "transaction_6a280ff19fa8b",
+        "date": "2026-06-09 15:06:57",
+        "id_utilisateur": 52,
+        "type": "entree",
+        "description": "Cr\u00e9dits d\u00e9bloqu\u00e9s suite \u00e0 r\u00e9solution de litige \u2014 trajet depart \u2192 arriv\u00e9eee",
+        "montant": 3,
+        "solde_apres": 21,
+        "id_trajet": 53
+    },
+    {
+        "id": "transaction_6a2819534e178",
+        "date": "2026-06-09 15:46:59",
+        "id_utilisateur": 19,
+        "type": "entree",
+        "description": "Cr\u00e9dits accord\u00e9s par EcoRide suite \u00e0 votre demande",
+        "montant": 20,
+        "solde_apres": 22,
+        "id_trajet": null
+    },
+    {
+        "id": "transaction_6a2819b92f19b",
+        "date": "2026-06-09 15:48:41",
+        "id_utilisateur": 47,
+        "type": "entree",
+        "description": "Cr\u00e9dits accord\u00e9s par EcoRide suite \u00e0 votre demande",
+        "montant": 20,
+        "solde_apres": 28,
+        "id_trajet": null
+    },
+    {
+        "id": "transaction_6a2819b9d9cb8",
+        "date": "2026-06-09 15:48:41",
+        "id_utilisateur": 47,
+        "type": "entree",
+        "description": "Cr\u00e9dits accord\u00e9s par EcoRide suite \u00e0 votre demande",
+        "montant": 20,
+        "solde_apres": 48,
+        "id_trajet": null
     }
 ]

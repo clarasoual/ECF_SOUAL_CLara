@@ -13,12 +13,11 @@ if ($est_conducteur) {
 }
 
 $roles = [
-    'passager' => '🧳 Passager',
-    'conducteur' => '🚗 Conducteur',
+    'passager'            => '🧳 Passager',
+    'conducteur'          => '🚗 Conducteur',
     'passager-conducteur' => '🧳🚗 Passager & Conducteur',
 ];
 
-// Stats rapides
 $stmt_trajets = $bdd->prepare("SELECT COUNT(*) FROM trajets_passagers WHERE id_passager = ? AND statut = 'termine'");
 $stmt_trajets->execute([$user['id']]);
 $nb_trajets = $stmt_trajets->fetchColumn();
@@ -55,7 +54,6 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
 
 <?php include('../COMPONENTS/COMP-header.php'); ?>
 
-<!-- SELECT MOBILE -->
 <select class="menu-principal-select" onchange="window.location.href=this.value">
     <option value="">— Mon compte —</option>
     <option value="../UTILISATEUR/USR-infos-perso.php">Informations personnelles</option>
@@ -65,18 +63,14 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
     <?php if ($est_conducteur): ?>
     <option value="../UTILISATEUR/USR-infos-conducteur.php">Informations conducteur</option>
     <?php endif; ?>
-    <option value="../UTILISATEUR/USR-aide.php">Aide</option>
 </select>
 
 <main>
     <?php include('../COMPONENTS/COMP-menu-mon-compte.html'); ?>
 
     <div class="profile-content">
-
-        <!-- BLOC PRINCIPAL -->
         <section class="profil-header">
 
-            <!-- LIGNE HAUTE : photo + infos + stats -->
             <div class="profil-top">
                 <img src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
                      alt="Photo de profil" class="profil-photo">
@@ -108,7 +102,6 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
                 </div>
             </div>
 
-            <!-- STATS -->
             <div class="profil-stats">
                 <div class="profil-stat-item">
                     <span class="profil-stat-value"><?= $nb_trajets ?></span>
@@ -128,7 +121,6 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
                 </div>
             </div>
 
-            <!-- VÉHICULES (conducteurs uniquement) -->
             <?php if ($est_conducteur): ?>
             <div class="profil-vehicules">
                 <h3>Mes véhicules</h3>
@@ -157,7 +149,6 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
             </div>
             <?php endif; ?>
 
-            <!-- ACTIONS -->
             <div class="profil-actions">
                 <button id="openModalBtn" type="button" class="btn-submit">✏️ Modifier mes informations</button>
                 <?php if ($est_conducteur): ?>
@@ -166,7 +157,6 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
             </div>
 
         </section>
-
     </div>
 </main>
 
@@ -203,8 +193,10 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
 
             <div class="form-group">
                 <label for="date_naissance">Date de naissance</label>
-                <input type="date" name="date_naissance" id="date_naissance"
-                       value="<?= htmlspecialchars($user['date_naissance']) ?>">
+                <input type="text" id="date_naissance"
+                       value="<?= !empty($user['date_naissance']) ? date('d/m/Y', strtotime($user['date_naissance'])) : '—' ?>"
+                       disabled>
+                <div class="contact-note">Merci de contacter Eco Ride pour modifier cette information</div>
             </div>
 
             <div class="form-group">

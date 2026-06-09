@@ -47,16 +47,16 @@ if (!empty($user['profile_completed']) && $user['profile_completed'] == 1) {
             <div class="form-group">
                 <label>Votre rôle *</label>
                 <div class="radio-group">
-                    <label class="radio-option <?= $user['role'] === 'passager' ? 'selected' : '' ?>">
-                        <input type="radio" name="role" value="passager" <?= $user['role'] === 'passager' ? 'checked' : '' ?>>
+                    <label class="radio-option">
+                        <input type="radio" name="role" value="passager">
                         🧳 Passager
                     </label>
-                    <label class="radio-option <?= $user['role'] === 'conducteur' ? 'selected' : '' ?>">
-                        <input type="radio" name="role" value="conducteur" <?= $user['role'] === 'conducteur' ? 'checked' : '' ?>>
+                    <label class="radio-option">
+                        <input type="radio" name="role" value="conducteur">
                         🚗 Conducteur
                     </label>
-                    <label class="radio-option <?= $user['role'] === 'passager-conducteur' ? 'selected' : '' ?>">
-                        <input type="radio" name="role" value="passager-conducteur" <?= $user['role'] === 'passager-conducteur' ? 'checked' : '' ?>>
+                    <label class="radio-option">
+                        <input type="radio" name="role" value="passager-conducteur">
                         🧳🚗 Passager & Conducteur
                     </label>
                 </div>

@@ -28,7 +28,10 @@ if (!$inscription) {
 $stmt = $bdd->prepare("UPDATE trajets_passagers SET statut = 'litige' WHERE id_trajet = ? AND id_passager = ?");
 $stmt->execute([$id_trajet, $id_utilisateur]);
 
-$stmt = $bdd->prepare("INSERT INTO signalements (id_trajet, id_utilisateur, motif) VALUES (?, ?, ?)");
+$stmt = $bdd->prepare("
+    INSERT INTO signalements (id_trajet, id_utilisateur, motif, type)
+    VALUES (?, ?, ?, 'passager_vers_conducteur')
+");
 $stmt->execute([$id_trajet, $id_utilisateur, $commentaire]);
 
 logAction(
@@ -40,4 +43,3 @@ logAction(
 
 header('Location: ../UTILISATEUR/USR-mes-trajets.php?litige=1');
 exit;
-?>

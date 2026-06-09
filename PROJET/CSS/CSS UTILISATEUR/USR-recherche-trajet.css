@@ -38,6 +38,8 @@
     border-radius: 6px;
     border: 1px solid var(--vert-doux);
     margin-bottom: 0;
+    height: 38px;
+    box-sizing: border-box;
 }
 
 /* ==============================================*/
@@ -48,7 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 42px;
+    height: 38px;
     width: 42px;
     min-width: 42px;
     background-color: var(--orange-doux);
@@ -58,7 +60,7 @@
     padding: 0;
     flex-shrink: 0;
     align-self: flex-end;
-    margin-bottom: 0.6em;
+    margin-bottom: 0;
 }
 
 .search-btn img {
@@ -323,7 +325,6 @@
         padding: 1rem;
     }
 
-    /* Bouton toggle visible */
     .btn-toggle-filtres {
         display: block;
         width: 100%;
@@ -345,7 +346,6 @@
         box-shadow: none;
     }
 
-    /* Filtres cachés par défaut sur mobile */
     .filters {
         display: none;
         width: 100%;
@@ -355,7 +355,6 @@
         margin-bottom: 1rem;
     }
 
-    /* Filtres visibles quand open */
     .filters.open { display: block; }
 
     .ride {

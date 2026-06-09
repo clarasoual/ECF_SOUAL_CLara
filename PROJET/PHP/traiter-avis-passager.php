@@ -14,13 +14,11 @@ $note            = isset($_POST['note'])            ? (int)$_POST['note']       
 $commentaire     = trim($_POST['commentaire']       ?? '');
 $motif_signal    = trim($_POST['motif_signalement'] ?? '');
 
-// --- Validations de base ---
 if (!$id_conducteur || !$id_trajet || !$id_destinataire || $note < 1 || $note > 5) {
     header('Location: ../UTILISATEUR/USR-avis-passager.php?id_trajet=' . $id_trajet . '&erreur=' . urlencode('Données invalides.'));
     exit;
 }
 
-// Vérifier que le trajet appartient bien au conducteur et est terminé
 $stmtCheck = $bdd->prepare("
     SELECT id FROM trajets
     WHERE id = ? AND id_conducteur = ? AND statut = 'termine'
@@ -31,7 +29,6 @@ if (!$stmtCheck->fetch()) {
     exit;
 }
 
-// Vérifier que le destinataire est bien un passager de ce trajet (non annulé)
 $stmtPass = $bdd->prepare("
     SELECT id FROM trajets_passagers
     WHERE id_trajet = ? AND id_passager = ? AND statut NOT IN ('annule')
@@ -42,7 +39,6 @@ if (!$stmtPass->fetch()) {
     exit;
 }
 
-// Vérifier que l'avis n'a pas déjà été soumis
 $stmtDeja = $bdd->prepare("
     SELECT id FROM avis
     WHERE id_trajet = ? AND id_auteur = ? AND id_destinataire = ?
@@ -56,7 +52,6 @@ if ($stmtDeja->fetch()) {
 try {
     $bdd->beginTransaction();
 
-    // --- Insérer l'avis ---
     $stmtAvis = $bdd->prepare("
         INSERT INTO avis (id_trajet, id_auteur, id_destinataire, note, commentaire, date_creation, statut)
         VALUES (?, ?, ?, ?, ?, NOW(), 'en_attente')
@@ -69,19 +64,19 @@ try {
         $commentaire !== '' ? $commentaire : null,
     ]);
 
-    // --- Signalement optionnel ---
     $signalement_soumis = false;
     if ($motif_signal !== '') {
+        // Vérifier qu'aucun signalement conducteur→passager n'existe déjà pour cette paire
         $stmtDejaSignal = $bdd->prepare("
             SELECT id FROM signalements
-            WHERE id_trajet = ? AND id_utilisateur = ?
+            WHERE id_trajet = ? AND id_utilisateur = ? AND type = 'conducteur_vers_passager'
         ");
         $stmtDejaSignal->execute([$id_trajet, $id_destinataire]);
 
         if (!$stmtDejaSignal->fetch()) {
             $stmtSignal = $bdd->prepare("
-                INSERT INTO signalements (id_trajet, id_utilisateur, motif, date_creation, statut)
-                VALUES (?, ?, ?, NOW(), 'en_cours')
+                INSERT INTO signalements (id_trajet, id_utilisateur, motif, date_creation, statut, type)
+                VALUES (?, ?, ?, NOW(), 'en_cours', 'conducteur_vers_passager')
             ");
             $stmtSignal->execute([$id_trajet, $id_destinataire, $motif_signal]);
             $signalement_soumis = true;
