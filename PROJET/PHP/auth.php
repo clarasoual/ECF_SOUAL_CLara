@@ -2,9 +2,25 @@
 if (defined('AUTH_PHP_LOADED')) return;
 define('AUTH_PHP_LOADED', true);
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ==============================================
+// ENVIRONNEMENT : dev ou prod
+// En prod sur Railway, définir APP_ENV=production
+// dans les variables d'environnement Railway
+// En local sur XAMPP, APP_ENV n'existe pas → dev
+// ==============================================
+$isProd = (getenv('APP_ENV') === 'production');
+
+if ($isProd) {
+    // Production : aucune erreur affichée côté client
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    error_reporting(0);
+} else {
+    // Local : tout afficher pour débugger
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -14,19 +30,17 @@ if (session_status() === PHP_SESSION_NONE) {
 // TIMEOUT DE SESSION
 // Déconnexion automatique après inactivité
 // ==============================================
-define('SESSION_TIMEOUT', 30 * 60); // 30 minutes — modifiable ici
+define('SESSION_TIMEOUT', 30 * 60); // 30 minutes
 
 function checkSessionTimeout() {
     if (isset($_SESSION['last_activity'])) {
         if (time() - $_SESSION['last_activity'] > SESSION_TIMEOUT) {
-            // Session expirée : on nettoie
             session_unset();
             session_destroy();
             session_start();
             return false;
         }
     }
-    // Mettre à jour le timestamp d'activité à chaque requête
     $_SESSION['last_activity'] = time();
     return true;
 }
@@ -54,7 +68,7 @@ if (!function_exists('loginUser')) {
         $_SESSION['email']         = $email;
         $_SESSION['photo']         = $photo;
         $_SESSION['role']          = $role;
-        $_SESSION['last_activity'] = time(); // démarrer le timer
+        $_SESSION['last_activity'] = time();
     }
 }
 
