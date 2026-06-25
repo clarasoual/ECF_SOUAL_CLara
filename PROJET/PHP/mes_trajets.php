@@ -43,29 +43,24 @@ foreach ($trajets as $trajet) {
     $statut = $trajet['statut'];
 
     if ($statut === 'termine') {
-        // Terminé uniquement si le conducteur a cliqué "Arrivée à destination"
         $trajetsTermine[] = $trajet;
     } elseif ($statut === 'en_cours') {
-        // En cours uniquement si le conducteur a cliqué "Démarrer"
         $trajetsEnCours[] = $trajet;
     } else {
-        // publie, complet, annule → à venir
-        // La date passée ne suffit pas, c'est le statut BDD qui fait foi
         $trajetsFutur[] = $trajet;
     }
 }
 
-// Tri : plus récent en haut pour les passés, plus proche en haut pour les à venir
 $sortDesc = fn($a, $b) => strcmp($b['date_depart'] . $b['heure_depart'], $a['date_depart'] . $a['heure_depart']);
 $sortAsc  = fn($a, $b) => strcmp($a['date_depart'] . $a['heure_depart'], $b['date_depart'] . $b['heure_depart']);
 
-usort($trajetsFutur,   $sortAsc);   // le plus proche en haut
-usort($trajetsEnCours, $sortAsc);   // le plus proche en haut
-usort($trajetsTermine, $sortDesc);  // le plus récent en haut
+usort($trajetsFutur,   $sortAsc);
+usort($trajetsEnCours, $sortAsc);
+usort($trajetsTermine, $sortDesc);
 
 function getPassagers($bdd, $id_trajet) {
     $stmt = $bdd->prepare("
-        SELECT u.id, u.nom, u.prenom, tp.note_passager, tp.statut
+        SELECT u.id, u.nom, u.prenom, tp.statut
         FROM trajets_passagers tp
         JOIN utilisateurs u ON tp.id_passager = u.id
         WHERE tp.id_trajet = ?
@@ -74,10 +69,6 @@ function getPassagers($bdd, $id_trajet) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-/**
- * Vérifie si le conducteur a déjà noté tous les passagers d'un trajet.
- * Retourne : 'tous' | 'partiel' | 'aucun' | 'aucun_passager'
- */
 function statutAvisPassagers($bdd, $id_trajet, $id_conducteur) {
     $stmtTotal = $bdd->prepare("
         SELECT COUNT(*) FROM trajets_passagers
@@ -156,7 +147,6 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
             </form>';
         }
 
-        // Bouton "Noter mes passagers" sur les trajets terminés
         if ($trajet['statut'] === 'termine' && !empty($passagers)) {
             $statutAvis = statutAvisPassagers($bdd, $trajet['id'], $id_utilisateur);
 
@@ -189,6 +179,6 @@ function afficherTrajet($trajet, $bdd, $id_utilisateur) {
         }
     }
 
-    echo '</div>'; // trip-card-actions
-    echo '</div>'; // trip-card
+    echo '</div>';
+    echo '</div>';
 }

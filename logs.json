@@ -1,5 +1,155 @@
 [
     {
+        "id": "log_6a3aab1a5e4889.49068766",
+        "date": "2026-06-23 17:49:46",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #8 (Agen → Pau) — 2 crédits débités",
+        "utilisateur": 54,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/reserver-trajet.php?id=8"
+    },
+    {
+        "id": "log_6a3aaaf01187f8.69930811",
+        "date": "2026-06-23 17:49:04",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 54,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_6a3aaac532cd91.97016656",
+        "date": "2026-06-23 17:48:21",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : pékin → los angeles le 2027-01-01 (1 résultat(s))",
+        "utilisateur": 54,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=p%C3%A9kin&destination=los+angeles&date=2027-01-01&passenger=1"
+    },
+    {
+        "id": "log_6a3aaa95487158.35111232",
+        "date": "2026-06-23 17:47:33",
+        "niveau": "INFO",
+        "action": "trajet_cree",
+        "message": "Nouveau trajet #59 créé : pékin → Los angeles le 2027-01-01 à 00:00 — 2 place(s) — 20 crédit(s)",
+        "utilisateur": 54,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-proposer-trajet-3.php"
+    },
+    {
+        "id": "log_6a3aa9c1a1ae14.42891347",
+        "date": "2026-06-23 17:44:01",
+        "niveau": "INFO",
+        "action": "profil_modifie",
+        "message": "Profil modifié : rôle → passager-conducteur, photo mise à jour",
+        "utilisateur": 54,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/update_infos.php"
+    },
+    {
+        "id": "log_6a3aa86d7533f0.79574302",
+        "date": "2026-06-23 17:38:21",
+        "niveau": "INFO",
+        "action": "inscription",
+        "message": "Nouvel utilisateur inscrit : nino.cicuttini@gmail.com",
+        "utilisateur": 54,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/inscription.php"
+    },
+    {
+        "id": "log_6a3a94b8246442.70588275",
+        "date": "2026-06-23 16:14:16",
+        "niveau": "INFO",
+        "action": "connexion_employe",
+        "message": "Connexion employé réussie : balthazar@emp-eco.com",
+        "utilisateur": 2,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login-employe.php"
+    },
+    {
+        "id": "log_6a3a946bbdaa03.54795347",
+        "date": "2026-06-23 16:12:59",
+        "niveau": "INFO",
+        "action": "trajet_termine",
+        "message": "Trajet #44 terminé (Agen → Niort) — 1 passager(s)",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/terminer-trajet.php"
+    },
+    {
+        "id": "log_6a3a93a1ed8050.87033633",
+        "date": "2026-06-23 16:09:37",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #8 (Agen → Pau) — 2 crédits débités",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/reserver-trajet.php?id=8"
+    },
+    {
+        "id": "log_6a3a939cc9de03.90244503",
+        "date": "2026-06-23 16:09:32",
+        "niveau": "INFO",
+        "action": "desinscription",
+        "message": "Désinscription du trajet #8 (Agen → Pau) — 2 crédits remboursés",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/desinscrire-trajet.php"
+    },
+    {
+        "id": "log_6a3a93955a6a37.54187704",
+        "date": "2026-06-23 16:09:25",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #8 (Agen → Pau) — 2 crédits débités",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/reserver-trajet.php?id=8"
+    },
+    {
+        "id": "log_6a3a919ca53a28.65552450",
+        "date": "2026-06-23 16:01:00",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a3a9140321197.33119364",
+        "date": "2026-06-23 15:59:28",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a3a910f82b803.09637063",
+        "date": "2026-06-23 15:58:39",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : Agen → Pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": null,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/UTILISATEUR\/USR-recherche_trajet.php?departure=Agen&destination=Pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_6a3400bd68a402.65333300",
+        "date": "2026-06-18 16:29:17",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "::1",
+        "page": "\/eco_ride\/PROJET\/PHP\/login.php"
+    },
+    {
         "id": "log_6a28150572f8d2.50909574",
         "date": "2026-06-09 15:28:37",
         "niveau": "INFO",

@@ -1,3 +1,6 @@
 .DS_Store
 .DS_Store
 vendor/
+logs.json
+transactions.json
+demandes_credits.json

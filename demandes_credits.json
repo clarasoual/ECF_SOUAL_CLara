@@ -34,5 +34,14 @@
         "nom": "Soual",
         "email": "clara.soual@example.com",
         "statut": "accepte"
+    },
+    {
+        "id": "demande_6a3a9519f1a78",
+        "date": "2026-06-23 16:15:53",
+        "id_utilisateur": 19,
+        "prenom": "Clara",
+        "nom": "Soual",
+        "email": "clara.soual@example.com",
+        "statut": "en_attente"
     }
 ]
