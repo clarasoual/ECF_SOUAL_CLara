@@ -16,9 +16,8 @@ services:
       - DB_USER=root
       - DB_PASS=root
 
-  # Base de données MySQL
-  mysql:
-    image: mysql:8.0
+mysql:
+    image: mariadb:10.4
     container_name: ecoride_mysql
     ports:
       - "3307:3306"

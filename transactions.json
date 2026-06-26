@@ -298,5 +298,25 @@
         "montant": 2,
         "solde_apres": 18,
         "id_trajet": 8
+    },
+    {
+        "id": "transaction_6a3e9f5e81b48",
+        "date": "2026-06-26 15:48:46",
+        "id_utilisateur": 19,
+        "type": "sortie",
+        "description": "R\u00e9servation trajet Agen \u2192 Pau",
+        "montant": 2,
+        "solde_apres": 5,
+        "id_trajet": 8
+    },
+    {
+        "id": "transaction_6a3e9f6a2aba4",
+        "date": "2026-06-26 15:48:58",
+        "id_utilisateur": 19,
+        "type": "entree",
+        "description": "Remboursement annulation trajet Agen \u2192 Pau",
+        "montant": 2,
+        "solde_apres": 7,
+        "id_trajet": 8
     }
 ]
