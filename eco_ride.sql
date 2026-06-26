@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : lun. 27 avr. 2026 à 14:04
+-- Généré le : ven. 26 juin 2026 à 17:20
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -39,8 +39,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `prenom`, `email`, `password`) VALUES
-(1, 'Clara', 'clara@admin-eco.com', '$2y$10$.pP8pnF6FVJ27.6aVOSoIO2M1kSGByHymIcUcWKfRusWB8dwmosJC'),
-(2, 'Léon', 'leon@admin-eco.com', '$2y$10$.pP8pnF6FVJ27.6aVOSoIO2M1kSGByHymIcUcWKfRusWB8dwmosJC');
+(1, 'Clara', 'clara@admin-eco.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32'),
+(2, 'Léon', 'leon@admin-eco.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32');
 
 -- --------------------------------------------------------
 
@@ -96,8 +96,14 @@ CREATE TABLE `credits` (
 --
 
 INSERT INTO `credits` (`id`, `id_utilisateur`, `solde`) VALUES
-(3, 19, 7),
-(4, 48, 20);
+(3, 19, 20),
+(10, 1, 20),
+(11, 2, 20),
+(12, 3, 20),
+(13, 4, 20),
+(14, 5, 20),
+(15, 6, 20),
+(16, 54, 18);
 
 -- --------------------------------------------------------
 
@@ -111,7 +117,8 @@ CREATE TABLE `employes` (
   `email` varchar(255) DEFAULT NULL,
   `mot_de_passe` varchar(255) NOT NULL DEFAULT '',
   `service` varchar(100) DEFAULT NULL,
-`date_embauche` date NOT NULL DEFAULT (CURRENT_DATE),  `suspendu` tinyint(1) NOT NULL DEFAULT 0
+  `date_embauche` date NOT NULL DEFAULT curdate(),
+  `suspendu` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -119,9 +126,8 @@ CREATE TABLE `employes` (
 --
 
 INSERT INTO `employes` (`id`, `prenom`, `email`, `mot_de_passe`, `service`, `date_embauche`, `suspendu`) VALUES
-(2, 'Blathazar', 'balthazar@emp-eco.com', '$2y$10$EzkzVK9PvO0o0KV8GCWvPOax86VdxvYcEgQYHZd2Ms1BNXhJfndYW', 'maintenance', '2025-07-15', 0),
-(3, 'Luna', 'luna@emp-eco.com', '$2y$10$EzkzVK9PvO0o0KV8GCWvPOax86VdxvYcEgQYHZd2Ms1BNXhJfndYW', 'Administration', '2025-08-01', 0),
-(6, 'nini', 'nini@example.com', '$2y$10$5AkBhqqCrdMVPZVw0fwraexjmZUJbr5V8P2ZWixLZoNkVPGk5Spay', 'maintenance', '2026-04-14', 0);
+(2, 'Blathazar', 'balthazar@emp-eco.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'maintenance', '2025-07-15', 0),
+(3, 'Luna', 'luna@emp-eco.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'Administration', '2025-08-01', 0);
 
 -- --------------------------------------------------------
 
@@ -135,17 +141,17 @@ CREATE TABLE `signalements` (
   `id_utilisateur` int(11) DEFAULT NULL,
   `motif` text DEFAULT NULL,
   `date_creation` datetime DEFAULT current_timestamp(),
-  `statut` enum('en_cours','resolu_credits_verses','resolu_credits_bloques') DEFAULT 'en_cours',
-  `note_employe` text DEFAULT NULL
+  `statut` enum('en_cours','resolu_credits_verses','resolu_credits_bloques','traite') DEFAULT 'en_cours',
+  `note_employe` text DEFAULT NULL,
+  `type` enum('passager_vers_conducteur','conducteur_vers_passager') NOT NULL DEFAULT 'passager_vers_conducteur'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `signalements`
 --
 
-INSERT INTO `signalements` (`id`, `id_trajet`, `id_utilisateur`, `motif`, `date_creation`, `statut`, `note_employe`) VALUES
-(1, 4, 4, 'Antoine roulait trop vite', '2026-03-16 10:00:00', 'en_cours', NULL),
-(2, 42, 19, 'conduit mal', '2026-04-23 09:42:59', 'en_cours', '30 avril : mail envoyé au passager');
+INSERT INTO `signalements` (`id`, `id_trajet`, `id_utilisateur`, `motif`, `date_creation`, `statut`, `note_employe`, `type`) VALUES
+(1, 4, 4, 'Antoine roulait trop vite', '2026-03-16 10:00:00', 'traite', 'avertissement envoyé à antoine par mail', 'passager_vers_conducteur');
 
 -- --------------------------------------------------------
 
@@ -174,20 +180,23 @@ CREATE TABLE `trajets` (
 --
 
 INSERT INTO `trajets` (`id`, `id_conducteur`, `depart`, `arrivee`, `etapes`, `commentaire`, `date_depart`, `heure_depart`, `heure_arrivee`, `vehicule_id`, `places_disponibles`, `prix`, `statut`) VALUES
-(1, 6, 'Mussidan', 'Perigueux', NULL, NULL, '2026-01-02', '15:00:00', NULL, 4, 1, 2, 'termine'),
-(2, 1, 'Perigueux', 'Limoges', NULL, NULL, '2026-01-26', '08:00:00', NULL, 1, 0, 2, 'termine'),
-(3, 2, 'Saint Pierre de Chignac', 'Bordeaux', NULL, NULL, '2026-02-07', '10:00:00', NULL, 2, 0, 2, 'termine'),
-(4, 3, 'Béziers', 'Bordeaux', NULL, NULL, '2026-03-15', '14:00:00', NULL, 3, 0, 2, 'termine'),
-(5, 1, 'Bordeaux', 'Bayonne', NULL, NULL, '2026-10-25', '08:30:00', NULL, 1, 2, 2, 'publie'),
-(6, 1, 'Bayonne', 'Dax', NULL, NULL, '2026-10-30', '17:45:00', NULL, 1, 3, 2, 'publie'),
-(7, 2, 'Toulouse', 'Auch', NULL, NULL, '2026-09-03', '10:00:00', NULL, 2, 3, 2, 'publie'),
-(8, 3, 'Agen', 'Pau', NULL, NULL, '2026-09-26', '14:15:00', '17:00:00', 3, 2, 2, 'publie'),
-(13, 19, 'Bordeaux', 'Biarritz', NULL, '', '2026-03-12', '10:00:00', NULL, 15, 2, 2, 'termine'),
-(14, 19, 'Bergerac', 'Mussidan', NULL, '', '2026-03-12', '10:00:00', NULL, 15, 1, 2, 'termine'),
-(39, 19, 'mussidan', 'montpon', '[\"saint martial\"]', '', '2026-07-12', '10:00:00', NULL, 15, 3, 2, 'publie'),
-(42, 1, 'begles', 'gradignan', NULL, '', '2026-04-30', '15:00:00', NULL, 15, 1, 3, 'termine'),
-(44, 19, 'Agen', 'Niort', '[\"Bergerac\"]', '', '2026-06-22', '11:00:00', '15:00:00', 15, 3, 2, 'publie'),
-(45, 19, 'Mérignac', 'Montpon', NULL, 'Départ Carrefour Mérignac soleil, arrivée gare de Montpon', '2026-08-12', '10:00:00', '11:00:00', 15, 3, 5, 'publie');
+(1, 6, 'Mussidan', 'Perigueux', NULL, 'Départ place du marché de Mussidan, arrivée gare de Périgueux', '2026-01-02', '15:00:00', '15:30:00', 4, 1, 2, 'termine'),
+(2, 1, 'Perigueux', 'Limoges', NULL, 'Départ gare de Périgueux, arrivée gare des Bénédictins de Limoges', '2026-01-26', '08:00:00', '09:30:00', 1, 0, 2, 'termine'),
+(3, 2, 'Saint Pierre de Chignac', 'Bordeaux', NULL, 'Départ mairie de Saint Pierre de Chignac, arrivée gare Saint-Jean de Bordeaux', '2026-02-07', '10:00:00', '11:15:00', 2, 0, 2, 'termine'),
+(4, 3, 'Béziers', 'Bordeaux', NULL, 'Départ gare de Béziers, arrivée gare Saint-Jean de Bordeaux', '2026-03-15', '14:00:00', '17:00:00', 3, 0, 2, 'termine'),
+(5, 1, 'Bordeaux', 'Bayonne', NULL, 'Départ gare Saint-Jean de Bordeaux, arrivée gare de Bayonne', '2026-10-25', '08:30:00', '10:15:00', 1, 2, 2, 'publie'),
+(6, 1, 'Bayonne', 'Dax', NULL, 'Départ place de la liberté de Bayonne, arrivée gare de Dax', '2026-10-30', '17:45:00', '18:25:00', 1, 3, 2, 'publie'),
+(7, 2, 'Toulouse', 'Auch', NULL, 'Départ gare Matabiau de Toulouse, arrivée gare d\'Auch', '2026-09-03', '10:00:00', '11:15:00', 2, 3, 2, 'publie'),
+(8, 3, 'Agen', 'Pau', NULL, 'Départ gare d\'Agen, arrivée gare de Pau', '2026-09-26', '14:15:00', '17:00:00', 3, 0, 2, 'complet'),
+(13, 19, 'Bordeaux', 'Biarritz', NULL, 'Départ gare Saint-Jean de Bordeaux, arrivée gare de Biarritz', '2026-03-12', '10:00:00', '12:00:00', 15, 2, 2, 'termine'),
+(14, 19, 'Bergerac', 'Mussidan', NULL, 'Départ gare de Bergerac, arrivée place du marché de Mussidan', '2026-03-12', '10:00:00', '10:30:00', 15, 1, 2, 'termine'),
+(44, 19, 'Agen', 'Niort', '[\"Bergerac\"]', 'Départ gare d\'Agen, arrêt gare de Bergerac, arrivée gare de Niort', '2026-06-22', '11:00:00', '15:00:00', 15, 3, 2, 'termine'),
+(54, 1, 'Bordeaux', 'Périgueux', NULL, 'Départ gare Saint-Jean de Bordeaux, arrivée gare de Périgueux', '2026-07-15', '08:00:00', '09:30:00', 1, 2, 3, 'publie'),
+(55, 2, 'Bordeaux', 'Toulouse', NULL, 'Départ gare Saint-Jean de Bordeaux, arrivée gare Matabiau de Toulouse', '2026-07-20', '09:00:00', '11:30:00', 2, 3, 4, 'publie'),
+(56, 6, 'Périgueux', 'Bordeaux', NULL, 'Départ gare de Périgueux, arrivée gare Saint-Jean de Bordeaux', '2026-07-22', '07:30:00', '09:00:00', 4, 1, 2, 'publie'),
+(57, 3, 'Bordeaux', 'Biarritz', NULL, 'Départ gare Saint-Jean de Bordeaux, arrivée gare de Biarritz', '2026-07-18', '10:00:00', '12:00:00', 3, 0, 3, 'complet'),
+(58, 1, 'Limoges', 'Bordeaux', '[\"Périgueux\"]', 'Départ gare des Bénédictins de Limoges, arrêt gare de Périgueux, arrivée gare Saint-Jean de Bordeaux', '2026-08-05', '07:00:00', '10:00:00', 1, 2, 5, 'publie'),
+(59, 54, 'pékin', 'Los angeles', '[\"mulhouse\"]', 'Au quartier tavu ', '2027-01-01', '00:00:00', '00:10:00', 18, 2, 20, 'publie');
 
 -- --------------------------------------------------------
 
@@ -199,7 +208,6 @@ CREATE TABLE `trajets_passagers` (
   `id` int(11) NOT NULL,
   `id_trajet` int(11) NOT NULL,
   `id_passager` int(11) NOT NULL,
-  `note_passager` decimal(2,1) DEFAULT NULL,
   `statut` enum('reserve','annule','termine','valide','litige','avis_laisse') DEFAULT 'reserve',
   `date_reservation` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -208,19 +216,24 @@ CREATE TABLE `trajets_passagers` (
 -- Déchargement des données de la table `trajets_passagers`
 --
 
-INSERT INTO `trajets_passagers` (`id`, `id_trajet`, `id_passager`, `note_passager`, `statut`, `date_reservation`) VALUES
-(1, 2, 2, 5.0, 'termine', '2026-01-19 16:01:34'),
-(2, 2, 3, 5.0, 'termine', '2026-01-19 16:01:34'),
-(3, 3, 5, 5.0, 'termine', '2026-01-19 16:01:34'),
-(4, 3, 1, 5.0, 'termine', '2026-01-19 16:01:34'),
-(5, 3, 4, 4.0, 'termine', '2026-01-19 16:01:34'),
-(6, 4, 4, 5.0, 'termine', '2026-01-19 16:01:34'),
-(7, 5, 2, NULL, 'reserve', '2026-01-19 16:19:49'),
-(8, 5, 4, NULL, 'reserve', '2026-01-19 16:19:49'),
-(9, 6, 3, NULL, 'reserve', '2026-01-19 16:19:49'),
-(10, 7, 4, NULL, 'reserve', '2026-01-19 16:19:49'),
-(16, 42, 19, NULL, 'litige', '2026-04-14 15:29:56'),
-(18, 44, 2, NULL, 'reserve', '2026-04-24 10:01:15');
+INSERT INTO `trajets_passagers` (`id`, `id_trajet`, `id_passager`, `statut`, `date_reservation`) VALUES
+(1, 2, 2, 'termine', '2026-01-19 16:01:34'),
+(2, 2, 3, 'termine', '2026-01-19 16:01:34'),
+(3, 3, 5, 'termine', '2026-01-19 16:01:34'),
+(4, 3, 1, 'termine', '2026-01-19 16:01:34'),
+(5, 3, 4, 'termine', '2026-01-19 16:01:34'),
+(6, 4, 4, 'termine', '2026-01-19 16:01:34'),
+(7, 5, 2, 'reserve', '2026-01-19 16:19:49'),
+(8, 5, 4, 'reserve', '2026-01-19 16:19:49'),
+(9, 6, 3, 'reserve', '2026-01-19 16:19:49'),
+(10, 7, 4, 'reserve', '2026-01-19 16:19:49'),
+(18, 44, 2, 'termine', '2026-04-24 10:01:15'),
+(25, 57, 2, 'reserve', '2026-06-01 10:00:00'),
+(26, 57, 4, 'reserve', '2026-06-01 11:00:00'),
+(27, 55, 5, 'reserve', '2026-06-02 09:00:00'),
+(28, 54, 4, 'reserve', '2026-06-03 14:00:00'),
+(30, 8, 19, 'reserve', '2026-06-23 16:09:37'),
+(31, 8, 54, 'reserve', '2026-06-23 17:49:46');
 
 -- --------------------------------------------------------
 
@@ -237,7 +250,6 @@ CREATE TABLE `utilisateurs` (
   `role` enum('passager','conducteur','passager-conducteur') NOT NULL,
   `date_naissance` date DEFAULT NULL,
   `bio` text DEFAULT NULL,
-  `credits` int(11) DEFAULT 0,
   `date_inscription` datetime DEFAULT current_timestamp(),
   `photo` varchar(255) DEFAULT 'default.jpg',
   `driver_completed` tinyint(1) DEFAULT 0,
@@ -249,16 +261,15 @@ CREATE TABLE `utilisateurs` (
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role`, `date_naissance`, `bio`, `credits`, `date_inscription`, `photo`, `driver_completed`, `profile_completed`, `suspendu`) VALUES
-(1, 'C.', 'Nino', 'nino@example.com', 'mdp123', 'passager-conducteur', '1998-01-01', NULL, 0, '2025-11-06 16:57:52', 'nino.jpg', 1, 1, 0),
-(2, 'M.', 'Finn', 'finn@example.com', 'mdp123', 'passager-conducteur', '1990-01-01', NULL, 0, '2025-11-06 16:57:52', 'finn.png', 1, 1, 0),
-(3, 'B.', 'Antoine', 'antoine@example.com', 'mdp123', 'passager-conducteur', '1983-01-01', NULL, 0, '2025-11-06 16:57:52', 'antoine.jpg', 1, 1, 0),
-(4, 'R.', 'Nina', 'nina@example.com', 'mdp123', 'passager', '2002-01-01', NULL, 0, '2025-11-06 16:57:52', 'nina.jpg', 0, 1, 0),
-(5, 'K.', 'Théo', 'theo@example.com', 'mdp123', 'passager', '1995-01-01', NULL, 0, '2025-11-06 16:57:52', 'theo.jpg', 0, 1, 0),
-(6, 'S.', 'Jeanne', 'jeanne@example.com', 'mdp123', 'conducteur', '1963-01-01', NULL, 0, '2025-11-06 16:57:52', 'jeanne.jpg', 1, 1, 0),
-(19, 'Soual', 'Clara', 'clara.soual@example.com', '$2y$10$FZ8OsJdJDWO0i8B.v2/oPusnZqYI9ioFQg08QwQT/o8e3GWkJI1F2', 'passager-conducteur', '2002-02-07', 'j\'aime pas conduire', 0, '2026-01-22 15:23:09', '6995c08cbbe06_anniv chat.png', 0, 0, 0),
-(47, 'testcredits', 'testcredits', 'test.credits@example.com', '$2y$10$.fG/lTZJoYUoj0sdU6a/JejbAROGatL7T9y2HI0L3pw/GG7Hc62la', 'passager', '2002-02-02', '', 0, '2026-04-06 13:42:16', 'default.jpg', 0, 1, 0),
-(48, 'profiltest', 'testprofil', 'testprofil@example.com', '$2y$10$oY4xQObjH9MWryIYK5jBSuLVKhXcWeRejcIkA.J1//Y3mVouNofOO', 'passager', NULL, NULL, 0, '2026-04-15 17:01:23', 'default.jpg', 0, 0, 0);
+INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role`, `date_naissance`, `bio`, `date_inscription`, `photo`, `driver_completed`, `profile_completed`, `suspendu`) VALUES
+(1, 'C.', 'Nino', 'nino@example.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'passager-conducteur', '1998-01-01', NULL, '2025-11-06 16:57:52', 'nino.jpg', 1, 1, 0),
+(2, 'M.', 'Finn', 'finn@example.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'passager-conducteur', '1990-01-01', NULL, '2025-11-06 16:57:52', 'finn.png', 1, 1, 0),
+(3, 'B.', 'Antoine', 'antoine@example.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'passager-conducteur', '1983-01-01', NULL, '2025-11-06 16:57:52', 'antoine.jpg', 1, 1, 0),
+(4, 'R.', 'Nina', 'nina@example.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'passager', '2002-01-01', NULL, '2025-11-06 16:57:52', 'nina.jpg', 0, 1, 0),
+(5, 'K.', 'Théo', 'theo@example.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'passager', '1995-01-01', NULL, '2025-11-06 16:57:52', 'theo.jpg', 0, 1, 0),
+(6, 'S.', 'Jeanne', 'jeanne@example.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'conducteur', '1963-01-01', NULL, '2025-11-06 16:57:52', 'jeanne.jpg', 1, 1, 0),
+(19, 'Soual', 'Clara', 'clara.soual@example.com', '$2y$12$j/4Y0ccznDIh/djcAGMYb.QbNVtU1u2uOiXdvDwrveEcQY8q/tW32', 'passager-conducteur', '2002-02-07', 'j\'aime pas conduire', '2026-01-22 15:23:09', '6995c08cbbe06_anniv chat.png', 1, 1, 0),
+(54, 'cicuttini', 'nino', 'nino.cicuttini@gmail.com', '$2y$10$yPPmwHxsVkmvE1iYk0gonOibpUJPO9MFyBX.4ZNSr/cHJjS.141V6', 'passager-conducteur', '1999-08-04', 'Je suis gentil et j\'aime le métal et les pâtes', '2026-06-23 17:38:21', '6a3aa9c1a07e6_33_Tours_.jpg', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -290,7 +301,8 @@ INSERT INTO `vehicules` (`vehicule_id`, `id_utilisateur`, `plaque`, `date_premie
 (2, 2, 'CD-321-BA', '2014-12-03', 'Opel', 'Agila', 'Blanche', 'Essence', 3, 'non', 'non', NULL),
 (3, 3, 'GH-678-IJ', '2012-02-27', 'Citroen', 'C3', 'Noir', 'Diesel', 4, 'non', 'non', NULL),
 (4, 6, 'CD-345-EF', '2016-11-29', 'Peugeot', '307', 'Grise', 'Diesel', 4, 'non', 'non', NULL),
-(15, 19, 'AB-123-CD', '2020-05-15', 'Toyota', 'Corolla', 'Bleu', 'Electrique', 5, 'oui', 'non', 'Pop');
+(15, 19, 'AB-123-CD', '2020-05-15', 'Toyota', 'Corolla', 'Bleu', 'Electrique', 5, 'oui', 'non', 'Pop'),
+(18, 54, 'KK-067-BB', '2010-02-01', 'lamborghini', 'proutini', 'Rose', 'Essence', 3, 'oui', 'oui', 'jazz');
 
 --
 -- Index pour les tables déchargées
@@ -378,13 +390,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT pour la table `avis`
 --
 ALTER TABLE `avis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `credits`
 --
 ALTER TABLE `credits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `employes`
@@ -396,31 +408,31 @@ ALTER TABLE `employes`
 -- AUTO_INCREMENT pour la table `signalements`
 --
 ALTER TABLE `signalements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `trajets`
 --
 ALTER TABLE `trajets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT pour la table `trajets_passagers`
 --
 ALTER TABLE `trajets_passagers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT pour la table `vehicules`
 --
 ALTER TABLE `vehicules`
-  MODIFY `vehicule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `vehicule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Contraintes pour les tables déchargées
