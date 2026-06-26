@@ -1,5 +1,35 @@
 [
     {
+        "id": "log_6a3ea59b24de44.21211246",
+        "date": "2026-06-26 16:15:23",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_6a3ea5965322d8.49808096",
+        "date": "2026-06-26 16:15:18",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-06-29 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-06-29&passenger=1"
+    },
+    {
+        "id": "log_6a3ea54031df31.19868498",
+        "date": "2026-06-26 16:13:52",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/login.php"
+    },
+    {
         "id": "log_6a3e9f6a2c5709.18514218",
         "date": "2026-06-26 15:48:58",
         "niveau": "INFO",

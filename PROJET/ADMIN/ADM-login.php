@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script src="../JS/ADM-login.js"></script>
 
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer-adm-emp.php'); ?>
 </body>
 </html>
+
