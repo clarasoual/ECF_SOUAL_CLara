@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -99,3 +104,4 @@ if (file_exists('../COMPONENTS/COMP-footer.php')) {
 ?>
 </body>
 </html>
+
