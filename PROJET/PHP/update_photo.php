@@ -14,7 +14,7 @@ if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== 0) {
 }
 
 // Dossier où on va stocker les photos
-$uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/eco_ride/IMAGES/profiles/";
+$uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/IMAGES/profiles/";
 
 // Vérifie que le dossier existe et est accessible
 if (!is_dir($uploadDir) || !is_writable($uploadDir)) {

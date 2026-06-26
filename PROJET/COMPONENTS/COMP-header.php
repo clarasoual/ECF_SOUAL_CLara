@@ -21,7 +21,7 @@ if ($isLoggedIn) {
 
             <div class="logo">
                 <a href="../UTILISATEUR/USR-index.php" class="logo-link">
-                    <img src="/eco_ride/IMAGES/logo.png" alt="Logo Eco Ride">
+                    <img src="/IMAGES/logo.png" alt="Logo Eco Ride">
                     <span class="logo-text">Eco Ride</span>
                 </a>
             </div>
@@ -39,7 +39,7 @@ if ($isLoggedIn) {
                 <div class="profil-container">
                     <div class="user-info">
                         <a href="<?= $profilLink ?>">
-                            <img src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($photo) ?>"
+                            <img src="/IMAGES/profiles/<?= htmlspecialchars($photo) ?>"
                                  alt="Photo de profil"
                                  class="photo-profil"
                                  id="profil-click">
