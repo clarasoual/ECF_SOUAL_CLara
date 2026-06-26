@@ -16,7 +16,7 @@ services:
       - DB_USER=root
       - DB_PASS=root
 
-mysql:
+  mysql:
     image: mariadb:10.4
     container_name: ecoride_mysql
     ports:
@@ -41,3 +41,4 @@ mysql:
 
 volumes:
   mysql_data:
+
