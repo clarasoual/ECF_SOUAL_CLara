@@ -13,21 +13,18 @@ $password = $_POST['password'] ?? '';
 $redirect = $_POST['redirect'] ?? $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php';
 
 if ($email === '' || $password === '') {
-    die('Champs manquants.');
+    header('Location: ../UTILISATEUR/USR-connexion-inscription.php?error=champs_manquants');
+    exit;
 }
 
 $stmt = $bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
 $stmt->execute(['email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$user) {
-    logAction('connexion_echouee', "Tentative de connexion avec email inconnu : $email", 'WARNING');
-    die('Email incorrect.');
-}
-
-if (!password_verify($password, $user['mot_de_passe'])) {
-    logAction('connexion_echouee', "Mot de passe incorrect pour : $email", 'WARNING', $user['id']);
-    die('Mot de passe incorrect.');
+if (!$user || !password_verify($password, $user['mot_de_passe'])) {
+    logAction('connexion_echouee', "Tentative de connexion échouée pour : $email", 'WARNING');
+    header('Location: ../UTILISATEUR/USR-connexion-inscription.php?error=identifiants_incorrects');
+    exit;
 }
 
 if ($user['suspendu']) {
@@ -48,4 +45,3 @@ logAction('connexion', "Connexion réussie : {$user['email']}", 'INFO', $user['i
 
 header('Location: ' . $redirect);
 exit;
-?>
