@@ -35,11 +35,14 @@ if (session_status() === PHP_SESSION_NONE) {
         <div id="connexion">
             <h2>Se connecter</h2>
 
-            <?php if (isset($_GET['error']) && $_GET['error'] === 'suspendu'): ?>
-                <p class="error-message">
-                    ⚠️ Votre compte a été suspendu.
-                    <a href="mailto:support@ecoride.fr" target="_blank">Contacter le support EcoRide</a>
-                </p>
+            <?php if (isset($_GET['error'])): ?>
+                <?php if ($_GET['error'] === 'suspendu'): ?>
+                    <p class="error-message">⚠️ Votre compte a été suspendu. <a href="mailto:support@ecoride.fr">Contacter le support EcoRide</a></p>
+                <?php elseif ($_GET['error'] === 'identifiants_incorrects'): ?>
+                    <p class="error-message">❌ Email ou mot de passe incorrect.</p>
+                <?php elseif ($_GET['error'] === 'champs_manquants'): ?>
+                    <p class="error-message">❌ Veuillez remplir tous les champs.</p>
+                <?php endif; ?>
             <?php endif; ?>
 
             <?php $redirect = $_GET['redirect'] ?? '../UTILISATEUR/USR-index.php'; ?>
@@ -76,4 +79,3 @@ if (session_status() === PHP_SESSION_NONE) {
 
 </body>
 </html>
-
