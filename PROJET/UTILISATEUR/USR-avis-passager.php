@@ -120,7 +120,7 @@ $heure_fmt = substr($trajet['heure_depart'], 0, 5);
                 <div class="passager-info">
                     <div class="passager-avatar">
                         <?php if (!empty($p['photo'])): ?>
-                            <img src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($p['photo']) ?>" alt="Photo">
+                            <img src="/IMAGES/profiles/<?= htmlspecialchars($p['photo']) ?>" alt="Photo">
                         <?php else: ?>
                             <div class="avatar-placeholder"><?= strtoupper(substr($p['prenom'], 0, 1)) ?></div>
                         <?php endif; ?>

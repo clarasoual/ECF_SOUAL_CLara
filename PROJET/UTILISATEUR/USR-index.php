@@ -33,7 +33,7 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <section class="hero">
         <div class="hero-image">
-            <img src="/eco_ride/IMAGES/photoheader.jpg" alt="Image libre de droit covoiturage">
+            <img src="/IMAGES/photoheader.jpg" alt="Image libre de droit covoiturage">
             <div class="slogan">
                 <h1>Ensemble, roulons vers un futur plus vert</h1>
             </div>
@@ -60,7 +60,7 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="number" id="passenger" name="passenger" min="1" max="8" value="1">
                 </div>
                 <button type="submit" class="search-btn">
-                    <img src="/eco_ride/IMAGES/logo recherche.png" alt="Rechercher" class="search-icon">
+                    <img src="/IMAGES/logo recherche.png" alt="Rechercher" class="search-icon">
                 </button>
             </div>
         </form>
@@ -75,7 +75,7 @@ $temoignages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <section class="founder-section">
         <div class="founder-container">
-            <img src="/eco_ride/IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
+            <img src="/IMAGES/portrait jose.png" alt="Photo de José Marceau" class="founder-photo">
             <div class="founder-bio">
                 <h2>José Marceau</h2>
                 <p class="bio-short">

@@ -25,7 +25,7 @@ if ($role && !in_array($role, $roles_autorises)) {
 
 $photoFileName = null;
 if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
-    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/eco_ride/IMAGES/profiles/";
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . "/IMAGES/profiles/";
 
     if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
         $_SESSION['error'] = "❌ Dossier upload inaccessible.";

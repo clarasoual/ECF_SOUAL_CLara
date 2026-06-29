@@ -72,7 +72,7 @@ $solde = $stmt_solde->fetchColumn() ?: 0;
         <section class="profil-header">
 
             <div class="profil-top">
-                <img src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
+                <img src="/IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
                      alt="Photo de profil" class="profil-photo">
 
                 <div class="profil-infos">

@@ -99,7 +99,7 @@ $roles_labels = [
     <aside class="profil-aside">
 
         <div class="profil-card">
-            <img src="/eco_ride/IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
+            <img src="/IMAGES/profiles/<?= htmlspecialchars($user['photo'] ?? 'default.jpg') ?>"
                  class="profil-avatar" alt="Photo de profil">
             <h2 class="profil-nom"><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></h2>
             <span class="profil-role-badge"><?= $roles_labels[$user['role']] ?? ucfirst($user['role']) ?></span>

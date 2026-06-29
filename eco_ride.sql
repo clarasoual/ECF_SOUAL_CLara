@@ -117,7 +117,7 @@ CREATE TABLE `employes` (
   `email` varchar(255) DEFAULT NULL,
   `mot_de_passe` varchar(255) NOT NULL DEFAULT '',
   `service` varchar(100) DEFAULT NULL,
-  `date_embauche` date NOT NULL DEFAULT curdate(),
+  `date_embauche` date NOT NULL DEFAULT '2026-01-01',
   `suspendu` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -484,3 +484,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

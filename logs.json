@@ -1,5 +1,115 @@
 [
     {
+        "id": "log_6a3ea59b24de44.21211246",
+        "date": "2026-06-26 16:15:23",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_6a3ea5965322d8.49808096",
+        "date": "2026-06-26 16:15:18",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-06-29 (0 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-06-29&passenger=1"
+    },
+    {
+        "id": "log_6a3ea54031df31.19868498",
+        "date": "2026-06-26 16:13:52",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a3e9f6a2c5709.18514218",
+        "date": "2026-06-26 15:48:58",
+        "niveau": "INFO",
+        "action": "desinscription",
+        "message": "Désinscription du trajet #8 (Agen → Pau) — 2 crédits remboursés",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/desinscrire-trajet.php"
+    },
+    {
+        "id": "log_6a3e9f5e844577.60923245",
+        "date": "2026-06-26 15:48:46",
+        "niveau": "INFO",
+        "action": "reservation",
+        "message": "Réservation du trajet #8 (Agen → Pau) — 2 crédits débités",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/reserver-trajet.php?id=8"
+    },
+    {
+        "id": "log_6a3e9f4f7301b9.84263502",
+        "date": "2026-06-26 15:48:31",
+        "niveau": "INFO",
+        "action": "recherche_trajet",
+        "message": "Recherche : agen → pau le 2026-09-26 (1 résultat(s))",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/UTILISATEUR\/USR-recherche_trajet.php?departure=agen&destination=pau&date=2026-09-26&passenger=1"
+    },
+    {
+        "id": "log_6a3e9f24ccaa78.95995670",
+        "date": "2026-06-26 15:47:48",
+        "niveau": "INFO",
+        "action": "connexion",
+        "message": "Connexion réussie : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a3e9ea9755701.65456620",
+        "date": "2026-06-26 15:45:45",
+        "niveau": "WARNING",
+        "action": "connexion_echouee",
+        "message": "Mot de passe incorrect pour : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a3e9e97e9a817.13875203",
+        "date": "2026-06-26 15:45:27",
+        "niveau": "WARNING",
+        "action": "connexion_echouee",
+        "message": "Mot de passe incorrect pour : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a3e9e8dc26f50.35442841",
+        "date": "2026-06-26 15:45:17",
+        "niveau": "WARNING",
+        "action": "connexion_echouee",
+        "message": "Mot de passe incorrect pour : clara.soual@example.com",
+        "utilisateur": 19,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/login.php"
+    },
+    {
+        "id": "log_6a3e9e6b5576e3.04341433",
+        "date": "2026-06-26 15:44:43",
+        "niveau": "WARNING",
+        "action": "connexion_echouee",
+        "message": "Tentative de connexion avec email inconnu : clara.soual@test.com",
+        "utilisateur": null,
+        "ip": "172.18.0.1",
+        "page": "\/PHP\/login.php"
+    },
+    {
         "id": "log_6a3aab1a5e4889.49068766",
         "date": "2026-06-23 17:49:46",
         "niveau": "INFO",
