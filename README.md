@@ -14,7 +14,7 @@ Le projet est un site full-stack PHP avec une base de données relationnelle MyS
 
 | Rôle | Email | Mot de passe |
 |------|-------|--------------|
-| Administrateur | clara@admin-eco.com | [ à compléter ] |
+| Administrateur | leon@admin-eco.com | Mdp12345! |
 | Employé | balthazar@emp-eco.com | Mdp12345! |
 | Utilisateur | nino@example.com | Mdp12345! |
 
@@ -46,11 +46,11 @@ docker-compose up --build
 
 ## Déploiement en production
 
-Le site est déployé sur Railway : `[ URL de production à compléter après redéploiement ]`
+Le site est déployé sur Railway : [https://ecfsoualclara-production.up.railway.app/](https://ecfsoualclara-production.up.railway.app/)
 
 - Serveur : Railway (Docker, nginx + php-fpm)
 - Base de données : MySQL hébergée sur Railway
-- Variables d'environnement à configurer sur Railway :
+- Variables d'environnement configurées sur Railway :
 
 | Variable | Description |
 |----------|-------------|
@@ -78,9 +78,10 @@ eco_ride/
 │   ├── PHP/             # Logique back-end (auth, BDD, traitement formulaires)
 │   ├── SQL/             # Script SQL (création tables + seed)
 │   └── UTILISATEUR/     # Pages espace utilisateur
-├── dossier_projet/      # Documentation complète du projet
-│   ├── documentation_technique.pdf   # MCD, diagrammes, choix techniques [ page X ]
-│   └── gestion_de_projet.pdf         # Kanban, méthodologie [ page X ]
+├── docs/                # Documentation complète du projet
+│   ├── dossier_projet.pdf            # Analyse, conception, dev, BDD, déploiement [ page X ]
+│   ├── manuel_utilisateur.pdf        # Parcours par rôle avec captures d'écran
+│   └── charte_graphique.pdf          # Palette de couleurs, typographie, composants UI
 ├── Dockerfile
 ├── nginx.conf
 ├── start.sh
@@ -91,12 +92,11 @@ eco_ride/
 
 ## Documentation
 
-La documentation complète est disponible dans le dossier `dossier_projet/` à la racine :
+La documentation complète est disponible dans le dossier `docs/` à la racine :
 
-- **Documentation technique** — MCD, diagrammes UML, architecture, choix techniques, déploiement
-- **Documentation gestion de projet** — Kanban Trello, méthodologie, organisation
-- **Manuel utilisateur** — Parcours par rôle avec captures d'écran
-- **Charte graphique** — Palette de couleurs, typographie, composants UI
+- **Dossier projet** — analyse des besoins, conception (MCD, diagrammes UML), développement front/back-end, base de données, gestion de projet, déploiement
+- **Manuel utilisateur** — présentation de l'application et parcours par rôle avec identifiants de démonstration
+- **Charte graphique** — palette de couleurs, typographie, composants UI, maquettes
 
 Lien Trello : `[ à compléter ]`
 
