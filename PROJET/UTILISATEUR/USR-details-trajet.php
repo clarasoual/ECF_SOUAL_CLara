@@ -8,6 +8,7 @@ ini_set('display_errors', 0);
 
 $success  = isset($_GET['success']) && $_GET['success'] == 1;
 $isOwner  = isset($_SESSION['user_id']) && $_SESSION['user_id'] == $trajet['id_conducteur'];
+$peutReserver = in_array($_SESSION['role'] ?? '', ['passager', 'passager-conducteur']);
 
 $eco = strtolower($trajet['carburant'] ?? '') === 'electrique';
 
@@ -197,7 +198,14 @@ $trajetTermine  = ($trajet['statut'] === 'termine');
                     <button type="submit" class="cta-desinscrire">Se désinscrire</button>
                 </form>
             <?php elseif (!$isOwner && !$isPassenger): ?>
-                <a href="../PHP/reserver-trajet.php?id=<?= $trajet['id'] ?>" class="cta-reserver">Réserver ce trajet</a>
+                <?php if ($peutReserver): ?>
+                    <a href="../PHP/reserver-trajet.php?id=<?= $trajet['id'] ?>" class="cta-reserver">Réserver ce trajet</a>
+                <?php else: ?>
+                    <p class="cta-info-role">
+                        🚗 Votre rôle actuel ne permet pas de réserver de trajet.
+                        <a href="USR-infos-perso.php">Changez de rôle</a> pour devenir passager.
+                    </p>
+                <?php endif; ?>
             <?php endif; ?>
         <?php endif; ?>
     </div>

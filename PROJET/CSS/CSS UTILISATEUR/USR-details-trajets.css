@@ -298,6 +298,25 @@ main {
     text-decoration: none;
 }
 
+.cta-info-role {
+    background-color: rgba(244, 177, 131, 0.12);
+    border: 1px solid rgba(244, 177, 131, 0.3);
+    color: var(--gris-doux);
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: right;
+}
+
+.cta-info-role a {
+    color: var(--orange-doux);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.cta-info-role a:hover { color: #e07b39; }
+
 .cta-modifier { background-color: var(--orange-doux); color: black; }
 .cta-modifier:hover { background-color: #e07b39; }
 .cta-supprimer { background-color: #e74c3c; color: white; }

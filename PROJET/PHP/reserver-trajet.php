@@ -18,6 +18,12 @@ if (!$id_trajet) {
     die("Trajet invalide.");
 }
 
+// Vérifier que l'utilisateur a le droit de réserver (passager ou passager-conducteur)
+$role = $_SESSION['role'] ?? '';
+if (!in_array($role, ['passager', 'passager-conducteur'])) {
+    die("Votre rôle actuel (conducteur) ne vous permet pas de réserver un trajet. Modifiez votre rôle depuis votre profil pour devenir passager.");
+}
+
 $stmt = $bdd->prepare("SELECT * FROM trajets WHERE id = ?");
 $stmt->execute([$id_trajet]);
 $trajet = $stmt->fetch(PDO::FETCH_ASSOC);
