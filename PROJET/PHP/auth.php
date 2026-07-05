@@ -1,106 +1,104 @@
 <?php
-if (defined('AUTH_PHP_LOADED')) return;
-define('AUTH_PHP_LOADED', true);
+session_start();
+include('../PHP/connexion.php');
+include('../PHP/logs.php');
 
-// ==============================================
-// ENVIRONNEMENT : dev ou prod
-// En prod sur Railway, définir APP_ENV=production
-// dans les variables d'environnement Railway
-// En local sur XAMPP, APP_ENV n'existe pas → dev
-// ==============================================
-$isProd = (getenv('APP_ENV') === 'production');
-
-if ($isProd) {
-    // Production : aucune erreur affichée côté client
-    ini_set('display_errors', 0);
-    ini_set('display_startup_errors', 0);
-    error_reporting(0);
-} else {
-    // Local : tout afficher pour débugger
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+if (!isset($_SESSION['admin_id'])) {
+    header('Location: ADM-login.php');
+    exit();
 }
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+$niveau  = $_GET['niveau']  ?? '';
+$action  = $_GET['action']  ?? '';
+$page    = max(1, (int)($_GET['page'] ?? 1));
+$perPage = 20;
 
-// ==============================================
-// TIMEOUT DE SESSION
-// Déconnexion automatique après inactivité
-// ==============================================
-define('SESSION_TIMEOUT', 30 * 60); // 30 minutes
+$niveaux_autorises = ['INFO', 'WARNING', ''];
+if (!in_array($niveau, $niveaux_autorises)) $niveau = '';
 
-function checkSessionTimeout() {
-    if (isset($_SESSION['last_activity'])) {
-        if (time() - $_SESSION['last_activity'] > SESSION_TIMEOUT) {
-            session_unset();
-            session_destroy();
-            session_start();
-            return false;
-        }
-    }
-    $_SESSION['last_activity'] = time();
-    return true;
-}
-
-// ==============================================
-// UTILISATEURS
-// ==============================================
-
-if (!function_exists('requireLogin')) {
-    function requireLogin() {
-        checkSessionTimeout();
-        if (!isset($_SESSION['user_id'])) {
-            $currentPage = $_SERVER['REQUEST_URI'];
-            $redirectUrl = urlencode($currentPage);
-            header("Location: ../UTILISATEUR/USR-connexion-inscription.php?redirect=$redirectUrl");
-            exit();
-        }
-    }
-}
-
-if (!function_exists('loginUser')) {
-    function loginUser($id, $username, $email, $photo = 'default.jpg', $role = 'passager') {
-        $_SESSION['user_id']       = $id;
-        $_SESSION['username']      = $username;
-        $_SESSION['email']         = $email;
-        $_SESSION['photo']         = $photo;
-        $_SESSION['role']          = $role;
-        $_SESSION['last_activity'] = time();
-    }
-}
-
-if (!function_exists('logoutUser')) {
-    function logoutUser() {
-        session_unset();
-        session_destroy();
-        header('Location: ../UTILISATEUR/USR-connexion-inscription.php');
-        exit();
-    }
-}
-
-// ==============================================
-// EMPLOYÉS
-// ==============================================
-
-if (!function_exists('requireEmploye')) {
-    function requireEmploye() {
-        checkSessionTimeout();
-        if (!isset($_SESSION['employe_id'])) {
-            header("Location: ../EMPLOYE/EMP-login-employe.php");
-            exit();
-        }
-    }
-}
-
-if (!function_exists('logoutEmploye')) {
-    function logoutEmploye() {
-        session_unset();
-        session_destroy();
-        header('Location: ../EMPLOYE/EMP-login-employe.php');
-        exit();
-    }
-}
+$logs       = getLogs($niveau, $action, $page, $perPage);
+$total      = countLogs($niveau, $action);
+$totalPages = ceil($total / $perPage);
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journaux d'activité - Admin</title>
+    <link rel="stylesheet" href="../CSS/style_global.css">
+    <link rel="stylesheet" href="../CSS/CSS ADMIN/ADM-logs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<?php include('../COMPONENTS/COMP-header-admin.php'); ?>
+
+<main>
+    <?php include('../COMPONENTS/COMP-menu-admin.html'); ?>
+
+    <div class="logs-container">
+        <h2>Journaux d'activité</h2>
+
+        <form method="GET" class="logs-filters">
+            <select name="niveau">
+                <option value="">Tous les niveaux</option>
+                <option value="INFO"    <?= $niveau === 'INFO'    ? 'selected' : '' ?>>INFO</option>
+                <option value="WARNING" <?= $niveau === 'WARNING' ? 'selected' : '' ?>>WARNING</option>
+            </select>
+            <input type="text" name="action" value="<?= htmlspecialchars($action) ?>" placeholder="Filtrer par action...">
+            <button type="submit" class="btn-filtrer">Filtrer</button>
+            <a href="admin_logs.php" class="btn-reset">Réinitialiser</a>
+        </form>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Niveau</th>
+                        <th>Action</th>
+                        <th>Message</th>
+                        <th>Utilisateur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($logs)): ?>
+                        <tr><td colspan="5" style="text-align:center; color:var(--gris-doux);">Aucun log trouvé.</td></tr>
+                    <?php else: ?>
+                        <?php foreach ($logs as $log): ?>
+                        <tr>
+                            <td class="log-date"><?= htmlspecialchars($log['date'] ?? '—') ?></td>
+                            <td>
+                                <span class="badge-niveau badge-<?= strtolower($log['niveau'] ?? '') ?>">
+                                    <?= htmlspecialchars($log['niveau'] ?? '—') ?>
+                                </span>
+                            </td>
+                            <td class="log-action"><?= htmlspecialchars($log['action'] ?? '—') ?></td>
+                            <td><?= htmlspecialchars($log['message'] ?? '—') ?></td>
+                            <td><?= htmlspecialchars($log['user_id'] ?? '—') ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <?php if ($totalPages > 1): ?>
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?= $page - 1 ?>&niveau=<?= urlencode($niveau) ?>&action=<?= urlencode($action) ?>">← Précédent</a>
+            <?php endif; ?>
+            <span>Page <?= $page ?> / <?= $totalPages ?></span>
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?= $page + 1 ?>&niveau=<?= urlencode($niveau) ?>&action=<?= urlencode($action) ?>">Suivant →</a>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+
+    </div>
+</main>
+
+<?php include('../COMPONENTS/COMP-footer-adm-emp.php'); ?>
+</body>
+</html>
