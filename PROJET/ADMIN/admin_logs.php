@@ -9,11 +9,11 @@ $action  = $_GET['action']  ?? '';
 $page    = max(1, (int)($_GET['page'] ?? 1));
 $perPage = 20;
 
-$niveaux_autorises = ['INFO', 'WARNING', 'ERROR', ''];
+$niveaux_autorises = ['INFO', 'WARNING', ''];
 if (!in_array($niveau, $niveaux_autorises)) $niveau = '';
 
-$logs      = getLogs($niveau, $action, $page, $perPage);
-$total     = countLogs($niveau, $action);
+$logs       = getLogs($niveau, $action, $page, $perPage);
+$total      = countLogs($niveau, $action);
 $totalPages = ceil($total / $perPage);
 ?>
 <!DOCTYPE html>
@@ -36,7 +36,6 @@ $totalPages = ceil($total / $perPage);
     <div class="logs-container">
         <h2>Journaux d'activité</h2>
 
-        <!-- Filtres -->
         <form method="GET" class="logs-filters">
             <select name="niveau">
                 <option value="">Tous les niveaux</option>
@@ -48,7 +47,6 @@ $totalPages = ceil($total / $perPage);
             <a href="admin_logs.php" class="btn-reset">Réinitialiser</a>
         </form>
 
-        <!-- Tableau -->
         <div class="table-container">
             <table>
                 <thead>
@@ -82,7 +80,6 @@ $totalPages = ceil($total / $perPage);
             </table>
         </div>
 
-        <!-- Pagination -->
         <?php if ($totalPages > 1): ?>
         <div class="pagination">
             <?php if ($page > 1): ?>
