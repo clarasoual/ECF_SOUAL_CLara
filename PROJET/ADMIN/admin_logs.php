@@ -86,10 +86,6 @@ $nbError   = count(array_filter($allLogs, fn($l) => $l['niveau'] === 'ERROR'));
                 <div class="stat-value" style="color:var(--orange-doux)"><?= $nbWarning ?></div>
                 <div class="stat-label">Warning</div>
             </div>
-            <div class="stat-card" style="border-top-color:#e74c3c">
-                <div class="stat-value" style="color:#e74c3c"><?= $nbError ?></div>
-                <div class="stat-label">Erreur</div>
-            </div>
         </div>
 
         <!-- FILTRES -->
