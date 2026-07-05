@@ -17,7 +17,7 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
 
-<?php include('../COMPONENTS/COMP-header.html'); ?>
+<?php include('../COMPONENTS/COMP-header.php'); ?>
 
 <main>
     <div class="account-creation-container">
@@ -65,7 +65,7 @@ if (isset($_SESSION['user_id'])) {
 </main>
 
 <script src="../JS/USR-inscription.js"></script>
-<?php include('../COMPONENTS/COMP-footer.html'); ?>
+<?php include('../COMPONENTS/COMP-footer.php'); ?>
 <script src="../JS/USR-connexion-inscription.js"></script>
 </body>
 </html>
