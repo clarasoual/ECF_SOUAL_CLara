@@ -21,12 +21,21 @@ if (session_status() === PHP_SESSION_NONE) {
         <div id="connexion">
             <h2>Se connecter</h2>
 
+            <?php if (isset($_GET['error'])): ?>
+                <?php if ($_GET['error'] === 'identifiants'): ?>
+                    <p class="error-message">❌ Email ou mot de passe incorrect.</p>
+                <?php elseif ($_GET['error'] === 'suspendu'): ?>
+                    <p class="error-message">⚠️ Votre compte a été suspendu. Contactez l'administrateur.</p>
+                <?php elseif ($_GET['error'] === 'champs'): ?>
+                    <p class="error-message">❌ Veuillez remplir tous les champs.</p>
+                <?php endif; ?>
+            <?php endif; ?>
+
             <form id="formulaire-connexion" action="../PHP/login-employe.php" method="POST" novalidate>
 
                 <div class="form-group">
                     <label for="email-connexion">Adresse mail :</label>
-                    <input type="text" id="email-connexion" name="email-connexion"
-                           autocomplete="email">
+                    <input type="text" id="email-connexion" name="email-connexion" autocomplete="email">
                 </div>
 
                 <div class="form-group">
@@ -45,4 +54,3 @@ if (session_status() === PHP_SESSION_NONE) {
 <?php include('../COMPONENTS/COMP-footer-employe.php'); ?>
 </body>
 </html>
-
