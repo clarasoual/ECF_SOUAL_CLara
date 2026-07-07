@@ -98,7 +98,7 @@ La documentation complète est disponible dans le dossier `docs/` à la racine :
 - **Manuel utilisateur** — présentation de l'application et parcours par rôle avec identifiants de démonstration
 - **Charte graphique** — palette de couleurs, typographie, composants UI, maquettes
 
-Lien Trello : `[ à compléter ]`
+Lien Trello : `(https://trello.com/b/75KK2zCs/eco-ride)`
 
 ---
 
